@@ -1,0 +1,23 @@
+.headerBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  &__left {
+    padding: 5px;
+    &__nav {
+      color: rgba($color: white, $alpha: 1);
+    }
+    &__icon {
+      vertical-align: top;
+    }
+  }
+  &__right {
+    padding: 5px;
+    &__search {
+      color: rgba($color: white, $alpha: 1);
+    }
+    &__account {
+      color: rgba($color: white, $alpha: 1);
+    }
+  }
+}
