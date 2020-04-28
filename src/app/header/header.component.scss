@@ -2,22 +2,23 @@
   display: flex;
   justify-content: space-between;
   padding: 0;
-  &__left {
-    padding: 5px;
-    &__nav {
-      color: rgba($color: white, $alpha: 1);
-    }
-    &__icon {
-      vertical-align: top;
-    }
+}
+
+.headerLeft {
+  display: flex;
+  padding: 0 5px 0;
+  &__nav {
+    color: rgba($color: white, $alpha: 1);
   }
-  &__right {
-    padding: 5px;
-    &__search {
-      color: rgba($color: white, $alpha: 1);
-    }
-    &__account {
-      color: rgba($color: white, $alpha: 1);
-    }
+}
+
+.headerRight {
+  display: flex;
+  padding: 0 5px 0;
+  &__search {
+    color: rgba($color: white, $alpha: 1);
+  }
+  &__account {
+    color: rgba($color: white, $alpha: 1);
   }
 }
