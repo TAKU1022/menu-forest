@@ -13,9 +13,7 @@ import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,11 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     AngularFireFunctionsModule,
     AngularFireAnalyticsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [
-    { provide: REGION, useValue: 'asia-northeast1' }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
