@@ -1,14 +1,8 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 0;
-  color: rgba($color: white, $alpha: 1);
-  &__left {
-    padding: 0 5px;
-  }
-  &__right {
-    padding: 0 5px;
-  }
+  padding: 8px;
+  color: #fff;
 }
 
 .logo {
