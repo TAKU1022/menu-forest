@@ -2,24 +2,15 @@
   display: flex;
   justify-content: space-between;
   padding: 0;
-}
-
-.header-left {
-  padding: 0 5px 0;
-  &__nav {
-    color: rgba($color: white, $alpha: 1);
+  color: rgba($color: white, $alpha: 1);
+  &__left {
+    padding: 0 5px;
   }
-  &__icon {
-    vertical-align: middle;
+  &__right {
+    padding: 0 5px;
   }
 }
 
-.header-right {
-  padding: 0 5px 0;
-  &__search {
-    color: rgba($color: white, $alpha: 1);
-  }
-  &__account {
-    color: rgba($color: white, $alpha: 1);
-  }
+.logo {
+  vertical-align: middle;
 }
