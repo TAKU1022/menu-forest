@@ -19,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
 import { DrawerComponent } from './drawer/drawer.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatButtonModule,
     MatListModule,
     MatSidenavModule,
+    MatMenuModule,
   ],
   providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
   bootstrap: [AppComponent],
