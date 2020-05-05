@@ -10,8 +10,13 @@
     <button mat-icon-button>
       <mat-icon aria-hidden="false">search</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon aria-hidden="false">account_circle</mat-icon>
     </button>
   </div>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>新規登録</button>
+  <button mat-menu-item>ログイン</button>
+</mat-menu>
