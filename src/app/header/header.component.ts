@@ -9,8 +9,6 @@ import { AccountDialogComponent } from '../account-dialog/account-dialog.compone
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isSignUp: boolean;
-
   constructor(
     private drawerService: DrawerService,
     private daialog: MatDialog
@@ -22,14 +20,14 @@ export class HeaderComponent implements OnInit {
     this.drawerService.toggle();
   }
 
-  openAccountDialog() {
+  openAccountDialog(isSignUp: boolean) {
     this.daialog.open(AccountDialogComponent, {
       minHeight: 400,
       minWidth: 340,
       autoFocus: false,
       restoreFocus: false,
       data: {
-        isSignUp: Boolean,
+        isSignUp,
       },
     });
   }
