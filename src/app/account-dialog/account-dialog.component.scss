@@ -11,45 +11,28 @@ button {
   width: 100%;
   border-radius: 30px;
   position: relative;
+  margin-bottom: 12px;
 }
 
-.btn--facebook {
-  background-color: #3b5998;
-  margin-bottom: 12px;
+.btn {
   &__icon {
     position: absolute;
     top: 6px;
     left: 16px;
   }
-}
-
-.btn--twitter {
-  background-color: #2daae1;
-  margin-bottom: 12px;
-  &__icon {
-    position: absolute;
-    top: 6px;
-    left: 16px;
+  &--facebook {
+    background-color: #3b5998;
   }
-}
-
-.btn--google {
-  color: rgba(black, 0.6);
-  background-color: #dcdcdc;
-  margin-bottom: 12px;
-  &__icon {
-    position: absolute;
-    top: 6px;
-    left: 16px;
+  &--twitter {
+    background-color: #2daae1;
   }
-}
-
-.btn--yahoo {
-  background-color: #6b0094;
-  &__icon {
-    position: absolute;
-    top: 6px;
-    left: 16px;
+  &--google {
+    color: rgba(black, 0.6);
+    background-color: #dcdcdc;
+  }
+  &--yahoo {
+    background-color: #6b0094;
+    margin-bottom: 0;
   }
 }
 
