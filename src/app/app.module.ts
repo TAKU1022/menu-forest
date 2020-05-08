@@ -21,8 +21,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
-import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component';
+import { AccountDialogComponent } from './account-dialog/account-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component
     HeaderComponent,
     FooterComponent,
     DrawerComponent,
-    LoginDialogComponent,
-    SignInDialogComponent,
+    AccountDialogComponent,
   ],
   imports: [
     BrowserModule,
