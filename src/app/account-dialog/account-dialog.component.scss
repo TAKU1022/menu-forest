@@ -1,0 +1,58 @@
+.account {
+  text-align: center;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+button {
+  color: #fff;
+  width: 100%;
+  border-radius: 30px;
+  position: relative;
+}
+
+.btn--facebook {
+  background-color: #3b5998;
+  margin-bottom: 12px;
+  &__icon {
+    position: absolute;
+    top: 6px;
+    left: 16px;
+  }
+}
+
+.btn--twitter {
+  background-color: #2daae1;
+  margin-bottom: 12px;
+  &__icon {
+    position: absolute;
+    top: 6px;
+    left: 16px;
+  }
+}
+
+.btn--google {
+  color: rgba(black, 0.6);
+  background-color: #dcdcdc;
+  margin-bottom: 12px;
+  &__icon {
+    position: absolute;
+    top: 6px;
+    left: 16px;
+  }
+}
+
+.btn--yahoo {
+  background-color: #6b0094;
+  &__icon {
+    position: absolute;
+    top: 6px;
+    left: 16px;
+  }
+}
+
+hr {
+  margin: 24px 0;
+}
