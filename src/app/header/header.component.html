@@ -17,6 +17,6 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>新規登録</button>
-  <button mat-menu-item>ログイン</button>
+  <button mat-menu-item (click)="openAccountDialog(true)">新規登録</button>
+  <button mat-menu-item (click)="openAccountDialog(false)">ログイン</button>
 </mat-menu>

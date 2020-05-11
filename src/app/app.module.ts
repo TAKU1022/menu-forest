@@ -20,6 +20,8 @@ import { DrawerComponent } from './drawer/drawer.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AccountDialogComponent } from './account-dialog/account-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { MatMenuModule } from '@angular/material/menu';
     HeaderComponent,
     FooterComponent,
     DrawerComponent,
+    AccountDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatListModule,
     MatSidenavModule,
     MatMenuModule,
+    MatDialogModule,
   ],
   providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
   bootstrap: [AppComponent],
