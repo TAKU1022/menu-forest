@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DrawerService } from '../services/drawer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AccountDialogComponent } from '../account-dialog/account-dialog.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +10,12 @@ import { AccountDialogComponent } from '../account-dialog/account-dialog.compone
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  user$ = this.authService.afUser$;
+
   constructor(
     private drawerService: DrawerService,
-    private daialog: MatDialog
+    private daialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {}
@@ -30,5 +34,9 @@ export class HeaderComponent implements OnInit {
         isSignUp,
       },
     });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

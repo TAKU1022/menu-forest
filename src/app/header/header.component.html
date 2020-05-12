@@ -17,6 +17,21 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="openAccountDialog(true)">新規登録</button>
-  <button mat-menu-item (click)="openAccountDialog(false)">ログイン</button>
+  <button
+    mat-menu-item
+    (click)="openAccountDialog(true)"
+    *ngIf="!(user$ | async)"
+  >
+    新規登録
+  </button>
+  <button
+    mat-menu-item
+    (click)="openAccountDialog(false)"
+    *ngIf="!(user$ | async)"
+  >
+    ログイン
+  </button>
+  <button mat-menu-item (click)="logout()" *ngIf="user$ | async">
+    ログアウト
+  </button>
 </mat-menu>
