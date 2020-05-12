@@ -1,7 +1,7 @@
 <div class="account">
   <h1 mat-dialog-title>{{ data.isSignUp ? '新規登録' : 'ログイン' }}</h1>
   <div class="btn">
-    <button mat-raised-button class="btn--facebook">
+    <button mat-raised-button class="btn--facebook" (click)="facebookLogin()">
       <span class="btn__icon"
         ><img
           src="/assets/images/facebook-3.svg"
@@ -11,7 +11,7 @@
       /></span>
       <span>Facebook</span>
     </button>
-    <button mat-raised-button class="btn--twitter">
+    <button mat-raised-button class="btn--twitter" (click)="twitterLogin()">
       <span class="btn__icon"
         ><img
           src="/assets/images/twitter-3.svg"
@@ -21,7 +21,7 @@
       /></span>
       <span>Twitter</span>
     </button>
-    <button mat-raised-button class="btn--google">
+    <button mat-raised-button class="btn--google" (click)="gooleLogin()">
       <span class="btn__icon"
         ><img
           src="/assets/images/google-icon.svg"
@@ -31,7 +31,7 @@
       /></span>
       <span>Google</span>
     </button>
-    <button mat-raised-button class="btn--yahoo">
+    <button mat-raised-button class="btn--yahoo" (click)="yahooLogin()">
       <span class="btn__icon"
         ><img
           src="/assets/images/yahoo-icon.svg"
