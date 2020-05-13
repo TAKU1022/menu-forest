@@ -1,0 +1,25 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+h1 {
+  margin: 8px 0 8px;
+  font-size: 24px;
+}
+
+.food {
+  border: 1px solid rgba(black, 0.32);
+  &__name {
+    border-top: 1px solid rgba(black, 0.32);
+    margin: 0 0 8px;
+    padding-top: 8px;
+  }
+}
