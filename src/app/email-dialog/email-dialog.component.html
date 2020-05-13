@@ -37,7 +37,7 @@
         autocomplete="current-password"
         placeholder="パスワードを入力"
       />
-      <mat-error *ngIf="passwordControl.hasError('minLength')"
+      <mat-error *ngIf="passwordControl.invalid"
         >パスワードは6文字以上</mat-error
       >
       <mat-error *ngIf="passwordControl.hasError('required')"
