@@ -1,6 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialog,
+} from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
+import { EmailDialogComponent } from '../email-dialog/email-dialog.component';
 
 @Component({
   selector: 'app-account-dialog',
@@ -14,7 +19,8 @@ export class AccountDialogComponent implements OnInit {
       isSignUp: boolean;
     },
     private authSercice: AuthService,
-    private dialog: MatDialogRef<AccountDialogComponent>
+    private dialog: MatDialogRef<AccountDialogComponent>,
+    private emailDialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -61,5 +67,15 @@ export class AccountDialogComponent implements OnInit {
       .catch((error: Error) => {
         alert(error.message);
       });
+  }
+
+  openEmailDialog(isEmailSignUp: boolean) {
+    this.emailDialog.open(EmailDialogComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+      data: {
+        isEmailSignUp,
+      },
+    });
   }
 }

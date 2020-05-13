@@ -22,6 +22,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AccountDialogComponent } from './account-dialog/account-dialog.component';
+import { EmailDialogComponent } from './email-dialog/email-dialog.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { AccountDialogComponent } from './account-dialog/account-dialog.componen
     FooterComponent,
     DrawerComponent,
     AccountDialogComponent,
+    EmailDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,10 @@ import { AccountDialogComponent } from './account-dialog/account-dialog.componen
     MatSidenavModule,
     MatMenuModule,
     MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
   bootstrap: [AppComponent],

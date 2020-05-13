@@ -42,10 +42,22 @@
       <span>Yahoo! JAPAN</span>
     </button>
     <hr />
-    <button mat-raised-button color="primary" *ngIf="data.isSignUp">
+    <button
+      mat-raised-button
+      color="primary"
+      *ngIf="data.isSignUp"
+      (click)="openEmailDialog(true)"
+      mat-dialog-close
+    >
       新規登録
     </button>
-    <button mat-raised-button color="primary" *ngIf="!data.isSignUp">
+    <button
+      mat-raised-button
+      color="primary"
+      *ngIf="!data.isSignUp"
+      (click)="openEmailDialog(false)"
+      mat-dialog-close
+    >
       ログイン
     </button>
   </div>
