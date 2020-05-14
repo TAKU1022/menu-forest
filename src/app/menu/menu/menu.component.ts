@@ -6,29 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  days = [
-    {
-      title: '月曜日',
-    },
-    {
-      title: '火曜日',
-    },
-    {
-      title: '水曜日',
-    },
-    {
-      title: '木曜日',
-    },
-    {
-      title: '金曜日',
-    },
-    {
-      title: '土曜日',
-    },
-    {
-      title: '日曜日',
-    },
-  ];
+  days = ['月', '火', '水', '木', '金', '土', '日'];
 
   constructor() {}
 
