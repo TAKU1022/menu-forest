@@ -9,16 +9,16 @@
       "npm --prefix \"$RESOURCE_DIR\" run build"
     ]
   },
-
-  "public": "public",
-  "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-  "rewrites": [
-    {
-      "source": "**",
-      "destination": "/index.html"
-    }
-  ],
-
+  "hosting": {
+    "public": "dist/menu",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
   "storage": {
     "rules": "storage.rules"
   },
