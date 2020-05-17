@@ -16,6 +16,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./food-list/food-list.module').then((m) => m.FoodListModule),
   },
+  {
+    path: 'editor',
+    loadChildren: () =>
+      import('./editor/editor.module').then((m) => m.EditorModule),
+  },
 ];
 
 @NgModule({
