@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FoodService } from 'src/app/services/food.service';
 
 @Component({
   selector: 'app-food-list',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./food-list.component.scss'],
 })
 export class FoodListComponent implements OnInit {
-  constructor() {}
+  foods$ = this.foodService.getFood();
+
+  constructor(private foodService: FoodService) {}
 
   ngOnInit(): void {}
 }
