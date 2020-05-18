@@ -10,7 +10,7 @@ import { FoodService } from 'src/app/services/food.service';
 export class EditorComponent implements OnInit {
   form = this.fb.group({
     name: ['', Validators.required],
-    image: ['', Validators.required],
+    image: ['https://dummyimage.com/300x300/F0F8FF.png', Validators.required],
   });
 
   constructor(private fb: FormBuilder, private foodService: FoodService) {}
@@ -19,9 +19,13 @@ export class EditorComponent implements OnInit {
 
   submit() {
     const formData = this.form.value;
-    this.foodService.createFood({
-      name: formData.name,
-      image: formData.image,
-    });
+    this.foodService
+      .createFood({
+        name: formData.name,
+        image: formData.image,
+      })
+      .then(() => {
+        this.form.reset();
+      });
   }
 }
