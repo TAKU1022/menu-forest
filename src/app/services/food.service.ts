@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Food } from '../interfaces/food';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,5 +20,9 @@ export class FoodService {
           duration: 3000,
         });
       });
+  }
+
+  getFood(): Observable<Food[]> {
+    return this.db.collection<Food>('foods').valueChanges();
   }
 }
