@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FoodService {
+  id = this.db.createId();
+
   constructor(private db: AngularFirestore, private snackBar: MatSnackBar) {}
 
   createFood(food: Food) {
-    const id = this.db.createId();
     return this.db
-      .doc(`foods/${id}`)
+      .doc(`foods/${this.id}`)
       .set(food)
       .then(() => {
         this.snackBar.open('メニューを作成しました！', null, {
@@ -24,5 +25,9 @@ export class FoodService {
 
   getFood(): Observable<Food[]> {
     return this.db.collection<Food>('foods').valueChanges();
+  }
+
+  getFoodId(id: string): Observable<Food> {
+    return this.db.doc<Food>(`foods/${id}`).valueChanges();
   }
 }
