@@ -23,9 +23,10 @@ export class EditorComponent implements OnInit {
       .createFood({
         name: formData.name,
         image: formData.image,
+        id: this.foodService.id,
       })
       .then(() => {
-        this.form.reset();
+        this.form.controls.name.reset();
       });
   }
 }
