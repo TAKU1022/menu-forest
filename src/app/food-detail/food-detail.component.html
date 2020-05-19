@@ -1,0 +1,11 @@
+<div class="container">
+  <div *ngIf="food$ | async as food">
+    <h1>{{ food.name }}</h1>
+    <img [src]="food.image" alt="" />
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, qui.
+      Soluta repellat doloribus quam, aperiam repudiandae veritatis beatae non
+      animi voluptatum enim optio suscipit asperiores eius et eum pariatur quae!
+    </p>
+  </div>
+</div>
