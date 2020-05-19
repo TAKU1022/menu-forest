@@ -1,7 +1,10 @@
 <div class="container">
   <h1>メニュー一覧</h1>
   <div class="grid">
-    <div *ngFor="let food of foods$ | async">
+    <div
+      *ngFor="let food of foods$ | async"
+      routerLink="/food-list/{{ food.id }}"
+    >
       <div class="food">
         <img class="food__img" [src]="food.image" alt="" />
         <p class="food__name">{{ food.name }}</p>
