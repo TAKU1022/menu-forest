@@ -17,6 +17,11 @@ const routes: Routes = [
       import('./food-list/food-list.module').then((m) => m.FoodListModule),
   },
   {
+    path: 'setting',
+    loadChildren: () =>
+      import('./setting/setting.module').then((m) => m.SettingModule),
+  },
+  {
     path: 'editor',
     loadChildren: () =>
       import('./editor/editor.module').then((m) => m.EditorModule),

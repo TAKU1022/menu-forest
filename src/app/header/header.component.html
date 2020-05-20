@@ -34,5 +34,8 @@
   <button mat-menu-item (click)="logout()" *ngIf="user$ | async">
     ログアウト
   </button>
+  <button mat-menu-item routerLink="/setting" *ngIf="user$ | async">
+    設定
+  </button>
   <button mat-menu-item routerLink="/editor">管理者画面</button>
 </mat-menu>
