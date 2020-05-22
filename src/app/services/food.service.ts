@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Food } from '../interfaces/food';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +30,14 @@ export class FoodService {
 
   getFoodId(id: string): Observable<Food> {
     return this.db.doc<Food>(`foods/${id}`).valueChanges();
+  }
+
+  getDayFood(): Observable<Food> {
+    return this.db.collection<Food>('foods').valueChanges()
+      .pipe(
+        map(foods => {
+          return foods[Math.floor(Math.random() * foods.length)];
+        })
+      );
   }
 }
