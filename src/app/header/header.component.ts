@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
 
   openAccountDialog(isSignUp: boolean) {
     this.daialog.open(AccountDialogComponent, {
-      minHeight: 380,
       minWidth: 340,
       autoFocus: false,
       restoreFocus: false,
