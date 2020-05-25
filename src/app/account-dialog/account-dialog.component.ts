@@ -58,17 +58,6 @@ export class AccountDialogComponent implements OnInit {
       });
   }
 
-  yahooLogin() {
-    this.authSercice
-      .yahooLogin()
-      .then(() => {
-        this.dialog.close();
-      })
-      .catch((error: Error) => {
-        alert(error.message);
-      });
-  }
-
   openEmailDialog(isEmailSignUp: boolean) {
     this.emailDialog.open(EmailDialogComponent, {
       autoFocus: false,
