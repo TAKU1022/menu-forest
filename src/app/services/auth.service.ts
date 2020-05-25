@@ -1,32 +1,50 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth, User } from 'firebase';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  afUser$: Observable<User> = this.afAuth.user;
+  afUser$: Observable<User> = this.afAuth.authState.pipe(
+    switchMap((afUser) => {
+      if (afUser) {
+        return this.db.doc<User>(`users/${afUser.uid}`).valueChanges();
+      } else {
+        return of(null);
+      }
+    })
+  );
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
     this.afUser$.subscribe((user) => console.log(user));
   }
 
   facebookLogin() {
-    return this.afAuth.signInWithPopup(new auth.FacebookAuthProvider());
+    return this.afAuth.signInWithPopup(
+      new auth.FacebookAuthProvider().setCustomParameters({
+        prompt: 'select_account',
+      })
+    );
   }
 
   twrtterLogin() {
-    return this.afAuth.signInWithPopup(new auth.TwitterAuthProvider());
+    return this.afAuth.signInWithPopup(
+      new auth.TwitterAuthProvider().setCustomParameters({
+        prompt: 'select_account',
+      })
+    );
   }
 
   googleLogin() {
-    return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
-  }
-
-  yahooLogin() {
-    return this.afAuth.signInWithPopup(new auth.OAuthProvider('yahoo.com'));
+    return this.afAuth.signInWithPopup(
+      new auth.GoogleAuthProvider().setCustomParameters({
+        prompt: 'select_account',
+      })
+    );
   }
 
   logout() {
