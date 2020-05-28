@@ -18,6 +18,11 @@ const routes: Routes = [
       import('./food-list/food-list.module').then((m) => m.FoodListModule),
   },
   {
+    path: 'my-menu',
+    loadChildren: () =>
+      import('./my-menu/my-menu.module').then((m) => m.MyMenuModule),
+  },
+  {
     path: 'setting',
     loadChildren: () =>
       import('./setting/setting.module').then((m) => m.SettingModule),

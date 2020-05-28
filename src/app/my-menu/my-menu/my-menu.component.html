@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>My献立を作成</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ng-container *ngFor="let control of form.controls; index as i">
+      <h2>曜日: {{ days[i] }}</h2>
+      <div [formGroupName]="i">
+        <mat-form-field>
+          <mat-label>朝食</mat-label>
+          <input type="text" matInput formControlName="breakfast" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>昼食</mat-label>
+          <input type="text" matInput formControlName="lunch" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>夜食</mat-label>
+          <input type="text" matInput formControlName="dinner" />
+        </mat-form-field>
+      </div>
+    </ng-container>
+    <button mat-raised-button color="primary" [disabled]="form.invalid">
+      献立を作成
+    </button>
+  </form>
+</div>
