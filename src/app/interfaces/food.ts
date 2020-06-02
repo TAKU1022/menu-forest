@@ -1,5 +1,6 @@
 export interface Food {
   name: string;
   image: string;
-  id: string;
+  foodId: string;
+  recipe: string;
 }
