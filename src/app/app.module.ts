@@ -26,7 +26,6 @@ import { EmailDialogComponent } from './email-dialog/email-dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
@@ -60,7 +59,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    MatSnackBarModule,
   ],
   providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
   bootstrap: [AppComponent],

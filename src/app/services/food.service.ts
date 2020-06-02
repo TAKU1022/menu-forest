@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Food } from '../interfaces/food';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,19 +8,14 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class FoodService {
-  id = this.db.createId();
+  constructor(private db: AngularFirestore) {}
 
-  constructor(private db: AngularFirestore, private snackBar: MatSnackBar) {}
-
-  createFood(food: Food) {
-    return this.db
-      .doc(`foods/${this.id}`)
-      .set(food)
-      .then(() => {
-        this.snackBar.open('メニューを作成しました！', null, {
-          duration: 3000,
-        });
-      });
+  createFood(food: Omit<Food, 'foodId'>): Promise<void> {
+    const foodId = this.db.createId();
+    return this.db.doc(`foods/${foodId}`).set({
+      foodId,
+      ...food,
+    });
   }
 
   getFood(): Observable<Food[]> {
@@ -33,9 +27,11 @@ export class FoodService {
   }
 
   getDayFood(): Observable<Food> {
-    return this.db.collection<Food>('foods').valueChanges()
+    return this.db
+      .collection<Food>('foods')
+      .valueChanges()
       .pipe(
-        map(foods => {
+        map((foods) => {
           return foods[Math.floor(Math.random() * foods.length)];
         })
       );

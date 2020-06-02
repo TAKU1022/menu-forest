@@ -3,7 +3,7 @@
   <div class="grid">
     <div
       *ngFor="let food of foods$ | async"
-      routerLink="/food-list/{{ food.id }}"
+      routerLink="/food-list/{{ food.foodId }}"
     >
       <div class="food">
         <img class="food__img" [src]="food.image" alt="" />
