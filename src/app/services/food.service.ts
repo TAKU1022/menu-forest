@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Food } from '../interfaces/food';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Food } from '@interfaces/food';
 
 @Injectable({
   providedIn: 'root',

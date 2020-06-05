@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { Observable } from 'rxjs';
-import { Food } from '../interfaces/food';
 import { switchMap } from 'rxjs/operators';
+import { Food } from '@interfaces/food';
 
 @Component({
   selector: 'app-food-detail',

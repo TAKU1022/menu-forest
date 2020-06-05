@@ -6,11 +6,12 @@ const db = admin.firestore();
 
 export const createUser = functions.auth.user().onCreate((user) => {
   return db.doc(`users/${user.uid}`).set({
-    id: user.uid,
+    uid: user.uid,
     name: user.displayName,
     avaterURL: user.photoURL,
     email: user.email,
-    createAt: new Date(),
+    createdAt: new Date(),
+    admin: false,
   });
 });
 

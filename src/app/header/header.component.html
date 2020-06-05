@@ -1,23 +1,36 @@
 <mat-toolbar class="header" color="primary">
-  <div>
+  <div class="header-left">
     <button mat-icon-button (click)="toggle()">
       <mat-icon aria-hidden="false">menu</mat-icon>
     </button>
-    <span class="logo">MENU</span>
+    <span class="header-left--logo">MENU</span>
   </div>
 
-  <div>
-    <button mat-icon-button>
-      <mat-icon aria-hidden="false">search</mat-icon>
-    </button>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon aria-hidden="false">account_circle</mat-icon>
-    </button>
+  <div class="header-right">
+    <div class="header-right--search">
+      <button mat-icon-button>
+        <mat-icon aria-hidden="false">search</mat-icon>
+      </button>
+    </div>
+    <div class="header-right--account">
+      <ng-template #defaultAccount>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon aria-hidden="false">account_circle</mat-icon>
+        </button>
+      </ng-template>
+      <button
+        *ngIf="user$ | async as user; else defaultAccount"
+        [matMenuTriggerFor]="menu"
+        class="user-avatar"
+      >
+        <img [src]="user.avaterURL" alt="" />
+      </button>
+    </div>
   </div>
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-  <ng-template #login>
+  <ng-template #defaultMenu>
     <button mat-menu-item (click)="openAccountDialog(true)">
       新規登録
     </button>
@@ -25,7 +38,7 @@
       ログイン
     </button>
   </ng-template>
-  <div *ngIf="user$ | async; else login">
+  <div *ngIf="user$ | async as user; else defaultMenu">
     <button mat-menu-item routerLink="/my-menu">My献立</button>
     <button mat-menu-item routerLink="/setting">
       設定
@@ -33,6 +46,8 @@
     <button mat-menu-item (click)="logout()">
       ログアウト
     </button>
+    <button mat-menu-item routerLink="/editor" *ngIf="user.admin">
+      管理者画面
+    </button>
   </div>
-  <button mat-menu-item routerLink="/editor">管理者画面</button>
 </mat-menu>
