@@ -1,7 +1,8 @@
 export interface User {
-  id: string;
+  uid: string;
   name: string;
   avaterURL: string;
   email: string;
-  createAt: Date;
+  createdAt: Date;
+  admin: boolean;
 }
