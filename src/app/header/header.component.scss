@@ -7,6 +7,24 @@
   z-index: 2;
 }
 
-.logo {
-  vertical-align: middle;
+.header-left {
+  &--logo {
+    vertical-align: middle;
+  }
+}
+
+.header-right {
+  display: flex;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  vertical-align: bottom;
+  border-radius: 50%;
+  border: 0;
+  img {
+    border-radius: 50%;
+  }
 }

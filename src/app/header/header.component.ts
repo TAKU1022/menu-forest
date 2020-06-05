@@ -3,6 +3,8 @@ import { DrawerService } from '../services/drawer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AccountDialogComponent } from '../account-dialog/account-dialog.component';
 import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
+import { User } from '@interfaces/user';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +12,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  user$ = this.authService.afUser$;
+  user$: Observable<User> = this.authService.afUser$;
 
   constructor(
     private drawerService: DrawerService,
