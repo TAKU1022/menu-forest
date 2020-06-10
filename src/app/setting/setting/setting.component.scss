@@ -1,11 +1,56 @@
-.container {
-  text-align: left;
+h1 {
+  font-size: 24px;
 }
 
-h1 {
+h2 {
   font-size: 20px;
 }
 
-hr {
+.content {
   margin: 32px 0 24px;
+}
+
+.avater-section {
+  padding: 0 16px 8px;
+  margin-bottom: 40px;
+  &__title {
+    font-weight: bold;
+  }
+}
+
+.name-section {
+  &__title {
+    font-weight: bold;
+  }
+}
+
+.avater {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto 16px;
+  &__image {
+    border-radius: 50%;
+    border: 1px solid rgba(black, 0.32);
+  }
+}
+
+image-cropper {
+  display: none;
+}
+
+image-cropper.active {
+  display: block;
+  width: 300px;
+  margin: 0 auto 16px;
+}
+
+.reset-btn {
+  margin-left: 16px;
+}
+
+hr {
+  display: inline-block;
+  margin: 48px 0;
+  width: 90%;
 }
