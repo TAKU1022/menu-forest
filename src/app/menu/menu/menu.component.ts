@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodService } from 'src/app/services/food.service';
-import { Observable } from 'rxjs';
-import { Food } from '@interfaces/food';
+import { MyMenuService } from 'src/app/services/my-menu.service';
+import { Observable, of } from 'rxjs';
+import { DayMenuWithFood, MyMenuWithFood } from '@interfaces/my-menu';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from '@interfaces/user';
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
@@ -9,10 +12,34 @@ import { Food } from '@interfaces/food';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  days = ['月', '火', '水', '木', '金', '土', '日'];
-  dayFood$: Observable<Food> = this.foodService.getDayFood();
+  weekMenu$: Observable<
+    DayMenuWithFood[] | null
+  > = this.authService.afUser$.pipe(
+    switchMap((user: User) => {
+      if (user) {
+        return this.myMenuService.getMyMenuWithFood(user.uid);
+      } else {
+        return of(null);
+      }
+    }),
+    map((myMenuWithFood: MyMenuWithFood | null) => {
+      const weekMenu: DayMenuWithFood[] = [
+        myMenuWithFood.sundayFood,
+        myMenuWithFood.mondayFood,
+        myMenuWithFood.tuesdayFood,
+        myMenuWithFood.wednesdayFood,
+        myMenuWithFood.thursdayFood,
+        myMenuWithFood.fridayFood,
+        myMenuWithFood.saturdayFood,
+      ];
+      return weekMenu;
+    })
+  );
 
-  constructor(private foodService: FoodService) {}
+  constructor(
+    private myMenuService: MyMenuService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
 }
