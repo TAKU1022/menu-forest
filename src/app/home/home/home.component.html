@@ -1,26 +1,22 @@
 <div class="container">
-  <h1>これを食え</h1>
-  <div class="food">
-    <div class="breakfast">
-      <img
-        src="/assets/images/ben-kolde-FFqNATH27EM-unsplash.jpg"
-        alt="デモ画像"
-      />
-      <label>朝食</label>
-    </div>
-    <div class="lunch">
-      <img
-        src="/assets/images/fran-hogan-ksCum0SeHg0-unsplash.jpg"
-        alt="デモ画像"
-      />
-      <label>昼食</label>
-    </div>
-    <div class="dinner">
-      <img
-        src="/assets/images/keri-liwi-c3mFafsFz2w-unsplash.jpg"
-        alt="デモ画像"
-      />
-      <label>夕食</label>
+  <div class="food" *ngIf="todayMenu$ | async as todayMenu">
+    <h1>{{ todayMenu.dayOfWeek }}曜日の献立</h1>
+    <div class="grid">
+      <div
+        class="breakfast"
+        routerLink="/menu/{{ todayMenu.breakfast.foodId }}"
+      >
+        <img [src]="todayMenu.breakfast.image" alt="デモ画像" />
+        <label>朝食「{{ todayMenu.breakfast.name }}」</label>
+      </div>
+      <div class="lunch" routerLink="/menu/{{ todayMenu.lunch.foodId }}">
+        <img [src]="todayMenu.lunch.image" alt="デモ画像" />
+        <label>昼食「{{ todayMenu.lunch.name }}」</label>
+      </div>
+      <div class="dinner" routerLink="/menu/{{ todayMenu.dinner.foodId }}">
+        <img [src]="todayMenu.dinner.image" alt="デモ画像" />
+        <label>夕食「{{ todayMenu.dinner.name }}」</label>
+      </div>
     </div>
   </div>
 </div>

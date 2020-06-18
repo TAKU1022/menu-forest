@@ -12,5 +12,9 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAuthenticated()
     }
+    match /userMenus/{myMenuId} {
+      allow read: if true;
+      allow write: if isAuthenticated()
+    }
   }
 }

@@ -1,31 +1,19 @@
 <div class="container">
   <div class="grid">
-    <div *ngFor="let day of days">
-      <h1>{{ day }}曜日</h1>
+    <div *ngFor="let weekMenu of weekMenu$ | async">
+      <h1>{{ weekMenu.dayOfWeek }}曜日</h1>
       <div class="menu-grid">
-        <div class="food" *ngIf="dayFood$ | async as dayFood">
-          <img
-            class="food__img"
-            [src]="dayFood.image"
-            alt=""
-          />
-          <p class="food__name">{{dayFood.name}}</p>
+        <div class="food" routerLink="/menu/{{ weekMenu.breakfast.foodId }}">
+          <img class="food__img" [src]="weekMenu.breakfast.image" alt="" />
+          <p class="food__name">{{ weekMenu.breakfast.name }}</p>
         </div>
-        <div class="food" *ngIf="dayFood$ | async as dayFood">
-          <img
-            class="food__img"
-            [src]="dayFood.image"
-            alt=""
-          />
-          <p class="food__name">{{dayFood.name}}</p>
+        <div class="food" routerLink="/menu/{{ weekMenu.lunch.foodId }}">
+          <img class="food__img" [src]="weekMenu.lunch.image" alt="" />
+          <p class="food__name">{{ weekMenu.lunch.name }}</p>
         </div>
-        <div class="food" *ngIf="dayFood$ | async as dayFood">
-          <img
-            class="food__img"
-            [src]="dayFood.image"
-            alt=""
-          />
-          <p class="food__name">{{dayFood.name}}</p>
+        <div class="food" routerLink="/menu/{{ weekMenu.dinner.foodId }}">
+          <img class="food__img" [src]="weekMenu.dinner.image" alt="" />
+          <p class="food__name">{{ weekMenu.dinner.name }}</p>
         </div>
       </div>
     </div>
