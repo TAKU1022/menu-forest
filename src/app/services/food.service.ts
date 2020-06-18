@@ -22,7 +22,7 @@ export class FoodService {
     return this.db.collection<Food>('foods').valueChanges();
   }
 
-  getFoodId(id: string): Observable<Food> {
+  getFoodById(id: string): Observable<Food> {
     return this.db.doc<Food>(`foods/${id}`).valueChanges();
   }
 

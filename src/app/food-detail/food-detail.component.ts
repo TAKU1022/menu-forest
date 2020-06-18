@@ -22,7 +22,7 @@ export class FoodDetailComponent implements OnInit {
     this.food$ = this.route.paramMap.pipe(
       switchMap((prams) => {
         const id = prams.get('detail');
-        return this.foodService.getFoodId(id);
+        return this.foodService.getFoodById(id);
       })
     );
   }
