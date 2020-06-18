@@ -6,15 +6,33 @@
       <div [formGroupName]="i">
         <mat-form-field>
           <mat-label>朝食</mat-label>
-          <input type="text" matInput formControlName="breakfast" />
+          <input
+            type="text"
+            matInput
+            formControlName="breakfast"
+            autocomplete="off"
+          />
+          <mat-error>必須入力です</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>昼食</mat-label>
-          <input type="text" matInput formControlName="lunch" />
+          <input
+            type="text"
+            matInput
+            formControlName="lunch"
+            autocomplete="off"
+          />
+          <mat-error>必須入力です</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>夜食</mat-label>
-          <input type="text" matInput formControlName="dinner" />
+          <input
+            type="text"
+            matInput
+            formControlName="dinner"
+            autocomplete="off"
+          />
+          <mat-error>必須入力です</mat-error>
         </mat-form-field>
       </div>
     </ng-container>
