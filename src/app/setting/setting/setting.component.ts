@@ -39,9 +39,9 @@ export class SettingComponent implements OnInit {
     });
   }
 
-  chengeUserName() {
+  chengeUserName(): Promise<void> {
     const newUserName = this.nameForm.value;
-    this.userService
+    return this.userService
       .changeUserName(this.userId, newUserName)
       .then(() => {
         this.snackBar.open('変更されました', null, {
@@ -59,28 +59,28 @@ export class SettingComponent implements OnInit {
   fileChengeEvent(event: any): void {
     this.imageChengedEvent = event;
   }
-  imageCropped(event: ImageCroppedEvent) {
+  imageCropped(event: ImageCroppedEvent): void {
     this.croppedImage = event.base64;
   }
-  imageLoaded() {
+  imageLoaded(): void {
     console.log('画像が読み込まれました');
   }
-  cropperReady(sourceImageDimensions: Dimensions) {
+  cropperReady(sourceImageDimensions: Dimensions): void {
     console.log('操作できるようになりました', sourceImageDimensions);
   }
-  loadImageFailed(selectedImage) {
+  loadImageFailed(selectedImage): void {
     alert('画像の読み込みに失敗しました');
     selectedImage.value = '';
     this.imageChengedEvent = '';
   }
-  resetImage(selectedImage) {
+  resetImage(selectedImage): void {
     selectedImage.value = '';
     this.imageChengedEvent = '';
     this.croppedImage = '';
   }
 
-  chengeUserAvater(selectedImage) {
-    this.userService
+  chengeUserAvater(selectedImage): Promise<void> {
+    return this.userService
       .changeUserAvater(this.userId, this.croppedImage)
       .then(() => {
         this.snackBar.open('変更されました', null, {

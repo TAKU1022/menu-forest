@@ -28,15 +28,13 @@ export class EditorComponent implements OnInit {
       .createFood({
         name: formData.name,
         image: formData.image,
-        recipe: 'a',
-      })
-      .then(() => {
-        this.form.controls.name.reset();
+        recipe: '',
       })
       .then(() => {
         this.snackBar.open('firestoreに追加しました！', null, {
           duration: 3000,
         });
+        this.form.controls.name.reset();
       });
   }
 }
