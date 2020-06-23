@@ -3,9 +3,10 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { MyMenuService } from 'src/app/services/my-menu.service';
 import { DayMenu } from '@interfaces/my-menu';
-import { switchMap } from 'rxjs/operators';
+import { startWith, map } from 'rxjs/operators';
 import { User } from '@interfaces/user';
-import { of, Observable } from 'rxjs';
+import { SearchService } from 'src/app/services/search.service';
+import { SearchIndex } from 'algoliasearch/lite';
 
 @Component({
   selector: 'app-my-menu',
@@ -16,14 +17,16 @@ export class MyMenuComponent implements OnInit {
   form: FormArray = this.fb.array([]);
   days = ['日', '月', '火', '水', '木', '金', '土'];
   dayMenus: DayMenu[];
+  index: SearchIndex = this.searchService.index.foods;
+  searchOptions = [];
+  userId: string | null;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private myMenuService: MyMenuService
-  ) {}
-
-  ngOnInit(): void {
+    private myMenuService: MyMenuService,
+    private searchService: SearchService
+  ) {
     new Array(7).fill(null).forEach(() => {
       this.form.push(
         this.fb.group({
@@ -33,9 +36,30 @@ export class MyMenuComponent implements OnInit {
         })
       );
     });
+
+    this.authService.afUser$.subscribe((user: User) => {
+      if (user) {
+        this.userId = user.uid;
+      } else {
+        this.userId = null;
+      }
+    });
   }
 
-  submit(): Observable<void | null> {
+  ngOnInit(): void {
+    this.form.valueChanges
+      .pipe(
+        startWith('')
+        // map((value) => (typeof value === 'string' ? value : value.name))
+      )
+      .subscribe((value) => {
+        this.index.search(value).then((result) => {
+          this.searchOptions = result.hits;
+        });
+      });
+  }
+
+  submit(): void {
     this.dayMenus = [];
     for (let i = 0; i < 7; i++) {
       this.dayMenus.push({
@@ -55,25 +79,21 @@ export class MyMenuComponent implements OnInit {
       saturday,
     ] = this.dayMenus;
 
-    return this.authService.afUser$.pipe(
-      switchMap((user: User) => {
-        if (user) {
-          return this.myMenuService.createMyMenu({
-            day: {
-              sunday,
-              monday,
-              tuesday,
-              wednesday,
-              thursday,
-              friday,
-              saturday,
-            },
-            creatorId: user.uid,
-          });
-        } else {
-          return of(null);
-        }
-      })
-    );
+    this.myMenuService.createMyMenu({
+      day: {
+        sunday,
+        monday,
+        tuesday,
+        wednesday,
+        thursday,
+        friday,
+        saturday,
+      },
+      creatorId: this.userId,
+    });
   }
+
+  // displayFn(value) {
+  //   return value && value.name ? value.name : '';
+  // }
 }
