@@ -7,6 +7,7 @@ import { startWith, map } from 'rxjs/operators';
 import { User } from '@interfaces/user';
 import { SearchService } from 'src/app/services/search.service';
 import { SearchIndex } from 'algoliasearch/lite';
+import { Food } from '@interfaces/food';
 
 @Component({
   selector: 'app-my-menu',
@@ -46,26 +47,45 @@ export class MyMenuComponent implements OnInit {
     });
   }
 
+  initList() {
+    this.index.search('').then((result) => {
+      this.searchOptions = result.hits;
+      console.log(this.searchOptions);
+    });
+  }
+
   ngOnInit(): void {
-    this.form.valueChanges
-      .pipe(
-        startWith('')
-        // map((value) => (typeof value === 'string' ? value : value.name))
-      )
-      .subscribe((value) => {
+    this.initList();
+
+    this.form.controls.forEach((ctrl, index) => {
+      ctrl
+        .get('breakfast')
+        .valueChanges.pipe(startWith(''))
+        .subscribe((value) => {
+          this.index.search(value).then((result) => {
+            this.searchOptions = result.hits;
+          });
+        });
+      ctrl.get('lunch').valueChanges.subscribe((value) => {
         this.index.search(value).then((result) => {
           this.searchOptions = result.hits;
         });
       });
+      ctrl.get('dinner').valueChanges.subscribe((value) => {
+        this.index.search(value).then((result) => {
+          this.searchOptions = result.hits;
+        });
+      });
+    });
   }
 
   submit(): void {
     this.dayMenus = [];
     for (let i = 0; i < 7; i++) {
       this.dayMenus.push({
-        breakfastId: this.form.value[i].breakfast,
-        lunchId: this.form.value[i].lunch,
-        dinnerId: this.form.value[i].dinner,
+        breakfastId: this.form.value[i].breakfast.foodId,
+        lunchId: this.form.value[i].lunch.foodId,
+        dinnerId: this.form.value[i].dinner.foodId,
       });
     }
 
@@ -93,7 +113,7 @@ export class MyMenuComponent implements OnInit {
     });
   }
 
-  // displayFn(value) {
-  //   return value && value.name ? value.name : '';
-  // }
+  displayFn(food: Food) {
+    return food && food.name ? food.name : '';
+  }
 }

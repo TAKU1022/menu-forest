@@ -42,8 +42,12 @@
   </form>
 </div>
 
-<mat-autocomplete #algolia>
-  <mat-option *ngFor="let option of searchOptions" [value]="option.name">
+<mat-autocomplete
+  #algolia
+  [displayWith]="displayFn"
+  (optionSelected)="initList()"
+>
+  <mat-option *ngFor="let option of searchOptions" [value]="option">
     {{ option.name }}
   </mat-option>
 </mat-autocomplete>
