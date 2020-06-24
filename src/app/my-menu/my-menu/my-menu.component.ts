@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { MyMenuService } from 'src/app/services/my-menu.service';
 import { DayMenu } from '@interfaces/my-menu';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map, debounceTime, debounce } from 'rxjs/operators';
 import { User } from '@interfaces/user';
 import { SearchService } from 'src/app/services/search.service';
 import { SearchIndex } from 'algoliasearch/lite';
@@ -66,17 +66,27 @@ export class MyMenuComponent implements OnInit {
             this.searchOptions = result.hits;
           });
         });
-      ctrl.get('lunch').valueChanges.subscribe((value) => {
-        this.index.search(value).then((result) => {
-          this.searchOptions = result.hits;
+      ctrl
+        .get('lunch')
+        .valueChanges.pipe(startWith(''))
+        .subscribe((value) => {
+          this.index.search(value).then((result) => {
+            this.searchOptions = result.hits;
+          });
         });
-      });
-      ctrl.get('dinner').valueChanges.subscribe((value) => {
-        this.index.search(value).then((result) => {
-          this.searchOptions = result.hits;
+      ctrl
+        .get('dinner')
+        .valueChanges.pipe(startWith(''))
+        .subscribe((value) => {
+          this.index.search(value).then((result) => {
+            this.searchOptions = result.hits;
+          });
         });
-      });
     });
+  }
+
+  displayFn(food): string {
+    return food && food.name ? food.name : '';
   }
 
   submit(): void {
@@ -111,9 +121,5 @@ export class MyMenuComponent implements OnInit {
       },
       creatorId: this.userId,
     });
-  }
-
-  displayFn(food: Food) {
-    return food && food.name ? food.name : '';
   }
 }
