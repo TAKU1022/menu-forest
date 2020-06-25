@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { MyMenuService } from 'src/app/services/my-menu.service';
 import { DayMenu } from '@interfaces/my-menu';
@@ -7,7 +12,6 @@ import { startWith, map, debounceTime, debounce } from 'rxjs/operators';
 import { User } from '@interfaces/user';
 import { SearchService } from 'src/app/services/search.service';
 import { SearchIndex } from 'algoliasearch/lite';
-import { Food } from '@interfaces/food';
 
 @Component({
   selector: 'app-my-menu',
@@ -47,41 +51,47 @@ export class MyMenuComponent implements OnInit {
     });
   }
 
-  initList() {
-    this.index.search('').then((result) => {
-      this.searchOptions = result.hits;
-      console.log(this.searchOptions);
-    });
-  }
-
   ngOnInit(): void {
-    this.initList();
-
     this.form.controls.forEach((ctrl, index) => {
       ctrl
         .get('breakfast')
-        .valueChanges.pipe(startWith(''))
-        .subscribe((value) => {
-          this.index.search(value).then((result) => {
+        .valueChanges.pipe(
+          startWith(''),
+          map((value) => (typeof value === 'string' ? value : value.name))
+        )
+        .subscribe((name) => {
+          this.index.search(name).then((result) => {
             this.searchOptions = result.hits;
           });
         });
       ctrl
         .get('lunch')
-        .valueChanges.pipe(startWith(''))
-        .subscribe((value) => {
-          this.index.search(value).then((result) => {
+        .valueChanges.pipe(
+          startWith(''),
+          map((value) => (typeof value === 'string' ? value : value.name))
+        )
+        .subscribe((name) => {
+          this.index.search(name).then((result) => {
             this.searchOptions = result.hits;
           });
         });
       ctrl
         .get('dinner')
-        .valueChanges.pipe(startWith(''))
-        .subscribe((value) => {
-          this.index.search(value).then((result) => {
+        .valueChanges.pipe(
+          startWith(''),
+          map((value) => (typeof value === 'string' ? value : value.name))
+        )
+        .subscribe((name) => {
+          this.index.search(name).then((result) => {
             this.searchOptions = result.hits;
           });
         });
+    });
+  }
+
+  updateFormValue(control: FormControl) {
+    control.updateValueAndValidity({
+      emitEvent: true,
     });
   }
 
