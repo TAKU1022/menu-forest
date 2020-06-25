@@ -1,10 +1,10 @@
 import * as functions from 'firebase-functions';
-const algoliasearch = require('algoliasearch');
+import algoliasearch, { SearchIndex } from 'algoliasearch';
 
 const ALGOLIA_ID = functions.config().algolia.app_id;
 const ALGOLIA_ADMIN_KEY = functions.config().algolia.api_key;
 const client = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
-const foodIndex = client.initIndex('foods');
+const foodIndex: SearchIndex = client.initIndex('foods');
 
 const addFoodRecords = (food: any) => {
   const records = food.recipe

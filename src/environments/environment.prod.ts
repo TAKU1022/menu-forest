@@ -10,4 +10,8 @@ export const environment = {
     appId: '1:106080504750:web:4fe7bb85e3c426c657163f',
     measurementId: 'G-DRKTDKVVBC',
   },
+  algoia: {
+    appId: '22KHOCYFR4',
+    searchKey: '4499a84d9540168a8ee73a8c6b9237d1',
+  },
 };

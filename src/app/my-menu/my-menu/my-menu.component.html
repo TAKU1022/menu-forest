@@ -10,7 +10,8 @@
             type="text"
             matInput
             formControlName="breakfast"
-            autocomplete="off"
+            (focus)="updateFormValue(form.controls[i].get('breakfast'))"
+            [matAutocomplete]="algolia"
           />
           <mat-error>必須入力です</mat-error>
         </mat-form-field>
@@ -20,7 +21,8 @@
             type="text"
             matInput
             formControlName="lunch"
-            autocomplete="off"
+            (focus)="updateFormValue(form.controls[i].get('lunch'))"
+            [matAutocomplete]="algolia"
           />
           <mat-error>必須入力です</mat-error>
         </mat-form-field>
@@ -30,7 +32,8 @@
             type="text"
             matInput
             formControlName="dinner"
-            autocomplete="off"
+            (focus)="updateFormValue(form.controls[i].get('dinner'))"
+            [matAutocomplete]="algolia"
           />
           <mat-error>必須入力です</mat-error>
         </mat-form-field>
@@ -41,3 +44,9 @@
     </button>
   </form>
 </div>
+
+<mat-autocomplete #algolia [displayWith]="displayFn">
+  <mat-option *ngFor="let option of searchOptions" [value]="option">
+    {{ option.name }}
+  </mat-option>
+</mat-autocomplete>
