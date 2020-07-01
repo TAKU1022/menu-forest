@@ -16,7 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './header/header.component';
 import { MatButtonModule } from '@angular/material/button';
 import { FooterComponent } from './footer/footer.component';
-import { DrawerComponent } from './drawer/drawer.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
@@ -33,7 +32,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    DrawerComponent,
     AccountDialogComponent,
     EmailDialogComponent,
     NotFoundComponent,
