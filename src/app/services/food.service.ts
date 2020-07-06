@@ -18,7 +18,7 @@ export class FoodService {
     });
   }
 
-  getFood(): Observable<Food[]> {
+  getFoods(): Observable<Food[]> {
     return this.db.collection<Food>('foods').valueChanges();
   }
 

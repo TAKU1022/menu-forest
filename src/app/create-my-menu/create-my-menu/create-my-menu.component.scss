@@ -1,0 +1,17 @@
+.week {
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.day {
+  text-align: left;
+  background-color: #f0f8ff;
+  border-radius: 10px;
+  border-bottom: 1px solid #000;
+  &--title {
+    display: inline-block;
+    margin: 0 0 0 8px;
+    font-size: 24px;
+  }
+}
