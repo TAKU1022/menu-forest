@@ -1,0 +1,30 @@
+p {
+  font-weight: bold;
+}
+
+button {
+  color: #fff;
+  width: 250px;
+  border-radius: 30px;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.btn {
+  &__icon {
+    position: absolute;
+    top: 6px;
+    left: 16px;
+  }
+  &--facebook {
+    background-color: #3b5998;
+  }
+  &--twitter {
+    background-color: #2daae1;
+  }
+  &--google {
+    color: rgba(black, 0.6);
+    background-color: #fff;
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>ようこそ</h1>
+  <p>ログイン</p>
+  <div class="btn">
+    <button mat-raised-button class="btn--facebook" (click)="facebookLogin()">
+      <span class="btn__icon"
+        ><img
+          src="/assets/images/facebook-3.svg"
+          alt="Facebookのアイコン"
+          width="30"
+          height="30"
+      /></span>
+      <span>Facebook</span>
+    </button>
+    <button mat-raised-button class="btn--twitter" (click)="twitterLogin()">
+      <span class="btn__icon"
+        ><img
+          src="/assets/images/twitter-3.svg"
+          alt="Twitterのアイコン"
+          width="30"
+          height="30"
+      /></span>
+      <span>Twitter</span>
+    </button>
+    <button mat-raised-button class="btn--google" (click)="gooleLogin()">
+      <span class="btn__icon"
+        ><img
+          src="/assets/images/google-icon.svg"
+          alt="Googleのアイコン"
+          width="20"
+          height="20"
+      /></span>
+      <span>Google</span>
+    </button>
+  </div>
+</div>
