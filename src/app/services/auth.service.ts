@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '@interfaces/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -20,36 +21,54 @@ export class AuthService {
     })
   );
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private db: AngularFirestore,
+    private router: Router
+  ) {
     this.afUser$.subscribe((user) => console.log(user));
   }
 
   facebookLogin() {
-    return this.afAuth.signInWithPopup(
-      new auth.FacebookAuthProvider().setCustomParameters({
-        prompt: 'select_account',
-      })
-    );
+    return this.afAuth
+      .signInWithPopup(
+        new auth.FacebookAuthProvider().setCustomParameters({
+          prompt: 'select_account',
+        })
+      )
+      .then(() => {
+        this.router.navigateByUrl('/');
+      });
   }
 
   twrtterLogin() {
-    return this.afAuth.signInWithPopup(
-      new auth.TwitterAuthProvider().setCustomParameters({
-        prompt: 'select_account',
-      })
-    );
+    return this.afAuth
+      .signInWithPopup(
+        new auth.TwitterAuthProvider().setCustomParameters({
+          prompt: 'select_account',
+        })
+      )
+      .then(() => {
+        this.router.navigateByUrl('/');
+      });
   }
 
   googleLogin() {
-    return this.afAuth.signInWithPopup(
-      new auth.GoogleAuthProvider().setCustomParameters({
-        prompt: 'select_account',
-      })
-    );
+    return this.afAuth
+      .signInWithPopup(
+        new auth.GoogleAuthProvider().setCustomParameters({
+          prompt: 'select_account',
+        })
+      )
+      .then(() => {
+        this.router.navigateByUrl('/');
+      });
   }
 
   logout() {
-    this.afAuth.signOut();
+    this.afAuth.signOut().then(() => {
+      this.router.navigateByUrl('/welcome');
+    });
   }
 
   createUser(params: { email: string; password: string }) {
