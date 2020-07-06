@@ -19,9 +19,11 @@ const routes: Routes = [
       import('./food-list/food-list.module').then((m) => m.FoodListModule),
   },
   {
-    path: 'my-menu',
+    path: 'create-my-menu',
     loadChildren: () =>
-      import('./my-menu/my-menu.module').then((m) => m.MyMenuModule),
+      import('./create-my-menu/create-my-menu.module').then(
+        (m) => m.CreateMyMenuModule
+      ),
   },
   {
     path: 'setting',
