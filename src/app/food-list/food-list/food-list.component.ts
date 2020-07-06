@@ -9,7 +9,7 @@ import { Food } from '@interfaces/food';
   styleUrls: ['./food-list.component.scss'],
 })
 export class FoodListComponent implements OnInit {
-  foods$: Observable<Food[]> = this.foodService.getFood();
+  foods$: Observable<Food[]> = this.foodService.getFoods();
 
   constructor(private foodService: FoodService) {}
 
