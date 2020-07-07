@@ -11,15 +11,15 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  facebookLogin() {
-    this.authService.facebookLogin();
+  loginWithFacebook() {
+    this.authService.loginWithFacebook();
   }
 
-  twitterLogin() {
-    this.authService.twrtterLogin();
+  loginWithTwitter() {
+    this.authService.loginWithTwitter();
   }
 
-  gooleLogin() {
-    this.authService.googleLogin();
+  loginWithGoogle() {
+    this.authService.loginWithGoogle();
   }
 }

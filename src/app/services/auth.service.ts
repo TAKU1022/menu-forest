@@ -29,7 +29,7 @@ export class AuthService {
     this.afUser$.subscribe((user) => console.log(user));
   }
 
-  facebookLogin() {
+  loginWithFacebook() {
     return this.afAuth
       .signInWithPopup(
         new auth.FacebookAuthProvider().setCustomParameters({
@@ -41,7 +41,7 @@ export class AuthService {
       });
   }
 
-  twrtterLogin() {
+  loginWithTwitter() {
     return this.afAuth
       .signInWithPopup(
         new auth.TwitterAuthProvider().setCustomParameters({
@@ -53,7 +53,7 @@ export class AuthService {
       });
   }
 
-  googleLogin() {
+  loginWithGoogle() {
     return this.afAuth
       .signInWithPopup(
         new auth.GoogleAuthProvider().setCustomParameters({
@@ -89,7 +89,7 @@ export class AuthService {
       });
   }
 
-  emailLogin(params: { email: string; password: string }) {
+  loginWithEmail(params: { email: string; password: string }) {
     return this.afAuth
       .signInWithEmailAndPassword(params.email, params.password)
       .catch((error) => {
