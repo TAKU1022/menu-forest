@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmailDialogComponent } from './email-dialog.component';
+import { MainShellComponent } from './main-shell.component';
 
-describe('EmailDialogComponent', () => {
-  let component: EmailDialogComponent;
-  let fixture: ComponentFixture<EmailDialogComponent>;
+describe('MainShellComponent', () => {
+  let component: MainShellComponent;
+  let fixture: ComponentFixture<MainShellComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EmailDialogComponent],
+      declarations: [MainShellComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmailDialogComponent);
+    fixture = TestBed.createComponent(MainShellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,32 @@
+<app-header [sidenav]="sidenav"></app-header>
+
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    fixedInViewport
+    [fixedTopGap]="56"
+    mode="over"
+    [opened]="opened"
+  >
+    <mat-nav-list>
+      <a mat-list-item routerLink="/"
+        ><mat-icon color="primary">home</mat-icon><span>今日の献立</span></a
+      >
+      <a mat-list-item routerLink="/menu"
+        ><mat-icon color="primary">date_range</mat-icon
+        ><span>一週間の献立</span></a
+      >
+      <a mat-list-item routerLink="/food-list"
+        ><mat-icon color="primary">restaurant</mat-icon
+        ><span>メニュー一覧</span></a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div id="wrapper">
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

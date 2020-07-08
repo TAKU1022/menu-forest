@@ -1,6 +1,6 @@
 <mat-toolbar class="header" color="primary">
   <div class="header-left">
-    <button mat-icon-button (click)="toggle()">
+    <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon aria-hidden="false">menu</mat-icon>
     </button>
     <span class="header-left--logo">MENU</span>
@@ -30,17 +30,7 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-  <ng-template #defaultMenu>
-    <button mat-menu-item (click)="openAccountDialog(true)">
-      <mat-icon color="primary">how_to_reg</mat-icon>
-      <span>新規登録</span>
-    </button>
-    <button mat-menu-item (click)="openAccountDialog(false)">
-      <mat-icon color="primary">login</mat-icon>
-      <span>ログイン</span>
-    </button>
-  </ng-template>
-  <div *ngIf="user$ | async as user; else defaultMenu">
+  <div *ngIf="user$ | async as user">
     <button mat-menu-item routerLink="/create-my-menu">
       <mat-icon color="primary">add_circle</mat-icon>
       <span>My献立を作成</span>

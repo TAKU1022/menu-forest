@@ -19,22 +19,21 @@ import { FooterComponent } from './footer/footer.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDialogModule } from '@angular/material/dialog';
-import { AccountDialogComponent } from './account-dialog/account-dialog.component';
-import { EmailDialogComponent } from './email-dialog/email-dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { WelcomeShellComponent } from './welcome-shell/welcome-shell.component';
+import { MainShellComponent } from './main-shell/main-shell.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    AccountDialogComponent,
-    EmailDialogComponent,
     NotFoundComponent,
+    WelcomeShellComponent,
+    MainShellComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +51,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatListModule,
     MatSidenavModule,
     MatMenuModule,
-    MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,

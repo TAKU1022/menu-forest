@@ -1,7 +1,12 @@
-<div class="account">
-  <h1 mat-dialog-title>{{ data.isSignUp ? '新規登録' : 'ログイン' }}</h1>
+<div class="container">
+  <h1>ようこそ</h1>
+  <p>ログイン</p>
   <div class="btn">
-    <button mat-raised-button class="btn--facebook" (click)="facebookLogin()">
+    <button
+      mat-raised-button
+      class="btn--facebook"
+      (click)="loginWithFacebook()"
+    >
       <span class="btn__icon"
         ><img
           src="/assets/images/facebook-3.svg"
@@ -11,7 +16,7 @@
       /></span>
       <span>Facebook</span>
     </button>
-    <button mat-raised-button class="btn--twitter" (click)="twitterLogin()">
+    <button mat-raised-button class="btn--twitter" (click)="loginWithTwitter()">
       <span class="btn__icon"
         ><img
           src="/assets/images/twitter-3.svg"
@@ -21,7 +26,7 @@
       /></span>
       <span>Twitter</span>
     </button>
-    <button mat-raised-button class="btn--google" (click)="gooleLogin()">
+    <button mat-raised-button class="btn--google" (click)="loginWithGoogle()">
       <span class="btn__icon"
         ><img
           src="/assets/images/google-icon.svg"
@@ -30,25 +35,6 @@
           height="20"
       /></span>
       <span>Google</span>
-    </button>
-    <hr />
-    <button
-      mat-raised-button
-      color="primary"
-      *ngIf="data.isSignUp"
-      (click)="openEmailDialog(true)"
-      mat-dialog-close
-    >
-      新規登録
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      *ngIf="!data.isSignUp"
-      (click)="openEmailDialog(false)"
-      mat-dialog-close
-    >
-      ログイン
     </button>
   </div>
 </div>
