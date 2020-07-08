@@ -11,13 +11,13 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { tap, map, take } from 'rxjs/operators';
+import { map, tap, take } from 'rxjs/operators';
 import { User } from '@interfaces/user';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminGuard implements CanActivate, CanLoad {
+export class GuestGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -29,14 +29,9 @@ export class AdminGuard implements CanActivate, CanLoad {
     | boolean
     | UrlTree {
     return this.authService.afUser$.pipe(
-      tap((user: User) => {
-        if (!user) {
-          this.router.navigateByUrl('/welcome');
-        }
-      }),
-      map((isUser: User) => isUser.admin),
-      tap((isAdmin: boolean) => {
-        if (!isAdmin) {
+      map((user: User) => !user),
+      tap((isGuest: boolean) => {
+        if (!isGuest) {
           this.router.navigateByUrl('/');
         }
       })
@@ -47,15 +42,10 @@ export class AdminGuard implements CanActivate, CanLoad {
     segments: UrlSegment[]
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.authService.afUser$.pipe(
-      tap((user: User) => {
-        if (!user) {
-          this.router.navigateByUrl('/welcome');
-        }
-      }),
-      map((isUser: User) => isUser.admin),
+      map((user: User) => !user),
       take(1),
-      tap((isAdmin: boolean) => {
-        if (!isAdmin) {
+      tap((isGuest: boolean) => {
+        if (!isGuest) {
           this.router.navigateByUrl('/');
         }
       })

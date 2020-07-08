@@ -4,11 +4,11 @@ import { FoodService } from 'src/app/services/food.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-editor',
-  templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.scss'],
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss'],
 })
-export class EditorComponent implements OnInit {
+export class AdminComponent implements OnInit {
   form = this.fb.group({
     name: ['', Validators.required],
     image: ['https://dummyimage.com/300x300/F0F8FF.png', Validators.required],
