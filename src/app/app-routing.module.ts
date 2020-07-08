@@ -50,9 +50,9 @@ const routes: Routes = [
           import('./setting/setting.module').then((m) => m.SettingModule),
       },
       {
-        path: 'editor',
+        path: 'admin',
         loadChildren: () =>
-          import('./editor/editor.module').then((m) => m.EditorModule),
+          import('./admin/admin.module').then((m) => m.AdminModule),
         canActivate: [AdminGuard],
         canLoad: [AdminGuard],
       },
