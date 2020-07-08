@@ -12,6 +12,7 @@ import {
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { tap, map, take } from 'rxjs/operators';
+import { User } from '@interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -28,10 +29,15 @@ export class AdminGuard implements CanActivate, CanLoad {
     | boolean
     | UrlTree {
     return this.authService.afUser$.pipe(
-      map((user) => user.admin),
-      tap((isAdmin) => {
+      tap((user: User) => {
+        if (!user) {
+          this.router.navigateByUrl('/welcome');
+        }
+      }),
+      map((isUser: User) => isUser.admin),
+      tap((isAdmin: boolean) => {
         if (!isAdmin) {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('/');
         }
       })
     );
@@ -41,11 +47,16 @@ export class AdminGuard implements CanActivate, CanLoad {
     segments: UrlSegment[]
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.authService.afUser$.pipe(
-      map((user) => user.admin),
+      tap((user: User) => {
+        if (!user) {
+          this.router.navigateByUrl('/welcome');
+        }
+      }),
+      map((isUser: User) => isUser.admin),
       take(1),
-      tap((isAdmin) => {
+      tap((isAdmin: boolean) => {
         if (!isAdmin) {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('/');
         }
       })
     );
