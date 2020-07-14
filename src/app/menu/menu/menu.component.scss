@@ -17,8 +17,10 @@ h1 {
 
 .food {
   border: 1px solid rgba(black, 0.32);
+  &__img {
+    border-bottom: 1px solid rgba(black, 0.32);
+  }
   &__name {
-    border-top: 1px solid rgba(black, 0.32);
     margin: 0 0 8px;
     padding-top: 8px;
   }
