@@ -1,17 +1,36 @@
+.week-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
 .week {
   border: 1px solid #000;
-  border-radius: 10px;
-  margin-bottom: 8px;
 }
 
 .day {
   text-align: left;
-  background-color: #f0f8ff;
-  border-radius: 10px;
-  border-bottom: 1px solid #000;
   &--title {
     display: inline-block;
-    margin: 0 0 0 8px;
+    margin: 8px 0 0 16px;
     font-size: 24px;
+    border-bottom: 3px solid #000;
+  }
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 16px;
+}
+
+.food {
+  border: 1px solid rgba(black, 0.32);
+  &__img {
+    border-bottom: 1px solid rgba(black, 0.32);
+  }
+  &__name {
+    margin: 0;
   }
 }
