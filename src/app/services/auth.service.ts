@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '@interfaces/user';
 import { Router } from '@angular/router';
@@ -20,49 +20,41 @@ export class AuthService {
       }
     })
   );
+  userId: string;
 
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
     private router: Router
   ) {
-    this.afUser$.subscribe((user) => console.log(user));
+    this.afUser$.pipe(take(1)).subscribe((user: User) => {
+      this.userId = user && user.uid;
+      console.log(user);
+    });
   }
 
   loginWithFacebook() {
-    return this.afAuth
-      .signInWithPopup(
-        new auth.FacebookAuthProvider().setCustomParameters({
-          prompt: 'select_account',
-        })
-      )
-      .then(() => {
-        this.router.navigateByUrl('/');
-      });
+    return this.afAuth.signInWithPopup(
+      new auth.FacebookAuthProvider().setCustomParameters({
+        prompt: 'select_account',
+      })
+    );
   }
 
   loginWithTwitter() {
-    return this.afAuth
-      .signInWithPopup(
-        new auth.TwitterAuthProvider().setCustomParameters({
-          prompt: 'select_account',
-        })
-      )
-      .then(() => {
-        this.router.navigateByUrl('/');
-      });
+    return this.afAuth.signInWithPopup(
+      new auth.TwitterAuthProvider().setCustomParameters({
+        prompt: 'select_account',
+      })
+    );
   }
 
   loginWithGoogle() {
-    return this.afAuth
-      .signInWithPopup(
-        new auth.GoogleAuthProvider().setCustomParameters({
-          prompt: 'select_account',
-        })
-      )
-      .then(() => {
-        this.router.navigateByUrl('/');
-      });
+    return this.afAuth.signInWithPopup(
+      new auth.GoogleAuthProvider().setCustomParameters({
+        prompt: 'select_account',
+      })
+    );
   }
 
   logout() {
