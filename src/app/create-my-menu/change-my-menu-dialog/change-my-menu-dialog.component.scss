@@ -1,21 +1,23 @@
-.grid {
+.current-food {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+.food-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 }
 
-h1 {
-  margin: 0 0 16px;
-  font-size: 28px;
-}
-
 .food {
   border: 1px solid rgba(black, 0.32);
+  text-align: center;
   &__img {
     border-bottom: 1px solid rgba(black, 0.32);
   }
   &__name {
-    margin-top: 0;
-    padding-top: 16px;
+    margin: 0;
+    padding-top: 8px;
   }
 }

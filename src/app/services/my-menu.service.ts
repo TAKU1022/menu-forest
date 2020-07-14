@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import {
-  MyMenu,
-  DayMenu,
-  DayMenuWithFood,
-  MyMenuWithFood,
-} from '@interfaces/my-menu';
+import { MyMenu, DayMenu, DayMenuWithFood } from '@interfaces/my-menu';
 import { Observable, combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { FoodService } from './food.service';
@@ -18,29 +13,17 @@ export class MyMenuService {
 
   constructor(private db: AngularFirestore, private foodService: FoodService) {}
 
-  createMyMenu(myMenu: Omit<MyMenu, 'myMenuId'>): Promise<void> {
-    const myMenuId = this.db.createId();
-    return this.db.doc(`userMenus/${myMenuId}`).set({
-      myMenuId,
-      ...myMenu,
-    });
-  }
-
-  updateMyMenu() {}
-
-  deleteMyMenu() {}
-
-  getMyMenuById(userId: string): Observable<MyMenu[]> {
+  getMyMenuByUserId(userId: string): Observable<MyMenu> {
     return this.db
-      .collection<MyMenu>('userMenus', (ref) => {
+      .collection<MyMenu>('myMenus', (ref) => {
         return ref.where('creatorId', '==', userId);
       })
-      .valueChanges();
+      .valueChanges()
+      .pipe(map((myMenus: MyMenu[]) => myMenus[0]));
   }
 
-  getMyMenuWithFood(userId: string): Observable<MyMenuWithFood> {
-    return this.getMyMenuById(userId).pipe(
-      map((myMenus: MyMenu[]) => myMenus[0]),
+  getDayMenuWithFoods(userId: string): Observable<DayMenuWithFood[]> {
+    return this.getMyMenuByUserId(userId).pipe(
       map((myMenu: MyMenu) => myMenu.day),
       map((day) => {
         const days: DayMenu[] = [
@@ -55,7 +38,7 @@ export class MyMenuService {
         return days;
       }),
       switchMap(
-        (dayMenus: DayMenu[]): Observable<MyMenuWithFood> => {
+        (dayMenus: DayMenu[]): Observable<DayMenuWithFood[]> => {
           const dayMenuWithFoods$: Observable<DayMenuWithFood>[] = dayMenus.map(
             (dayMenu: DayMenu) => {
               return combineLatest([
@@ -74,21 +57,12 @@ export class MyMenuService {
               );
             }
           );
-
           return combineLatest(dayMenuWithFoods$).pipe(
             map((dayMenuWithFoods: DayMenuWithFood[]) => {
               for (let i = 0; i < 7; i++) {
                 dayMenuWithFoods[i].dayOfWeek = this.dayOfWeeks[i];
               }
-              return {
-                sundayFood: dayMenuWithFoods[0],
-                mondayFood: dayMenuWithFoods[1],
-                tuesdayFood: dayMenuWithFoods[2],
-                wednesdayFood: dayMenuWithFoods[3],
-                thursdayFood: dayMenuWithFoods[4],
-                fridayFood: dayMenuWithFoods[5],
-                saturdayFood: dayMenuWithFoods[6],
-              };
+              return dayMenuWithFoods;
             })
           );
         }
@@ -97,24 +71,127 @@ export class MyMenuService {
   }
 
   getTodayMenu(userId: string): Observable<DayMenuWithFood> {
-    return this.getMyMenuWithFood(userId).pipe(
-      map((myMenuWithFood: MyMenuWithFood) => {
-        const weekMenu: DayMenuWithFood[] = [
-          myMenuWithFood.sundayFood,
-          myMenuWithFood.mondayFood,
-          myMenuWithFood.tuesdayFood,
-          myMenuWithFood.wednesdayFood,
-          myMenuWithFood.thursdayFood,
-          myMenuWithFood.fridayFood,
-          myMenuWithFood.saturdayFood,
-        ];
-        return weekMenu;
-      }),
+    return this.getDayMenuWithFoods(userId).pipe(
       map((dayMenuWithFoods: DayMenuWithFood[]) => {
         const today = new Date();
         const dayOfWeek = today.getDay();
         return dayMenuWithFoods[dayOfWeek];
       })
     );
+  }
+
+  changeMyMenu(
+    myMenuId: string,
+    dayOfWeek: number,
+    time: string,
+    foodId: string
+  ) {
+    switch (dayOfWeek) {
+      case 0:
+        if (time === '朝') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.sunday.breakfastId': foodId,
+          });
+        } else if (time === '昼') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.sunday.lunchId': foodId,
+          });
+        } else if (time === '夜') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.sunday.dinnerId': foodId,
+          });
+        }
+        break;
+      case 1:
+        if (time === '朝') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.monday.breakfastId': foodId,
+          });
+        } else if (time === '昼') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.monday.lunchId': foodId,
+          });
+        } else if (time === '夜') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.monday.dinnerId': foodId,
+          });
+        }
+        break;
+      case 2:
+        if (time === '朝') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.tuesday.breakfastId': foodId,
+          });
+        } else if (time === '昼') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.tuesday.lunchId': foodId,
+          });
+        } else if (time === '夜') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.tuesday.dinnerId': foodId,
+          });
+        }
+        break;
+      case 3:
+        if (time === '朝') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.wednesday.breakfastId': foodId,
+          });
+        } else if (time === '昼') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.wednesday.lunchId': foodId,
+          });
+        } else if (time === '夜') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.wednesday.dinnerId': foodId,
+          });
+        }
+        break;
+      case 4:
+        if (time === '朝') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.thursday.breakfastId': foodId,
+          });
+        } else if (time === '昼') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.thursday.lunchId': foodId,
+          });
+        } else if (time === '夜') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.thursday.dinnerId': foodId,
+          });
+        }
+        break;
+      case 5:
+        if (time === '朝') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.friday.breakfastId': foodId,
+          });
+        } else if (time === '昼') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.friday.lunchId': foodId,
+          });
+        } else if (time === '夜') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.friday.dinnerId': foodId,
+          });
+        }
+        break;
+      case 6:
+        if (time === '朝') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.suturday.breakfastId': foodId,
+          });
+        } else if (time === '昼') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.suturday.lunchId': foodId,
+          });
+        } else if (time === '夜') {
+          return this.db.doc(`myMenus/${myMenuId}`).update({
+            'day.suturday.dinnerId': foodId,
+          });
+        }
+        break;
+    }
   }
 }

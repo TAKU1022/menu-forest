@@ -12,14 +12,9 @@ import { User } from '@interfaces/user';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  todayMenu$: Observable<DayMenuWithFood | null> = this.authService.afUser$.pipe(
-    switchMap((user: User) => {
-      if (user) {
-        return this.myMenuService.getTodayMenu(user.uid);
-      } else {
-        return of(null);
-      }
-    })
+  userId: string = this.authService.userId;
+  todayMenu$: Observable<DayMenuWithFood> = this.myMenuService.getTodayMenu(
+    this.userId
   );
 
   constructor(

@@ -12,29 +12,10 @@ import { switchMap, map } from 'rxjs/operators';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
+  userId: string = this.authService.userId;
   weekMenu$: Observable<
-    DayMenuWithFood[] | null
-  > = this.authService.afUser$.pipe(
-    switchMap((user: User) => {
-      if (user) {
-        return this.myMenuService.getMyMenuWithFood(user.uid);
-      } else {
-        return of(null);
-      }
-    }),
-    map((myMenuWithFood: MyMenuWithFood | null) => {
-      const weekMenu: DayMenuWithFood[] = [
-        myMenuWithFood.sundayFood,
-        myMenuWithFood.mondayFood,
-        myMenuWithFood.tuesdayFood,
-        myMenuWithFood.wednesdayFood,
-        myMenuWithFood.thursdayFood,
-        myMenuWithFood.fridayFood,
-        myMenuWithFood.saturdayFood,
-      ];
-      return weekMenu;
-    })
-  );
+    DayMenuWithFood[]
+  > = this.myMenuService.getDayMenuWithFoods(this.userId);
 
   constructor(
     private myMenuService: MyMenuService,

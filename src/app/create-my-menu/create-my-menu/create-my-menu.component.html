@@ -1,10 +1,36 @@
 <div class="container">
-  <div *ngFor="let dayOfweek of dayOfweeks">
-    <div class="week">
-      <div class="day">
-        <p class="day--title">{{ dayOfweek }}曜日</p>
+  <div class="week-grid" *ngIf="myMenu$ | async as myMenu">
+    <div *ngFor="let dayMenu of weekMenu$ | async; let i = index">
+      <div class="week">
+        <div class="day">
+          <p class="day--title">{{ dayMenu.dayOfWeek }}曜日</p>
+        </div>
+        <div class="menu-grid">
+          <div
+            class="food"
+            (click)="
+              openChangeMyMenu(myMenu.myMenuId, dayMenu.breakfast, i, '朝')
+            "
+          >
+            <img class="food__img" [src]="dayMenu.breakfast.image" alt="" />
+            <p class="food__name">{{ dayMenu.breakfast.name }}</p>
+          </div>
+          <div
+            class="food"
+            (click)="openChangeMyMenu(myMenu.myMenuId, dayMenu.lunch, i, '昼')"
+          >
+            <img class="food__img" [src]="dayMenu.lunch.image" alt="" />
+            <p class="food__name">{{ dayMenu.lunch.name }}</p>
+          </div>
+          <div
+            class="food"
+            (click)="openChangeMyMenu(myMenu.myMenuId, dayMenu.dinner, i, '夜')"
+          >
+            <img class="food__img" [src]="dayMenu.breakfast.image" alt="" />
+            <p class="food__name">{{ dayMenu.dinner.name }}</p>
+          </div>
+        </div>
       </div>
-      <p>献立がありません</p>
     </div>
   </div>
 </div>
