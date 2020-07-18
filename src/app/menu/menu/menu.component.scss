@@ -8,6 +8,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+  max-width: 950px;
+  margin: 0 auto;
 }
 
 h1 {
@@ -17,6 +19,8 @@ h1 {
 
 .food {
   border: 1px solid rgba(black, 0.32);
+  max-width: 300px;
+  cursor: pointer;
   &__img {
     border-bottom: 1px solid rgba(black, 0.32);
   }

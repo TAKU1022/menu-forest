@@ -11,6 +11,8 @@ h1 {
 
 .food {
   border: 1px solid rgba(black, 0.32);
+  max-width: 300px;
+  cursor: pointer;
   &__img {
     border-bottom: 1px solid rgba(black, 0.32);
   }

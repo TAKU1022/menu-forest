@@ -1,22 +1,79 @@
-<p class="current-food">{{ data.food.name }}</p>
-<mat-dialog-content>
-  <div class="food-grid">
-    <div *ngFor="let food of foods$ | async">
-      <div class="food">
-        <img class="food__img" [src]="food.image" alt="" />
-        <p class="food__name">{{ food.name }}</p>
-        <button
-          mat-button
-          color="primary"
-          (click)="changeMyMenu(food.foodId)"
-          matDialogClose
-        >
-          変更する
-        </button>
+<div class="wrap">
+  <p class="current-food">{{ data.food.name }}</p>
+  <form class="search" (ngSubmit)="searchFood(searchControl.value)">
+    <input
+      type="text"
+      class="search__input"
+      [formControl]="searchControl"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionActivated)="setSearchQuery($event.option?.value)"
+      (optionSelected)="searchFood($event.option?.value)"
+    >
+      <mat-option *ngFor="let option of searchOptions" [value]="option.name">
+        {{ option.name }}
+      </mat-option>
+    </mat-autocomplete>
+    <button
+      mat-icon-button
+      class="search__button"
+      (click)="searchFood(searchControl.value)"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+
+  <mat-dialog-content>
+    <ng-container *ngIf="isSearched; else default">
+      <ng-template #hits>
+        <div class="result-grid">
+          <ng-container *ngFor="let result of searchResults">
+            <div class="result">
+              <img class="result__img" [src]="result.image" alt="" />
+              <p class="result__name">{{ result.name }}</p>
+              <button
+                class="result__button"
+                mat-button
+                color="primary"
+                (click)="changeMyMenu(result.foodId)"
+                matDialogClose
+              >
+                変更する
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </ng-template>
+      <ng-container *ngIf="nbHits === 0; else hits">
+        <p>一致する検索結果はありませんでした</p>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #default>
+      <div class="food-grid">
+        <div *ngFor="let food of foods$ | async">
+          <div class="food">
+            <img class="food__img" [src]="food.image" alt="" />
+            <p class="food__name">{{ food.name }}</p>
+            <button
+              mat-button
+              color="primary"
+              (click)="changeMyMenu(food.foodId)"
+              matDialogClose
+            >
+              変更する
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions align="center">
-  <button mat-stroked-button color="primary" matDialogClose>キャンセル</button>
-</mat-dialog-actions>
+    </ng-template>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center">
+    <button mat-stroked-button color="primary" matDialogClose>
+      キャンセル
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ChangeMyMenuDialogComponent } from './change-my-menu-dialog/change-my-menu-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [CreateMyMenuComponent, ChangeMyMenuDialogComponent],
@@ -18,6 +20,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatDialogModule,
     MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
   ],
 })
 export class CreateMyMenuModule {}

@@ -1,36 +1,25 @@
-.wrap {
-  text-align: center;
-}
-
-.current-food {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 0 0 8px;
-}
-
 .search {
+  width: 80%;
   max-width: 400px;
-  width: 100%;
+  margin: 16px auto 24px;
   position: relative;
-  margin: 0;
-  display: inline-block;
-  margin-bottom: 8px;
   &__input {
     width: 100%;
-    border: 1px solid rgba(black, 0.32);
-    border-radius: 20px;
+    border: none;
+    border-bottom: 1px solid rgba(black, 0.32);
     box-sizing: border-box;
     line-height: 32px;
     outline: none;
     padding: 0 42px 0 16px;
     font-size: 18px;
+    background-color: transparent;
   }
   &__button {
     position: absolute;
     width: 34px;
     height: 34px;
-    top: 0px;
     right: 8px;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,33 +35,15 @@
 
 .result {
   border: 1px solid rgba(black, 0.32);
+  max-width: 300px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  cursor: pointer;
+  outline: none;
   &__img {
     border-bottom: 1px solid rgba(black, 0.32);
   }
   &__name {
-    margin: 0;
-    padding-top: 8px;
     font-size: 20px;
-  }
-  &__button {
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
-}
-
-.food-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
-
-.food {
-  border: 1px solid rgba(black, 0.32);
-  &__img {
-    border-bottom: 1px solid rgba(black, 0.32);
-  }
-  &__name {
-    margin: 0;
-    padding-top: 8px;
   }
 }
