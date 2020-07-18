@@ -10,6 +10,8 @@
 .header-left {
   &--logo {
     vertical-align: middle;
+    outline: none;
+    cursor: pointer;
   }
 }
 
@@ -24,6 +26,8 @@
   vertical-align: bottom;
   border-radius: 50%;
   border: 0;
+  outline: none;
+  cursor: pointer;
   img {
     border-radius: 50%;
   }
