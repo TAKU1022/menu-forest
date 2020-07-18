@@ -16,7 +16,6 @@ export class SearchComponent implements OnInit {
   searchOptions: any[];
   query: string;
   searchResults: any[];
-  nbHits: number;
 
   constructor(
     private searchService: SearchService,
@@ -34,7 +33,6 @@ export class SearchComponent implements OnInit {
       this.query = map.get('query');
       this.index.search(this.query).then((result) => {
         this.searchResults = result.hits;
-        this.nbHits = result.nbHits;
       });
     });
   }

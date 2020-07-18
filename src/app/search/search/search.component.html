@@ -25,17 +25,12 @@
     </button>
   </form>
 
-  <ng-template #hits>
-    <div class="result-grid">
-      <ng-container *ngFor="let result of searchResults">
-        <div class="result" routerLink="/food-list/{{ result.foodId }}">
-          <img class="result__img" [src]="result.image" alt="" />
-          <p class="result__name">{{ result.name }}</p>
-        </div>
-      </ng-container>
-    </div>
-  </ng-template>
-  <ng-container *ngIf="nbHits === 0; else hits">
-    <p>一致する検索結果はありませんでした</p>
-  </ng-container>
+  <div class="result-grid">
+    <ng-container *ngFor="let result of searchResults">
+      <div class="result" routerLink="/food-list/{{ result.foodId }}">
+        <img class="result__img" [src]="result.image" alt="" />
+        <p class="result__name">{{ result.name }}</p>
+      </div>
+    </ng-container>
+  </div>
 </div>
