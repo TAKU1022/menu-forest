@@ -3,9 +3,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Food } from '@interfaces/food';
 import { FoodService } from 'src/app/services/food.service';
 import { Observable } from 'rxjs';
-import { DayMenu } from '@interfaces/my-menu';
 import { MyMenuService } from 'src/app/services/my-menu.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl } from '@angular/forms';
+import { SearchIndex } from 'algoliasearch/lite';
+import { SearchService } from 'src/app/services/search.service';
+import { startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-change-my-menu-dialog',
@@ -14,6 +17,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ChangeMyMenuDialogComponent implements OnInit {
   foods$: Observable<Food[]> = this.foodService.getFoods();
+  searchControl = new FormControl('');
+  index: SearchIndex = this.searchService.index.foods;
+  searchOptions: any[];
+  searchResults: any[];
+  nbHits: number;
+  isSearched: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -25,12 +34,20 @@ export class ChangeMyMenuDialogComponent implements OnInit {
     },
     private foodService: FoodService,
     private myMenuService: MyMenuService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private searchService: SearchService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searchControl.valueChanges.pipe(startWith('')).subscribe((value) => {
+      this.index
+        .search(value)
+        .then((result) => (this.searchOptions = result.hits));
+    });
+    this.isSearched = false;
+  }
 
-  changeMyMenu(foodId: string) {
+  changeMyMenu(foodId: string): void {
     this.myMenuService
       .changeMyMenu(
         this.data.myMenuId,
@@ -43,5 +60,23 @@ export class ChangeMyMenuDialogComponent implements OnInit {
           duration: 3000,
         });
       });
+  }
+
+  searchFood(searchQuery): void {
+    if (searchQuery === '') {
+      this.searchResults = null;
+    } else {
+      this.index.search(searchQuery).then((result) => {
+        this.searchResults = result.hits;
+        this.nbHits = result.nbHits;
+        this.isSearched = true;
+      });
+    }
+  }
+
+  setSearchQuery(value: string): void {
+    this.searchControl.setValue(value, {
+      emitEvent: false,
+    });
   }
 }

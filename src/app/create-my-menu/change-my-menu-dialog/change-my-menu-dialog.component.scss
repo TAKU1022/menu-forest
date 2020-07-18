@@ -1,7 +1,63 @@
+.wrap {
+  text-align: center;
+}
+
 .current-food {
   font-size: 20px;
   font-weight: bold;
   margin: 0 0 8px;
+}
+
+.search {
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  margin: 0;
+  display: inline-block;
+  margin-bottom: 8px;
+  &__input {
+    width: 100%;
+    border: 1px solid rgba(black, 0.32);
+    border-radius: 20px;
+    box-sizing: border-box;
+    line-height: 32px;
+    outline: none;
+    padding: 0 42px 0 16px;
+    font-size: 18px;
+  }
+  &__button {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    top: 0px;
+    right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(black, 0.32);
+  }
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(1fr, 1fr);
+  gap: 16px;
+}
+
+.result {
+  border: 1px solid rgba(black, 0.32);
+  &__img {
+    border-bottom: 1px solid rgba(black, 0.32);
+  }
+  &__name {
+    margin: 0;
+    padding-top: 8px;
+    font-size: 20px;
+  }
+  &__button {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
 }
 
 .food-grid {
@@ -12,7 +68,6 @@
 
 .food {
   border: 1px solid rgba(black, 0.32);
-  text-align: center;
   &__img {
     border-bottom: 1px solid rgba(black, 0.32);
   }
