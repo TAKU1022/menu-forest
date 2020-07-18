@@ -2,19 +2,28 @@
   <div class="food" *ngIf="todayMenu$ | async as todayMenu">
     <h1>{{ todayMenu.dayOfWeek }}曜日の献立</h1>
     <div class="grid">
-      <div
-        class="breakfast"
-        routerLink="/menu/{{ todayMenu.breakfast.foodId }}"
-      >
-        <img [src]="todayMenu.breakfast.image" alt="デモ画像" />
+      <div class="breakfast">
+        <img
+          [src]="todayMenu.breakfast.image"
+          alt="デモ画像"
+          routerLink="/menu/{{ todayMenu.breakfast.foodId }}"
+        />
         <label>朝食「{{ todayMenu.breakfast.name }}」</label>
       </div>
-      <div class="lunch" routerLink="/menu/{{ todayMenu.lunch.foodId }}">
-        <img [src]="todayMenu.lunch.image" alt="デモ画像" />
+      <div class="lunch">
+        <img
+          [src]="todayMenu.lunch.image"
+          alt="デモ画像"
+          routerLink="/menu/{{ todayMenu.lunch.foodId }}"
+        />
         <label>昼食「{{ todayMenu.lunch.name }}」</label>
       </div>
-      <div class="dinner" routerLink="/menu/{{ todayMenu.dinner.foodId }}">
-        <img [src]="todayMenu.dinner.image" alt="デモ画像" />
+      <div class="dinner">
+        <img
+          [src]="todayMenu.dinner.image"
+          alt="デモ画像"
+          routerLink="/menu/{{ todayMenu.dinner.foodId }}"
+        />
         <label>夕食「{{ todayMenu.dinner.name }}」</label>
       </div>
     </div>
