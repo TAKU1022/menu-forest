@@ -3,12 +3,12 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon aria-hidden="false">menu</mat-icon>
     </button>
-    <span class="header-left--logo">MENU</span>
+    <span class="header-left--logo" routerLink="/">MENU</span>
   </div>
 
   <div class="header-right">
     <div class="header-right--search">
-      <button mat-icon-button>
+      <button mat-icon-button routerLink="/search">
         <mat-icon aria-hidden="false">search</mat-icon>
       </button>
     </div>
