@@ -1,6 +1,6 @@
 <div class="container">
   <div class="grid">
-    <div *ngFor="let weekMenu of weekMenu$ | async">
+    <ng-container *ngFor="let weekMenu of weekMenu$ | async">
       <h1>{{ weekMenu.dayOfWeek }}曜日</h1>
       <div class="menu-grid">
         <div class="food" routerLink="/menu/{{ weekMenu.breakfast.foodId }}">
@@ -16,6 +16,6 @@
           <p class="food__name">{{ weekMenu.dinner.name }}</p>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 </div>
