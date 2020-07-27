@@ -1,11 +1,24 @@
 <div class="container">
   <h1>メニュー一覧</h1>
   <div class="grid">
-    <ng-container *ngFor="let food of foods$ | async">
+    <ng-container *ngFor="let food of initialFoods">
       <div class="food" routerLink="/food-list/{{ food.foodId }}">
         <img class="food__img" [src]="food.image" alt="" />
         <p class="food__name">{{ food.name }}</p>
       </div>
     </ng-container>
   </div>
+  <div
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="80"
+    (scrolled)="onScroll()"
+  ></div>
+  <mat-spinner
+    mode="indeterminate"
+    *ngIf="isLoading"
+    class="loading-spinner"
+    [diameter]="30"
+  >
+  </mat-spinner>
 </div>

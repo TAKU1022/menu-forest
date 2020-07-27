@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodService } from 'src/app/services/food.service';
-import { Observable } from 'rxjs';
-import { Food } from '@interfaces/food';
+import { SearchService } from 'src/app/services/search.service';
+import { SearchIndex } from 'algoliasearch/lite';
 
 @Component({
   selector: 'app-food-list',
@@ -9,9 +8,43 @@ import { Food } from '@interfaces/food';
   styleUrls: ['./food-list.component.scss'],
 })
 export class FoodListComponent implements OnInit {
-  foods$: Observable<Food[]> = this.foodService.getFoods();
+  index: SearchIndex = this.searchService.index.foods;
+  initialFoods: any[] = [];
+  page = 0;
+  maxPage: number;
+  isLoading: boolean;
+  isInit = true;
 
-  constructor(private foodService: FoodService) {}
+  constructor(private searchService: SearchService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.search();
+  }
+
+  search(): void {
+    if (!this.maxPage || (this.maxPage > this.page && !this.isLoading)) {
+      this.isLoading = true;
+      setTimeout(
+        () => {
+          this.index
+            .search('', {
+              page: this.page,
+              hitsPerPage: 6,
+            })
+            .then((result) => {
+              this.maxPage = result.nbPages;
+              this.initialFoods.push(...result.hits);
+              this.isInit = false;
+              this.isLoading = false;
+            });
+        },
+        this.isInit ? 0 : 1000
+      );
+    }
+  }
+
+  onScroll(): void {
+    this.page++;
+    this.search();
+  }
 }
