@@ -17,18 +17,15 @@
 
 .header-right {
   display: flex;
+  justify-content: center;
 }
 
 .user-avatar {
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  vertical-align: bottom;
-  border-radius: 50%;
-  border: 0;
-  outline: none;
-  cursor: pointer;
+  overflow: hidden;
+  width: 35px;
+  height: 35px;
+  margin: auto 0;
   img {
-    border-radius: 50%;
+    display: block;
   }
 }
