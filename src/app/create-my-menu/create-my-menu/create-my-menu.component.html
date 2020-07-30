@@ -1,10 +1,8 @@
 <div class="container">
-  <div class="week-grid" *ngIf="myMenu$ | async as myMenu">
-    <div *ngFor="let dayMenu of weekMenu$ | async; let i = index">
-      <div class="week">
-        <div class="day">
-          <p class="day--title">{{ dayMenu.dayOfWeek }}曜日</p>
-        </div>
+  <mat-card class="week">
+    <div class="week-grid" *ngIf="myMenu$ | async as myMenu">
+      <div *ngFor="let dayMenu of weekMenu$ | async; let i = index">
+        <h1 class="day-of-week">{{ dayMenu.dayOfWeek }}曜日</h1>
         <div class="menu-grid">
           <div
             class="food"
@@ -32,5 +30,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </mat-card>
 </div>

@@ -1,28 +1,22 @@
+.week {
+  border: 1px solid rgba(black, 0.12);
+}
+
 .week-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
 }
 
-.week {
-  border: 1px solid #000;
-}
-
-.day {
-  text-align: left;
-  &--title {
-    display: inline-block;
-    margin: 8px 0 0 16px;
-    font-size: 24px;
-    border-bottom: 3px solid #000;
-  }
+.day-of-week {
+  margin: 0 0 8px;
+  font-size: 24px;
 }
 
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  padding: 16px;
 }
 
 .food {
