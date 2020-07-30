@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangeMyMenuDialogComponent } from '../change-my-menu-dialog/change-my-menu-dialog.component';
 import { Food } from '@interfaces/food';
+import { PostService } from 'src/app/services/post.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-my-menu',
@@ -20,14 +22,23 @@ export class CreateMyMenuComponent implements OnInit {
   myMenu$: Observable<MyMenu> = this.myMenuService.getMyMenuByUserId(
     this.userId
   );
+  myMenu: MyMenu;
 
   constructor(
     private authService: AuthService,
     private myMenuService: MyMenuService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private postService: PostService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.myMenuService
+      .getMyMenuByUserId(this.userId)
+      .pipe(take(1))
+      .subscribe((myMenu: MyMenu) => {
+        this.myMenu = myMenu;
+      });
+  }
 
   openChangeMyMenu(
     myMenuId: string,
@@ -45,6 +56,13 @@ export class CreateMyMenuComponent implements OnInit {
         dayOfWeek,
         time,
       },
+    });
+  }
+
+  createPost(): void {
+    this.postService.createPost({
+      day: this.myMenu.day,
+      creatorId: this.userId,
     });
   }
 }
