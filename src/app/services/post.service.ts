@@ -67,6 +67,13 @@ export class PostService {
     );
   }
 
+  getPostWithFoodById(postId: string): Observable<PostWithFood> {
+    return this.db
+      .doc<Post>(`posts/${postId}`)
+      .valueChanges()
+      .pipe(switchMap((post: Post) => this.mergePostWithFood(post)));
+  }
+
   getPostWithFoodWithUsers(): Observable<PostWithFoodWithUser[]> {
     return this.db
       .collection<Post>(`posts`)
