@@ -1,16 +1,8 @@
-.week {
-  border: 1px solid rgba(black, 0.12);
-}
-
-.week-grid {
+.grid {
   display: grid;
   grid-template-columns: 1fr;
+  justify-content: center;
   gap: 16px;
-}
-
-.day-of-week {
-  margin: 8px 0 8px;
-  font-size: 24px;
 }
 
 .menu-grid {
@@ -19,16 +11,20 @@
   gap: 8px;
 }
 
+.day-of-week {
+  margin: 8px 0 8px;
+  font-size: 24px;
+}
+
 .food {
   border: 1px solid rgba(black, 0.32);
+  max-width: 300px;
+  cursor: pointer;
   &__img {
     border-bottom: 1px solid rgba(black, 0.32);
   }
   &__name {
-    margin: 0;
+    margin: 0 0 8px;
+    padding-top: 8px;
   }
-}
-
-.post-button {
-  margin-top: 24px;
 }

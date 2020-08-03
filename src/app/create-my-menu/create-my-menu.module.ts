@@ -10,6 +10,7 @@ import { ChangeMyMenuDialogComponent } from './change-my-menu-dialog/change-my-m
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [CreateMyMenuComponent, ChangeMyMenuDialogComponent],
@@ -23,6 +24,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     FormsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
+    MatCardModule,
   ],
 })
 export class CreateMyMenuModule {}

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="grid">
+    <ng-container *ngIf="post$ | async as post">
+      <ng-container *ngFor="let menu of post.days">
+        <div class="day">
+          <h1 class="day-of-week">{{ menu.dayOfWeek }}曜日</h1>
+          <div class="menu-grid">
+            <div
+              class="food"
+              routerLink="/food-list/{{ menu.breakfast.foodId }}"
+            >
+              <img class="food__img" [src]="menu.breakfast.image" alt="" />
+              <p class="food__name">{{ menu.breakfast.name }}</p>
+            </div>
+            <div class="food" routerLink="/food-list/{{ menu.lunch.foodId }}">
+              <img class="food__img" [src]="menu.lunch.image" alt="" />
+              <p class="food__name">{{ menu.lunch.name }}</p>
+            </div>
+            <div class="food" routerLink="/food-list/{{ menu.dinner.foodId }}">
+              <img class="food__img" [src]="menu.dinner.image" alt="" />
+              <p class="food__name">{{ menu.dinner.name }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

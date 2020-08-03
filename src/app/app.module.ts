@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +25,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { WelcomeShellComponent } from './welcome-shell/welcome-shell.component';
 import { MainShellComponent } from './main-shell/main-shell.component';
+import localeJa from '@angular/common/locales/ja';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(localeJa);
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +59,10 @@ import { MainShellComponent } from './main-shell/main-shell.component';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [{ provide: REGION, useValue: 'asia-northeast1' }],
+  providers: [
+    { provide: REGION, useValue: 'asia-northeast1' },
+    { provide: LOCALE_ID, useValue: 'ja-JP' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

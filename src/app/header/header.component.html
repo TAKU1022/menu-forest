@@ -7,25 +7,18 @@
   </div>
 
   <div class="header-right">
-    <div class="header-right--search">
-      <button mat-icon-button routerLink="/search">
-        <mat-icon aria-hidden="false">search</mat-icon>
-      </button>
-    </div>
-    <div class="header-right--account">
-      <ng-template #defaultAccount>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon aria-hidden="false">account_circle</mat-icon>
-        </button>
-      </ng-template>
-      <button
-        *ngIf="user$ | async as user; else defaultAccount"
-        [matMenuTriggerFor]="menu"
-        class="user-avatar"
-      >
-        <img [src]="user.avaterURL" alt="" />
-      </button>
-    </div>
+    <button mat-icon-button routerLink="/search">
+      <mat-icon aria-hidden="false">search</mat-icon>
+    </button>
+
+    <button
+      *ngIf="user$ | async as user"
+      [matMenuTriggerFor]="menu"
+      class="user-avatar"
+      mat-icon-button
+    >
+      <img [src]="user.avaterURL" alt="" />
+    </button>
   </div>
 </mat-toolbar>
 

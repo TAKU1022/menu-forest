@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="grid">
+    <ng-container *ngFor="let post of posts$ | async">
+      <mat-card class="post" routerLink="/post/{{ post.postId }}">
+        <mat-card-header class="post__header">
+          <button mat-icon-button mat-card-avatar class="post__avater">
+            <img [src]="post.creator.avaterURL" alt="" />
+          </button>
+          <mat-card-title class="post__user-name">{{
+            post.creator.name
+          }}</mat-card-title>
+          <mat-card-subtitle class="post__date">{{
+            post.createdAt.toDate() | date
+          }}</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-image
+          class="post__thumbnail"
+          [src]="post.days[0].breakfast.image"
+          alt=""
+        />
+      </mat-card>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1fr, 1fr);
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.post {
+  width: 300px;
+  height: 350px;
+  overflow: hidden;
+  border: 1px solid rgba(black, 0.12);
+  &__header {
+    display: flex;
+    justify-content: center;
+  }
+  &__avater {
+    border: 1px solid rgba(black, 0.12);
+    overflow: hidden;
+    img {
+      display: block;
+    }
+  }
+  &__user-name {
+    width: 228px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+  }
+  &__date {
+    text-align: left;
+  }
+  &__thumbnail {
+    background-size: cover;
+    max-width: none;
+  }
+}
