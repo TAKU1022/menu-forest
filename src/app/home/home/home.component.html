@@ -1,31 +1,78 @@
 <div class="container">
-  <div class="food" *ngIf="todayMenu$ | async as todayMenu">
+  <div class="food-wrap" *ngIf="todayMenu$ | async as todayMenu">
     <h1>{{ todayMenu.dayOfWeek }}曜日の献立</h1>
     <div class="grid">
-      <div class="breakfast">
+      <div class="food food--breakfast">
         <img
           [src]="todayMenu.breakfast.image"
           alt="デモ画像"
-          routerLink="/menu/{{ todayMenu.breakfast.foodId }}"
+          class="food__img"
         />
-        <label>朝食「{{ todayMenu.breakfast.name }}」</label>
+        <button
+          mat-icon-button
+          class="food__button"
+          [matMenuTriggerFor]="menu"
+          [matMenuTriggerData]="{ foodId: todayMenu.breakfast.foodId, time: 0 }"
+        >
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <label class="food__label"
+          >朝食「{{ todayMenu.breakfast.name }}」</label
+        >
       </div>
-      <div class="lunch">
-        <img
-          [src]="todayMenu.lunch.image"
-          alt="デモ画像"
-          routerLink="/menu/{{ todayMenu.lunch.foodId }}"
-        />
-        <label>昼食「{{ todayMenu.lunch.name }}」</label>
+      <div class="food food--lunch">
+        <img [src]="todayMenu.lunch.image" alt="デモ画像" class="food__img" />
+        <button
+          mat-icon-button
+          class="food__button"
+          [matMenuTriggerFor]="menu"
+          [matMenuTriggerData]="{ foodId: todayMenu.lunch.foodId, time: 1 }"
+        >
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <label class="food__label">昼食「{{ todayMenu.lunch.name }}」</label>
       </div>
-      <div class="dinner">
-        <img
-          [src]="todayMenu.dinner.image"
-          alt="デモ画像"
-          routerLink="/menu/{{ todayMenu.dinner.foodId }}"
-        />
-        <label>夕食「{{ todayMenu.dinner.name }}」</label>
+      <div class="food food--dinner">
+        <img [src]="todayMenu.dinner.image" alt="デモ画像" class="food__img" />
+        <button
+          mat-icon-button
+          class="food__button"
+          [matMenuTriggerFor]="menu"
+          [matMenuTriggerData]="{ foodId: todayMenu.dinner.foodId, time: 2 }"
+        >
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <label class="food__label">夕食「{{ todayMenu.dinner.name }}」</label>
       </div>
     </div>
   </div>
 </div>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-foodId="foodId" let-time="time">
+    <button mat-menu-item routerLink="/menu/{{ foodId }}">
+      <mat-icon color="primary">restaurant_menu</mat-icon>
+      <span>献立詳細情報</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon color="primary">find_replace</mat-icon>
+      <span>献立差し替え</span>
+    </button>
+    <button
+      mat-menu-item
+      (click)="increaseEatCount(time)"
+      *ngIf="!checkTime(time)"
+    >
+      <mat-icon color="primary">check_circle_outline </mat-icon>
+      <span>食べたチェック</span>
+    </button>
+    <button
+      mat-menu-item
+      (click)="reduceEatCount(time)"
+      *ngIf="checkTime(time)"
+    >
+      <mat-icon color="primary">undo</mat-icon>
+      <span>食べたチェック解除</span>
+    </button>
+  </ng-template>
+</mat-menu>
