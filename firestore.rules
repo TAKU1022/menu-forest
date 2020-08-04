@@ -20,5 +20,9 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAuthenticated()
     }
+    match /day/day {
+      allow read: if true;
+      allow write: if isAuthenticated()
+    }
   }
 }
