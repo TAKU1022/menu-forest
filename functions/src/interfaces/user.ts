@@ -5,4 +5,8 @@ export interface User {
   email: string;
   createdAt: Date;
   admin: boolean;
+  eatCount: number;
+  isEatenBreakfast: boolean;
+  isEatenLunch: boolean;
+  isEatenDinner: boolean;
 }

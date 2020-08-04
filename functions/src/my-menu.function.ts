@@ -4,11 +4,12 @@ import { MyMenu } from './interfaces/my-menu';
 
 const db = admin.firestore();
 
-export const creatMyMenu = functions
+export const createMyMenu = functions
   .region('asia-northeast1')
-  .auth.user()
-  .onCreate((user) => {
+  .firestore.document('users/{userId}')
+  .onCreate((snap) => {
     const myMenuId = db.collection('_').doc().id;
+    const user = snap.data();
     const myMenu: MyMenu = {
       day: {
         sunday: {

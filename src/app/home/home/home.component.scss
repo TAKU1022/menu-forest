@@ -4,13 +4,19 @@
   gap: 24px;
 }
 
-img {
-  display: block;
-  margin: 0 auto 8px;
-  border: 1px solid rgba(black, 0.32);
-  cursor: pointer;
-}
-
-label {
-  font-size: 24px;
+.food {
+  max-width: 300px;
+  margin: 0 auto;
+  position: relative;
+  &__img {
+    border: 1px solid rgba(black, 0.32);
+  }
+  &__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  &__label {
+    font-size: 24px;
+  }
 }

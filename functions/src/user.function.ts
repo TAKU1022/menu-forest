@@ -15,6 +15,10 @@ export const createUser = functions
       email: user.email,
       createdAt: new Date(),
       admin: false,
+      eatCount: 0,
+      isEatenBreakfast: false,
+      isEatenLunch: false,
+      isEatenDinner: false,
     });
   });
 
