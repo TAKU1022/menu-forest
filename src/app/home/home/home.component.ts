@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  increaseEatCount(time: number) {
+  increaseEatCount(time: string) {
     const increasedEatCount = ++this.eatCount;
     this.userService.changeEatCount(this.userId, increasedEatCount).then(() => {
       this.snackBar.open('よく頑張りました！', null, {
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  reduceEatCount(time: number) {
+  reduceEatCount(time: string) {
     const reducedEatCount = --this.eatCount;
     this.userService.changeEatCount(this.userId, reducedEatCount).then(() => {
       this.snackBar.open('取り消しました！', null, {
@@ -73,13 +73,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  checkTime(time: number): boolean {
+  checkTime(time: string): boolean {
     switch (time) {
-      case 0:
+      case 'breakfast':
         return this.isEatenBreakfast;
-      case 1:
+      case 'lunch':
         return this.isEatenLunch;
-      case 2:
+      case 'dinner':
         return this.isEatenDinner;
     }
   }

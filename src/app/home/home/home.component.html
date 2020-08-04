@@ -12,7 +12,10 @@
           mat-icon-button
           class="food__button"
           [matMenuTriggerFor]="menu"
-          [matMenuTriggerData]="{ foodId: todayMenu.breakfast.foodId, time: 0 }"
+          [matMenuTriggerData]="{
+            foodId: todayMenu.breakfast.foodId,
+            time: 'breakfast'
+          }"
         >
           <mat-icon>more_horiz</mat-icon>
         </button>
@@ -26,7 +29,10 @@
           mat-icon-button
           class="food__button"
           [matMenuTriggerFor]="menu"
-          [matMenuTriggerData]="{ foodId: todayMenu.lunch.foodId, time: 1 }"
+          [matMenuTriggerData]="{
+            foodId: todayMenu.lunch.foodId,
+            time: 'lunch'
+          }"
         >
           <mat-icon>more_horiz</mat-icon>
         </button>
@@ -38,7 +44,10 @@
           mat-icon-button
           class="food__button"
           [matMenuTriggerFor]="menu"
-          [matMenuTriggerData]="{ foodId: todayMenu.dinner.foodId, time: 2 }"
+          [matMenuTriggerData]="{
+            foodId: todayMenu.dinner.foodId,
+            time: 'dinner'
+          }"
         >
           <mat-icon>more_horiz</mat-icon>
         </button>
