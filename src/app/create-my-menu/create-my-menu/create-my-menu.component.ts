@@ -8,6 +8,7 @@ import { ChangeMyMenuDialogComponent } from '../change-my-menu-dialog/change-my-
 import { Food } from '@interfaces/food';
 import { PostService } from 'src/app/services/post.service';
 import { take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-my-menu',
@@ -22,23 +23,16 @@ export class CreateMyMenuComponent implements OnInit {
   myMenu$: Observable<MyMenu> = this.myMenuService.getMyMenuByUserId(
     this.userId
   );
-  myMenu: MyMenu;
 
   constructor(
     private authService: AuthService,
     private myMenuService: MyMenuService,
     private dialog: MatDialog,
-    private postService: PostService
+    private postService: PostService,
+    private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
-    this.myMenuService
-      .getMyMenuByUserId(this.userId)
-      .pipe(take(1))
-      .subscribe((myMenu: MyMenu) => {
-        this.myMenu = myMenu;
-      });
-  }
+  ngOnInit(): void {}
 
   openChangeMyMenu(
     myMenuId: string,
@@ -60,9 +54,17 @@ export class CreateMyMenuComponent implements OnInit {
   }
 
   createPost(): void {
-    this.postService.createPost({
-      day: this.myMenu.day,
-      creatorId: this.userId,
+    this.myMenu$.pipe(take(1)).subscribe((myMenu: MyMenu) => {
+      this.postService
+        .createPost({ day: myMenu.day, createrId: this.userId })
+        .then(() => {
+          this.snackBar.open('投稿に成功しました！', null, {
+            duration: 3000,
+          });
+          if (!myMenu.isPosted) {
+            this.myMenuService.changeMyMenuIsPosted(myMenu.myMenuId, true);
+          }
+        });
     });
   }
 }
