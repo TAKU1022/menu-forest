@@ -1,6 +1,6 @@
 <div class="container">
   <div class="grid">
-    <ng-container *ngFor="let post of posts$ | async">
+    <ng-container *ngFor="let post of userPosts$ | async">
       <mat-card class="post" routerLink="/post/{{ post.postId }}">
         <mat-card-header class="post__header">
           <button
@@ -8,8 +8,6 @@
             mat-card-avatar
             class="post__avater"
             (click)="$event.stopPropagation()"
-            routerLink="/user"
-            [queryParams]="{ id: post.createrId }"
           >
             <img [src]="post.creater.avaterURL" alt="" />
           </button>
