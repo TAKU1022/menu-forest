@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { User } from '@interfaces/user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -63,5 +64,9 @@ export class UserService {
     return this.db.doc<User>(`users/${userId}`).update({
       eatCount,
     });
+  }
+
+  getUserbyId(userId: string): Observable<User> {
+    return this.db.doc<User>(`users/${userId}`).valueChanges();
   }
 }
