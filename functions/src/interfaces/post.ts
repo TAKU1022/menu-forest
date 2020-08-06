@@ -12,7 +12,7 @@ export interface Post {
     friday: DayMenu;
     saturday: DayMenu;
   };
-  creatorId: string;
+  createrId: string;
   postId: string;
   createdAt: firestore.Timestamp;
 }
@@ -25,5 +25,5 @@ export interface PostWithFood {
 }
 
 export interface PostWithFoodWithUser extends PostWithFood {
-  creator: User;
+  creater: User;
 }
