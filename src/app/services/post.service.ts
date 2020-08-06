@@ -64,7 +64,7 @@ export class PostService {
         }
         return {
           days: dayMenuWithFoods,
-          createrId: post.createrId,
+          creatorId: post.creatorId,
           postId: post.postId,
           createdAt: post.createdAt,
         };
@@ -94,7 +94,7 @@ export class PostService {
           const distinctUserIds: string[] = Array.from(
             new Set(
               postWithFoods.map(
-                (postWithFood: PostWithFood) => postWithFood.createrId
+                (postWithFood: PostWithFood) => postWithFood.creatorId
               )
             )
           );
@@ -109,8 +109,8 @@ export class PostService {
           return postWithFoods.map((postWithFood: PostWithFood) => {
             return {
               ...postWithFood,
-              creater: users.find(
-                (user: User) => user.uid === postWithFood.createrId
+              creator: users.find(
+                (user: User) => user.uid === postWithFood.creatorId
               ),
             };
           });
@@ -121,7 +121,7 @@ export class PostService {
   getPostsByUserId(userId: string): Observable<Post[]> {
     return this.db
       .collection<Post>('posts', (ref) => {
-        return ref.where('createrId', '==', userId);
+        return ref.where('creatorId', '==', userId);
       })
       .valueChanges();
   }
@@ -137,7 +137,7 @@ export class PostService {
       switchMap((postWithFoods: PostWithFood[]) => {
         const users$: Observable<User[]> = combineLatest(
           postWithFoods.map((postWithFood: PostWithFood) => {
-            return this.userService.getUserbyId(postWithFood.createrId);
+            return this.userService.getUserbyId(postWithFood.creatorId);
           })
         );
         return combineLatest([of(postWithFoods), users$]);
@@ -146,8 +146,8 @@ export class PostService {
         return postWithFoods.map((postWithFood: PostWithFood) => {
           return {
             ...postWithFood,
-            creater: users.find(
-              (user: User) => user.uid === postWithFood.createrId
+            creator: users.find(
+              (user: User) => user.uid === postWithFood.creatorId
             ),
           };
         });

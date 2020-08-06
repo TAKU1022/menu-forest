@@ -56,7 +56,7 @@ export class CreateMyMenuComponent implements OnInit {
   createPost(): void {
     this.myMenu$.pipe(take(1)).subscribe((myMenu: MyMenu) => {
       this.postService
-        .createPost({ day: myMenu.day, createrId: this.userId })
+        .createPost({ day: myMenu.day, creatorId: this.userId })
         .then(() => {
           this.snackBar.open('投稿に成功しました！', null, {
             duration: 3000,

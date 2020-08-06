@@ -9,10 +9,10 @@
             class="post__avater"
             (click)="$event.stopPropagation()"
           >
-            <img [src]="post.creater.avaterURL" alt="" />
+            <img [src]="post.creator.avaterURL" alt="" />
           </button>
           <mat-card-title class="post__user-name">{{
-            post.creater.name
+            post.creator.name
           }}</mat-card-title>
           <mat-card-subtitle class="post__date">{{
             post.createdAt.toDate() | date

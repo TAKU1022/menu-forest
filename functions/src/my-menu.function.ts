@@ -48,7 +48,7 @@ export const createMyMenu = functions
           dinnerId: '6s6NlUxvrNkuREb2gy13',
         },
       },
-      createrId: user.uid,
+      creatorId: user.uid,
       myMenuId: myMenuId,
       isPosted: false,
     };

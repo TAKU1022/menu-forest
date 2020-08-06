@@ -20,7 +20,7 @@ export class MyMenuService {
   getMyMenuByUserId(userId: string): Observable<MyMenu> {
     return this.db
       .collection<MyMenu>('myMenus', (ref) => {
-        return ref.where('createrId', '==', userId);
+        return ref.where('creatorId', '==', userId);
       })
       .valueChanges()
       .pipe(map((myMenus: MyMenu[]) => myMenus[0]));

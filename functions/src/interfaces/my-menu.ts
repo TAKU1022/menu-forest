@@ -16,7 +16,7 @@ export interface MyMenu {
     friday: DayMenu;
     saturday: DayMenu;
   };
-  createrId: string;
+  creatorId: string;
   myMenuId: string;
   isPosted: boolean;
 }
