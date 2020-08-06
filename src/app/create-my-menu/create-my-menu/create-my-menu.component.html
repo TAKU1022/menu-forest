@@ -8,7 +8,12 @@
             <div
               class="food"
               (click)="
-                openChangeMyMenu(myMenu.myMenuId, dayMenu.breakfast, i, '朝')
+                openChangeMyMenuDialog(
+                  myMenu.myMenuId,
+                  dayMenu.breakfast,
+                  i,
+                  '朝'
+                )
               "
             >
               <img class="food__img" [src]="dayMenu.breakfast.image" alt="" />
@@ -17,7 +22,7 @@
             <div
               class="food"
               (click)="
-                openChangeMyMenu(myMenu.myMenuId, dayMenu.lunch, i, '昼')
+                openChangeMyMenuDialog(myMenu.myMenuId, dayMenu.lunch, i, '昼')
               "
             >
               <img class="food__img" [src]="dayMenu.lunch.image" alt="" />
@@ -26,7 +31,7 @@
             <div
               class="food"
               (click)="
-                openChangeMyMenu(myMenu.myMenuId, dayMenu.dinner, i, '夜')
+                openChangeMyMenuDialog(myMenu.myMenuId, dayMenu.dinner, i, '夜')
               "
             >
               <img class="food__img" [src]="dayMenu.breakfast.image" alt="" />

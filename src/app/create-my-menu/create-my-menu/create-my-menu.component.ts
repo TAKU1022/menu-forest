@@ -34,7 +34,7 @@ export class CreateMyMenuComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openChangeMyMenu(
+  openChangeMyMenuDialog(
     myMenuId: string,
     food: Food,
     dayOfWeek: number,
