@@ -13,10 +13,14 @@ export class MyMenuService {
 
   constructor(private db: AngularFirestore, private foodService: FoodService) {}
 
+  getMyMenuById(myMenuId: string): Observable<MyMenu> {
+    return this.db.doc<MyMenu>(`myMenus/${myMenuId}`).valueChanges();
+  }
+
   getMyMenuByUserId(userId: string): Observable<MyMenu> {
     return this.db
       .collection<MyMenu>('myMenus', (ref) => {
-        return ref.where('creatorId', '==', userId);
+        return ref.where('createrId', '==', userId);
       })
       .valueChanges()
       .pipe(map((myMenus: MyMenu[]) => myMenus[0]));
@@ -85,7 +89,7 @@ export class MyMenuService {
     dayOfWeek: number,
     time: string,
     foodId: string
-  ) {
+  ): Promise<void> {
     switch (dayOfWeek) {
       case 0:
         if (time === '朝') {
@@ -193,5 +197,11 @@ export class MyMenuService {
         }
         break;
     }
+  }
+
+  changeMyMenuIsPosted(myMenuId: string, isPosted: boolean): Promise<void> {
+    return this.db.doc<MyMenu>(`myMenus/${myMenuId}`).update({
+      isPosted,
+    });
   }
 }
