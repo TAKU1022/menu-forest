@@ -19,7 +19,7 @@ export interface Post {
 
 export interface PostWithFood {
   days: DayMenuWithFood[];
-  createrId: string;
+  creatorId: string;
   postId: string;
   createdAt: firestore.Timestamp;
 }

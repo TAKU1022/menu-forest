@@ -7,12 +7,17 @@ import { switchMap, map } from 'rxjs/operators';
 import { combineLatest, Observable, of } from 'rxjs';
 import { FoodService } from './food.service';
 import { User } from '@interfaces/user';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
-  constructor(private db: AngularFirestore, private foodService: FoodService) {}
+  constructor(
+    private db: AngularFirestore,
+    private foodService: FoodService,
+    private userService: UserService
+  ) {}
 
   createPost(post: Omit<Post, 'postId' | 'createdAt'>): Promise<void> {
     const postId = this.db.createId();
@@ -59,7 +64,7 @@ export class PostService {
         }
         return {
           days: dayMenuWithFoods,
-          createrId: post.creatorId,
+          creatorId: post.creatorId,
           postId: post.postId,
           createdAt: post.createdAt,
         };
@@ -74,7 +79,7 @@ export class PostService {
       .pipe(switchMap((post: Post) => this.mergePostWithFood(post)));
   }
 
-  getPostWithFoodWithUsers(): Observable<PostWithFoodWithUser[]> {
+  getPostsWithFoodWithUser(): Observable<PostWithFoodWithUser[]> {
     return this.db
       .collection<Post>(`posts`)
       .valueChanges()
@@ -89,13 +94,13 @@ export class PostService {
           const distinctUserIds: string[] = Array.from(
             new Set(
               postWithFoods.map(
-                (postWithFood: PostWithFood) => postWithFood.createrId
+                (postWithFood: PostWithFood) => postWithFood.creatorId
               )
             )
           );
           const users$: Observable<User[]> = combineLatest(
             distinctUserIds.map((userId: string) => {
-              return this.db.doc<User>(`users/${userId}`).valueChanges();
+              return this.userService.getUserbyId(userId);
             })
           );
           return combineLatest([of(postWithFoods), users$]);
@@ -105,11 +110,48 @@ export class PostService {
             return {
               ...postWithFood,
               creator: users.find(
-                (user) => user.uid === postWithFood.createrId
+                (user: User) => user.uid === postWithFood.creatorId
               ),
             };
           });
         })
       );
+  }
+
+  getPostsByUserId(userId: string): Observable<Post[]> {
+    return this.db
+      .collection<Post>('posts', (ref) => {
+        return ref.where('creatorId', '==', userId);
+      })
+      .valueChanges();
+  }
+
+  getUserPosts(userId: string): Observable<PostWithFoodWithUser[]> {
+    return this.getPostsByUserId(userId).pipe(
+      switchMap((posts: Post[]) => {
+        const postWithFood$$: Observable<
+          PostWithFood
+        >[] = posts.map((post: Post) => this.mergePostWithFood(post));
+        return combineLatest(postWithFood$$);
+      }),
+      switchMap((postWithFoods: PostWithFood[]) => {
+        const users$: Observable<User[]> = combineLatest(
+          postWithFoods.map((postWithFood: PostWithFood) => {
+            return this.userService.getUserbyId(postWithFood.creatorId);
+          })
+        );
+        return combineLatest([of(postWithFoods), users$]);
+      }),
+      map(([postWithFoods, users]) => {
+        return postWithFoods.map((postWithFood: PostWithFood) => {
+          return {
+            ...postWithFood,
+            creator: users.find(
+              (user: User) => user.uid === postWithFood.creatorId
+            ),
+          };
+        });
+      })
+    );
   }
 }

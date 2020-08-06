@@ -8,7 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl } from '@angular/forms';
 import { SearchIndex } from 'algoliasearch/lite';
 import { SearchService } from 'src/app/services/search.service';
-import { startWith } from 'rxjs/operators';
+import { startWith, take } from 'rxjs/operators';
+import { MyMenu } from '@interfaces/my-menu';
 
 @Component({
   selector: 'app-change-my-menu-dialog',
@@ -59,6 +60,14 @@ export class ChangeMyMenuDialogComponent implements OnInit {
         this.snackBar.open('My献立を変更しました！', null, {
           duration: 3000,
         });
+        this.myMenuService
+          .getMyMenuById(this.data.myMenuId)
+          .pipe(take(1))
+          .subscribe((myMenu: MyMenu) => {
+            if (myMenu.isPosted) {
+              this.myMenuService.changeMyMenuIsPosted(myMenu.myMenuId, false);
+            }
+          });
       });
   }
 

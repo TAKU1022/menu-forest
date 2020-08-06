@@ -11,7 +11,7 @@ import { PostWithFoodWithUser } from '@interfaces/post';
 export class PostComponent implements OnInit {
   posts$: Observable<
     PostWithFoodWithUser[]
-  > = this.postService.getPostWithFoodWithUsers();
+  > = this.postService.getPostsWithFoodWithUser();
 
   constructor(private postService: PostService) {}
 

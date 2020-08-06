@@ -1,42 +1,49 @@
 <div class="container">
   <mat-card class="week">
-    <div class="week-grid" *ngIf="myMenu$ | async as myMenu">
-      <div *ngFor="let dayMenu of weekMenu$ | async; let i = index">
-        <h1 class="day-of-week">{{ dayMenu.dayOfWeek }}曜日</h1>
-        <div class="menu-grid">
-          <div
-            class="food"
-            (click)="
-              openChangeMyMenu(myMenu.myMenuId, dayMenu.breakfast, i, '朝')
-            "
-          >
-            <img class="food__img" [src]="dayMenu.breakfast.image" alt="" />
-            <p class="food__name">{{ dayMenu.breakfast.name }}</p>
-          </div>
-          <div
-            class="food"
-            (click)="openChangeMyMenu(myMenu.myMenuId, dayMenu.lunch, i, '昼')"
-          >
-            <img class="food__img" [src]="dayMenu.lunch.image" alt="" />
-            <p class="food__name">{{ dayMenu.lunch.name }}</p>
-          </div>
-          <div
-            class="food"
-            (click)="openChangeMyMenu(myMenu.myMenuId, dayMenu.dinner, i, '夜')"
-          >
-            <img class="food__img" [src]="dayMenu.breakfast.image" alt="" />
-            <p class="food__name">{{ dayMenu.dinner.name }}</p>
+    <ng-container *ngIf="myMenu$ | async as myMenu">
+      <div class="week-grid">
+        <div *ngFor="let dayMenu of weekMenu$ | async; let i = index">
+          <h1 class="day-of-week">{{ dayMenu.dayOfWeek }}曜日</h1>
+          <div class="menu-grid">
+            <div
+              class="food"
+              (click)="
+                openChangeMyMenu(myMenu.myMenuId, dayMenu.breakfast, i, '朝')
+              "
+            >
+              <img class="food__img" [src]="dayMenu.breakfast.image" alt="" />
+              <p class="food__name">{{ dayMenu.breakfast.name }}</p>
+            </div>
+            <div
+              class="food"
+              (click)="
+                openChangeMyMenu(myMenu.myMenuId, dayMenu.lunch, i, '昼')
+              "
+            >
+              <img class="food__img" [src]="dayMenu.lunch.image" alt="" />
+              <p class="food__name">{{ dayMenu.lunch.name }}</p>
+            </div>
+            <div
+              class="food"
+              (click)="
+                openChangeMyMenu(myMenu.myMenuId, dayMenu.dinner, i, '夜')
+              "
+            >
+              <img class="food__img" [src]="dayMenu.breakfast.image" alt="" />
+              <p class="food__name">{{ dayMenu.dinner.name }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <button
-      mat-flat-button
-      color="primary"
-      class="post-button"
-      (click)="createPost()"
-    >
-      投稿する
-    </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="post-button"
+        (click)="createPost()"
+        *ngIf="!myMenu.isPosted"
+      >
+        投稿する
+      </button>
+    </ng-container>
   </mat-card>
 </div>
