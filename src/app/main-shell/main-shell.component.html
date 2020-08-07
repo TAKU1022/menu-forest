@@ -29,6 +29,12 @@
   <mat-sidenav-content>
     <div id="wrapper">
       <router-outlet></router-outlet>
+      <mat-spinner
+        *ngIf="loading$ | async"
+        mode="indeterminate"
+        [diameter]="30"
+        class="loading"
+      ></mat-spinner>
       <app-footer></app-footer>
     </div>
   </mat-sidenav-content>

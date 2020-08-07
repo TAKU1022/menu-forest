@@ -27,6 +27,7 @@ import { WelcomeShellComponent } from './welcome-shell/welcome-shell.component';
 import { MainShellComponent } from './main-shell/main-shell.component';
 import localeJa from '@angular/common/locales/ja';
 import { registerLocaleData } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 registerLocaleData(localeJa);
 @NgModule({
@@ -58,6 +59,7 @@ registerLocaleData(localeJa);
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     { provide: REGION, useValue: 'asia-northeast1' },
