@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Observable } from 'rxjs';
 import { PostWithFoodWithUser } from '@interfaces/post';
+import { LoadingService } from 'src/app/services/loading.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post',
@@ -11,9 +13,16 @@ import { PostWithFoodWithUser } from '@interfaces/post';
 export class PostComponent implements OnInit {
   posts$: Observable<
     PostWithFoodWithUser[]
-  > = this.postService.getPostsWithFoodWithUser();
+  > = this.postService
+    .getPostsWithFoodWithUser()
+    .pipe(tap(() => this.loadingService.toggleLoading(false)));
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private loadingService: LoadingService
+  ) {
+    this.loadingService.toggleLoading(true);
+  }
 
   ngOnInit(): void {}
 }

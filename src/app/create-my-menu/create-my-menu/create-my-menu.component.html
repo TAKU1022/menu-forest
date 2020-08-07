@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-card class="week">
+  <mat-card class="week" *ngIf="weekMenu$ | async">
     <ng-container *ngIf="myMenu$ | async as myMenu">
       <div class="week-grid">
         <div *ngFor="let dayMenu of weekMenu$ | async; let i = index">
