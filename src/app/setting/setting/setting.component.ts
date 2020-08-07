@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./setting.component.scss'],
 })
 export class SettingComponent implements OnInit {
-  user$: Observable<User> = this.authService.afUser$;
+  user$: Observable<User> = this.authService.user$;
   userId: string;
   imageChengedEvent: any = '';
   croppedImage: any = '';

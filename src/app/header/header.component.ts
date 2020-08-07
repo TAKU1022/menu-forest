@@ -10,7 +10,7 @@ import { User } from '@interfaces/user';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  user$: Observable<User> = this.authService.afUser$;
+  user$: Observable<User> = this.authService.user$;
   @Input() sidenav;
 
   constructor(

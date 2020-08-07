@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.authService.afUser$.subscribe((user: User) => {
+    this.authService.user$.subscribe((user: User) => {
       this.isEatenBreakfast = user.isEatenBreakfast;
       this.isEatenLunch = user.isEatenLunch;
       this.isEatenDinner = user.isEatenDinner;
