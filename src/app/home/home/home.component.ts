@@ -5,9 +5,10 @@ import { MyMenuService } from 'src/app/services/my-menu.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { User } from '@interfaces/user';
 import { DayService } from 'src/app/services/day.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +17,9 @@ import { DayService } from 'src/app/services/day.service';
 })
 export class HomeComponent implements OnInit {
   userId: string = this.authService.userId;
-  todayMenu$: Observable<DayMenuWithFood> = this.myMenuService.getTodayMenu(
-    this.userId
-  );
+  todayMenu$: Observable<DayMenuWithFood> = this.myMenuService
+    .getTodayMenu(this.userId)
+    .pipe(tap(() => this.loadingService.toggleLoading(false)));
   eatCount: number;
   isEatenBreakfast: boolean;
   isEatenLunch: boolean;
@@ -30,8 +31,11 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private snackBar: MatSnackBar,
-    private dayService: DayService
-  ) {}
+    private dayService: DayService,
+    private loadingService: LoadingService
+  ) {
+    this.loadingService.toggleLoading(true);
+  }
 
   ngOnInit(): void {
     const date = new Date();
@@ -40,12 +44,10 @@ export class HomeComponent implements OnInit {
       if (this.today !== day.dayNumber) {
         this.userService.initializeUserIsEatenFood(this.userId);
         this.dayService.changeDayNumber(this.today);
-        console.log(this.today);
-        console.log(day.dayNumber);
       }
     });
 
-    this.authService.afUser$.subscribe((user: User) => {
+    this.authService.user$.subscribe((user: User) => {
       this.isEatenBreakfast = user.isEatenBreakfast;
       this.isEatenLunch = user.isEatenLunch;
       this.isEatenDinner = user.isEatenDinner;

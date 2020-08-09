@@ -3,7 +3,8 @@ import { PostService } from 'src/app/services/post.service';
 import { Observable } from 'rxjs';
 import { PostWithFoodWithUser } from '@interfaces/post';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-user',
@@ -15,15 +16,19 @@ export class UserComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private loadingService: LoadingService
+  ) {
+    this.loadingService.toggleLoading(true);
+  }
 
   ngOnInit(): void {
     this.userPosts$ = this.route.queryParamMap.pipe(
       switchMap((param: ParamMap) => {
         const userId = param.get('id');
         return this.postService.getUserPosts(userId);
-      })
+      }),
+      tap(() => this.loadingService.toggleLoading(false))
     );
   }
 }

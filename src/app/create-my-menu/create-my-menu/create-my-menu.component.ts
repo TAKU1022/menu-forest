@@ -7,8 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ChangeMyMenuDialogComponent } from '../change-my-menu-dialog/change-my-menu-dialog.component';
 import { Food } from '@interfaces/food';
 import { PostService } from 'src/app/services/post.service';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-create-my-menu',
@@ -19,7 +20,9 @@ export class CreateMyMenuComponent implements OnInit {
   userId: string = this.authService.userId;
   weekMenu$: Observable<
     DayMenuWithFood[]
-  > = this.myMenuService.getDayMenuWithFoods(this.userId);
+  > = this.myMenuService
+    .getDayMenuWithFoods(this.userId)
+    .pipe(tap(() => this.loadingService.toggleLoading(false)));
   myMenu$: Observable<MyMenu> = this.myMenuService.getMyMenuByUserId(
     this.userId
   );
@@ -29,12 +32,15 @@ export class CreateMyMenuComponent implements OnInit {
     private myMenuService: MyMenuService,
     private dialog: MatDialog,
     private postService: PostService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private loadingService: LoadingService
+  ) {
+    this.loadingService.toggleLoading(true);
+  }
 
   ngOnInit(): void {}
 
-  openChangeMyMenu(
+  openChangeMyMenuDialog(
     myMenuId: string,
     food: Food,
     dayOfWeek: number,
