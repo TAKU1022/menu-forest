@@ -158,4 +158,8 @@ export class PostService {
       })
     );
   }
+
+  deletePost(postId: string): Promise<void> {
+    return this.db.doc<Post>(`posts/${postId}`).delete();
+  }
 }

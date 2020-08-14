@@ -67,4 +67,13 @@ export class PostDetailComponent implements OnInit {
           });
       });
   }
+
+  deletePost(): void {
+    this.location.back();
+    this.postService.deletePost(this.post.postId).then(() => {
+      this.snackBar.open('この投稿を削除しました！', null, {
+        duration: 3000,
+      });
+    });
+  }
 }
