@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { DayMenuWithFood } from '@interfaces/my-menu';
+import { Observable } from 'rxjs';
+import { DayMenuWithFood, MyMenu } from '@interfaces/my-menu';
 import { MyMenuService } from 'src/app/services/my-menu.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -9,6 +9,9 @@ import { take, tap } from 'rxjs/operators';
 import { User } from '@interfaces/user';
 import { DayService } from 'src/app/services/day.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { MatDialog } from '@angular/material/dialog';
+import { Food } from '@interfaces/food';
+import { ChangeMyMenuDialogComponent } from 'src/app/change-my-menu-dialog/change-my-menu-dialog/change-my-menu-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +28,7 @@ export class HomeComponent implements OnInit {
   isEatenLunch: boolean;
   isEatenDinner: boolean;
   today: number;
+  myMenuId: string;
 
   constructor(
     private myMenuService: MyMenuService,
@@ -32,7 +36,8 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private snackBar: MatSnackBar,
     private dayService: DayService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private dialog: MatDialog
   ) {
     this.loadingService.toggleLoading(true);
   }
@@ -48,11 +53,18 @@ export class HomeComponent implements OnInit {
     });
 
     this.authService.user$.subscribe((user: User) => {
-      this.isEatenBreakfast = user.isEatenBreakfast;
-      this.isEatenLunch = user.isEatenLunch;
-      this.isEatenDinner = user.isEatenDinner;
-      this.eatCount = user.eatCount;
+      if (user) {
+        this.isEatenBreakfast = user.isEatenBreakfast;
+        this.isEatenLunch = user.isEatenLunch;
+        this.isEatenDinner = user.isEatenDinner;
+        this.eatCount = user.eatCount;
+      }
     });
+
+    this.myMenuService
+      .getMyMenuByUserId(this.userId)
+      .pipe(take(1))
+      .subscribe((myMenu: MyMenu) => (this.myMenuId = myMenu.myMenuId));
   }
 
   increaseEatCount(time: string) {
@@ -77,12 +89,26 @@ export class HomeComponent implements OnInit {
 
   checkTime(time: string): boolean {
     switch (time) {
-      case 'breakfast':
+      case '朝':
         return this.isEatenBreakfast;
-      case 'lunch':
+      case '昼':
         return this.isEatenLunch;
-      case 'dinner':
+      case '夜':
         return this.isEatenDinner;
     }
+  }
+
+  openChangeMyMenuDialog(food: Food, time: string): void {
+    this.dialog.open(ChangeMyMenuDialogComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+      minWidth: 320,
+      data: {
+        myMenuId: this.myMenuId,
+        food,
+        dayOfWeek: this.today,
+        time,
+      },
+    });
   }
 }
