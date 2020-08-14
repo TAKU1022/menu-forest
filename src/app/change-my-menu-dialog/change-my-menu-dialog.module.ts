@@ -1,22 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { CreateMyMenuRoutingModule } from './create-my-menu-routing.module';
-import { CreateMyMenuComponent } from './create-my-menu/create-my-menu.component';
+import { ChangeMyMenuDialogComponent } from './change-my-menu-dialog/change-my-menu-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatCardModule } from '@angular/material/card';
-import { ChangeMyMenuDialogModule } from '../change-my-menu-dialog/change-my-menu-dialog.module';
 
 @NgModule({
-  declarations: [CreateMyMenuComponent],
+  declarations: [ChangeMyMenuDialogComponent],
   imports: [
     CommonModule,
-    CreateMyMenuRoutingModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
@@ -24,8 +19,7 @@ import { ChangeMyMenuDialogModule } from '../change-my-menu-dialog/change-my-men
     FormsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatCardModule,
-    ChangeMyMenuDialogModule,
   ],
+  exports: [ChangeMyMenuDialogComponent],
 })
-export class CreateMyMenuModule {}
+export class ChangeMyMenuDialogModule {}
