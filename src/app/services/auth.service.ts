@@ -27,7 +27,7 @@ export class AuthService {
     private db: AngularFirestore,
     private router: Router
   ) {
-    this.user$.pipe(take(1)).subscribe((user: User) => {
+    this.user$.subscribe((user: User) => {
       this.userId = user && user.uid;
       console.log(user);
     });
