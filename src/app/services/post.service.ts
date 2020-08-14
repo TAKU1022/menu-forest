@@ -28,6 +28,10 @@ export class PostService {
     });
   }
 
+  getPostById(postId: string): Observable<Post> {
+    return this.db.doc<Post>(`posts/${postId}`).valueChanges();
+  }
+
   mergePostWithFood(post: Post): Observable<PostWithFood> {
     const dayMenus: DayMenu[] = [
       post.day.sunday,
