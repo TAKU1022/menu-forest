@@ -204,4 +204,21 @@ export class MyMenuService {
       isPosted,
     });
   }
+
+  changeMyMenuToUserMenu(
+    myMenuId: string,
+    userMenu: {
+      sunday: DayMenu;
+      monday: DayMenu;
+      tuesday: DayMenu;
+      wednesday: DayMenu;
+      thursday: DayMenu;
+      friday: DayMenu;
+      saturday: DayMenu;
+    }
+  ): Promise<void> {
+    return this.db.doc<MyMenu>(`myMenus/${myMenuId}`).update({
+      day: userMenu,
+    });
+  }
 }

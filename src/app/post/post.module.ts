@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { PostDetailComponent } from './post-detail/post-detail.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [PostComponent, PostDetailComponent],
@@ -16,6 +17,7 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    MatSnackBarModule,
   ],
 })
 export class PostModule {}

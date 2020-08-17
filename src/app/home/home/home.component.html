@@ -13,8 +13,8 @@
           class="food__button"
           [matMenuTriggerFor]="menu"
           [matMenuTriggerData]="{
-            foodId: todayMenu.breakfast.foodId,
-            time: 'breakfast'
+            food: todayMenu.breakfast,
+            time: '朝'
           }"
         >
           <mat-icon>more_horiz</mat-icon>
@@ -30,8 +30,8 @@
           class="food__button"
           [matMenuTriggerFor]="menu"
           [matMenuTriggerData]="{
-            foodId: todayMenu.lunch.foodId,
-            time: 'lunch'
+            food: todayMenu.lunch,
+            time: '昼'
           }"
         >
           <mat-icon>more_horiz</mat-icon>
@@ -45,8 +45,8 @@
           class="food__button"
           [matMenuTriggerFor]="menu"
           [matMenuTriggerData]="{
-            foodId: todayMenu.dinner.foodId,
-            time: 'dinner'
+            food: todayMenu.dinner,
+            time: '夜'
           }"
         >
           <mat-icon>more_horiz</mat-icon>
@@ -58,12 +58,12 @@
 </div>
 
 <mat-menu #menu="matMenu">
-  <ng-template matMenuContent let-foodId="foodId" let-time="time">
-    <button mat-menu-item routerLink="/menu/{{ foodId }}">
+  <ng-template matMenuContent let-food="food" let-time="time">
+    <button mat-menu-item routerLink="/menu/{{ food.foodId }}">
       <mat-icon color="primary">restaurant_menu</mat-icon>
       <span>献立詳細情報</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="openChangeMyMenuDialog(food, time)">
       <mat-icon color="primary">find_replace</mat-icon>
       <span>献立差し替え</span>
     </button>

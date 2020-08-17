@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="grid">
-    <ng-container *ngIf="post$ | async as post">
+  <ng-container *ngIf="post$ | async as post">
+    <div class="grid">
       <ng-container *ngFor="let menu of post.days">
         <div class="day">
           <h1 class="day-of-week">{{ menu.dayOfWeek }}曜日</h1>
@@ -23,6 +23,23 @@
           </div>
         </div>
       </ng-container>
-    </ng-container>
-  </div>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      class="change-my-menu-button"
+      (click)="changeMyMenuToUserMenu()"
+    >
+      My献立に上書き
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="delete-my-post-button"
+      (click)="deletePost()"
+      *ngIf="post.creatorId === userId"
+    >
+      投稿を削除
+    </button>
+  </ng-container>
 </div>

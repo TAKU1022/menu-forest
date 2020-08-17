@@ -28,6 +28,10 @@ export class PostService {
     });
   }
 
+  getPostById(postId: string): Observable<Post> {
+    return this.db.doc<Post>(`posts/${postId}`).valueChanges();
+  }
+
   mergePostWithFood(post: Post): Observable<PostWithFood> {
     const dayMenus: DayMenu[] = [
       post.day.sunday,
@@ -153,5 +157,9 @@ export class PostService {
         });
       })
     );
+  }
+
+  deletePost(postId: string): Promise<void> {
+    return this.db.doc<Post>(`posts/${postId}`).delete();
   }
 }

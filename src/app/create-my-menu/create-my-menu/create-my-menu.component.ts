@@ -4,12 +4,12 @@ import { MyMenuService } from 'src/app/services/my-menu.service';
 import { DayMenuWithFood, MyMenu } from '@interfaces/my-menu';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ChangeMyMenuDialogComponent } from '../change-my-menu-dialog/change-my-menu-dialog.component';
 import { Food } from '@interfaces/food';
 import { PostService } from 'src/app/services/post.service';
 import { take, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ChangeMyMenuDialogComponent } from 'src/app/change-my-menu-dialog/change-my-menu-dialog/change-my-menu-dialog.component';
 
 @Component({
   selector: 'app-create-my-menu',
