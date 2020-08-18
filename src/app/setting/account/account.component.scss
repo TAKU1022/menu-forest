@@ -1,0 +1,45 @@
+h1 {
+  font-size: 20px;
+}
+
+.avater-section {
+  margin-bottom: 48px;
+  &__title {
+    font-weight: bold;
+  }
+}
+
+.name-section {
+  &__title {
+    font-weight: bold;
+  }
+  &__button {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.avater {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto 16px;
+  &__image {
+    border-radius: 50%;
+    border: 1px solid rgba(black, 0.32);
+  }
+}
+
+image-cropper {
+  display: none;
+}
+
+image-cropper.active {
+  display: block;
+  width: 300px;
+  margin: 0 auto 16px;
+}
+
+.reset-btn {
+  margin-left: 16px;
+}

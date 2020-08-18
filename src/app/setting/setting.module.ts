@@ -10,9 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
-  declarations: [SettingComponent],
+  declarations: [SettingComponent, AccountComponent],
   imports: [
     CommonModule,
     SettingRoutingModule,
