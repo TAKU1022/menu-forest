@@ -14,6 +14,10 @@ const routes: Routes = [
         path: 'account',
         component: AccountComponent,
       },
+      {
+        path: 'billing',
+        component: BillingComponent,
+      },
     ],
   },
 ];
