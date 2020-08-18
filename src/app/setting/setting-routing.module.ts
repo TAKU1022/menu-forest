@@ -18,6 +18,10 @@ const routes: Routes = [
         path: 'billing',
         component: BillingComponent,
       },
+      {
+        path: 'withdrawal',
+        component: WithdrawalComponent,
+      },
     ],
   },
 ];

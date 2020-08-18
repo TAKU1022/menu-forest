@@ -12,9 +12,15 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AccountComponent } from './account/account.component';
 import { BillingComponent } from './billing/billing.component';
+import { WithdrawalComponent } from './withdrawal/withdrawal.component';
 
 @NgModule({
-  declarations: [SettingComponent, AccountComponent, BillingComponent],
+  declarations: [
+    SettingComponent,
+    AccountComponent,
+    BillingComponent,
+    WithdrawalComponent,
+  ],
   imports: [
     CommonModule,
     SettingRoutingModule,
