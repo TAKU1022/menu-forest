@@ -13,6 +13,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AccountComponent } from './account/account.component';
 import { BillingComponent } from './billing/billing.component';
 import { WithdrawalComponent } from './withdrawal/withdrawal.component';
+import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { WithdrawalComponent } from './withdrawal/withdrawal.component';
     AccountComponent,
     BillingComponent,
     WithdrawalComponent,
+    DeleteUserDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,7 @@ import { WithdrawalComponent } from './withdrawal/withdrawal.component';
     MatTabsModule,
     ImageCropperModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
 })
 export class SettingModule {}
