@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { User } from '@interfaces/user';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,8 @@ import { Observable } from 'rxjs';
 export class UserService {
   constructor(
     private db: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private afAuth: AngularFireAuth
   ) {}
 
   changeUserName(userId: string, name: string): Promise<void> {
@@ -68,5 +70,9 @@ export class UserService {
 
   getUserbyId(userId: string): Observable<User> {
     return this.db.doc<User>(`users/${userId}`).valueChanges();
+  }
+
+  deleteUser(): Promise<void> {
+    return this.afAuth.currentUser.then((user: firebase.User) => user.delete());
   }
 }
