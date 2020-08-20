@@ -1,101 +1,32 @@
-<div class="container" *ngIf="user$ | async as user">
+<div class="container">
   <h1>設定画面</h1>
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="アカウント">
-      <div class="content">
-        <h2>プロフィール</h2>
-        <section class="avater-section">
-          <p class="avater-section__title">アバター編集</p>
-          <label class="avater">
-            <img
-              class="avater__image"
-              [src]="croppedImage ? croppedImage : user.avaterURL"
-              alt=""
-            />
-            <input
-              type="file"
-              accept="image/jpeg, image/png"
-              style="display: none;"
-              (change)="fileChengeEvent($event)"
-              #selectedImage
-            />
-          </label>
-          <image-cropper
-            [imageChangedEvent]="imageChengedEvent"
-            [maintainAspectRatio]="true"
-            [aspectRatio]="1 / 1"
-            format="png"
-            [roundCropper]="true"
-            (imageCropped)="imageCropped($event)"
-            (imageLoaded)="imageLoaded()"
-            (cropperReady)="cropperReady($event)"
-            (loadImageFailed)="loadImageFailed(selectedImage)"
-            [class.active]="imageChengedEvent"
-            width="300px"
-            height="300px"
-          ></image-cropper>
-          <button
-            mat-flat-button
-            color="primary"
-            [disabled]="!imageChengedEvent"
-            (click)="chengeUserAvater(selectedImage)"
-          >
-            更新する
-          </button>
-          <button
-            mat-stroked-button
-            color="primary"
-            *ngIf="imageChengedEvent"
-            (click)="resetImage(selectedImage)"
-            class="reset-btn"
-          >
-            キャンセル
-          </button>
-        </section>
-        <section class="name-section">
-          <p class="name-section__title">ユーザー名編集</p>
-          <mat-form-field appearance="fill" [hideRequiredMarker]="true">
-            <mat-label>ユーザー名：{{ user.name }}</mat-label>
-            <input
-              type="text"
-              matInput
-              autocomplete="off"
-              placeholder="「{{ user.name }}」から変更"
-              [formControl]="nameForm"
-              required
-            />
-            <mat-error *ngIf="nameForm.hasError('required')"
-              >必須入力です</mat-error
-            >
-            <mat-error *ngIf="nameForm.hasError('maxlength')"
-              >最大文字数を超えてます</mat-error
-            >
-          </mat-form-field>
-          <button
-            mat-flat-button
-            color="primary"
-            [disabled]="nameForm.invalid"
-            (click)="chengeUserName()"
-          >
-            更新する
-          </button>
-        </section>
-      </div>
-      <hr />
-      <div class="content">
-        <h2>退会手続き</h2>
-        <p>
-          退会すると利用データが完全に削除され、復元できません。退会すると有料プランに入会している場合自動解約となります。
-        </p>
-        <button mat-raised-button color="primary">退会する</button>
-      </div>
-    </mat-tab>
-    <mat-tab label="ご利用状況">
-      <div class="content">
-        <h2>ご利用状況</h2>
-        <p>無料プラン</p>
-        <button mat-raised-button color="primary">プランを変更する</button>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+  <nav mat-tab-nav-bar mat-align-tabs="center">
+    <a
+      mat-tab-link
+      routerLink="/setting/account"
+      routerLinkActive
+      #account="routerLinkActive"
+      [active]="account.isActive"
+      >アカウント</a
+    >
+    <a
+      mat-tab-link
+      routerLink="/setting/billing"
+      routerLinkActive
+      #billing="routerLinkActive"
+      [active]="billing.isActive"
+      >ご利用状況</a
+    >
+    <a
+      mat-tab-link
+      routerLink="/setting/withdrawal"
+      routerLinkActive
+      #withdrawal="routerLinkActive"
+      [active]="withdrawal.isActive"
+      >退会</a
+    >
+  </nav>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
 </div>

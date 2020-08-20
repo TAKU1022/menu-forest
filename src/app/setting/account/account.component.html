@@ -1,0 +1,78 @@
+<div class="content" *ngIf="user$ | async as user">
+  <h1>プロフィール</h1>
+  <section class="avater-section">
+    <p class="avater-section__title">アバター編集</p>
+    <label class="avater">
+      <img
+        class="avater__image"
+        [src]="croppedImage ? croppedImage : user.avaterURL"
+        alt=""
+      />
+      <input
+        type="file"
+        accept="image/jpeg, image/png"
+        style="display: none;"
+        (change)="changeFileEvent($event)"
+        #selectedImage
+      />
+    </label>
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="1 / 1"
+      format="png"
+      [roundCropper]="true"
+      (imageCropped)="cropImage($event)"
+      (imageLoaded)="loadImage()"
+      (cropperReady)="isReadyForCropper($event)"
+      (loadImageFailed)="failLoadImage(selectedImage)"
+      [class.active]="imageChangedEvent"
+      width="300px"
+      height="300px"
+    ></image-cropper>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="!imageChangedEvent"
+      (click)="changeUserAvater(selectedImage)"
+    >
+      更新する
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      *ngIf="imageChangedEvent"
+      (click)="resetImage(selectedImage)"
+      class="reset-btn"
+    >
+      キャンセル
+    </button>
+  </section>
+  <section class="name-section">
+    <p class="name-section__title">ユーザー名編集</p>
+    <mat-form-field appearance="fill" [hideRequiredMarker]="true">
+      <mat-label>ユーザー名：{{ user.name }}</mat-label>
+      <input
+        type="text"
+        matInput
+        autocomplete="off"
+        placeholder="「{{ user.name }}」から変更"
+        [formControl]="nameForm"
+        required
+      />
+      <mat-error *ngIf="nameForm.hasError('required')">必須入力です</mat-error>
+      <mat-error *ngIf="nameForm.hasError('maxlength')"
+        >最大文字数を超えてます</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="nameForm.invalid"
+      (click)="changeUserName()"
+      class="name-section__button"
+    >
+      更新する
+    </button>
+  </section>
+</div>

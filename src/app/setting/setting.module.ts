@@ -10,9 +10,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AccountComponent } from './account/account.component';
+import { BillingComponent } from './billing/billing.component';
+import { WithdrawalComponent } from './withdrawal/withdrawal.component';
+import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [SettingComponent],
+  declarations: [
+    SettingComponent,
+    AccountComponent,
+    BillingComponent,
+    WithdrawalComponent,
+    DeleteUserDialogComponent,
+  ],
   imports: [
     CommonModule,
     SettingRoutingModule,
@@ -24,6 +35,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTabsModule,
     ImageCropperModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
 })
 export class SettingModule {}

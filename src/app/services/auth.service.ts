@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { Observable, of } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '@interfaces/user';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   user$: Observable<User> = this.afAuth.authState.pipe(
-    switchMap((afUser) => {
+    switchMap((afUser: firebase.User) => {
       if (afUser) {
         return this.db.doc<User>(`users/${afUser.uid}`).valueChanges();
       } else {
@@ -33,7 +33,7 @@ export class AuthService {
     });
   }
 
-  loginWithFacebook() {
+  loginWithFacebook(): Promise<auth.UserCredential> {
     return this.afAuth.signInWithPopup(
       new auth.FacebookAuthProvider().setCustomParameters({
         prompt: 'select_account',
@@ -41,7 +41,7 @@ export class AuthService {
     );
   }
 
-  loginWithTwitter() {
+  loginWithTwitter(): Promise<auth.UserCredential> {
     return this.afAuth.signInWithPopup(
       new auth.TwitterAuthProvider().setCustomParameters({
         prompt: 'select_account',
@@ -49,7 +49,7 @@ export class AuthService {
     );
   }
 
-  loginWithGoogle() {
+  loginWithGoogle(): Promise<auth.UserCredential> {
     return this.afAuth.signInWithPopup(
       new auth.GoogleAuthProvider().setCustomParameters({
         prompt: 'select_account',
@@ -57,8 +57,8 @@ export class AuthService {
     );
   }
 
-  logout() {
-    this.afAuth.signOut().then(() => {
+  logout(): Promise<void> {
+    return this.afAuth.signOut().then(() => {
       this.router.navigateByUrl('/welcome');
     });
   }

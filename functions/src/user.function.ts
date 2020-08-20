@@ -1,7 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-
 admin.initializeApp();
+import { deleteCollectionByReference } from './firebase-util.function';
+
 const db = admin.firestore();
 
 export const createUser = functions
@@ -22,9 +23,15 @@ export const createUser = functions
     });
   });
 
-export const deleteUser = functions
+export const deleteUserAccount = functions
   .region('asia-northeast1')
   .auth.user()
-  .onDelete((user) => {
-    return db.doc(`users/${user.uid}`).delete();
+  .onDelete(async (user) => {
+    const userId = user.uid;
+    const deleteUser = db.doc(`users/${userId}`).delete();
+    const myMenu = db.collection('myMenus').where('creatorId', '==', userId);
+    const deleteMyMenu = deleteCollectionByReference(myMenu);
+    const posts = db.collection('posts').where('creatorId', '==', userId);
+    const deleteAllPosts = deleteCollectionByReference(posts);
+    return Promise.all([deleteUser, deleteMyMenu, deleteAllPosts]);
   });
