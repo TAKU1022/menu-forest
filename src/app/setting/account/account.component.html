@@ -12,36 +12,36 @@
         type="file"
         accept="image/jpeg, image/png"
         style="display: none;"
-        (change)="fileChengeEvent($event)"
+        (change)="changeFileEvent($event)"
         #selectedImage
       />
     </label>
     <image-cropper
-      [imageChangedEvent]="imageChengedEvent"
+      [imageChangedEvent]="imageChangedEvent"
       [maintainAspectRatio]="true"
       [aspectRatio]="1 / 1"
       format="png"
       [roundCropper]="true"
-      (imageCropped)="imageCropped($event)"
-      (imageLoaded)="imageLoaded()"
-      (cropperReady)="cropperReady($event)"
-      (loadImageFailed)="loadImageFailed(selectedImage)"
-      [class.active]="imageChengedEvent"
+      (imageCropped)="cropImage($event)"
+      (imageLoaded)="loadImage()"
+      (cropperReady)="isReadyForCropper($event)"
+      (loadImageFailed)="failLoadImage(selectedImage)"
+      [class.active]="imageChangedEvent"
       width="300px"
       height="300px"
     ></image-cropper>
     <button
       mat-flat-button
       color="primary"
-      [disabled]="!imageChengedEvent"
-      (click)="chengeUserAvater(selectedImage)"
+      [disabled]="!imageChangedEvent"
+      (click)="changeUserAvater(selectedImage)"
     >
       更新する
     </button>
     <button
       mat-stroked-button
       color="primary"
-      *ngIf="imageChengedEvent"
+      *ngIf="imageChangedEvent"
       (click)="resetImage(selectedImage)"
       class="reset-btn"
     >
@@ -69,7 +69,7 @@
       mat-flat-button
       color="primary"
       [disabled]="nameForm.invalid"
-      (click)="chengeUserName()"
+      (click)="changeUserName()"
       class="name-section__button"
     >
       更新する

@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AccountComponent implements OnInit {
   user$: Observable<User> = this.authService.user$;
   userId: string = this.authService.userId;
-  imageChengedEvent: any = '';
+  imageChangedEvent: any = '';
   croppedImage: any = '';
 
   nameForm = new FormControl('', [
@@ -31,7 +31,7 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  chengeUserName(): Promise<void> {
+  changeUserName(): Promise<void> {
     const newUserName = this.nameForm.value;
     return this.userService
       .changeUserName(this.userId, newUserName)
@@ -48,30 +48,30 @@ export class AccountComponent implements OnInit {
       });
   }
 
-  fileChengeEvent(event: any): void {
-    this.imageChengedEvent = event;
+  changeFileEvent(event: any): void {
+    this.imageChangedEvent = event;
   }
-  imageCropped(event: ImageCroppedEvent): void {
+  cropImage(event: ImageCroppedEvent): void {
     this.croppedImage = event.base64;
   }
-  imageLoaded(): void {
+  loadImage(): void {
     console.log('画像が読み込まれました');
   }
-  cropperReady(sourceImageDimensions: Dimensions): void {
+  isReadyForCropper(sourceImageDimensions: Dimensions): void {
     console.log('操作できるようになりました', sourceImageDimensions);
   }
-  loadImageFailed(selectedImage): void {
+  failLoadImage(selectedImage): void {
     alert('画像の読み込みに失敗しました');
     selectedImage.value = '';
-    this.imageChengedEvent = '';
+    this.imageChangedEvent = '';
   }
   resetImage(selectedImage): void {
     selectedImage.value = '';
-    this.imageChengedEvent = '';
+    this.imageChangedEvent = '';
     this.croppedImage = '';
   }
 
-  chengeUserAvater(selectedImage): Promise<void> {
+  changeUserAvater(selectedImage): Promise<void> {
     return this.userService
       .changeUserAvater(this.userId, this.croppedImage)
       .then(() => {
@@ -79,7 +79,7 @@ export class AccountComponent implements OnInit {
           duration: 3000,
         });
         selectedImage.value = '';
-        this.imageChengedEvent = '';
+        this.imageChangedEvent = '';
       })
       .catch(() => {
         this.snackBar.open('変更に失敗しました', null, {
