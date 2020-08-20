@@ -15,8 +15,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AccountComponent implements OnInit {
   user$: Observable<User> = this.authService.user$;
   userId: string = this.authService.userId;
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
+  imageChangedEvent: any;
+  croppedImage: string;
 
   nameForm = new FormControl('', [
     Validators.required,
@@ -63,11 +63,11 @@ export class AccountComponent implements OnInit {
   failLoadImage(selectedImage): void {
     alert('画像の読み込みに失敗しました');
     selectedImage.value = '';
-    this.imageChangedEvent = '';
+    this.imageChangedEvent = null;
   }
   resetImage(selectedImage): void {
     selectedImage.value = '';
-    this.imageChangedEvent = '';
+    this.imageChangedEvent = null;
     this.croppedImage = '';
   }
 
@@ -79,7 +79,7 @@ export class AccountComponent implements OnInit {
           duration: 3000,
         });
         selectedImage.value = '';
-        this.imageChangedEvent = '';
+        this.imageChangedEvent = null;
       })
       .catch(() => {
         this.snackBar.open('変更に失敗しました', null, {
