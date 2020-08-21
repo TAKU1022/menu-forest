@@ -24,6 +24,10 @@
 
 <mat-menu #menu="matMenu">
   <div *ngIf="user$ | async as user">
+    <button mat-menu-item routerLink="/my-page">
+      <mat-icon color="primary">person</mat-icon>
+      <span>マイページ</span>
+    </button>
     <button mat-menu-item routerLink="/create-my-menu">
       <mat-icon color="primary">add_circle</mat-icon>
       <span>My献立を作成</span>
