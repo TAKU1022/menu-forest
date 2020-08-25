@@ -36,15 +36,11 @@ export class AccountComponent implements OnInit {
     return this.userService
       .changeUserName(this.userId, newUserName)
       .then(() => {
-        this.snackBar.open('変更されました', null, {
-          duration: 3000,
-        });
+        this.snackBar.open('変更されました', null);
         this.nameForm.reset();
       })
       .catch(() => {
-        this.snackBar.open('変更に失敗しました', null, {
-          duration: 3000,
-        });
+        this.snackBar.open('変更に失敗しました', null);
       });
   }
 
@@ -75,16 +71,12 @@ export class AccountComponent implements OnInit {
     return this.userService
       .changeUserAvater(this.userId, this.croppedImage)
       .then(() => {
-        this.snackBar.open('変更されました', null, {
-          duration: 3000,
-        });
+        this.snackBar.open('変更されました', null);
         selectedImage.value = '';
         this.imageChangedEvent = null;
       })
       .catch(() => {
-        this.snackBar.open('変更に失敗しました', null, {
-          duration: 3000,
-        });
+        this.snackBar.open('変更に失敗しました', null);
       });
   }
 }

@@ -31,9 +31,7 @@ export class AdminComponent implements OnInit {
         recipe: '',
       })
       .then(() => {
-        this.snackBar.open('firestoreに追加しました！', null, {
-          duration: 3000,
-        });
+        this.snackBar.open('firestoreに追加しました！', null);
         this.form.controls.name.reset();
       });
   }

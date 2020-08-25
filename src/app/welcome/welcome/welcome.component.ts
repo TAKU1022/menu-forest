@@ -19,27 +19,21 @@ export class WelcomeComponent implements OnInit {
 
   loginWithFacebook(): void {
     this.authService.loginWithFacebook().then(() => {
-      this.snackBar.open('ようこそ！', null, {
-        duration: 3000,
-      });
+      this.snackBar.open('ようこそ！', null);
       this.router.navigateByUrl('/');
     });
   }
 
   loginWithTwitter(): void {
     this.authService.loginWithTwitter().then(() => {
-      this.snackBar.open('ようこそ！', null, {
-        duration: 3000,
-      });
+      this.snackBar.open('ようこそ！', null);
       this.router.navigateByUrl('/');
     });
   }
 
   loginWithGoogle(): void {
     this.authService.loginWithGoogle().then(() => {
-      this.snackBar.open('ようこそ！', null, {
-        duration: 3000,
-      });
+      this.snackBar.open('ようこそ！', null);
       this.router.navigateByUrl('/');
     });
   }

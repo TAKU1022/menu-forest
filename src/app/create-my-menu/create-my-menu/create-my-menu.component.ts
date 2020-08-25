@@ -64,9 +64,7 @@ export class CreateMyMenuComponent implements OnInit {
       this.postService
         .createPost({ day: myMenu.day, creatorId: this.userId })
         .then(() => {
-          this.snackBar.open('投稿に成功しました！', null, {
-            duration: 3000,
-          });
+          this.snackBar.open('投稿に成功しました！', null);
           if (!myMenu.isPosted) {
             this.myMenuService.changeMyMenuIsPosted(myMenu.myMenuId, true);
           }
