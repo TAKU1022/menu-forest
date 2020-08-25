@@ -51,18 +51,18 @@
   <section class="name-section">
     <p class="name-section__title">ユーザー名編集</p>
     <mat-form-field appearance="fill" [hideRequiredMarker]="true">
-      <mat-label>ユーザー名：{{ user.name }}</mat-label>
+      <mat-label>ユーザー名編集</mat-label>
       <input
         type="text"
         matInput
         autocomplete="off"
-        placeholder="「{{ user.name }}」から変更"
+        placeholder="{{ user.name }}"
         [formControl]="nameForm"
         required
       />
       <mat-error *ngIf="nameForm.hasError('required')">必須入力です</mat-error>
       <mat-error *ngIf="nameForm.hasError('maxlength')"
-        >最大文字数を超えてます</mat-error
+        >最大文字数は25文字です</mat-error
       >
     </mat-form-field>
     <button
