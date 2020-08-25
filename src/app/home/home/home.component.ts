@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
     this.myMenuService
       .getMyMenuByUserId(this.userId)
       .pipe(take(1))
-      .subscribe((myMenu: MyMenu) => (this.myMenuId = myMenu.myMenuId));
+      .subscribe((myMenu: MyMenu) => (this.myMenuId = myMenu?.myMenuId));
   }
 
   increaseEatCount(time: string) {
