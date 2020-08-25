@@ -28,6 +28,7 @@ import { MainShellComponent } from './main-shell/main-shell.component';
 import localeJa from '@angular/common/locales/ja';
 import { registerLocaleData } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 registerLocaleData(localeJa);
 @NgModule({
@@ -64,6 +65,7 @@ registerLocaleData(localeJa);
   providers: [
     { provide: REGION, useValue: 'asia-northeast1' },
     { provide: LOCALE_ID, useValue: 'ja-JP' },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },
   ],
   bootstrap: [AppComponent],
 })
