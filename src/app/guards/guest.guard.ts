@@ -12,7 +12,6 @@ import {
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { map, tap, take } from 'rxjs/operators';
-import { User } from '@interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -28,10 +27,11 @@ export class GuestGuard implements CanActivate, CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.authService.user$.pipe(
-      map((user: User) => !user),
+    return this.authService.afUser$.pipe(
+      map((user: firebase.User) => !user),
       tap((isGuest: boolean) => {
         if (!isGuest) {
+          console.log('ログインしてるよ');
           this.router.navigateByUrl('/');
         }
       })
@@ -41,11 +41,12 @@ export class GuestGuard implements CanActivate, CanLoad {
     route: Route,
     segments: UrlSegment[]
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authService.user$.pipe(
-      map((user: User) => !user),
+    return this.authService.afUser$.pipe(
+      map((user: firebase.User) => !user),
       take(1),
       tap((isGuest: boolean) => {
         if (!isGuest) {
+          console.log('ログインしてるよ');
           this.router.navigateByUrl('/');
         }
       })
