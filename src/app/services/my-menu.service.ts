@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MyMenu, DayMenu, DayMenuWithFood } from '@interfaces/my-menu';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { FoodService } from './food.service';
 
@@ -26,25 +26,30 @@ export class MyMenuService {
       .pipe(map((myMenus: MyMenu[]) => myMenus[0]));
   }
 
-  getDayMenuWithFoods(userId: string): Observable<DayMenuWithFood[]> {
+  getDayMenuWithFoods(userId: string): Observable<DayMenuWithFood[] | null> {
     return this.getMyMenuByUserId(userId).pipe(
-      map((myMenu: MyMenu) => myMenu.day),
-      map((day) => {
-        const days: DayMenu[] = [
-          day.sunday,
-          day.monday,
-          day.tuesday,
-          day.wednesday,
-          day.thursday,
-          day.friday,
-          day.saturday,
-        ];
-        return days;
+      map((myMenu: MyMenu) => {
+        const day = myMenu?.day;
+        if (myMenu) {
+          return [
+            day?.sunday,
+            day?.monday,
+            day?.tuesday,
+            day?.wednesday,
+            day?.thursday,
+            day?.friday,
+            day?.saturday,
+          ];
+        } else {
+          return null;
+        }
       }),
       switchMap(
-        (dayMenus: DayMenu[]): Observable<DayMenuWithFood[]> => {
-          const dayMenuWithFoods$: Observable<DayMenuWithFood>[] = dayMenus.map(
-            (dayMenu: DayMenu) => {
+        (dayMenus: DayMenu[]): Observable<DayMenuWithFood[] | null> => {
+          if (dayMenus) {
+            const dayMenuWithFoods$: Observable<
+              DayMenuWithFood
+            >[] = dayMenus.map((dayMenu: DayMenu) => {
               return combineLatest([
                 this.foodService.getFoodById(dayMenu.breakfastId),
                 this.foodService.getFoodById(dayMenu.lunchId),
@@ -59,27 +64,33 @@ export class MyMenuService {
                   };
                 })
               );
-            }
-          );
-          return combineLatest(dayMenuWithFoods$).pipe(
-            map((dayMenuWithFoods: DayMenuWithFood[]) => {
-              for (let i = 0; i < 7; i++) {
-                dayMenuWithFoods[i].dayOfWeek = this.dayOfWeeks[i];
-              }
-              return dayMenuWithFoods;
-            })
-          );
+            });
+            return combineLatest(dayMenuWithFoods$).pipe(
+              map((dayMenuWithFoods: DayMenuWithFood[]) => {
+                for (let i = 0; i < 7; i++) {
+                  dayMenuWithFoods[i].dayOfWeek = this.dayOfWeeks[i];
+                }
+                return dayMenuWithFoods;
+              })
+            );
+          } else {
+            return of(null);
+          }
         }
       )
     );
   }
 
-  getTodayMenu(userId: string): Observable<DayMenuWithFood> {
+  getTodayMenu(userId: string): Observable<DayMenuWithFood | null> {
     return this.getDayMenuWithFoods(userId).pipe(
       map((dayMenuWithFoods: DayMenuWithFood[]) => {
         const today = new Date();
         const dayOfWeek = today.getDay();
-        return dayMenuWithFoods[dayOfWeek];
+        if (dayMenuWithFoods) {
+          return dayMenuWithFoods[dayOfWeek];
+        } else {
+          return null;
+        }
       })
     );
   }
