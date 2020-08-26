@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
+  afUser$: Observable<firebase.User> = this.afAuth.user;
   user$: Observable<User> = this.afAuth.authState.pipe(
     switchMap((afUser: firebase.User) => {
       if (afUser) {
@@ -27,7 +28,7 @@ export class AuthService {
     private db: AngularFirestore,
     private router: Router
   ) {
-    this.user$.subscribe((user: User) => {
+    this.afUser$.subscribe((user: firebase.User) => {
       this.userId = user && user.uid;
       console.log(user);
     });

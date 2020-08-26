@@ -60,9 +60,7 @@ export class PostDetailComponent implements OnInit {
         this.myMenuService
           .changeMyMenuToUserMenu(myMenu.myMenuId, this.post.day)
           .then(() => {
-            this.snackBar.open('この献立をMy献立に登録しました！', null, {
-              duration: 3000,
-            });
+            this.snackBar.open('この献立をMy献立に登録しました！', null);
             this.router.navigateByUrl('/create-my-menu');
           });
       });
@@ -71,9 +69,7 @@ export class PostDetailComponent implements OnInit {
   deletePost(): void {
     this.location.back();
     this.postService.deletePost(this.post.postId).then(() => {
-      this.snackBar.open('この投稿を削除しました！', null, {
-        duration: 3000,
-      });
+      this.snackBar.open('この投稿を削除しました！', null);
     });
   }
 }

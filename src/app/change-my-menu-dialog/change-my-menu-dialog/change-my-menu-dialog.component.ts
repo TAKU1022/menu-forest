@@ -57,9 +57,7 @@ export class ChangeMyMenuDialogComponent implements OnInit {
         foodId
       )
       .then(() => {
-        this.snackBar.open('My献立を変更しました！', null, {
-          duration: 3000,
-        });
+        this.snackBar.open('My献立を変更しました！', null);
         this.myMenuService
           .getMyMenuById(this.data.myMenuId)
           .pipe(take(1))

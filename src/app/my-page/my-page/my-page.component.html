@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="user" *ngIf="user$ | async as user">
+    <img [src]="user.avaterURL" class="user__avater" alt="" />
+    <div class="user--content">
+      <p class="user__name">{{ user.name }}</p>
+      <p class="user__eat-count">食べたチェック合計値：{{ user.eatCount }}</p>
+    </div>
+  </div>
+  <hr />
+  <ng-template #default>
+    <p class="default-title">まだ投稿をされていません</p>
+  </ng-template>
+  <ng-container *ngIf="userPosts$ | async as posts; else default">
+    <div class="grid">
+      <ng-container *ngFor="let post of posts">
+        <mat-card class="post" routerLink="/post/{{ post.postId }}">
+          <mat-card-header class="post__header">
+            <img
+              mat-card-avatar
+              class="post__avater"
+              [src]="post.creator.avaterURL"
+              alt=""
+            />
+            <mat-card-title class="post__user-name">{{
+              post.creator.name
+            }}</mat-card-title>
+            <mat-card-subtitle class="post__date">{{
+              post.createdAt.toDate() | date
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <img
+            mat-card-image
+            class="post__thumbnail"
+            [src]="post.days[0].breakfast.image"
+            alt=""
+          />
+        </mat-card>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

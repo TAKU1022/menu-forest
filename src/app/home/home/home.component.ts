@@ -64,15 +64,13 @@ export class HomeComponent implements OnInit {
     this.myMenuService
       .getMyMenuByUserId(this.userId)
       .pipe(take(1))
-      .subscribe((myMenu: MyMenu) => (this.myMenuId = myMenu.myMenuId));
+      .subscribe((myMenu: MyMenu) => (this.myMenuId = myMenu?.myMenuId));
   }
 
   increaseEatCount(time: string) {
     const increasedEatCount = ++this.eatCount;
     this.userService.changeEatCount(this.userId, increasedEatCount).then(() => {
-      this.snackBar.open('よく頑張りました！', null, {
-        duration: 2000,
-      });
+      this.snackBar.open('よく頑張りました！', null);
       this.userService.changeUserIsEatenFood(this.userId, time, true);
     });
   }
@@ -80,9 +78,7 @@ export class HomeComponent implements OnInit {
   reduceEatCount(time: string) {
     const reducedEatCount = --this.eatCount;
     this.userService.changeEatCount(this.userId, reducedEatCount).then(() => {
-      this.snackBar.open('取り消しました！', null, {
-        duration: 2000,
-      });
+      this.snackBar.open('取り消しました！', null);
       this.userService.changeUserIsEatenFood(this.userId, time, false);
     });
   }

@@ -17,36 +17,24 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  loginWithFacebook() {
+  loginWithFacebook(): void {
     this.authService.loginWithFacebook().then(() => {
-      setTimeout(() => {
-        this.snackBar.open('ようこそ！', null, {
-          duration: 3000,
-        });
-        this.router.navigateByUrl('/');
-      }, 4000);
+      this.snackBar.open('ようこそ！', null);
+      this.router.navigateByUrl('/');
     });
   }
 
-  loginWithTwitter() {
+  loginWithTwitter(): void {
     this.authService.loginWithTwitter().then(() => {
-      setTimeout(() => {
-        this.snackBar.open('ようこそ！', null, {
-          duration: 3000,
-        });
-        this.router.navigateByUrl('/');
-      }, 4000);
+      this.snackBar.open('ようこそ！', null);
+      this.router.navigateByUrl('/');
     });
   }
 
-  loginWithGoogle() {
+  loginWithGoogle(): void {
     this.authService.loginWithGoogle().then(() => {
-      setTimeout(() => {
-        this.snackBar.open('ようこそ！', null, {
-          duration: 3000,
-        });
-        this.router.navigateByUrl('/');
-      }, 4000);
+      this.snackBar.open('ようこそ！', null);
+      this.router.navigateByUrl('/');
     });
   }
 }
