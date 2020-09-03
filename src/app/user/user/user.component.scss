@@ -18,9 +18,7 @@
   &__avater {
     border: 1px solid rgba(black, 0.12);
     overflow: hidden;
-    img {
-      display: block;
-    }
+    display: block;
   }
   &__user-name {
     width: 228px;
@@ -28,6 +26,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
+    color: rgba(black, 0.87);
   }
   &__date {
     text-align: left;
