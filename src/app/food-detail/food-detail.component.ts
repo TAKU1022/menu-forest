@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, take } from 'rxjs/operators';
 import { Food } from '@interfaces/food';
 import { LoadingService } from '../services/loading.service';
 
@@ -23,11 +23,16 @@ export class FoodDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getFood();
+  }
+
+  private getFood(): void {
     this.food$ = this.route.paramMap.pipe(
       switchMap((prams) => {
         const id = prams.get('detail');
         return this.foodService.getFoodById(id);
       }),
+      take(1),
       tap(() => this.loadingService.toggleLoading(false))
     );
   }
