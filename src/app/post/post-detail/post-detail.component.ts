@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PostWithFood, Post } from '@interfaces/post';
 import { switchMap, tap, take } from 'rxjs/operators';
 import { PostService } from 'src/app/services/post.service';
@@ -17,8 +17,10 @@ import { Location } from '@angular/common';
   styleUrls: ['./post-detail.component.scss'],
 })
 export class PostDetailComponent implements OnInit {
+  private post: Post;
+  private myMenu: MyMenu;
+
   post$: Observable<PostWithFood>;
-  post: Post;
   userId: string = this.authService.userId;
 
   constructor(
@@ -35,34 +37,49 @@ export class PostDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getPostWithFood();
+    this.getPost();
+    this.getMyMenu();
+  }
+
+  private getPostWithFood(): void {
     this.post$ = this.route.paramMap.pipe(
+      take(1),
       switchMap((param: ParamMap) => {
-        const postId = param.get('detail');
-        return this.postService.getPostById(postId);
-      }),
-      tap((post: Post) => (this.post = post)),
-      switchMap((post: Post) => {
-        if (post) {
-          return this.postService.getPostWithFoodById(post.postId);
-        } else {
-          return of(null);
-        }
+        const postId: string = param.get('detail');
+        return this.postService.getPostWithFoodById(postId);
       }),
       tap(() => this.loadingService.toggleLoading(false))
     );
   }
 
-  changeMyMenuToUserMenu(): void {
+  private getPost(): void {
+    this.route.paramMap
+      .pipe(
+        switchMap((param: ParamMap) => {
+          const postId: string = param.get('detail');
+          return this.postService.getPostById(postId);
+        }),
+        take(1)
+      )
+      .toPromise()
+      .then((post: Post) => (this.post = post));
+  }
+
+  private getMyMenu(): void {
     this.myMenuService
       .getMyMenuByUserId(this.userId)
       .pipe(take(1))
-      .subscribe((myMenu: MyMenu) => {
-        this.myMenuService
-          .changeMyMenuToUserMenu(myMenu.myMenuId, this.post.day)
-          .then(() => {
-            this.snackBar.open('この献立をMy献立に登録しました！', null);
-            this.router.navigateByUrl('/create-my-menu');
-          });
+      .toPromise()
+      .then((myMenu: MyMenu) => (this.myMenu = myMenu));
+  }
+
+  changeMyMenuToUserMenu(): void {
+    this.myMenuService
+      .changeMyMenuToUserMenu(this.myMenu.myMenuId, this.post.day)
+      .then(() => {
+        this.snackBar.open('この献立をMy献立に登録しました！', null);
+        this.router.navigateByUrl('/create-my-menu');
       });
   }
 
