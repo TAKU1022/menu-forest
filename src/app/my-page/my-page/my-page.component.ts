@@ -11,8 +11,9 @@ import { PostWithFoodWithUser } from '@interfaces/post';
   styleUrls: ['./my-page.component.scss'],
 })
 export class MyPageComponent implements OnInit {
+  private userId: string = this.authService.userId;
+
   user$: Observable<User> = this.authService.user$;
-  userId: string = this.authService.userId;
   userPosts$: Observable<
     PostWithFoodWithUser[]
   > = this.postService.getUserPosts(this.userId);
