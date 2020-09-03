@@ -2,9 +2,11 @@
   <h1>メニュー一覧</h1>
   <div class="grid">
     <ng-container *ngFor="let food of initialFoods">
-      <div class="food" routerLink="/food-list/{{ food.foodId }}">
-        <img class="food__img" [src]="food.image" alt="" />
-        <p class="food__name">{{ food.name }}</p>
+      <div class="food">
+        <a routerLink="/food-list/{{ food.foodId }}">
+          <img class="food__img" [src]="food.image" alt="" />
+          <p class="food__name">{{ food.name }}</p>
+        </a>
       </div>
     </ng-container>
   </div>
