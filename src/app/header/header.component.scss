@@ -5,27 +5,27 @@
   color: #fff;
   position: fixed;
   z-index: 2;
-}
-
-.header-left {
-  &--logo {
-    vertical-align: middle;
+  &__logo {
     outline: none;
     cursor: pointer;
+    color: white;
+    margin: auto 0;
   }
-}
+  &__user-avatar {
+    overflow: hidden;
+    width: 35px;
+    height: 35px;
+    margin: auto 0;
+    img {
+      display: block;
+    }
+  }
 
-.header-right {
-  display: flex;
-  justify-content: center;
-}
+  .header__left {
+    display: flex;
+  }
 
-.user-avatar {
-  overflow: hidden;
-  width: 35px;
-  height: 35px;
-  margin: auto 0;
-  img {
-    display: block;
+  .header__right {
+    display: flex;
   }
 }

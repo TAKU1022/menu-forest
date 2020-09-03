@@ -1,48 +1,49 @@
-<mat-toolbar class="header" color="primary">
-  <div class="header-left">
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon aria-hidden="false">menu</mat-icon>
-    </button>
-    <span class="header-left--logo" routerLink="/">MENU</span>
-  </div>
+<ng-container *ngIf="user$ | async as user">
+  <mat-toolbar class="header" color="primary">
+    <div class="header__left">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon aria-hidden="false">menu</mat-icon>
+      </button>
+      <a class="header__logo" routerLink="/">MENU</a>
+    </div>
+    <div class="header__right">
+      <button
+        mat-icon-button
+        class="header__search-btn"
+        (click)="routeSearch()"
+      >
+        <mat-icon aria-hidden="false">search</mat-icon>
+      </button>
+      <button
+        [matMenuTriggerFor]="menu"
+        class="header__user-avatar"
+        mat-icon-button
+      >
+        <img [src]="user.avaterURL" alt="" />
+      </button>
+    </div>
+  </mat-toolbar>
 
-  <div class="header-right">
-    <button mat-icon-button routerLink="/search">
-      <mat-icon aria-hidden="false">search</mat-icon>
-    </button>
-
-    <button
-      *ngIf="user$ | async as user"
-      [matMenuTriggerFor]="menu"
-      class="user-avatar"
-      mat-icon-button
-    >
-      <img [src]="user.avaterURL" alt="" />
-    </button>
-  </div>
-</mat-toolbar>
-
-<mat-menu #menu="matMenu">
-  <div *ngIf="user$ | async as user">
-    <button mat-menu-item routerLink="/my-page">
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/my-page">
       <mat-icon color="primary">account_box</mat-icon>
       <span>マイページ</span>
-    </button>
-    <button mat-menu-item routerLink="/create-my-menu">
+    </a>
+    <a mat-menu-item routerLink="/create-my-menu">
       <mat-icon color="primary">add_circle</mat-icon>
       <span>My献立を作成</span>
-    </button>
-    <button mat-menu-item routerLink="/setting/account">
+    </a>
+    <a mat-menu-item routerLink="/setting/account">
       <mat-icon color="primary">settings</mat-icon>
       <span>設定</span>
-    </button>
+    </a>
     <button mat-menu-item (click)="logout()">
       <mat-icon color="primary">logout</mat-icon>
       <span>ログアウト</span>
     </button>
-    <button mat-menu-item routerLink="/admin" *ngIf="user.admin">
+    <a mat-menu-item routerLink="/admin" *ngIf="user.admin">
       <mat-icon color="primary">admin_panel_settings</mat-icon>
       <span>管理者画面</span>
-    </button>
-  </div>
-</mat-menu>
+    </a>
+  </mat-menu>
+</ng-container>
