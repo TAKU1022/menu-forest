@@ -6,7 +6,7 @@
     fixedInViewport
     [fixedTopGap]="56"
     mode="over"
-    [opened]="opened"
+    [opened]="isMobile"
   >
     <mat-nav-list>
       <a mat-list-item routerLink="/"
@@ -27,15 +27,17 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div id="wrapper">
-      <router-outlet></router-outlet>
-      <mat-spinner
-        *ngIf="loading$ | async"
-        mode="indeterminate"
-        [diameter]="30"
-        class="loading"
-      ></mat-spinner>
-      <app-footer></app-footer>
+    <div class="content">
+      <main class="main">
+        <router-outlet></router-outlet>
+        <mat-spinner
+          *ngIf="loading$ | async"
+          mode="indeterminate"
+          [diameter]="30"
+          class="loading"
+        ></mat-spinner>
+      </main>
+      <app-footer class="footer"></app-footer>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

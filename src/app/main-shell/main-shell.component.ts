@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DrawerService } from '../services/drawer.service';
 import { LoadingService } from '../services/loading.service';
 import { Observable } from 'rxjs';
 
@@ -9,15 +8,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./main-shell.component.scss'],
 })
 export class MainShellComponent implements OnInit {
-  opened: boolean;
   loading$: Observable<boolean> = this.loadingService.loading$;
+  // TODO: 画面の大きさで切り分ける
+  isMobile = false;
 
-  constructor(
-    private drawrService: DrawerService,
-    private loadingService: LoadingService
-  ) {
-    this.drawrService.isOpen$.subscribe((opened) => (this.opened = opened));
-  }
+  constructor(private loadingService: LoadingService) {}
 
   ngOnInit(): void {}
 }
