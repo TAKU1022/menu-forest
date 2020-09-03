@@ -12,7 +12,7 @@ export class WithdrawalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openDeleteUserDialog() {
+  openDeleteUserDialog(): void {
     this.dialog.open(DeleteUserDialogComponent, {
       autoFocus: false,
       restoreFocus: false,
