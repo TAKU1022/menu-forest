@@ -1,10 +1,10 @@
 <div class="container">
   <h1>ようこそ</h1>
   <p>ログイン</p>
-  <div class="btn">
+  <div class="btn-content">
     <button
       mat-raised-button
-      class="btn--facebook"
+      class="btn btn--facebook"
       (click)="loginWithFacebook()"
     >
       <span class="btn__icon"
@@ -16,7 +16,11 @@
       /></span>
       <span>Facebook</span>
     </button>
-    <button mat-raised-button class="btn--twitter" (click)="loginWithTwitter()">
+    <button
+      mat-raised-button
+      class="btn btn--twitter"
+      (click)="loginWithTwitter()"
+    >
       <span class="btn__icon"
         ><img
           src="/assets/images/twitter-3.svg"
@@ -26,7 +30,11 @@
       /></span>
       <span>Twitter</span>
     </button>
-    <button mat-raised-button class="btn--google" (click)="loginWithGoogle()">
+    <button
+      mat-raised-button
+      class="btn btn--google"
+      (click)="loginWithGoogle()"
+    >
       <span class="btn__icon"
         ><img
           src="/assets/images/google-icon.svg"
