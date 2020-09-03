@@ -59,10 +59,10 @@
 
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-food="food" let-time="time">
-    <button mat-menu-item routerLink="/menu/{{ food.foodId }}">
+    <a mat-menu-item routerLink="/menu/{{ food.foodId }}">
       <mat-icon color="primary">restaurant_menu</mat-icon>
       <span>献立詳細情報</span>
-    </button>
+    </a>
     <button mat-menu-item (click)="openChangeMyMenuDialog(food, time)">
       <mat-icon color="primary">find_replace</mat-icon>
       <span>献立差し替え</span>

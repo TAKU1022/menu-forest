@@ -19,16 +19,17 @@ import { ChangeMyMenuDialogComponent } from 'src/app/change-my-menu-dialog/chang
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  userId: string = this.authService.userId;
+  private userId: string = this.authService.userId;
+  private eatCount: number;
+  private isEatenBreakfast: boolean;
+  private isEatenLunch: boolean;
+  private isEatenDinner: boolean;
+  private today: number;
+  private myMenu: MyMenu;
+
   todayMenu$: Observable<DayMenuWithFood> = this.myMenuService
     .getTodayMenu(this.userId)
     .pipe(tap(() => this.loadingService.toggleLoading(false)));
-  eatCount: number;
-  isEatenBreakfast: boolean;
-  isEatenLunch: boolean;
-  isEatenDinner: boolean;
-  today: number;
-  myMenuId: string;
 
   constructor(
     private myMenuService: MyMenuService,
@@ -43,43 +44,62 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.resetEatStatus();
+    this.getEatStatus();
+    this.getMyMenu();
+  }
+
+  private resetEatStatus(): void {
     const date = new Date();
     this.today = date.getDay();
-    this.dayService.day$.pipe(take(1)).subscribe((day: any) => {
-      if (this.today !== day.dayNumber) {
-        this.userService.initializeUserIsEatenFood(this.userId);
-        this.dayService.changeDayNumber(this.today);
-      }
-    });
+    this.dayService.day$
+      .pipe(take(1))
+      .toPromise()
+      .then((day: any) => {
+        if (this.today !== day.dayNumber) {
+          this.userService.initializeUserIsEatenFood(this.userId);
+          this.dayService.changeDayNumber(this.today);
+        }
+      });
+  }
 
-    this.authService.user$.subscribe((user: User) => {
-      if (user) {
-        this.isEatenBreakfast = user.isEatenBreakfast;
-        this.isEatenLunch = user.isEatenLunch;
-        this.isEatenDinner = user.isEatenDinner;
-        this.eatCount = user.eatCount;
-      }
-    });
+  private getEatStatus(): void {
+    this.authService.user$
+      .pipe(take(1))
+      .toPromise()
+      .then((user: User) => {
+        if (user) {
+          this.isEatenBreakfast = user.isEatenBreakfast;
+          this.isEatenLunch = user.isEatenLunch;
+          this.isEatenDinner = user.isEatenDinner;
+          this.eatCount = user.eatCount;
+        }
+      });
+  }
 
+  private getMyMenu(): void {
     this.myMenuService
       .getMyMenuByUserId(this.userId)
       .pipe(take(1))
-      .subscribe((myMenu: MyMenu) => (this.myMenuId = myMenu?.myMenuId));
+      .toPromise()
+      .then((myMenu: MyMenu) => (this.myMenu = myMenu));
   }
 
-  increaseEatCount(time: string) {
+  increaseEatCount(time: string): void {
     const increasedEatCount = ++this.eatCount;
     this.userService.changeEatCount(this.userId, increasedEatCount).then(() => {
       this.snackBar.open('よく頑張りました！', null);
       this.userService.changeUserIsEatenFood(this.userId, time, true);
+      this.getEatStatus();
     });
   }
 
-  reduceEatCount(time: string) {
+  reduceEatCount(time: string): void {
     const reducedEatCount = --this.eatCount;
     this.userService.changeEatCount(this.userId, reducedEatCount).then(() => {
       this.snackBar.open('取り消しました！', null);
       this.userService.changeUserIsEatenFood(this.userId, time, false);
+      this.getEatStatus();
     });
   }
 
@@ -100,7 +120,7 @@ export class HomeComponent implements OnInit {
       restoreFocus: false,
       minWidth: 320,
       data: {
-        myMenuId: this.myMenuId,
+        myMenu: this.myMenu,
         food,
         dayOfWeek: this.today,
         time,
