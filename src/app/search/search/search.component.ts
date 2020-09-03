@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SearchService } from 'src/app/services/search.service';
 import { FormControl } from '@angular/forms';
 import { SearchIndex } from 'algoliasearch/lite';
 import { startWith } from 'rxjs/operators';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
+  private index: SearchIndex = this.searchService.index.foods;
+  private searchOptionsSubscription: Subscription;
+  private searchResultsSubscription: Subscription;
+
   searchControl = new FormControl('');
-  index: SearchIndex = this.searchService.index.foods;
   searchOptions: any[];
-  query: string;
   searchResults: any[];
 
   constructor(
@@ -24,17 +27,34 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchControl.valueChanges.pipe(startWith('')).subscribe((value) => {
-      this.index
-        .search(value)
-        .then((result) => (this.searchOptions = result.hits));
-    });
-    this.route.queryParamMap.subscribe((map) => {
-      this.query = map.get('query');
-      this.index.search(this.query).then((result) => {
-        this.searchResults = result.hits;
+    this.setSearchOptions();
+    this.setSearchResults();
+  }
+
+  ngOnDestroy(): void {
+    this.searchOptionsSubscription.unsubscribe();
+    this.searchResultsSubscription.unsubscribe();
+  }
+
+  private setSearchOptions(): void {
+    this.searchOptionsSubscription = this.searchControl.valueChanges
+      .pipe(startWith(''))
+      .subscribe((value) => {
+        this.index
+          .search(value)
+          .then((result) => (this.searchOptions = result.hits));
       });
-    });
+  }
+
+  private setSearchResults(): void {
+    this.searchResultsSubscription = this.route.queryParamMap.subscribe(
+      (param: ParamMap) => {
+        const query = param.get('query');
+        this.index.search(query).then((result) => {
+          this.searchResults = result.hits;
+        });
+      }
+    );
   }
 
   displayFn(food): string {
@@ -54,7 +74,7 @@ export class SearchComponent implements OnInit {
     this.router.navigateByUrl(`/food-list/${foodId}`);
   }
 
-  setSearchOption(value): void {
+  setSearchQuery(value): void {
     this.searchControl.setValue(value, {
       emitEvent: false,
     });
