@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { MyMenuService } from 'src/app/services/my-menu.service';
 import { DayMenuWithFood, MyMenu } from '@interfaces/my-menu';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Food } from '@interfaces/food';
 import { PostService } from 'src/app/services/post.service';
-import { take, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ChangeMyMenuDialogComponent } from 'src/app/change-my-menu-dialog/change-my-menu-dialog/change-my-menu-dialog.component';
@@ -16,16 +16,16 @@ import { ChangeMyMenuDialogComponent } from 'src/app/change-my-menu-dialog/chang
   templateUrl: './create-my-menu.component.html',
   styleUrls: ['./create-my-menu.component.scss'],
 })
-export class CreateMyMenuComponent implements OnInit {
-  userId: string = this.authService.userId;
+export class CreateMyMenuComponent implements OnInit, OnDestroy {
+  private userId: string = this.authService.userId;
+  private subscription: Subscription;
+
   weekMenu$: Observable<
     DayMenuWithFood[]
   > = this.myMenuService
     .getDayMenuWithFoods(this.userId)
     .pipe(tap(() => this.loadingService.toggleLoading(false)));
-  myMenu$: Observable<MyMenu> = this.myMenuService.getMyMenuByUserId(
-    this.userId
-  );
+  myMenu: MyMenu;
 
   constructor(
     private authService: AuthService,
@@ -38,20 +38,27 @@ export class CreateMyMenuComponent implements OnInit {
     this.loadingService.toggleLoading(true);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getMyMenu();
+  }
 
-  openChangeMyMenuDialog(
-    myMenuId: string,
-    food: Food,
-    dayOfWeek: number,
-    time: string
-  ): void {
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private getMyMenu(): void {
+    this.subscription = this.myMenuService
+      .getMyMenuByUserId(this.userId)
+      .subscribe((myMenu: MyMenu) => (this.myMenu = myMenu));
+  }
+
+  openChangeMyMenuDialog(food: Food, dayOfWeek: number, time: string): void {
     this.dialog.open(ChangeMyMenuDialogComponent, {
       autoFocus: false,
       restoreFocus: false,
       minWidth: 320,
       data: {
-        myMenuId,
+        myMenu: this.myMenu,
         food,
         dayOfWeek,
         time,
@@ -60,15 +67,13 @@ export class CreateMyMenuComponent implements OnInit {
   }
 
   createPost(): void {
-    this.myMenu$.pipe(take(1)).subscribe((myMenu: MyMenu) => {
-      this.postService
-        .createPost({ day: myMenu.day, creatorId: this.userId })
-        .then(() => {
-          this.snackBar.open('投稿に成功しました！', null);
-          if (!myMenu.isPosted) {
-            this.myMenuService.changeMyMenuIsPosted(myMenu.myMenuId, true);
-          }
-        });
-    });
+    this.postService
+      .createPost({ day: this.myMenu.day, creatorId: this.userId })
+      .then(() => {
+        this.snackBar.open('投稿に成功しました！', null);
+        if (!this.myMenu.isPosted) {
+          this.myMenuService.changeMyMenuIsPosted(this.myMenu.myMenuId, true);
+        }
+      });
   }
 }

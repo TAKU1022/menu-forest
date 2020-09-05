@@ -2,15 +2,12 @@ p {
   font-weight: bold;
 }
 
-button {
+.btn {
   color: #fff;
   width: 250px;
   border-radius: 30px;
   position: relative;
   margin-bottom: 12px;
-}
-
-.btn {
   &__icon {
     position: absolute;
     top: 6px;

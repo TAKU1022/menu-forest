@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DrawerService } from '../services/drawer.service';
 import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { User } from '@interfaces/user';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,21 +11,18 @@ import { User } from '@interfaces/user';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  @Input() sidenav: MatSidenav;
   user$: Observable<User> = this.authService.user$;
-  @Input() sidenav;
 
-  constructor(
-    private drawerService: DrawerService,
-    private authService: AuthService
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
-  toggle() {
-    this.drawerService.toggle();
+  routeSearch(): void {
+    this.router.navigateByUrl('/search');
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
   }
 }

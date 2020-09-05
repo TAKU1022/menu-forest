@@ -8,12 +8,13 @@ import { SearchIndex } from 'algoliasearch/lite';
   styleUrls: ['./food-list.component.scss'],
 })
 export class FoodListComponent implements OnInit {
-  index: SearchIndex = this.searchService.index.foods;
+  private index: SearchIndex = this.searchService.index.foods;
+  private page = 0;
+  private maxPage: number;
+  private isInit = true;
+
   initialFoods: any[] = [];
-  page = 0;
-  maxPage: number;
   isLoading: boolean;
-  isInit = true;
 
   constructor(private searchService: SearchService) {}
 
@@ -21,7 +22,7 @@ export class FoodListComponent implements OnInit {
     this.search();
   }
 
-  search(): void {
+  private search(): void {
     if (!this.maxPage || (this.maxPage > this.page && !this.isLoading)) {
       this.isLoading = true;
       setTimeout(

@@ -13,11 +13,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit {
+  private userId: string = this.authService.userId;
+
   user$: Observable<User> = this.authService.user$;
-  userId: string = this.authService.userId;
   imageChangedEvent: any;
   croppedImage: string;
-
   nameForm = new FormControl('', [
     Validators.required,
     Validators.maxLength(25),

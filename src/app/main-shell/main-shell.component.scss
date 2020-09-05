@@ -1,11 +1,11 @@
-#wrapper {
+.content {
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
   min-height: 100vh;
 }
 
-app-footer {
-  margin-top: auto;
+.main {
+  flex: 1;
 }
 
 span {

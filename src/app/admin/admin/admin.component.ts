@@ -22,7 +22,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  submit() {
+  submit(): void {
     const formData = this.form.value;
     this.foodService
       .createFood({

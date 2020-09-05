@@ -19,7 +19,7 @@ export class DeleteUserDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  deleteUserData() {
+  deleteUserData(): void {
     this.userService
       .deleteUser()
       .then(() => {

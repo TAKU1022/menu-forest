@@ -10,7 +10,7 @@
       #auto="matAutocomplete"
       [displayWith]="displayFn"
       (optionSelected)="navigateByFoodId($event.option?.value.foodId)"
-      (optionActivated)="setSearchOption($event.option?.value)"
+      (optionActivated)="setSearchQuery($event.option?.value)"
     >
       <mat-option *ngFor="let option of searchOptions" [value]="option">
         {{ option.name }}
