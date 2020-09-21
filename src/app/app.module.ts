@@ -29,6 +29,7 @@ import localeJa from '@angular/common/locales/ja';
 import { registerLocaleData } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeJa);
 @NgModule({
@@ -61,6 +62,7 @@ registerLocaleData(localeJa);
     ReactiveFormsModule,
     FormsModule,
     MatProgressSpinnerModule,
+    HttpClientModule,
   ],
   providers: [
     { provide: REGION, useValue: 'asia-northeast1' },
