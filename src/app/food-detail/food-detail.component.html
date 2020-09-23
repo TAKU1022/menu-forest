@@ -1,11 +1,26 @@
 <div class="container">
-  <div *ngIf="food$ | async as food">
-    <h1>{{ food.name }}</h1>
-    <img [src]="food.image" alt="" />
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, qui.
-      Soluta repellat doloribus quam, aperiam repudiandae veritatis beatae non
-      animi voluptatum enim optio suscipit asperiores eius et eum pariatur quae!
-    </p>
-  </div>
+  <ng-container *ngIf="food$ | async as food">
+    <h1 class="food-name">{{ food.name }}のレシピ</h1>
+    <div class="grid">
+      <ng-container *ngFor="let recipe of recipes">
+        <div class="recipe">
+          <div
+            class="recipe__img"
+            [style.background-image]="'url(' + recipe.foodImageUrl + ')'"
+          ></div>
+          <div class="recipe__about">
+            <p class="recipe__title">{{ recipe.recipeTitle }}</p>
+            <p class="recipe__material">材料：{{ recipe.recipeMaterial }}</p>
+            <span class="recipe__indication"
+              >調理時間：{{ recipe.recipeIndication }}</span
+            >
+            <span class="recipe__cost">費用：{{ recipe.recipeCost }}</span>
+            <p class="recipe__url">
+              作り方：<a [href]="recipe.recipeUrl">{{ recipe.recipeUrl }}</a>
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
 </div>

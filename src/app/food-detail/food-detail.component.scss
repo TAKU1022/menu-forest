@@ -1,3 +1,48 @@
-h1 {
+.container {
+  @media screen and (max-width: 450px) {
+    margin: 16px 0 72px;
+  }
+}
+
+.food-name {
   font-size: 24px;
+  margin-bottom: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 48px;
+}
+
+.recipe {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  &__img {
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 56.25%;
+  }
+  &__about {
+    padding: 0 16px 0;
+    text-align: left;
+  }
+  &__title {
+    color: #000;
+    font-size: 18px;
+  }
+  &__material {
+    color: rgba(black, 0.6);
+  }
+  &__indication {
+    color: rgba(black, 0.6);
+    margin-right: 16px;
+  }
+  &__cost {
+    color: rgba(black, 0.6);
+  }
+  &__url {
+    word-break: break-all;
+  }
 }
