@@ -29,21 +29,27 @@
 
 .result-grid {
   display: grid;
-  grid-template-columns: repeat(1fr, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
 }
 
 .result {
-  border: 1px solid rgba(black, 0.32);
-  max-width: 300px;
-  box-sizing: border-box;
-  margin: 0 auto;
   cursor: pointer;
-  outline: none;
+  overflow: hidden;
+  transition: 0.3s;
   &__img {
-    border-bottom: 1px solid rgba(black, 0.32);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 56.25%;
   }
   &__name {
     font-size: 20px;
+    margin: 0;
+    color: #000;
   }
+}
+
+.result:hover {
+  box-shadow: 0 15px 30px -5px rgba(black, 0.15), 0 0 5px rgba(black, 0.1);
+  transform: translateY(-4px);
 }
