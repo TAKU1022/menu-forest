@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FoodService } from 'src/app/services/food.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RakutenRecipeApiService } from 'src/app/services/rakuten-recipe-api.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,18 +10,24 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  form = this.fb.group({
+  form: FormGroup = this.fb.group({
     name: ['', Validators.required],
-    image: ['https://dummyimage.com/300x300/F0F8FF.png', Validators.required],
+    image: ['', Validators.required],
+    categoryId: ['', Validators.required],
   });
+  categories: any[];
+  recipes: any[];
 
   constructor(
     private fb: FormBuilder,
     private foodService: FoodService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private rakutenRecipeApiService: RakutenRecipeApiService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCategoryList();
+  }
 
   submit(): void {
     const formData = this.form.value;
@@ -28,11 +35,23 @@ export class AdminComponent implements OnInit {
       .createFood({
         name: formData.name,
         image: formData.image,
-        recipe: '',
+        categoryId: formData.categoryId,
       })
       .then(() => {
         this.snackBar.open('firestoreに追加しました！', null);
-        this.form.controls.name.reset();
+        this.form.reset();
       });
+  }
+
+  private getCategoryList() {
+    this.rakutenRecipeApiService
+      .getCategoryList()
+      .then((data: any) => (this.categories = data.result.medium));
+  }
+
+  getCategoryRanking(categoryId: string) {
+    this.rakutenRecipeApiService
+      .getCategoryRanking(categoryId)
+      .then((data: any) => (this.recipes = data.result));
   }
 }
