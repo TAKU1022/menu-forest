@@ -9,6 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ChangeMyMenuDialogModule } from '../change-my-menu-dialog/change-my-menu-dialog.module';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -21,6 +22,7 @@ import { ChangeMyMenuDialogModule } from '../change-my-menu-dialog/change-my-men
     MatSnackBarModule,
     MatDialogModule,
     ChangeMyMenuDialogModule,
+    MatCardModule,
   ],
 })
 export class HomeModule {}

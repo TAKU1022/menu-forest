@@ -1,3 +1,8 @@
+.food-wrap {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -5,16 +10,21 @@
 }
 
 .food {
-  max-width: 300px;
-  margin: 0 auto;
+  max-width: 500px;
   position: relative;
+  overflow: hidden;
+  &__header {
+    height: 24px;
+  }
   &__img {
-    border: 1px solid rgba(black, 0.32);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 100%;
   }
   &__button {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 8px;
   }
   &__label {
     font-size: 24px;
