@@ -7,13 +7,13 @@ const client = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
 const foodIndex: SearchIndex = client.initIndex('foods');
 
 const addFoodRecords = (food: any) => {
-  const records = food.recipe
+  const records = food.image
     .match(/[\s\S]{1,500}/gm)
-    .map((recipe: any, i: number) => {
+    .map((image: any, i: number) => {
       return {
         ...food,
         objectID: food.foodId + '-' + i,
-        recipe,
+        image,
       };
     });
   return Promise.all(
@@ -26,10 +26,10 @@ export const addFoodIndex = (data: any) => {
     name: data.name,
     image: data.image,
     foodId: data.foodId,
+    categoryId: data.categoryId,
     objectID: data.foodId,
-    recipe: data.recipe,
   };
-  if (food.recipe && food.recipe.length > 500) {
+  if (food.image && food.image.length > 500) {
     return addFoodRecords(food);
   } else {
     return foodIndex.saveObject(food);
