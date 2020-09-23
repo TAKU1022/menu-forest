@@ -1,26 +1,32 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
 }
 
 h1 {
-  margin: 0 0 16px;
+  margin: 8px 0 24px;
   font-size: 28px;
 }
 
 .food {
-  border: 1px solid rgba(black, 0.32);
-  max-width: 300px;
   cursor: pointer;
+  overflow: hidden;
+  transition: 0.3s;
   &__img {
-    border-bottom: 1px solid rgba(black, 0.32);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 56.25%;
   }
   &__name {
-    margin-top: 0;
-    padding-top: 16px;
+    margin: 0;
     color: #000;
   }
+}
+
+.food:hover {
+  box-shadow: 0 15px 30px -5px rgba(black, 0.15), 0 0 5px rgba(black, 0.1);
+  transform: translateY(-4px);
 }
 
 .loading-spinner {

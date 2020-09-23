@@ -30,7 +30,7 @@ export class FoodListComponent implements OnInit {
           this.index
             .search('', {
               page: this.page,
-              hitsPerPage: 6,
+              hitsPerPage: 12,
             })
             .then((result) => {
               this.maxPage = result.nbPages;
