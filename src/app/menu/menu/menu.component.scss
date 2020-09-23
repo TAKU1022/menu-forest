@@ -1,7 +1,7 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 8px;
+  gap: 24px;
 }
 
 .menu-grid {
@@ -10,23 +10,39 @@
   gap: 8px;
   max-width: 950px;
   margin: 0 auto;
+  @media screen and (max-width: 450px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 2fr, 1fr;
+  }
 }
 
-h1 {
+h2 {
   margin: 8px 0 8px;
   font-size: 24px;
 }
 
 .food {
-  border: 1px solid rgba(black, 0.32);
-  max-width: 300px;
   cursor: pointer;
+  overflow: hidden;
+  transition: 0.3s;
+  &--breakfast {
+    @media screen and (max-width: 450px) {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
   &__img {
-    border-bottom: 1px solid rgba(black, 0.32);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 56.25%;
   }
   &__name {
-    margin: 0 0 8px;
-    padding-top: 8px;
+    margin: 0;
     color: #000;
   }
+}
+
+.food:hover {
+  box-shadow: 0 15px 30px -5px rgba(black, 0.15), 0 0 5px rgba(black, 0.1);
+  transform: translateY(-4px);
 }

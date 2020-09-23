@@ -1,25 +1,42 @@
 <div class="container">
+  <h1>一週間の献立</h1>
   <div class="grid">
     <ng-container *ngFor="let weekMenu of weekMenu$ | async">
-      <h1>{{ weekMenu.dayOfWeek }}曜日</h1>
-      <div class="menu-grid">
-        <div class="food">
-          <a routerLink="/menu/{{ weekMenu.breakfast.foodId }}">
-            <img class="food__img" [src]="weekMenu.breakfast.image" alt="" />
-            <p class="food__name">{{ weekMenu.breakfast.name }}</p>
-          </a>
-        </div>
-        <div class="food">
-          <a routerLink="/menu/{{ weekMenu.lunch.foodId }}">
-            <img class="food__img" [src]="weekMenu.lunch.image" alt="" />
-            <p class="food__name">{{ weekMenu.lunch.name }}</p>
-          </a>
-        </div>
-        <div class="food">
-          <a routerLink="/menu/{{ weekMenu.dinner.foodId }}">
-            <img class="food__img" [src]="weekMenu.dinner.image" alt="" />
-            <p class="food__name">{{ weekMenu.dinner.name }}</p>
-          </a>
+      <div class="menu">
+        <h2>{{ weekMenu.dayOfWeek }}曜日</h2>
+        <div class="menu-grid">
+          <mat-card class="food food--breakfast">
+            <a routerLink="/menu/{{ weekMenu.breakfast.foodId }}">
+              <div
+                class="food__img"
+                mat-card-image
+                [style.background-image]="
+                  'url(' + weekMenu.breakfast.image + ')'
+                "
+              ></div>
+              <p class="food__name">{{ weekMenu.breakfast.name }}</p>
+            </a>
+          </mat-card>
+          <mat-card class="food food--lunch">
+            <a routerLink="/menu/{{ weekMenu.lunch.foodId }}">
+              <div
+                class="food__img"
+                mat-card-image
+                [style.background-image]="'url(' + weekMenu.lunch.image + ')'"
+              ></div>
+              <p class="food__name">{{ weekMenu.lunch.name }}</p>
+            </a>
+          </mat-card>
+          <mat-card class="food food--dinner">
+            <a routerLink="/menu/{{ weekMenu.dinner.foodId }}">
+              <div
+                class="food__img"
+                mat-card-image
+                [style.background-image]="'url(' + weekMenu.dinner.image + ')'"
+              ></div>
+              <p class="food__name">{{ weekMenu.dinner.name }}</p>
+            </a>
+          </mat-card>
         </div>
       </div>
     </ng-container>
