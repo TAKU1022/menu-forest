@@ -27,10 +27,16 @@
 
   <div class="result-grid">
     <ng-container *ngFor="let result of searchResults">
-      <div class="result" routerLink="/food-list/{{ result.foodId }}">
-        <img class="result__img" [src]="result.image" alt="" />
-        <p class="result__name">{{ result.name }}</p>
-      </div>
+      <mat-card class="result">
+        <a routerLink="/food-list/{{ result.foodId }}">
+          <div
+            class="result__img"
+            mat-card-image
+            [style.background-image]="'url(' + result.image + ')'"
+          ></div>
+          <p class="result__name">{{ result.name }}</p>
+        </a>
+      </mat-card>
     </ng-container>
   </div>
 </div>

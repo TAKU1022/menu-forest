@@ -5,24 +5,36 @@
         <div class="day">
           <h1 class="day-of-week">{{ menu.dayOfWeek }}曜日</h1>
           <div class="menu-grid">
-            <div class="food">
+            <mat-card class="food food--breakfast">
               <a routerLink="/food-list/{{ menu.breakfast.foodId }}">
-                <img class="food__img" [src]="menu.breakfast.image" alt="" />
+                <div
+                  class="food__img"
+                  mat-card-image
+                  [style.background-image]="'url(' + menu.breakfast.image + ')'"
+                ></div>
                 <p class="food__name">{{ menu.breakfast.name }}</p>
               </a>
-            </div>
-            <div class="food">
+            </mat-card>
+            <mat-card class="food food--lunch">
               <a routerLink="/food-list/{{ menu.lunch.foodId }}">
-                <img class="food__img" [src]="menu.lunch.image" alt="" />
+                <div
+                  class="food__img"
+                  mat-card-image
+                  [style.background-image]="'url(' + menu.lunch.image + ')'"
+                ></div>
                 <p class="food__name">{{ menu.lunch.name }}</p>
               </a>
-            </div>
-            <div class="food">
+            </mat-card>
+            <mat-card class="food food--dinner">
               <a routerLink="/food-list/{{ menu.dinner.foodId }}">
-                <img class="food__img" [src]="menu.dinner.image" alt="" />
+                <div
+                  class="food__img"
+                  mat-card-image
+                  [style.background-image]="'url(' + menu.dinner.image + ')'"
+                ></div>
                 <p class="food__name">{{ menu.dinner.name }}</p>
               </a>
-            </div>
+            </mat-card>
           </div>
         </div>
       </ng-container>

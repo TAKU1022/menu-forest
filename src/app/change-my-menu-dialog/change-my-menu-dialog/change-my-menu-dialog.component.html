@@ -1,5 +1,5 @@
 <div class="wrap">
-  <p class="current-food">{{ data.food.name }}</p>
+  <p class="current-food">{{ data.food.name }}を変更</p>
   <form class="search" (ngSubmit)="searchFood(searchControl.value)">
     <input
       type="text"
@@ -31,7 +31,10 @@
         <div class="result-grid">
           <ng-container *ngFor="let result of searchResults">
             <div class="result">
-              <img class="result__img" [src]="result.image" alt="" />
+              <div
+                class="result__img"
+                [style.background-image]="'url(' + result.image + ')'"
+              ></div>
               <p class="result__name">{{ result.name }}</p>
               <button
                 class="result__button"
@@ -55,7 +58,10 @@
       <div class="food-grid">
         <div *ngFor="let food of foods$ | async">
           <div class="food">
-            <img class="food__img" [src]="food.image" alt="" />
+            <div
+              class="food__img"
+              [style.background-image]="'url(' + food.image + ')'"
+            ></div>
             <p class="food__name">{{ food.name }}</p>
             <button
               mat-button

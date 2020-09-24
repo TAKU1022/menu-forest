@@ -1,5 +1,6 @@
-.week {
-  border: 1px solid rgba(black, 0.12);
+.week-menu {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .week-grid {
@@ -17,15 +18,34 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+  @media screen and (max-width: 450px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .food {
-  border: 1px solid rgba(black, 0.32);
+  border: 1px solid rgba(black, 0.12);
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  &--breakfast {
+    @media screen and (max-width: 450px) {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
   &__img {
-    border-bottom: 1px solid rgba(black, 0.32);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 56.25%;
+  }
+  &__img:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    background-blend-mode: lighten;
   }
   &__name {
     margin: 0;
+    padding: 8px;
   }
 }
 

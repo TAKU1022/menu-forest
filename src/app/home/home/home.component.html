@@ -2,12 +2,13 @@
   <div class="food-wrap" *ngIf="todayMenu$ | async as todayMenu">
     <h1>{{ todayMenu.dayOfWeek }}曜日の献立</h1>
     <div class="grid">
-      <div class="food food--breakfast">
-        <img
-          [src]="todayMenu.breakfast.image"
-          alt="デモ画像"
+      <mat-card class="food food--breakfast">
+        <mat-card-header class="food__header"></mat-card-header>
+        <div
           class="food__img"
-        />
+          mat-card-image
+          [style.background-image]="'url(' + todayMenu.breakfast.image + ')'"
+        ></div>
         <button
           mat-icon-button
           class="food__button"
@@ -19,12 +20,15 @@
         >
           <mat-icon>more_horiz</mat-icon>
         </button>
-        <label class="food__label"
-          >朝食「{{ todayMenu.breakfast.name }}」</label
-        >
-      </div>
-      <div class="food food--lunch">
-        <img [src]="todayMenu.lunch.image" alt="デモ画像" class="food__img" />
+        <label class="food__label">朝食：{{ todayMenu.breakfast.name }}</label>
+      </mat-card>
+      <mat-card class="food food--lunch">
+        <mat-card-header class="food__header"></mat-card-header>
+        <div
+          class="food__img"
+          mat-card-image
+          [style.background-image]="'url(' + todayMenu.lunch.image + ')'"
+        ></div>
         <button
           mat-icon-button
           class="food__button"
@@ -36,10 +40,15 @@
         >
           <mat-icon>more_horiz</mat-icon>
         </button>
-        <label class="food__label">昼食「{{ todayMenu.lunch.name }}」</label>
-      </div>
-      <div class="food food--dinner">
-        <img [src]="todayMenu.dinner.image" alt="デモ画像" class="food__img" />
+        <label class="food__label">昼食：{{ todayMenu.lunch.name }}</label>
+      </mat-card>
+      <mat-card class="food food--dinner">
+        <mat-card-header class="food__header"></mat-card-header>
+        <div
+          class="food__img"
+          mat-card-image
+          [style.background-image]="'url(' + todayMenu.dinner.image + ')'"
+        ></div>
         <button
           mat-icon-button
           class="food__button"
@@ -51,8 +60,8 @@
         >
           <mat-icon>more_horiz</mat-icon>
         </button>
-        <label class="food__label">夕食「{{ todayMenu.dinner.name }}」</label>
-      </div>
+        <label class="food__label">夕食：{{ todayMenu.dinner.name }}</label>
+      </mat-card>
     </div>
   </div>
 </div>
