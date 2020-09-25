@@ -13,6 +13,7 @@ export interface Post {
     saturday: DayMenu;
   };
   creatorId: string;
+  myMenuId: string;
   postId: string;
   createdAt: firestore.Timestamp;
 }
