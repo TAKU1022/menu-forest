@@ -1,28 +1,62 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    function isAuthenticated() {
+    function isLogin() {
       return request.auth.uid != null;
     }
+    function isAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true;
+    }
     match /foods/{foodId} {
+      //誰でも見ることができる
       allow read: if true;
-      allow write: if isAuthenticated()
+      //管理者だけ作成できる
+      allow create: if isAdmin()
+      //管理者だけアップデートできる
+      allow update: if isAdmin()
+      //管理者だけ削除できる
+      allow delete: if isAdmin()
     }
     match /users/{userId} {
+      //誰でも見ることができる
       allow read: if true;
-      allow write: if isAuthenticated()
+      //ログインした人だけ作成できる
+      allow create: if isLogin()
+      //作成者かつ、そのユーザーを変えようとしていない人がアップデートできる
+      //後半は受信データ(request.resource.data)と既存のデータ(resource.data)を比較している
+      allow update: if request.auth.uid == resource.data.uid && request.resource.data.uid == resource.data.uid;
+      //作成者だけ削除できる
+      allow delete: if request.auth.uid == resource.data.uid;
     }
     match /myMenus/{myMenuId} {
-      allow read: if true;
-      allow write: if isAuthenticated()
+      //作成者だけ見ることができる
+      allow read: if request.auth.uid == resource.data.creatorId;
+      //ログインした人だけ作成できる
+      allow create: if isLogin()
+      //作成者かつ、そのユーザーを変えようとしていない人がアップデートできる
+      allow update: if request.auth.uid == resource.data.creatorId && request.resource.data.creatorId == resource.data.creatorId;
+      //作成者だけ削除できる
+      allow delete: if request.auth.uid == resource.data.creatorId;
     }
     match /posts/{postId} {
+      //誰でも見ることができる
       allow read: if true;
-      allow write: if isAuthenticated()
+      //ログインした人かつ、前回の投稿と異なる内容(My献立)にした人が作成できる
+      allow create: if isLogin() && get(/databases/$(database)/documents/myMenus/$(request.resource.data.myMenuId)).data.isPosted == false;
+      //作成者かつ、そのユーザーを変えようとしていない人がアップデートできる
+      allow update: if request.auth.uid == resource.data.creatorId && request.resource.data.creatorId == resource.data.creatorId;
+      //作成者だけ削除できる
+      allow delete: if request.auth.uid == resource.data.creatorId;
     }
     match /day/day {
+      //誰でも見ることができる
       allow read: if true;
-      allow write: if isAuthenticated()
+      //誰も作成できない
+      allow create: if false;
+      //ログインした人はアップデートできる
+      allow update: if isLogin()
+      //誰も削除できない
+      allow delete: if false;
     }
   }
 }
