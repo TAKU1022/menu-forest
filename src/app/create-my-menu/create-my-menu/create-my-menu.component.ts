@@ -68,7 +68,11 @@ export class CreateMyMenuComponent implements OnInit, OnDestroy {
 
   createPost(): void {
     this.postService
-      .createPost({ day: this.myMenu.day, creatorId: this.userId })
+      .createPost({
+        day: this.myMenu.day,
+        creatorId: this.userId,
+        myMenuId: this.myMenu.myMenuId,
+      })
       .then(() => {
         this.snackBar.open('投稿に成功しました！', null);
         if (!this.myMenu.isPosted) {
