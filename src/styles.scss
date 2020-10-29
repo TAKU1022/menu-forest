@@ -5,13 +5,19 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: 'M PLUS Rounded 1c', Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .container {
-  margin: 24px 16px 80px;
+  margin: 0 16px 80px;
   text-align: center;
-  padding-top: 56px;
+  padding-top: 100px;
+  @media screen and (max-width: 750px) {
+    padding-top: 80px;
+  }
+  @media screen and (max-width: 450px) {
+    margin: 0 8px 64px;
+  }
 }
 
 img {
@@ -20,4 +26,86 @@ img {
 
 a {
   text-decoration: none;
+}
+
+.mat-option {
+  font-family: 'M PLUS Rounded 1c', Roboto, 'Helvetica Neue', sans-serif;
+  color: #8a4d41;
+}
+
+.wood-background {
+  background: url('/assets/images/backgrounds/wood-background0.png');
+  border-radius: 4px;
+  z-index: 0;
+  position: relative;
+}
+
+.wood-pins {
+  position: absolute;
+  width: 40px;
+  border-radius: 50%;
+  box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+  @media screen and (max-width: 600px) {
+    width: 32px;
+  }
+  &:nth-child(1) {
+    top: 8px;
+    left: 8px;
+  }
+  &:nth-child(2) {
+    top: 8px;
+    right: 8px;
+  }
+  &:nth-child(3) {
+    bottom: 8px;
+    left: 8px;
+  }
+  &:nth-child(4) {
+    bottom: 8px;
+    right: 8px;
+  }
+}
+
+.decoration-btn {
+  background-color: #8a4d41;
+  padding: 5px;
+  border-radius: 30px;
+  box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+  display: inline-block;
+  cursor: pointer;
+  &__border {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #eeeeee;
+    padding: 8px 40px;
+    border-radius: 30px;
+    font-size: 24px;
+    @media screen and (max-width: 660px) {
+      padding: 8px 32px;
+      font-size: 20px;
+    }
+  }
+  &__icon {
+    color: #fff050;
+    margin: 0 16px 0 0;
+    @media screen and (max-width: 660px) {
+      margin: 0 8px 0 0;
+    }
+  }
+  &__text {
+    display: block;
+    font-weight: bold;
+    color: #fff050;
+    letter-spacing: 2px;
+    border-radius: 20px;
+    font-size: 18px;
+    @media screen and (max-width: 720px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.decoration-btn:hover {
+  background-color: #eb7819;
 }
