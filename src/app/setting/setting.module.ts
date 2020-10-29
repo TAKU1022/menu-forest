@@ -11,7 +11,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AccountComponent } from './account/account.component';
-import { BillingComponent } from './billing/billing.component';
 import { WithdrawalComponent } from './withdrawal/withdrawal.component';
 import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -20,7 +19,6 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [
     SettingComponent,
     AccountComponent,
-    BillingComponent,
     WithdrawalComponent,
     DeleteUserDialogComponent,
   ],
