@@ -56,7 +56,7 @@ export class CreateMyMenuComponent implements OnInit, OnDestroy {
     this.dialog.open(ChangeMyMenuDialogComponent, {
       autoFocus: false,
       restoreFocus: false,
-      minWidth: 320,
+      width: '800px',
       data: {
         myMenu: this.myMenu,
         food,

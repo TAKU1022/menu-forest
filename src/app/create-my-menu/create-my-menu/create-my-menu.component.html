@@ -1,51 +1,100 @@
 <div class="container">
-  <h1>My献立の編集</h1>
-  <mat-card class="week-menu" *ngIf="weekMenu$ | async">
+  <img
+    src="/assets/images/titles/create-my-menu-title.png"
+    alt=""
+    class="content-title"
+  />
+  <div class="wood-background" *ngIf="weekMenu$ | async">
+    <img
+      src="/assets/images/others/wood-pin.png"
+      alt=""
+      *ngFor="let number of [1, 2, 3, 4]"
+      class="wood-pins"
+    />
     <div class="week-grid">
       <div *ngFor="let dayMenu of weekMenu$ | async; let i = index">
-        <h2 class="day-of-week">{{ dayMenu.dayOfWeek }}曜日</h2>
+        <img
+          src="/assets/images/titles/day-of-week-title{{ i }}.png"
+          alt=""
+          class="day-of-week"
+        />
         <div class="menu-grid">
           <div
             class="food food--breakfast"
             (click)="openChangeMyMenuDialog(dayMenu.breakfast, i, '朝')"
           >
+            <img
+              src="/assets/images/others/pin-blue.png"
+              alt=""
+              class="food__pins"
+              *ngFor="let number of [1, 2]"
+            />
             <div
               class="food__img"
               [style.background-image]="'url(' + dayMenu.breakfast.image + ')'"
-            ></div>
+            >
+              <img
+                src="/assets/images/icons/morning-icon.png"
+                alt=""
+                class="food__time-icon"
+              />
+            </div>
             <p class="food__name">{{ dayMenu.breakfast.name }}</p>
+            <div class="food__color-sheet"></div>
           </div>
           <div
             class="food food--lunch"
             (click)="openChangeMyMenuDialog(dayMenu.lunch, i, '昼')"
           >
+            <img
+              src="/assets/images/others/pin-blue.png"
+              alt=""
+              class="food__pins"
+              *ngFor="let number of [1, 2]"
+            />
             <div
               class="food__img"
               [style.background-image]="'url(' + dayMenu.lunch.image + ')'"
-            ></div>
+            >
+              <img
+                src="/assets/images/icons/noon-icon.png"
+                alt=""
+                class="food__time-icon"
+              />
+            </div>
             <p class="food__name">{{ dayMenu.lunch.name }}</p>
+            <div class="food__color-sheet"></div>
           </div>
           <div
             class="food food--dinner"
             (click)="openChangeMyMenuDialog(dayMenu.dinner, i, '夜')"
           >
+            <img
+              src="/assets/images/others/pin-blue.png"
+              alt=""
+              class="food__pins"
+              *ngFor="let number of [1, 2]"
+            />
             <div
               class="food__img"
               [style.background-image]="'url(' + dayMenu.dinner.image + ')'"
-            ></div>
+            >
+              <img
+                src="/assets/images/icons/night-icon.png"
+                alt=""
+                class="food__time-icon"
+              />
+            </div>
             <p class="food__name">{{ dayMenu.dinner.name }}</p>
+            <div class="food__color-sheet"></div>
           </div>
         </div>
       </div>
     </div>
-    <button
-      mat-flat-button
-      color="primary"
-      class="post-button"
-      (click)="createPost()"
-      *ngIf="!myMenu.isPosted"
-    >
-      投稿する
-    </button>
-  </mat-card>
+    <div class="decoration-btn" (click)="createPost()" *ngIf="!myMenu.isPosted">
+      <div class="decoration-btn__border">
+        <span class="decoration-btn__text">My献立を投稿する</span>
+      </div>
+    </div>
+  </div>
 </div>

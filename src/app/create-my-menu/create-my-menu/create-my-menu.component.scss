@@ -1,54 +1,161 @@
-.week-menu {
-  max-width: 900px;
+.container {
+  @media screen and (max-width: 600px) {
+    margin: 0 0 64px;
+  }
+}
+
+.content-title {
+  margin: 40px 0;
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    margin: 32px 0;
+  }
+  @media screen and (max-width: 320px) {
+    margin: 16px 0 32px;
+  }
+}
+
+.wood-background {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 40px 24px 64px;
+  @media screen and (max-width: 600px) {
+    padding: 32px 16px 40px;
+  }
 }
 
 .week-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 48px;
+  @media screen and (max-width: 600px) {
+    gap: 40px;
+  }
 }
 
 .day-of-week {
-  margin: 8px 0 8px;
-  font-size: 24px;
+  width: 200px;
+  @media screen and (max-width: 600px) {
+    width: 150px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 100px;
+  }
 }
 
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  @media screen and (max-width: 450px) {
-    grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  @media screen and (max-width: 600px) {
+    gap: 8px;
   }
 }
 
 .food {
-  border: 1px solid rgba(black, 0.12);
   cursor: pointer;
   border-radius: 4px;
   overflow: hidden;
-  &--breakfast {
-    @media screen and (max-width: 450px) {
-      grid-column-start: 1;
-      grid-column-end: 3;
+  padding: 16px;
+  background-color: #f0eddd;
+  position: relative;
+  box-shadow: 6px 6px 0 0 rgba(black, 0.3);
+  @media screen and (max-width: 720px) {
+    padding: 8px;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 4px;
+    box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+  }
+  &__pins {
+    position: absolute;
+    top: 8px;
+    width: 16px;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+    z-index: 1;
+    @media screen and (max-width: 720px) {
+      top: 4px;
+      width: 12px;
+      box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+    }
+    @media screen and (max-width: 600px) {
+      top: 2px;
+      width: 8px;
+      box-shadow: 2px 2px 0 0 rgba(black, 0.3);
+    }
+    &:nth-child(1) {
+      left: 8px;
+      @media screen and (max-width: 720px) {
+        left: 4px;
+      }
+      @media screen and (max-width: 600px) {
+        left: 2px;
+      }
+    }
+    &:nth-child(2) {
+      right: 8px;
+      @media screen and (max-width: 720px) {
+        right: 4px;
+      }
+      @media screen and (max-width: 600px) {
+        right: 2px;
+      }
     }
   }
   &__img {
     background-size: cover;
     background-position: center;
     padding-bottom: 56.25%;
+    border-radius: 4px;
+    position: relative;
   }
-  &__img:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    background-blend-mode: lighten;
+  &__time-icon {
+    position: absolute;
+    width: 20%;
+    bottom: -3%;
+    left: -1%;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+    @media screen and (max-width: 720px) {
+      box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+    }
+    @media screen and (max-width: 600px) {
+      box-shadow: 2px 2px 0 0 rgba(black, 0.3);
+    }
   }
   &__name {
     margin: 0;
-    padding: 8px;
+    padding: 16px 0 0;
+    color: #8a4d41;
+    font-weight: bold;
+    @media screen and (max-width: 720px) {
+      padding: 8px 0 0;
+      font-size: 14px;
+    }
+    @media screen and (max-width: 600px) {
+      padding: 4px 0 0;
+      font-size: 12px;
+    }
+    @media screen and (max-width: 450px) {
+      font-size: 10px;
+    }
+  }
+  &__color-sheet {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 0;
+  }
+  &__color-sheet:hover {
+    background-color: #fff;
+    opacity: 0.3;
   }
 }
 
-.post-button {
-  margin-top: 24px;
+.decoration-btn {
+  margin: 40px 0 0;
 }
