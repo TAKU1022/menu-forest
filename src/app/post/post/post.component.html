@@ -1,34 +1,67 @@
 <div class="container">
-  <div class="grid">
-    <ng-container *ngFor="let post of posts$ | async">
-      <mat-card class="post">
-        <a routerLink="/post/{{ post.postId }}">
-          <mat-card-header class="post__header">
-            <a
-              mat-icon-button
-              mat-card-avatar
-              class="post__avater"
-              (click)="$event.stopPropagation()"
-              routerLink="/user"
-              [queryParams]="{ id: post.creatorId }"
-            >
-              <img [src]="post.creator.avaterURL" alt="" />
+  <img
+    src="/assets/images/titles/post-title.png"
+    alt=""
+    class="content-title"
+  />
+  <ng-container *ngIf="posts$ | async">
+    <div class="wood-background">
+      <img
+        src="/assets/images/others/wood-pin.png"
+        alt=""
+        *ngFor="let number of [1, 2, 3, 4]"
+        class="wood-pins"
+      />
+      <div class="grid">
+        <ng-container *ngFor="let post of posts$ | async">
+          <div class="post">
+            <a routerLink="/post/{{ post.postId }}">
+              <img
+                src="/assets/images/others/pin-yellow.png"
+                alt=""
+                class="post__pins"
+                *ngFor="let number of [1, 2]"
+              />
+              <p class="post__title">
+                好物盛り合わせメニュー
+              </p>
+              <div class="post__foods-content">
+                <ng-container *ngFor="let dayMenu of post.days">
+                  <div class="post__foods">
+                    <div
+                      class="post__food-images"
+                      [style.background-image]="
+                        'url(' + dayMenu.lunch.image + ')'
+                      "
+                    ></div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class="post__user-content">
+                <a
+                  class="post__user-avater"
+                  (click)="$event.stopPropagation()"
+                  routerLink="/user"
+                  [queryParams]="{ id: post.creatorId }"
+                  ><img [src]="post.creator.avaterURL" alt=""
+                /></a>
+                <a
+                  (click)="$event.stopPropagation()"
+                  routerLink="/user"
+                  [queryParams]="{ id: post.creatorId }"
+                >
+                  <div class="post__user-content-right">
+                    <p class="post__user-name">{{ post.creator.name }}</p>
+                    <p class="post__date">
+                      {{ post.createdAt.toDate() | date }}
+                    </p>
+                  </div>
+                </a>
+              </div>
             </a>
-            <mat-card-title class="post__user-name">{{
-              post.creator.name
-            }}</mat-card-title>
-            <mat-card-subtitle class="post__date">{{
-              post.createdAt.toDate() | date
-            }}</mat-card-subtitle>
-          </mat-card-header>
-          <img
-            mat-card-image
-            class="post__thumbnail"
-            [src]="post.days[0].breakfast.image"
-            alt=""
-          />
-        </a>
-      </mat-card>
-    </ng-container>
-  </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
 </div>
