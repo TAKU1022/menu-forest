@@ -1,43 +1,93 @@
 <div class="container">
-  <div class="user" *ngIf="user$ | async as user">
-    <img [src]="user.avaterURL" class="user__avater" alt="" />
-    <div class="user--content">
-      <p class="user__name">{{ user.name }}</p>
-      <p class="user__eat-count">食べたチェック合計値：{{ user.eatCount }}</p>
+  <img
+    src="/assets/images/titles/my-page-title.png"
+    alt=""
+    class="content-title"
+  />
+  <div class="wood-background">
+    <img
+      src="/assets/images/others/wood-pin.png"
+      alt=""
+      *ngFor="let number of [1, 2, 3, 4]"
+      class="wood-pins"
+    />
+    <div class="content">
+      <img
+        src="/assets/images/others/pin-yellow.png"
+        alt=""
+        class="content-pins"
+        *ngFor="let number of [1, 2, 3, 4]"
+      />
+      <div class="user-content" *ngIf="user$ | async as user">
+        <div class="user">
+          <img [src]="user.avaterURL" class="user__avater" alt="" />
+          <div class="user__right-content">
+            <p class="user__name">{{ user.name }}</p>
+            <p class="user__eat-count">
+              食べたチェック合計値：{{ user.eatCount }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="my-post-title-content">
+        <p class="my-post-title">あなたの投稿</p>
+      </div>
+      <div class="post-content">
+        <ng-template #default>
+          <p class="default-title">
+            <img
+              src="/assets/images/others/pin-green.png"
+              alt=""
+              class="default-title__pins"
+              *ngFor="let number of [1, 2]"
+            />まだ投稿をされていません
+          </p>
+        </ng-template>
+        <ng-container *ngIf="userPosts$ | async as posts; else default">
+          <div class="grid">
+            <ng-container *ngFor="let post of posts">
+              <div class="post">
+                <a routerLink="/post/{{ post.postId }}">
+                  <img
+                    src="/assets/images/others/pin-green.png"
+                    alt=""
+                    class="post__pins"
+                    *ngFor="let number of [1, 2]"
+                  />
+                  <p class="post__title">
+                    好物盛り合わせメニュー
+                  </p>
+                  <div class="post__foods-content">
+                    <ng-container *ngFor="let dayMenu of post.days">
+                      <div class="post__foods">
+                        <div
+                          class="post__food-images"
+                          [style.background-image]="
+                            'url(' + dayMenu.lunch.image + ')'
+                          "
+                        ></div>
+                      </div>
+                    </ng-container>
+                  </div>
+                  <div class="post__user-content">
+                    <img
+                      [src]="post.creator.avaterURL"
+                      alt=""
+                      class="post__user-avater"
+                    />
+                    <div class="post__user-content-right">
+                      <p class="post__user-name">{{ post.creator.name }}</p>
+                      <p class="post__date">
+                        {{ post.createdAt.toDate() | date }}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </div>
-  <hr />
-  <ng-template #default>
-    <p class="default-title">まだ投稿をされていません</p>
-  </ng-template>
-  <ng-container *ngIf="userPosts$ | async as posts; else default">
-    <div class="grid">
-      <ng-container *ngFor="let post of posts">
-        <mat-card class="post">
-          <a routerLink="/post/{{ post.postId }}">
-            <mat-card-header class="post__header">
-              <img
-                mat-card-avatar
-                class="post__avater"
-                [src]="post.creator.avaterURL"
-                alt=""
-              />
-              <mat-card-title class="post__user-name">{{
-                post.creator.name
-              }}</mat-card-title>
-              <mat-card-subtitle class="post__date">{{
-                post.createdAt.toDate() | date
-              }}</mat-card-subtitle>
-            </mat-card-header>
-            <img
-              mat-card-image
-              class="post__thumbnail"
-              [src]="post.days[0].breakfast.image"
-              alt=""
-            />
-          </a>
-        </mat-card>
-      </ng-container>
-    </div>
-  </ng-container>
 </div>
