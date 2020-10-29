@@ -1,32 +1,46 @@
 <div class="container">
-  <h1>設定画面</h1>
-  <nav mat-tab-nav-bar mat-align-tabs="center">
-    <a
-      mat-tab-link
-      routerLink="/setting/account"
-      routerLinkActive
-      #account="routerLinkActive"
-      [active]="account.isActive"
-      >アカウント</a
-    >
-    <a
-      mat-tab-link
-      routerLink="/setting/billing"
-      routerLinkActive
-      #billing="routerLinkActive"
-      [active]="billing.isActive"
-      >ご利用状況</a
-    >
-    <a
-      mat-tab-link
-      routerLink="/setting/withdrawal"
-      routerLinkActive
-      #withdrawal="routerLinkActive"
-      [active]="withdrawal.isActive"
-      >退会</a
-    >
-  </nav>
-  <div class="content">
-    <router-outlet></router-outlet>
+  <img
+    src="/assets/images/titles/setting-title.png"
+    alt=""
+    class="content-title"
+  />
+  <div class="wood-background">
+    <img
+      src="/assets/images/others/wood-pin.png"
+      alt=""
+      *ngFor="let number of [1, 2, 3, 4]"
+      class="wood-pins"
+    />
+    <div class="content">
+      <img
+        src="/assets/images/others/pin-yellow.png"
+        alt=""
+        class="content-pins"
+        *ngFor="let number of [1, 2, 3, 4]"
+      />
+      <nav mat-tab-nav-bar mat-align-tabs="center" backgroundColor="primary">
+        <a
+          mat-tab-link
+          routerLink="/setting/account"
+          routerLinkActive
+          #account="routerLinkActive"
+          [active]="account.isActive"
+          class="tab-text"
+          >プロフィール</a
+        >
+        <a
+          mat-tab-link
+          routerLink="/setting/withdrawal"
+          routerLinkActive
+          #withdrawal="routerLinkActive"
+          [active]="withdrawal.isActive"
+          class="tab-text"
+          >退会</a
+        >
+      </nav>
+      <div class="setting-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </div>
 </div>
