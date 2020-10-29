@@ -4,29 +4,45 @@
   <mat-sidenav
     #sidenav
     fixedInViewport
-    [fixedTopGap]="56"
     mode="over"
     [opened]="isMobile"
+    class="sidenav"
   >
     <mat-nav-list>
-      <a mat-list-item routerLink="/"
-        ><mat-icon color="primary">home</mat-icon><span>今日の献立</span></a
+      <a routerLink="/" class="list-item list-item--home">
+        <div class="list-item__border">
+          <mat-icon class="list-item__icon">home</mat-icon
+          ><span class="list-item__text">本日の献立</span>
+        </div>
+      </a>
+      <a routerLink="/menu" class="list-item list-item--menu">
+        <div class="list-item__border">
+          <mat-icon class="list-item__icon">date_range</mat-icon
+          ><span class="list-item__text">一週間の献立</span>
+        </div></a
       >
-      <a mat-list-item routerLink="/menu"
-        ><mat-icon color="primary">date_range</mat-icon
-        ><span>一週間の献立</span></a
-      >
-      <a mat-list-item routerLink="/food-list"
-        ><mat-icon color="primary">restaurant</mat-icon
-        ><span>メニュー一覧</span></a
-      >
-      <a mat-list-item routerLink="/post"
-        ><mat-icon color="primary">people</mat-icon><span>みんなの献立</span></a
-      >
+      <a routerLink="/food-list" class="list-item list-item--food-list">
+        <div class="list-item__border">
+          <mat-icon class="list-item__icon">restaurant</mat-icon
+          ><span class="list-item__text">メニュー一覧</span>
+        </div>
+      </a>
+      <a routerLink="/post" class="list-item list-item--post">
+        <div class="list-item__border">
+          <mat-icon class="list-item__icon">group</mat-icon
+          ><span class="list-item__text">みんなの献立</span>
+        </div>
+      </a>
+      <a routerLink="/search" class="list-item list-item--search">
+        <div class="list-item__border">
+          <mat-icon class="list-item__icon">search</mat-icon
+          ><span class="list-item__text">メニュー検索</span>
+        </div>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content class="sidenav-content">
     <div class="content">
       <main class="main">
         <router-outlet></router-outlet>
@@ -34,7 +50,8 @@
           *ngIf="loading$ | async"
           mode="indeterminate"
           [diameter]="30"
-          class="loading"
+          color="accent"
+          class="loading-spinner"
         ></mat-spinner>
       </main>
       <app-footer class="footer"></app-footer>

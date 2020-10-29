@@ -1,17 +1,95 @@
+.sidenav {
+  padding: 88px 0 0;
+  width: 240px;
+  background: url('/assets/images/sozai_image_144731.jpg') center;
+  background-size: 130%;
+  @media screen and (max-width: 320px) {
+    padding: 80px 0 0;
+  }
+}
+
+.list-item {
+  display: block;
+  text-align: center;
+  background-color: #8a4d41;
+  padding: 5px;
+  border-radius: 4px;
+  margin: 0 8px 32px;
+  &__border {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+  }
+  &__icon {
+    color: #fff;
+    margin: 0 16px 0 0;
+  }
+  &__text {
+    display: block;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 4px;
+    border-radius: 20px;
+  }
+  &--home {
+    -webkit-transform: rotate(4deg);
+    -moz-transform: rotate(4deg);
+    -o-transform: rotate(4deg);
+    -ms-transform: rotate(4deg);
+    transform: rotate(4deg);
+  }
+  &--menu {
+    -webkit-transform: rotate(-1deg);
+    -moz-transform: rotate(-1deg);
+    -o-transform: rotate(-1deg);
+    -ms-transform: rotate(-1deg);
+    transform: rotate(-1deg);
+  }
+  &--food-list {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    -o-transform: rotate(2deg);
+    -ms-transform: rotate(2deg);
+    transform: rotate(2deg);
+  }
+  &--post {
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+    -o-transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    transform: rotate(-3deg);
+  }
+  &--search {
+    margin: 0 8px;
+    -webkit-transform: rotate(1deg);
+    -moz-transform: rotate(1deg);
+    -o-transform: rotate(1deg);
+    -ms-transform: rotate(1deg);
+    transform: rotate(1deg);
+    @media screen and (min-width: 321px) {
+      display: none;
+    }
+  }
+}
+
+.sidenav-content {
+  overflow: hidden;
+}
+
 .content {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
+  background-image: url('/assets/images/background-image-green.png');
 }
 
 .main {
   flex: 1;
 }
 
-span {
-  margin-left: 16px;
-}
-
-.loading {
+.loading-spinner {
   margin: 0 auto;
 }
