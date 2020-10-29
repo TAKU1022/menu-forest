@@ -1,30 +1,50 @@
 <div class="container">
-  <h1>メニュー一覧</h1>
-  <div class="grid">
-    <ng-container *ngFor="let food of initialFoods">
-      <mat-card class="food">
-        <a routerLink="/food-list/{{ food.foodId }}">
-          <div
-            class="food__img"
-            mat-card-image
-            [style.background-image]="'url(' + food.image + ')'"
-          ></div>
-          <p class="food__name">{{ food.name }}</p>
-        </a>
-      </mat-card>
-    </ng-container>
+  <img
+    src="/assets/images/titles/food-list-title.png"
+    alt=""
+    class="content-title"
+  />
+  <div class="wood-background">
+    <img
+      *ngFor="let number of [1, 2, 3, 4]"
+      src="/assets/images/others/wood-pin.png"
+      alt=""
+      class="wood-pins"
+    />
+    <div class="grid">
+      <ng-container *ngFor="let food of initialFoods">
+        <div
+          class="food-content food-content--rotate-type-{{ food.rotateTypeId }}"
+        >
+          <div class="food">
+            <a routerLink="/food-list/{{ food.foodId }}">
+              <img
+                src="/assets/images/others/pin-red.png"
+                alt=""
+                class="food__pin"
+              />
+              <div
+                class="food__img"
+                [style.background-image]="'url(' + food.image + ')'"
+              ></div>
+              <p class="food__name">{{ food.name }}</p>
+            </a>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="80"
+      (scrolled)="onScroll()"
+    ></div>
+    <mat-spinner
+      mode="indeterminate"
+      *ngIf="isLoading"
+      class="loading-spinner"
+      [diameter]="30"
+    >
+    </mat-spinner>
   </div>
-  <div
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="80"
-    (scrolled)="onScroll()"
-  ></div>
-  <mat-spinner
-    mode="indeterminate"
-    *ngIf="isLoading"
-    class="loading-spinner"
-    [diameter]="30"
-  >
-  </mat-spinner>
 </div>

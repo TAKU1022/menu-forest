@@ -22,6 +22,14 @@ export class FoodListComponent implements OnInit {
     this.search();
   }
 
+  private getRandomRotateId(): string {
+    const rotateTypeIds: string[] = ['a', 'b', 'c', 'd', 'e'];
+    const randomNumber: number = Math.floor(
+      Math.random() * rotateTypeIds.length
+    );
+    return rotateTypeIds[randomNumber];
+  }
+
   private search(): void {
     if (!this.maxPage || (this.maxPage > this.page && !this.isLoading)) {
       this.isLoading = true;
@@ -34,6 +42,10 @@ export class FoodListComponent implements OnInit {
             })
             .then((result) => {
               this.maxPage = result.nbPages;
+              result.hits.map((food: any) => {
+                const rotateTypeId: string = this.getRandomRotateId();
+                food.rotateTypeId = rotateTypeId;
+              });
               this.initialFoods.push(...result.hits);
               this.isInit = false;
               this.isLoading = false;
