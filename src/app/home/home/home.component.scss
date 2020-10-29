@@ -1,32 +1,229 @@
+.container {
+  position: relative;
+}
+
+.woods {
+  position: absolute;
+  width: 30%;
+  z-index: 2;
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+  &:nth-child(2) {
+    top: 10%;
+    right: -16%;
+  }
+  &:nth-child(3) {
+    top: 45%;
+    right: -10%;
+  }
+  &:nth-child(4) {
+    top: 80%;
+    right: -8%;
+  }
+  &:nth-child(5) {
+    top: 20%;
+    left: -14%;
+  }
+  &:nth-child(6) {
+    top: 60%;
+    left: -8%;
+  }
+}
+
 .food-wrap {
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
+}
+
+.content-title {
+  margin: 40px 0;
+  @media screen and (max-width: 750px) {
+    width: 350px;
+  }
+  @media screen and (max-width: 450px) {
+    margin: 24px 0 32px;
+    width: 300px;
+  }
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 40px;
+}
+
+.grid-item {
+  background: url('/assets/images/backgrounds/wood-background1.png');
+  background-size: 100% 100%;
+  padding: 10% 10% 22%;
+  z-index: 0;
+  position: relative;
+  &--lunch {
+    transform: scale(-1, 1);
+  }
+}
+
+.item-title {
+  width: 300px;
+  margin: 0 0 16px;
+  &--lunch {
+    transform: scale(-1, 1);
+  }
+  @media screen and (max-width: 750px) {
+    width: 250px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 200px;
+    margin: 0 0 8px;
+  }
+}
+
+.animal {
+  position: absolute;
+  width: 30%;
+  top: -32%;
+  right: -10%;
+}
+
+.food-content {
+  transform-origin: center 16px 0;
+  position: relative;
+  transition: 0.5s;
+  @media screen and (max-width: 600px) {
+    transform-origin: center 8px 0;
+  }
+  @media screen and (max-width: 320px) {
+    transform-origin: center 4px 0;
+  }
+  &:hover .food::before {
+    left: 8px;
+    box-shadow: 0 20px rgba(black, 0.3);
+  }
+  &:hover .food::after {
+    right: 8px;
+    box-shadow: 0 20px rgba(black, 0.3);
+  }
+  &--breakfast {
+    transform: rotate(-1deg);
+    &:hover {
+      transform: rotate(-1deg) translateY(-5px);
+    }
+  }
+  &--lunch {
+    transform: rotate(-1deg) scale(-1, 1);
+    &:hover {
+      transform: rotate(-1deg) scale(-1, 1) translateY(-5px);
+    }
+  }
+  &--dinner {
+    transform: rotate(-1deg);
+    &:hover {
+      transform: rotate(-1deg) translateY(-5px);
+    }
+  }
 }
 
 .food {
-  max-width: 500px;
   position: relative;
-  overflow: hidden;
-  &__header {
-    height: 24px;
+  padding: 24px;
+  background-color: #f0eddd;
+  border-radius: 5px;
+  margin: 0 0 16px;
+  @media screen and (max-width: 600px) {
+    padding: 16px;
+  }
+  @media screen and (max-width: 320px) {
+    padding: 8px;
+  }
+  &__pin {
+    width: 24px;
+    position: absolute;
+    top: 16px;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+    @media screen and (max-width: 600px) {
+      width: 16px;
+      top: 8px;
+      box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+    }
+    @media screen and (max-width: 320px) {
+      width: 14px;
+      top: 4px;
+      box-shadow: 2px 2px 0 0 rgba(black, 0.3);
+    }
   }
   &__img {
     background-size: cover;
     background-position: center;
-    padding-bottom: 100%;
+    padding-bottom: 56.25%;
+    border-radius: 5px;
   }
-  &__button {
-    position: absolute;
-    top: 0;
-    right: 8px;
-  }
-  &__label {
+  &__name {
     font-size: 24px;
+    margin: 0;
+    color: #8a4d41;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+    padding: 24px 0 0;
+    @media screen and (max-width: 600px) {
+      font-size: 20px;
+      padding: 16px 0 0;
+    }
+    @media screen and (max-width: 450px) {
+      font-size: 16px;
+    }
+    @media screen and (max-width: 320px) {
+      padding: 8px 0 0;
+    }
+  }
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    z-index: -1;
+    top: 60%;
+    bottom: 12px;
+    width: 50%;
+    max-width: 300px;
+    border-radius: 4px;
+    transition: 0.5s;
+    box-shadow: 0 15px rgba(black, 0.3);
+  }
+  &::before {
+    left: 10px;
+    transform: rotate(-5deg);
+  }
+  &::after {
+    right: 10px;
+    transform: rotate(5deg);
+  }
+}
+
+.decoration-btn-content {
+  display: flex;
+  justify-content: center;
+  @media screen and (max-width: 600px) {
+    flex-flow: column;
+  }
+  &--lunch {
+    transform: scale(-1, 1);
+  }
+}
+
+.decoration-btn {
+  &--change-food {
+    margin: 0 16px 0 0;
+    @media screen and (max-width: 660px) {
+      margin: 0 8px 0 0;
+    }
+    @media screen and (max-width: 600px) {
+      margin: 0 auto 8px;
+    }
+  }
+  &--eat-check {
+    @media screen and (max-width: 600px) {
+      margin: 0 auto;
+    }
   }
 }

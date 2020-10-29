@@ -19,11 +19,12 @@ import { ChangeMyMenuDialogComponent } from 'src/app/change-my-menu-dialog/chang
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  isEatenBreakfast: boolean;
+  isEatenLunch: boolean;
+  isEatenDinner: boolean;
+
   private userId: string = this.authService.userId;
   private eatCount: number;
-  private isEatenBreakfast: boolean;
-  private isEatenLunch: boolean;
-  private isEatenDinner: boolean;
   private today: number;
   private myMenu: MyMenu;
 
@@ -103,22 +104,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  checkTime(time: string): boolean {
-    switch (time) {
-      case '朝':
-        return this.isEatenBreakfast;
-      case '昼':
-        return this.isEatenLunch;
-      case '夜':
-        return this.isEatenDinner;
-    }
-  }
-
   openChangeMyMenuDialog(food: Food, time: string): void {
     this.dialog.open(ChangeMyMenuDialogComponent, {
       autoFocus: false,
       restoreFocus: false,
-      minWidth: 320,
+      width: '800px',
       data: {
         myMenu: this.myMenu,
         food,
