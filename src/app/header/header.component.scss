@@ -1,31 +1,175 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px;
-  color: #fff;
+  width: 100%;
+  height: 100px;
+  background: url('/assets/images/header-max.png') center no-repeat;
   position: fixed;
   z-index: 2;
-  &__logo {
-    outline: none;
-    cursor: pointer;
-    color: white;
-    margin: auto 0;
+  @media screen and (max-width: 750px) {
+    height: 80px;
   }
-  &__user-avatar {
-    overflow: hidden;
-    width: 35px;
-    height: 35px;
-    margin: auto 0;
-    img {
-      display: block;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  @media screen and (max-width: 450px) {
+    padding: 0 8px;
+  }
+  &__left {
+    display: flex;
+    width: 300px;
+    margin: 32px 48px 0 0;
+    @media screen and (max-width: 750px) {
+      width: 250px;
+      margin: 16px 32px 0 0;
     }
   }
-
-  .header__left {
+  &__right {
     display: flex;
+    margin: auto 0;
+    justify-content: space-between;
+    width: 440px;
+    @media screen and (max-width: 750px) {
+      width: 340px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 100px;
+      justify-content: flex-end;
+    }
+    @media screen and (max-width: 320px) {
+      width: 56px;
+    }
   }
+  &__sidenav-btn {
+    width: 34px;
+    margin: 0 16px 0 0;
+    transform: rotate(3deg);
+    @media screen and (min-width: 601px) {
+      display: none;
+    }
+  }
+  &__logo {
+    display: block;
+    transform: rotate(-10deg);
+    @media screen and (max-width: 750px) {
+      transform: rotate(-4deg);
+    }
+  }
+  &__home {
+    width: 40px;
+    margin: 24px 0 0 0;
+    transform: rotate(-6deg);
+    @media screen and (max-width: 750px) {
+      width: 34px;
+    }
+  }
+  &__menu {
+    width: 40px;
+    margin: 32px 0 0 0;
+    transform: rotate(6deg);
+    @media screen and (max-width: 750px) {
+      width: 34px;
+    }
+  }
+  &__food-list {
+    width: 40px;
+    margin: 24px 0 0 0;
+    transform: rotate(-4deg);
+    @media screen and (max-width: 750px) {
+      width: 34px;
+    }
+  }
+  &__post {
+    width: 40px;
+    margin: 32px 0 0 0;
+    transform: rotate(4deg);
+    @media screen and (max-width: 750px) {
+      width: 34px;
+    }
+  }
+  &--mobile {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+  &__search {
+    width: 40px;
+    margin: 24px 0 0 0;
+    transform: rotate(-4deg);
+    @media screen and (max-width: 750px) {
+      width: 34px;
+    }
+    @media screen and (max-width: 600px) {
+      margin: 32px 16px 0 0;
+    }
+    @media screen and (max-width: 320px) {
+      display: none;
+    }
+  }
+  &__user-avatar-content {
+    background: url('/assets/images/icons/user-avater-icon.png') center/contain
+      no-repeat;
+    margin: 24px 0 0 -8px;
+    width: 52px;
+    height: 55px;
+    position: relative;
+    border-radius: 50%;
+    box-shadow: 3px 2px 0 0 rgba(black, 0.3);
+    transform: rotate(10deg);
+    @media screen and (max-width: 750px) {
+      width: 42px;
+      height: 44px;
+      margin: 16px 0 0 0;
+    }
+  }
+}
 
-  .header__right {
-    display: flex;
+.user-avatar-btn {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  position: relative;
+  top: 49%;
+  left: 50%;
+  transform: translate(-50%, -49%);
+  @media screen and (max-width: 750px) {
+    width: 30px;
+    height: 30px;
   }
+}
+
+.user-avatar-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: inset 0 2px 0 0 rgba($color: #6a380b, $alpha: 1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.user-avatar {
+  display: block;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.menu-icon {
+  width: 20px;
+  margin-right: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  &--edit {
+    width: 22px;
+    margin-right: 14px;
+  }
+}
+
+.menu-text {
+  font-family: 'M PLUS Rounded 1c', Roboto, 'Helvetica Neue', sans-serif;
+  color: #612000;
 }

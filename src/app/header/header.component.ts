@@ -18,10 +18,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  routeSearch(): void {
-    this.router.navigateByUrl('/search');
-  }
-
   logout(): void {
     this.authService.logout();
   }
