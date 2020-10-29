@@ -46,11 +46,23 @@ export class SearchComponent implements OnInit, OnDestroy {
       });
   }
 
+  private getRandomRotateId(): string {
+    const rotateTypeIds: string[] = ['a', 'b', 'c', 'd', 'e'];
+    const randomNumber: number = Math.floor(
+      Math.random() * rotateTypeIds.length
+    );
+    return rotateTypeIds[randomNumber];
+  }
+
   private setSearchResults(): void {
     this.searchResultsSubscription = this.route.queryParamMap.subscribe(
       (param: ParamMap) => {
         const query = param.get('query');
         this.index.search(query).then((result) => {
+          result.hits.map((food: any) => {
+            const rotateTypeId: string = this.getRandomRotateId();
+            food.rotateTypeId = rotateTypeId;
+          });
           this.searchResults = result.hits;
         });
       }
