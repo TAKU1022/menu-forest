@@ -34,22 +34,6 @@ export class AuthService {
     });
   }
 
-  loginWithFacebook(): Promise<auth.UserCredential> {
-    return this.afAuth.signInWithPopup(
-      new auth.FacebookAuthProvider().setCustomParameters({
-        prompt: 'select_account',
-      })
-    );
-  }
-
-  loginWithTwitter(): Promise<auth.UserCredential> {
-    return this.afAuth.signInWithPopup(
-      new auth.TwitterAuthProvider().setCustomParameters({
-        prompt: 'select_account',
-      })
-    );
-  }
-
   loginWithGoogle(): Promise<auth.UserCredential> {
     return this.afAuth.signInWithPopup(
       new auth.GoogleAuthProvider().setCustomParameters({
