@@ -74,6 +74,19 @@ a {
   }
 }
 
+.dot-background {
+  text-align: center;
+  background-color: #f8f8f0;
+  background-image: radial-gradient(#f3efe4 15%, transparent 30%),
+    radial-gradient(#f3efe4 15%, transparent 30%);
+  background-size: 24px 24px;
+  background-position: center;
+  overflow: hidden;
+  @media screen and (max-width: 600px) {
+    background-size: 20px 20px;
+  }
+}
+
 .decoration-btn {
   background-color: #8a4d41;
   padding: 5px;
