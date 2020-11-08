@@ -1,7 +1,7 @@
 .sidenav {
   padding: 88px 0 0;
   width: 240px;
-  background: url('/assets/images/sozai_image_144731.jpg') center;
+  background: url('/assets/images/backgrounds/ishigaki-background.jpg') center;
   background-size: 130%;
   @media screen and (max-width: 320px) {
     padding: 80px 0 0;
@@ -35,39 +35,19 @@
     border-radius: 20px;
   }
   &--home {
-    -webkit-transform: rotate(4deg);
-    -moz-transform: rotate(4deg);
-    -o-transform: rotate(4deg);
-    -ms-transform: rotate(4deg);
     transform: rotate(4deg);
   }
   &--menu {
-    -webkit-transform: rotate(-1deg);
-    -moz-transform: rotate(-1deg);
-    -o-transform: rotate(-1deg);
-    -ms-transform: rotate(-1deg);
     transform: rotate(-1deg);
   }
   &--food-list {
-    -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
-    -o-transform: rotate(2deg);
-    -ms-transform: rotate(2deg);
     transform: rotate(2deg);
   }
   &--post {
-    -webkit-transform: rotate(-3deg);
-    -moz-transform: rotate(-3deg);
-    -o-transform: rotate(-3deg);
-    -ms-transform: rotate(-3deg);
     transform: rotate(-3deg);
   }
   &--search {
     margin: 0 8px;
-    -webkit-transform: rotate(1deg);
-    -moz-transform: rotate(1deg);
-    -o-transform: rotate(1deg);
-    -ms-transform: rotate(1deg);
     transform: rotate(1deg);
     @media screen and (min-width: 321px) {
       display: none;
@@ -83,7 +63,7 @@
   display: flex;
   flex-flow: column;
   min-height: 100vh;
-  background-image: url('/assets/images/background-image-green.png');
+  background-image: url('/assets/images/backgrounds/green-background.png');
 }
 
 .main {
