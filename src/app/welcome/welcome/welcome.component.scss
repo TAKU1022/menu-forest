@@ -3,29 +3,26 @@
   background-size: 120px 120px;
   background-position: 30px 30px;
   margin-bottom: 88px;
-  padding-bottom: 56.25%;
-  position: relative;
   overflow: hidden;
   @media screen and (max-width: 600px) {
     margin-bottom: 48px;
   }
-  &__content {
+  &__vegetables-background {
     background: url('/assets/images/backgrounds/vegetables-background.png')
       center;
     background-size: 110% auto;
     width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
+    padding-bottom: 56.25%;
+    position: relative;
   }
   &__logo {
     position: absolute;
-    width: 50%;
+    width: 60%;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -45%);
     @media screen and (max-width: 600px) {
-      width: 60%;
+      width: 70%;
     }
   }
 }
