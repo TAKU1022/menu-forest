@@ -1,92 +1,92 @@
-<ng-container *ngIf="user$ | async as user">
-  <div class="header">
-    <div class="header-content">
-      <div class="header-content__left">
+<div class="header">
+  <div class="header-content">
+    <div class="header-content__left">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        class="header-content__sidenav-btn"
+        *ngIf="user$ | async"
+      >
+        <img src="/assets/images/icons/sidenav-toggle-icon.png" alt="" />
+      </button>
+      <a routerLink="/" class="header-content__logo">
+        <img src="/assets/images/logos/main-logo-shadow.png" alt="" />
+      </a>
+    </div>
+    <div class="header-content__right" *ngIf="user$ | async as user">
+      <a routerLink="/" class="header-content__home header-content--mobile">
+        <img src="/assets/images/icons/home-icon.png" alt="" />
+      </a>
+      <a routerLink="/menu" class="header-content__menu header-content--mobile">
+        <img src="/assets/images/icons/menu-icon.png" alt="" />
+      </a>
+      <a
+        routerLink="/food-list"
+        class="header-content__food-list header-content--mobile"
+      >
+        <img src="/assets/images/icons/food-list-icon.png" alt="" />
+      </a>
+      <a routerLink="/post" class="header-content__post header-content--mobile">
+        <img src="/assets/images/icons/post-icon.png" alt="" />
+      </a>
+      <a routerLink="/search" class="header-content__search">
+        <img src="/assets/images/icons/search-icon.png" alt="" />
+      </a>
+      <div class="header-content__user-avatar-content">
         <button
+          [matMenuTriggerFor]="menu"
           mat-icon-button
-          (click)="sidenav.toggle()"
-          class="header-content__sidenav-btn"
+          class="header-content__user-avatar-btn"
         >
-          <img src="/assets/images/icons/sidenav-toggle-icon.png" alt="" />
+          <img
+            [src]="user.avaterURL"
+            alt=""
+            class="header-content__user-avatar"
+          />
         </button>
-        <a routerLink="/" class="header-content__logo">
-          <img src="/assets/images/logos/main-logo-shadow.png" alt="" />
-        </a>
-      </div>
-      <div class="header-content__right">
-        <a routerLink="/" class="header-content__home header-content--mobile">
-          <img src="/assets/images/icons/home-icon.png" alt="" />
-        </a>
-        <a
-          routerLink="/menu"
-          class="header-content__menu header-content--mobile"
-        >
-          <img src="/assets/images/icons/menu-icon.png" alt="" />
-        </a>
-        <a
-          routerLink="/food-list"
-          class="header-content__food-list header-content--mobile"
-        >
-          <img src="/assets/images/icons/food-list-icon.png" alt="" />
-        </a>
-        <a
-          routerLink="/post"
-          class="header-content__post header-content--mobile"
-        >
-          <img src="/assets/images/icons/post-icon.png" alt="" />
-        </a>
-        <a routerLink="/search" class="header-content__search">
-          <img src="/assets/images/icons/header-search-icon.png" alt="" />
-        </a>
-        <div class="header-content__user-avatar-content">
-          <button
-            [matMenuTriggerFor]="menu"
-            mat-icon-button
-            class="user-avatar-btn"
-          >
-            <img [src]="user.avaterURL" alt="" class="user-avatar" />
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item routerLink="/my-page" class="menu-item">
+            <img
+              src="/assets/images/icons/mypage-icon.png"
+              alt=""
+              class="menu-icon"
+            />
+            <span class="menu-text">マイページ</span>
+          </a>
+          <a mat-menu-item routerLink="/create-my-menu">
+            <img
+              src="/assets/images/icons/edit-icon.png"
+              alt=""
+              class="menu-icon menu-icon--edit"
+            />
+            <span class="menu-text">My献立を編集</span>
+          </a>
+          <a mat-menu-item routerLink="/setting/account">
+            <img
+              src="/assets/images/icons/setting-icon.png"
+              alt=""
+              class="menu-icon"
+            />
+            <span class="menu-text">設定</span>
+          </a>
+          <button mat-menu-item (click)="logout()">
+            <img
+              src="/assets/images/icons/logout-icon.png"
+              alt=""
+              class="menu-icon"
+            />
+            <span class="menu-text">ログアウト</span>
           </button>
-        </div>
+          <a mat-menu-item routerLink="/admin" *ngIf="user.admin">
+            <img
+              src="/assets/images/icons/admin-icon.png"
+              alt=""
+              class="menu-icon"
+            />
+            <span class="menu-text">管理者画面</span>
+          </a>
+        </mat-menu>
       </div>
     </div>
   </div>
-
-  <mat-menu #menu="matMenu">
-    <a mat-menu-item routerLink="/my-page" class="menu-item">
-      <img
-        src="/assets/images/icons/mypage-icon.png"
-        alt=""
-        class="menu-icon"
-      />
-      <span class="menu-text">マイページ</span>
-    </a>
-    <a mat-menu-item routerLink="/create-my-menu">
-      <img
-        src="/assets/images/icons/edit-icon.png"
-        alt=""
-        class="menu-icon menu-icon--edit"
-      />
-      <span class="menu-text">My献立を編集</span>
-    </a>
-    <a mat-menu-item routerLink="/setting/account">
-      <img
-        src="/assets/images/icons/setting-icon.png"
-        alt=""
-        class="menu-icon"
-      />
-      <span class="menu-text">設定</span>
-    </a>
-    <button mat-menu-item (click)="logout()">
-      <img
-        src="/assets/images/icons/logout-icon.png"
-        alt=""
-        class="menu-icon"
-      />
-      <span class="menu-text">ログアウト</span>
-    </button>
-    <a mat-menu-item routerLink="/admin" *ngIf="user.admin">
-      <img src="/assets/images/icons/admin-icon.png" alt="" class="menu-icon" />
-      <span class="menu-text">管理者画面</span>
-    </a>
-  </mat-menu>
-</ng-container>
+</div>
