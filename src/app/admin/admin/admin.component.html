@@ -48,7 +48,7 @@
       <p>{{ recipe.recipeCost }}</p>
       <p>{{ recipe.rank }}</p>
       <p class="category-ranking__url">{{ recipe.foodImageUrl }}</p>
-      <img [src]="recipe.foodImageUrl" alt="" />
+      <img [src]="recipe.foodImageUrl" [alt]="recipe.recipeTitle" />
     </div>
     <ul class="category-list">
       <li *ngFor="let category of categories">

@@ -1,26 +1,30 @@
 <div class="container">
   <img
     src="/assets/images/titles/my-page-title.png"
-    alt=""
+    alt="マイページ画面のタイトル"
     class="content-title"
   />
   <div class="wood-background">
     <img
       src="/assets/images/others/wood-pin.png"
-      alt=""
+      alt="木のピン"
       *ngFor="let number of [1, 2, 3, 4]"
       class="wood-pins"
     />
     <div class="content">
       <img
         src="/assets/images/others/pin-yellow.png"
-        alt=""
+        alt="黄色のピン"
         class="content-pins"
         *ngFor="let number of [1, 2, 3, 4]"
       />
       <div class="user-content" *ngIf="user$ | async as user">
         <div class="user">
-          <img [src]="user.avaterURL" class="user__avater" alt="" />
+          <img
+            [src]="user.avaterURL"
+            class="user__avater"
+            alt="ユーザーのアバター"
+          />
           <div class="user__right-content">
             <p class="user__name">{{ user.name }}</p>
             <p class="user__eat-count">
@@ -37,7 +41,7 @@
           <p class="default-title">
             <img
               src="/assets/images/others/pin-green.png"
-              alt=""
+              alt="緑色のピン"
               class="default-title__pins"
               *ngFor="let number of [1, 2]"
             />まだ投稿をされていません
@@ -50,7 +54,7 @@
                 <a routerLink="/post/{{ post.postId }}">
                   <img
                     src="/assets/images/others/pin-green.png"
-                    alt=""
+                    alt="緑色のピン"
                     class="post__pins"
                     *ngFor="let number of [1, 2]"
                   />
@@ -72,7 +76,7 @@
                   <div class="post__user-content">
                     <img
                       [src]="post.creator.avaterURL"
-                      alt=""
+                      alt="ユーザーのアバター"
                       class="post__user-avater"
                     />
                     <div class="post__user-content-right">

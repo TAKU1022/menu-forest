@@ -1,14 +1,14 @@
 <div class="container">
   <img
     src="/assets/images/titles/food-list-title.png"
-    alt=""
+    alt="メニュー一覧画面のタイトル"
     class="content-title"
   />
   <div class="wood-background">
     <img
       *ngFor="let number of [1, 2, 3, 4]"
       src="/assets/images/others/wood-pin.png"
-      alt=""
+      alt="木のピン"
       class="wood-pins"
     />
     <div class="grid">
@@ -20,7 +20,7 @@
             <a routerLink="/food-list/{{ food.foodId }}">
               <img
                 src="/assets/images/others/pin-red.png"
-                alt=""
+                alt="赤色ピン"
                 class="food__pin"
               />
               <div

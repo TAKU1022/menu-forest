@@ -3,7 +3,7 @@
     <div class="wood-background">
       <img
         src="/assets/images/others/wood-pin.png"
-        alt=""
+        alt="木のピン"
         *ngFor="let number of [1, 2, 3, 4]"
         class="wood-pins"
       />
@@ -13,7 +13,7 @@
       <div class="content">
         <img
           src="/assets/images/others/pin-yellow.png"
-          alt=""
+          alt="黄色のピン"
           class="content-pins"
           *ngFor="let number of [1, 2, 3, 4]"
         />
@@ -21,7 +21,7 @@
           <div *ngFor="let menu of post.days; let i = index">
             <img
               src="/assets/images/day-of-week{{ i }}.png"
-              alt=""
+              alt="{{ menu.dayOfWeek }}曜日のタイトル"
               class="day-of-week"
             />
             <div class="menu-grid">
@@ -29,7 +29,7 @@
                 <a routerLink="/food-list/{{ menu.breakfast.foodId }}">
                   <img
                     src="/assets/images/others/pin-green.png"
-                    alt=""
+                    alt="緑色のピン"
                     class="food__pins"
                     *ngFor="let number of [1, 2]"
                   />
@@ -41,7 +41,7 @@
                   >
                     <img
                       src="/assets/images/icons/morning-icon.png"
-                      alt=""
+                      alt="朝のアイコン"
                       class="food__time-icon"
                     />
                   </div>
@@ -53,7 +53,7 @@
                 <a routerLink="/food-list/{{ menu.lunch.foodId }}">
                   <img
                     src="/assets/images/others/pin-green.png"
-                    alt=""
+                    alt="緑色のピン"
                     class="food__pins"
                     *ngFor="let number of [1, 2]"
                   />
@@ -63,7 +63,7 @@
                   >
                     <img
                       src="/assets/images/icons/noon-icon.png"
-                      alt=""
+                      alt="昼のアイコン"
                       class="food__time-icon"
                     />
                   </div>
@@ -75,7 +75,7 @@
                 <a routerLink="/food-list/{{ menu.dinner.foodId }}">
                   <img
                     src="/assets/images/others/pin-green.png"
-                    alt=""
+                    alt="緑色のピン"
                     class="food__pins"
                     *ngFor="let number of [1, 2]"
                   />
@@ -85,7 +85,7 @@
                   >
                     <img
                       src="/assets/images/icons/night-icon.png"
-                      alt=""
+                      alt="夜のアイコン"
                       class="food__time-icon"
                     />
                   </div>

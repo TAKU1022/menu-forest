@@ -1,7 +1,7 @@
 <div class="container">
   <img
     src="/assets/images/titles/menu-title.png"
-    alt=""
+    alt="一週間の献立画面のタイトル"
     class="content-title"
   />
   <div class="grid">
@@ -9,7 +9,7 @@
       <div class="menu">
         <img
           src="/assets/images/titles/day-of-week-title{{ i }}.png"
-          alt=""
+          alt="{{ weekMenu.dayOfWeek }}曜日のタイトル"
           class="menu__title"
         />
         <div class="menu-grid">
@@ -18,7 +18,7 @@
               <a routerLink="/menu/{{ weekMenu.breakfast.foodId }}">
                 <img
                   src="/assets/images/others/pin-red.png"
-                  alt=""
+                  alt="赤色ピン"
                   class="food__pin"
                 />
                 <div
@@ -29,7 +29,7 @@
                 >
                   <img
                     src="/assets/images/icons/morning-icon.png"
-                    alt=""
+                    alt="朝のアイコン"
                     class="food__time-icon"
                   />
                 </div>
@@ -42,7 +42,7 @@
               <a routerLink="/menu/{{ weekMenu.lunch.foodId }}">
                 <img
                   src="/assets/images/others/pin-red.png"
-                  alt=""
+                  alt="赤色ピン"
                   class="food__pin"
                 />
                 <div
@@ -51,7 +51,7 @@
                 >
                   <img
                     src="/assets/images/icons/noon-icon.png"
-                    alt=""
+                    alt="昼のアイコン"
                     class="food__time-icon"
                   />
                 </div>
@@ -64,7 +64,7 @@
               <a routerLink="/menu/{{ weekMenu.dinner.foodId }}">
                 <img
                   src="/assets/images/others/pin-red.png"
-                  alt=""
+                  alt="赤色ピン"
                   class="food__pin"
                 />
                 <div
@@ -75,7 +75,7 @@
                 >
                   <img
                     src="/assets/images/icons/night-icon.png"
-                    alt=""
+                    alt="夜のアイコン"
                     class="food__time-icon"
                   />
                 </div>

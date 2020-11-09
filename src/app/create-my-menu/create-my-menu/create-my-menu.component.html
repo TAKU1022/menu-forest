@@ -1,13 +1,13 @@
 <div class="container">
   <img
     src="/assets/images/titles/create-my-menu-title.png"
-    alt=""
+    alt="My献立編集画面のタイトル"
     class="content-title"
   />
   <div class="wood-background" *ngIf="weekMenu$ | async">
     <img
       src="/assets/images/others/wood-pin.png"
-      alt=""
+      alt="木のピン"
       *ngFor="let number of [1, 2, 3, 4]"
       class="wood-pins"
     />
@@ -15,7 +15,7 @@
       <div *ngFor="let dayMenu of weekMenu$ | async; let i = index">
         <img
           src="/assets/images/titles/day-of-week-title{{ i }}.png"
-          alt=""
+          alt="{{ dayMenu.dayOfWeek }}曜日のタイトル"
           class="day-of-week"
         />
         <div class="menu-grid">
@@ -25,7 +25,7 @@
           >
             <img
               src="/assets/images/others/pin-blue.png"
-              alt=""
+              alt="青色のピン"
               class="food__pins"
               *ngFor="let number of [1, 2]"
             />
@@ -35,7 +35,7 @@
             >
               <img
                 src="/assets/images/icons/morning-icon.png"
-                alt=""
+                alt="朝のアイコン"
                 class="food__time-icon"
               />
             </div>
@@ -48,7 +48,7 @@
           >
             <img
               src="/assets/images/others/pin-blue.png"
-              alt=""
+              alt="青色のピン"
               class="food__pins"
               *ngFor="let number of [1, 2]"
             />
@@ -58,7 +58,7 @@
             >
               <img
                 src="/assets/images/icons/noon-icon.png"
-                alt=""
+                alt="昼のアイコン"
                 class="food__time-icon"
               />
             </div>
@@ -71,7 +71,7 @@
           >
             <img
               src="/assets/images/others/pin-blue.png"
-              alt=""
+              alt="青色のピン"
               class="food__pins"
               *ngFor="let number of [1, 2]"
             />
@@ -81,7 +81,7 @@
             >
               <img
                 src="/assets/images/icons/night-icon.png"
-                alt=""
+                alt="夜のピン"
                 class="food__time-icon"
               />
             </div>
