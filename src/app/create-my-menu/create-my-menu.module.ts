@@ -10,9 +10,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChangeMyMenuDialogModule } from '../change-my-menu-dialog/change-my-menu-dialog.module';
+import { PostDialogComponent } from './post-dialog/post-dialog.component';
 
 @NgModule({
-  declarations: [CreateMyMenuComponent],
+  declarations: [CreateMyMenuComponent, PostDialogComponent],
   imports: [
     CommonModule,
     CreateMyMenuRoutingModule,
