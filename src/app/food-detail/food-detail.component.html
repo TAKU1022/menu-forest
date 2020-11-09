@@ -1,26 +1,42 @@
 <div class="container">
   <ng-container *ngIf="food$ | async as food">
-    <h1 class="food-name">{{ food.name }}のレシピ</h1>
-    <div class="grid">
-      <ng-container *ngFor="let recipe of recipes">
-        <div class="recipe">
-          <div
-            class="recipe__img"
-            [style.background-image]="'url(' + recipe.foodImageUrl + ')'"
-          ></div>
-          <div class="recipe__about">
-            <p class="recipe__title">{{ recipe.recipeTitle }}</p>
-            <p class="recipe__material">材料：{{ recipe.recipeMaterial }}</p>
-            <span class="recipe__indication"
-              >調理時間：{{ recipe.recipeIndication }}</span
-            >
-            <span class="recipe__cost">費用：{{ recipe.recipeCost }}</span>
-            <p class="recipe__url">
-              作り方：<a [href]="recipe.recipeUrl">{{ recipe.recipeUrl }}</a>
-            </p>
+    <div class="wood-background">
+      <img
+        src="/assets/images/others/wood-pin.png"
+        alt="木のピン"
+        *ngFor="let number of [1, 2, 3, 4]"
+        class="wood-pins"
+      />
+      <div class="food-name">
+        <h1 class="food-name-text">{{ food.name }}のレシピ</h1>
+      </div>
+      <div class="grid">
+        <ng-container *ngFor="let recipe of recipes">
+          <div class="recipe">
+            <img
+              src="/assets/images/others/pin-yellow.png"
+              alt="黄色のピン"
+              class="recipe__pins"
+              *ngFor="let number of [1, 2]"
+            />
+            <div
+              class="recipe__img"
+              [style.background-image]="'url(' + recipe.foodImageUrl + ')'"
+            ></div>
+            <div class="recipe__about">
+              <p class="recipe__title">{{ recipe.recipeTitle }}</p>
+              <p class="recipe__material">材料：{{ recipe.recipeMaterial }}</p>
+              <span class="recipe__indication"
+                >調理時間：{{ recipe.recipeIndication }}</span
+              >
+              <span class="recipe__cost">費用：{{ recipe.recipeCost }}</span>
+              <p class="recipe__url">
+                作り方：<a [href]="recipe.recipeUrl">{{ recipe.recipeUrl }}</a>
+              </p>
+            </div>
           </div>
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
     </div>
   </ng-container>
 </div>

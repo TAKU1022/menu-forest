@@ -1,72 +1,374 @@
+.container {
+  @media screen and (max-width: 450px) {
+    margin: 0 0 64px;
+  }
+}
+
+.content-title {
+  margin: 32px 0;
+  @media screen and (max-width: 600px) {
+    width: 300px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 250px;
+  }
+}
+
+.wood-background {
+  padding: 56px 40px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  @media screen and (max-width: 450px) {
+    padding: 40px 16px 48px;
+  }
+}
+
+.wood-pins {
+  z-index: -1;
+}
+
+.content {
+  background-color: #43a047;
+  border-radius: 4px;
+  position: relative;
+  padding: 64px 0;
+  box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+}
+
+.content-pins {
+  position: absolute;
+  width: 18px;
+  border-radius: 50%;
+  box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+  z-index: 2;
+  @media screen and (max-width: 600px) {
+    width: 16px;
+    box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+  }
+  &:nth-child(1) {
+    top: 8px;
+    left: 8px;
+  }
+  &:nth-child(2) {
+    top: 8px;
+    right: 8px;
+  }
+  &:nth-child(3) {
+    bottom: 8px;
+    left: 8px;
+  }
+  &:nth-child(4) {
+    bottom: 8px;
+    right: 8px;
+  }
+}
+
+.user-content {
+  position: relative;
+  margin: 0 -8px 40px;
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+  }
+  &::before {
+    bottom: -8px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #bdbdbd;
+    border-left: 8px solid transparent;
+  }
+  &::after {
+    right: 0;
+    bottom: -8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #bdbdbd;
+    border-right: 8px solid transparent;
+  }
+}
+
 .user {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  padding: 24px;
+  color: #43a047;
+  position: relative;
+  background-color: #eeeeee;
+  @media screen and (max-width: 600px) {
+    padding: 24px 16px;
+  }
   &__avater {
     width: 100px;
     height: 100px;
-    border: 1px solid rgba(black, 0.12);
+    display: block;
     border-radius: 50%;
-    margin: auto 0;
+    margin: auto 24px auto 0;
+    flex-shrink: 0;
+    @media screen and (max-width: 600px) {
+      width: 50px;
+      height: 50px;
+      margin: auto 16px auto 0;
+    }
   }
-  &--content {
+  &__right-content {
     text-align: left;
-    margin: auto 0 auto 16px;
-    width: 200px;
+    margin: auto 0;
+    max-width: 380px;
   }
   &__name {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
-    margin: 16px 0;
+    margin: 0 0 16px;
+    @media screen and (max-width: 600px) {
+      font-size: 20px;
+    }
   }
   &__eat-count {
-    color: rgba(black, 0.6);
+    margin: 0;
+    @media screen and (max-width: 600px) {
+      font-size: 14px;
+    }
+  }
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 8px;
+    bottom: 0;
+    left: 8px;
+    box-shadow: 0 3px 0 0 rgba(black, 0.3);
   }
 }
 
-hr {
-  margin: 24px 0 32px;
+.my-post-title-content {
+  position: relative;
+  margin: 0 -8px 24px;
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+  }
+  &::before {
+    bottom: -8px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #bdbdbd;
+    border-left: 8px solid transparent;
+  }
+  &::after {
+    right: 0;
+    bottom: -8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #bdbdbd;
+    border-right: 8px solid transparent;
+  }
+}
+
+.my-post-title {
+  background-color: #eeeeee;
+  margin: 0;
+  padding: 16px;
+  color: #43a047;
+  font-weight: bold;
+  letter-spacing: 2px;
+  position: relative;
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 8px;
+    bottom: 0;
+    left: 8px;
+    box-shadow: 0 3px 0 0 rgba(black, 0.3);
+  }
+}
+
+.post-content {
+  padding: 0 16px;
+  // @media screen and (max-width: 600px) {
+  //   padding: 0;
+  // }
 }
 
 .default-title {
-  padding-top: 80px;
+  font-size: 24px;
+  color: #43a047;
+  margin: 0;
+  margin: 0;
+  padding: 200px 10%;
+  border-radius: 4px;
+  background-color: #eeeeee;
+  display: inline-block;
+  box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+  position: relative;
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+  }
+  &__pins {
+    position: absolute;
+    top: 8px;
+    width: 16px;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+    @media screen and (max-width: 600px) {
+      box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+    }
+    &:nth-child(1) {
+      left: 8px;
+    }
+    &:nth-child(2) {
+      right: 8px;
+    }
+  }
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(1fr, 1fr);
-  justify-content: center;
-  gap: 16px;
-  margin-top: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  column-gap: 24px;
+  row-gap: 32px;
+  max-width: 880px;
+  margin: 0 auto;
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
 }
 
 .post {
-  width: 300px;
-  height: 350px;
-  overflow: hidden;
-  border: 1px solid rgba(black, 0.12);
-  &__header {
-    display: flex;
-    justify-content: center;
+  background-color: #eeeeee;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+  position: relative;
+  &__pins {
+    position: absolute;
+    top: 8px;
+    width: 16px;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+    z-index: 1;
+    @media screen and (max-width: 320px) {
+      top: 4px;
+      width: 14px;
+      box-shadow: 2px 2px 0 0 rgba(black, 0.3);
+    }
+    &:nth-child(1) {
+      left: 8px;
+      @media screen and (max-width: 320px) {
+        left: 4px;
+      }
+    }
+    &:nth-child(2) {
+      right: 8px;
+      @media screen and (max-width: 320px) {
+        right: 4px;
+      }
+    }
   }
-  &__avater {
-    border: 1px solid rgba(black, 0.12);
+  &__title {
+    font-size: 16px;
+    color: #43a047;
+    font-weight: bold;
+    margin: 0;
+    padding: 16px;
+    letter-spacing: 2px;
+    @media screen and (max-width: 320px) {
+      font-size: 14px;
+    }
+  }
+  &__foods-content {
+    padding-bottom: 80%;
+    position: relative;
     overflow: hidden;
-    display: block;
+  }
+  &__foods {
+    padding: 8px;
+    background-color: #f0eddd;
+    border-radius: 4px;
+    position: absolute;
+    box-shadow: 0 0 1px 1px rgba(black, 0.14);
+    &:nth-child(1) {
+      width: 50%;
+      top: -5%;
+      left: -2%;
+      transform: rotate(10deg);
+      z-index: 1;
+    }
+    &:nth-child(2) {
+      width: 55%;
+      top: -10%;
+      right: -2%;
+      transform: rotate(-8deg);
+    }
+    &:nth-child(3) {
+      width: 60%;
+      top: 33%;
+      left: -2%;
+      transform: rotate(6deg);
+    }
+    &:nth-child(4) {
+      width: 70%;
+      top: 25%;
+      right: -2%;
+      transform: rotate(-5deg);
+    }
+    &:nth-child(5) {
+      width: 60%;
+      top: 66%;
+      left: -3%;
+      transform: rotate(3deg);
+    }
+    &:nth-child(6) {
+      width: 50%;
+      top: 50%;
+      right: 0;
+      transform: rotate(4deg);
+    }
+    &:nth-child(7) {
+      width: 60%;
+      top: 75%;
+      right: -3%;
+      transform: rotate(-7deg);
+    }
+  }
+
+  &__food-images {
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 56.25%;
+    border-radius: 4px;
+  }
+  &__user-content {
+    display: flex;
+    padding: 16px;
+  }
+  &__user-avater {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin: auto 8px auto 0;
+  }
+  &__user-content-right {
+    width: 220px;
+    text-align: left;
   }
   &__user-name {
-    width: 228px;
-    white-space: nowrap;
+    color: #43a047;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 8px;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-align: left;
-    color: rgba(black, 0.87);
   }
   &__date {
-    text-align: left;
-  }
-  &__thumbnail {
-    background-size: cover;
-    max-width: none;
+    color: #43a047;
+    font-size: 13px;
+    margin: 0;
   }
 }

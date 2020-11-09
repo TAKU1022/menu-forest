@@ -9,7 +9,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatCardModule } from '@angular/material/card';
 import { ChangeMyMenuDialogModule } from '../change-my-menu-dialog/change-my-menu-dialog.module';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { ChangeMyMenuDialogModule } from '../change-my-menu-dialog/change-my-men
     FormsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatCardModule,
     ChangeMyMenuDialogModule,
   ],
 })

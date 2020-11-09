@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { SettingComponent } from './setting/setting.component';
 import { AccountComponent } from './account/account.component';
 import { WithdrawalComponent } from './withdrawal/withdrawal.component';
-import { BillingComponent } from './billing/billing.component';
 
 const routes: Routes = [
   {
@@ -13,10 +12,6 @@ const routes: Routes = [
       {
         path: 'account',
         component: AccountComponent,
-      },
-      {
-        path: 'billing',
-        component: BillingComponent,
       },
       {
         path: 'withdrawal',

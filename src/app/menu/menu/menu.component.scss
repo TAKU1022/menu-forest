@@ -1,48 +1,203 @@
+.content-title {
+  margin: 40px 0 24px;
+  @media screen and (max-width: 750px) {
+    width: 450px;
+  }
+  @media screen and (max-width: 450px) {
+    width: 320px;
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.menu {
+  background: url('/assets/images/backgrounds/wood-background2.png');
+  background-size: 100% 100%;
+  z-index: 0;
+  padding: 4% 2% 14%;
+  @media screen and (max-width: 450px) {
+    padding: 4% 2% 20%;
+  }
+  &__title {
+    width: 200px;
+    margin: 0 0 16px;
+    @media screen and (max-width: 750px) {
+      width: 160px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 140px;
+      margin: 0 0 8px;
+    }
+  }
 }
 
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  max-width: 950px;
-  margin: 0 auto;
-  @media screen and (max-width: 450px) {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 2fr, 1fr;
+  width: 100%;
+}
+
+.food-content {
+  transform-origin: center 8px 0;
+  transition: 0.5s;
+  border-radius: 4px;
+  box-shadow: 0 0 1px 1px rgba(black, 0.14);
+  @media screen and (max-width: 750px) {
+    transform-origin: center 4px 0;
+  }
+  @media screen and (max-width: 600px) {
+    transform-origin: center 2px 0;
+  }
+  &:hover {
+    z-index: 2;
+    box-shadow: 0 0 5px 1px rgba(black, 0.14);
+  }
+  &:hover .food::before {
+    left: 2%;
+    box-shadow: 0 17px rgba(black, 0.3);
+    @media screen and (max-width: 750px) {
+      box-shadow: 0 16px rgba(black, 0.3);
+    }
+  }
+  &:hover .food::after {
+    right: 2%;
+    box-shadow: 0 17px rgba(black, 0.3);
+    @media screen and (max-width: 750px) {
+      box-shadow: 0 16px rgba(black, 0.3);
+    }
+  }
+  &--breakfast {
+    transform: rotate(-1deg);
+    &:hover {
+      transform: rotate(-1deg) translateY(-5px);
+    }
+  }
+  &--lunch {
+    z-index: 1;
+    transform: rotate(-2deg);
+    &:hover {
+      transform: rotate(-2deg) translateY(-5px);
+    }
+  }
+  &--dinner {
+    transform: rotate(3deg);
+    &:hover {
+      transform: rotate(3deg) translateY(-5px);
+    }
   }
 }
 
-h2 {
-  margin: 8px 0 8px;
-  font-size: 24px;
+.menu:nth-child(even) .menu-grid .food-content {
+  &--breakfast {
+    transform: rotate(-3deg);
+  }
+  &--breakfast:hover {
+    transform: rotate(-3deg) translateY(-5px);
+  }
+  &--lunch {
+    z-index: 1;
+    transform: rotate(2deg);
+  }
+  &--lunch:hover {
+    transform: rotate(2deg) translateY(-5px);
+  }
+  &--dinner {
+    transform: rotate(1deg);
+  }
+  &--dinner:hover {
+    transform: rotate(1deg) translateY(-5px);
+  }
 }
 
 .food {
   cursor: pointer;
-  overflow: hidden;
-  transition: 0.3s;
-  &--breakfast {
-    @media screen and (max-width: 450px) {
-      grid-column-start: 1;
-      grid-column-end: 3;
+  padding: 16px;
+  background-color: #f0eddd;
+  border-radius: 5px;
+  position: relative;
+  @media screen and (max-width: 750px) {
+    padding: 8px;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 4px;
+  }
+  &__pin {
+    position: absolute;
+    width: 16px;
+    top: 8px;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+    z-index: 1;
+    @media screen and (max-width: 750px) {
+      width: 12px;
+      top: 4px;
+      box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+    }
+    @media screen and (max-width: 600px) {
+      width: 10px;
+      top: 2px;
+      box-shadow: 2px 2px 0 0 rgba(black, 0.3);
     }
   }
   &__img {
     background-size: cover;
     background-position: center;
     padding-bottom: 56.25%;
+    border-radius: 5px;
+    position: relative;
+  }
+  &__time-icon {
+    position: absolute;
+    bottom: -3%;
+    left: -1%;
+    width: 20%;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 0 rgba(black, 0.3);
   }
   &__name {
     margin: 0;
-    color: #000;
+    color: #8a4d41;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+    padding: 16px 0 0;
+    @media screen and (max-width: 750px) {
+      padding: 8px 0 0;
+      font-size: 14px;
+    }
+    @media screen and (max-width: 600px) {
+      padding: 4px 0 0;
+      font-size: 11px;
+      letter-spacing: 0;
+    }
+    @media screen and (max-width: 320px) {
+      font-size: 10px;
+    }
   }
-}
-
-.food:hover {
-  box-shadow: 0 15px 30px -5px rgba(black, 0.15), 0 0 5px rgba(black, 0.1);
-  transform: translateY(-4px);
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    z-index: -1;
+    top: 60%;
+    bottom: 12px;
+    width: 50%;
+    max-width: 300px;
+    border-radius: 4px;
+    transition: 0.5s;
+    box-shadow: 0 15px rgba(black, 0.3);
+  }
+  &::before {
+    left: 3%;
+    transform: rotate(-5deg);
+  }
+  &::after {
+    right: 3%;
+    transform: rotate(5deg);
+  }
 }

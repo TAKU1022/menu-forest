@@ -1,17 +1,19 @@
-.container {
+.dot-background {
   text-align: left;
+  padding: 104px 16px 80px;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  @media screen and (max-width: 600px) {
+    padding: 88px 16px 64px;
+  }
 }
 
-.content {
+.terms-content {
   max-width: 1000px;
   margin: 0 auto;
-}
-
-p {
-  padding-left: 16px;
-}
-
-.date {
-  padding: 0;
-  font-weight: bold;
+  &__sentence {
+    padding-left: 16px;
+  }
+  &__date {
+    font-weight: bold;
+  }
 }

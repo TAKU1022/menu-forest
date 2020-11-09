@@ -195,15 +195,15 @@ export class MyMenuService {
       case 6:
         if (time === '朝') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
-            'day.suturday.breakfastId': foodId,
+            'day.saturday.breakfastId': foodId,
           });
         } else if (time === '昼') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
-            'day.suturday.lunchId': foodId,
+            'day.saturday.lunchId': foodId,
           });
         } else if (time === '夜') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
-            'day.suturday.dinnerId': foodId,
+            'day.saturday.dinnerId': foodId,
           });
         }
         break;

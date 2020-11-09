@@ -1,60 +1,119 @@
 <div class="container">
   <ng-container *ngIf="post$ | async as post">
-    <div class="grid">
-      <ng-container *ngFor="let menu of post.days">
-        <div class="day">
-          <h1 class="day-of-week">{{ menu.dayOfWeek }}曜日</h1>
-          <div class="menu-grid">
-            <mat-card class="food food--breakfast">
-              <a routerLink="/food-list/{{ menu.breakfast.foodId }}">
-                <div
-                  class="food__img"
-                  mat-card-image
-                  [style.background-image]="'url(' + menu.breakfast.image + ')'"
-                ></div>
-                <p class="food__name">{{ menu.breakfast.name }}</p>
-              </a>
-            </mat-card>
-            <mat-card class="food food--lunch">
-              <a routerLink="/food-list/{{ menu.lunch.foodId }}">
-                <div
-                  class="food__img"
-                  mat-card-image
-                  [style.background-image]="'url(' + menu.lunch.image + ')'"
-                ></div>
-                <p class="food__name">{{ menu.lunch.name }}</p>
-              </a>
-            </mat-card>
-            <mat-card class="food food--dinner">
-              <a routerLink="/food-list/{{ menu.dinner.foodId }}">
-                <div
-                  class="food__img"
-                  mat-card-image
-                  [style.background-image]="'url(' + menu.dinner.image + ')'"
-                ></div>
-                <p class="food__name">{{ menu.dinner.name }}</p>
-              </a>
-            </mat-card>
+    <div class="wood-background">
+      <img
+        src="/assets/images/others/wood-pin.png"
+        alt="木のピン"
+        *ngFor="let number of [1, 2, 3, 4]"
+        class="wood-pins"
+      />
+      <h1 class="post-title">
+        <span class="post-title__text">好物盛り合わせメニュー</span>
+      </h1>
+      <div class="content">
+        <img
+          src="/assets/images/others/pin-yellow.png"
+          alt="黄色のピン"
+          class="content-pins"
+          *ngFor="let number of [1, 2, 3, 4]"
+        />
+        <div class="week-grid">
+          <div *ngFor="let menu of post.days; let i = index">
+            <img
+              src="/assets/images/day-of-week{{ i }}.png"
+              alt="{{ menu.dayOfWeek }}曜日のタイトル"
+              class="day-of-week"
+            />
+            <div class="menu-grid">
+              <div class="food food--breakfast">
+                <a routerLink="/food-list/{{ menu.breakfast.foodId }}">
+                  <img
+                    src="/assets/images/others/pin-green.png"
+                    alt="緑色のピン"
+                    class="food__pins"
+                    *ngFor="let number of [1, 2]"
+                  />
+                  <div
+                    class="food__img"
+                    [style.background-image]="
+                      'url(' + menu.breakfast.image + ')'
+                    "
+                  >
+                    <img
+                      src="/assets/images/icons/morning-icon.png"
+                      alt="朝のアイコン"
+                      class="food__time-icon"
+                    />
+                  </div>
+                  <p class="food__name">{{ menu.breakfast.name }}</p>
+                  <div class="food__color-sheet"></div>
+                </a>
+              </div>
+              <div class="food food--lunch">
+                <a routerLink="/food-list/{{ menu.lunch.foodId }}">
+                  <img
+                    src="/assets/images/others/pin-green.png"
+                    alt="緑色のピン"
+                    class="food__pins"
+                    *ngFor="let number of [1, 2]"
+                  />
+                  <div
+                    class="food__img"
+                    [style.background-image]="'url(' + menu.lunch.image + ')'"
+                  >
+                    <img
+                      src="/assets/images/icons/noon-icon.png"
+                      alt="昼のアイコン"
+                      class="food__time-icon"
+                    />
+                  </div>
+                  <p class="food__name">{{ menu.lunch.name }}</p>
+                  <div class="food__color-sheet"></div>
+                </a>
+              </div>
+              <div class="food food--dinner">
+                <a routerLink="/food-list/{{ menu.dinner.foodId }}">
+                  <img
+                    src="/assets/images/others/pin-green.png"
+                    alt="緑色のピン"
+                    class="food__pins"
+                    *ngFor="let number of [1, 2]"
+                  />
+                  <div
+                    class="food__img"
+                    [style.background-image]="'url(' + menu.dinner.image + ')'"
+                  >
+                    <img
+                      src="/assets/images/icons/night-icon.png"
+                      alt="夜のアイコン"
+                      class="food__time-icon"
+                    />
+                  </div>
+                  <p class="food__name">{{ menu.dinner.name }}</p>
+                  <div class="food__color-sheet"></div>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </ng-container>
+      </div>
+
+      <div class="decoration-btn-content">
+        <div class="decoration-btn" (click)="changeMyMenuToUserMenu()">
+          <div class="decoration-btn__border">
+            <span class="decoration-btn__text">My献立に上書き</span>
+          </div>
+        </div>
+        <div
+          class="decoration-btn decoration-btn--delete-my-post"
+          (click)="deletePost()"
+          *ngIf="post.creatorId === userId"
+        >
+          <div class="decoration-btn__border">
+            <span class="decoration-btn__text">投稿を削除</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <button
-      mat-raised-button
-      color="primary"
-      class="change-my-menu-button"
-      (click)="changeMyMenuToUserMenu()"
-    >
-      My献立に上書き
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      class="delete-my-post-button"
-      (click)="deletePost()"
-      *ngIf="post.creatorId === userId"
-    >
-      投稿を削除
-    </button>
   </ng-container>
 </div>

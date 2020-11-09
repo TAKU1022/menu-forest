@@ -1,0 +1,41 @@
+.dot-background {
+  height: 100vh;
+  position: relative;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  @media screen and (max-width: 600px) {
+    flex-flow: column;
+  }
+  &__title {
+    font-size: 100px;
+    margin: 0;
+    @media screen and (max-width: 600px) {
+      font-size: 80px;
+    }
+  }
+  &__sub-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 40px;
+    @media screen and (max-width: 600px) {
+      font-size: 16px;
+      margin: 0 0 24px;
+    }
+  }
+  &__img {
+    height: 250px;
+    margin: auto 0;
+    @media screen and (max-width: 600px) {
+      width: 140px;
+      height: auto;
+      margin: 8px auto 0;
+    }
+  }
+}

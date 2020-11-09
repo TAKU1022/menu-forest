@@ -1,12 +1,17 @@
 <div class="content" *ngIf="user$ | async as user">
-  <h1>プロフィール</h1>
-  <section class="avater-section">
-    <p class="avater-section__title">アバター編集</p>
+  <section class="content-section content-section--avater">
+    <img
+      src="/assets/images/others/pin-green.png"
+      alt="緑色のピン"
+      class="content-section__pins"
+      *ngFor="let number of [1, 2]"
+    />
+    <p class="content-section__title">アバター編集</p>
     <label class="avater">
       <img
         class="avater__image"
         [src]="croppedImage ? croppedImage : user.avaterURL"
-        alt=""
+        alt="ユーザーのアバター"
       />
       <input
         type="file"
@@ -29,6 +34,7 @@
       [class.active]="imageChangedEvent"
       width="300px"
       height="300px"
+      class="image-cropper"
     ></image-cropper>
     <button
       mat-flat-button
@@ -48,9 +54,19 @@
       キャンセル
     </button>
   </section>
-  <section class="name-section">
-    <p class="name-section__title">ユーザー名編集</p>
-    <mat-form-field appearance="fill" [hideRequiredMarker]="true">
+  <section class="content-section content-section--name">
+    <img
+      src="/assets/images/others/pin-green.png"
+      alt="緑色のピン"
+      class="content-section__pins"
+      *ngFor="let number of [1, 2]"
+    />
+    <p class="content-section__title">ユーザー名編集</p>
+    <mat-form-field
+      appearance="fill"
+      [hideRequiredMarker]="true"
+      class="name-form"
+    >
       <mat-label>ユーザー名編集</mat-label>
       <input
         type="text"
@@ -70,7 +86,7 @@
       color="primary"
       [disabled]="nameForm.invalid"
       (click)="changeUserName()"
-      class="name-section__button"
+      class="content-section__button"
     >
       更新する
     </button>

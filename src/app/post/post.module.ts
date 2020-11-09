@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PostRoutingModule } from './post-routing.module';
 import { PostComponent } from './post/post.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -15,7 +14,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     CommonModule,
     PostRoutingModule,
     MatButtonModule,
-    MatCardModule,
     MatIconModule,
     MatSnackBarModule,
   ],

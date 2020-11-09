@@ -1,30 +1,55 @@
 <div class="container">
-  <div class="grid">
-    <ng-container *ngFor="let post of userPosts$ | async">
-      <mat-card class="post">
-        <a routerLink="/post/{{ post.postId }}">
-          <mat-card-header class="post__header">
-            <img
-              mat-card-avatar
-              class="post__avater"
-              [src]="post.creator.avaterURL"
-              alt=""
-            />
-            <mat-card-title class="post__user-name">{{
-              post.creator.name
-            }}</mat-card-title>
-            <mat-card-subtitle class="post__date">{{
-              post.createdAt.toDate() | date
-            }}</mat-card-subtitle>
-          </mat-card-header>
-          <img
-            mat-card-image
-            class="post__thumbnail"
-            [src]="post.days[0].breakfast.image"
-            alt=""
-          />
-        </a>
-      </mat-card>
-    </ng-container>
-  </div>
+  <ng-container *ngIf="userPosts$ | async as userPosts">
+    <div class="wood-background">
+      <img
+        src="/assets/images/others/wood-pin.png"
+        alt="木のピン"
+        *ngFor="let number of [1, 2, 3, 4]"
+        class="wood-pins"
+      />
+      <h1 class="user-name-title" *ngIf="user$ | async as user">
+        <span class="user-name-title__text">{{ user.name }}</span>
+      </h1>
+      <div class="grid">
+        <ng-container *ngFor="let post of userPosts">
+          <div class="post">
+            <a routerLink="/post/{{ post.postId }}">
+              <img
+                src="/assets/images/others/pin-yellow.png"
+                alt="黄色のピン"
+                class="post__pins"
+                *ngFor="let number of [1, 2]"
+              />
+              <p class="post__title">
+                好物盛り合わせメニュー
+              </p>
+              <div class="post__foods-content">
+                <ng-container *ngFor="let dayMenu of post.days">
+                  <div class="post__foods">
+                    <div
+                      class="post__food-images"
+                      [style.background-image]="
+                        'url(' + dayMenu.lunch.image + ')'
+                      "
+                    ></div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class="post__user-content">
+                <img
+                  [src]="post.creator.avaterURL"
+                  alt="ユーザーのアバター"
+                  class="post__user-avater"
+                />
+                <div class="post__user-content-right">
+                  <p class="post__user-name">{{ post.creator.name }}</p>
+                  <p class="post__date">{{ post.createdAt.toDate() | date }}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
 </div>

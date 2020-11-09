@@ -1,48 +1,70 @@
-<div class="container">
-  <h1>ようこそ</h1>
-  <p>ログイン</p>
-  <div class="btn-content">
+<div class="dot-background">
+  <div class="header">
+    <div class="header__vegetables-background">
+      <img
+        src="/assets/images/logos/main-logo-welcome.png"
+        alt="こんだての森ロゴ"
+        class="header__logo"
+      />
+    </div>
+  </div>
+  <div class="main-content">
+    <h2 class="main-content__title">
+      まいにちがとくべつ！<br />アカウントを作成して、自分だけのこんだて作り！
+    </h2>
+    <img
+      src="/assets/images/others/welcome-line.png"
+      alt="ライン画像"
+      class="main-content__line-img"
+    />
+    <div class="main-content__sentence-content">
+      <img
+        src="/assets/images/others/welcome-today.png"
+        alt="今日の献立画像"
+        class="main-content__top-img"
+      />
+      <p class="main-content__sentence">
+        ログインすると一週間のこんだてが作成され、 <br />
+        曜日ごとにそれぞれ, <br />
+        朝、昼、晩の三食のメニューが提案されます。
+      </p>
+      <p class="main-content__sentence">
+        作成されたこんだては編集できるので、 <br />
+        たくさんの大好物や、 <br />
+        ダイエットのためのヘルシーなメニューや、<br />
+        苦手な食べ物の克服など、<br />
+        あなたのこだわりがたっぷりつまった、<br />
+        世界で一つだけのこんだてを作りあげましょう。
+      </p>
+      <img
+        src="/assets/images/others/welcome-today.png"
+        alt="今日の献立画像"
+        class="main-content__left-img"
+      />
+      <img
+        src="/assets/images/others/welcome-week.png"
+        alt="一週間の献立画像"
+        class="main-content__right-img"
+      />
+      <img
+        src="/assets/images/others/welcome-week.png"
+        alt="一週間の献立画像"
+        class="main-content__bottom-img"
+      />
+    </div>
     <button
       mat-raised-button
-      class="btn btn--facebook"
-      (click)="loginWithFacebook()"
-    >
-      <span class="btn__icon"
-        ><img
-          src="/assets/images/facebook-3.svg"
-          alt="Facebookのアイコン"
-          width="30"
-          height="30"
-      /></span>
-      <span>Facebook</span>
-    </button>
-    <button
-      mat-raised-button
-      class="btn btn--twitter"
-      (click)="loginWithTwitter()"
-    >
-      <span class="btn__icon"
-        ><img
-          src="/assets/images/twitter-3.svg"
-          alt="Twitterのアイコン"
-          width="30"
-          height="30"
-      /></span>
-      <span>Twitter</span>
-    </button>
-    <button
-      mat-raised-button
-      class="btn btn--google"
+      class="main-content__button"
       (click)="loginWithGoogle()"
     >
-      <span class="btn__icon"
-        ><img
-          src="/assets/images/google-icon.svg"
-          alt="Googleのアイコン"
-          width="20"
-          height="20"
-      /></span>
-      <span>Google</span>
+      <img
+        src="/assets/images/icons/google-icon.svg"
+        alt="Googleのアイコン"
+        width="20"
+        height="20"
+        class="main-content__button-icon"
+      />
+      <span class="main-content__button-text">Googleでログイン</span>
     </button>
   </div>
 </div>

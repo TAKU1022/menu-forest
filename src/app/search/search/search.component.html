@@ -27,16 +27,28 @@
 
   <div class="result-grid">
     <ng-container *ngFor="let result of searchResults">
-      <mat-card class="result">
-        <a routerLink="/food-list/{{ result.foodId }}">
-          <div
-            class="result__img"
-            mat-card-image
-            [style.background-image]="'url(' + result.image + ')'"
-          ></div>
-          <p class="result__name">{{ result.name }}</p>
-        </a>
-      </mat-card>
+      <div class="wood-signboard">
+        <div
+          class="result-content result-content--rotate-type-{{
+            result.rotateTypeId
+          }}"
+        >
+          <div class="result">
+            <a routerLink="/food-list/{{ result.foodId }}">
+              <img
+                src="/assets/images/others/pin-red.png"
+                alt="赤色のピン"
+                class="result__pin"
+              />
+              <div
+                class="result__img"
+                [style.background-image]="'url(' + result.image + ')'"
+              ></div>
+              <p class="result__name">{{ result.name }}</p>
+            </a>
+          </div>
+        </div>
+      </div>
     </ng-container>
   </div>
 </div>

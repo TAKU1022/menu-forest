@@ -1,3 +1,46 @@
-h1 {
-  font-size: 20px;
+.content {
+  background-color: #f0eddd;
+  border-radius: 4px;
+  max-width: 400px;
+  padding: 24px;
+  margin: 200px auto 232px;
+  box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+  color: #8a4d41;
+  position: relative;
+  @media screen and (max-width: 600px) {
+    margin: 120px auto;
+  }
+  @media screen and (max-width: 320px) {
+    margin: 80px auto;
+  }
+  &__pins {
+    position: absolute;
+    top: 8px;
+    width: 16px;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+    z-index: 1;
+    @media screen and (max-width: 720px) {
+      box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+    }
+    @media screen and (max-width: 600px) {
+      box-shadow: 2px 2px 0 0 rgba(black, 0.3);
+    }
+    &:nth-child(1) {
+      left: 8px;
+    }
+    &:nth-child(2) {
+      right: 8px;
+    }
+  }
+  &__title {
+    margin: 0;
+    font-size: 22px;
+    @media screen and (max-width: 600px) {
+      font-size: 20px;
+    }
+  }
+  &__sentence {
+    text-align: left;
+  }
 }

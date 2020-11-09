@@ -6,6 +6,7 @@
   font-size: 20px;
   font-weight: bold;
   margin: 0 0 8px;
+  color: #8a4d41;
 }
 
 .search {
@@ -42,21 +43,36 @@
   display: grid;
   grid-template-columns: repeat(1fr, 1fr);
   gap: 16px;
+  max-width: 400px;
+  margin: 8px auto 16px;
 }
 
 .result {
-  border: 1px solid rgba(black, 0.12);
-  overflow: hidden;
   border-radius: 4px;
+  background-color: #f0eddd;
+  padding: 16px 16px 8px;
+  box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+  @media screen and (max-width: 320px) {
+    padding: 8px 8px 0;
+  }
   &__img {
     background-size: cover;
     background-position: center;
     padding-bottom: 56.25%;
+    border-radius: 4px;
   }
   &__name {
     margin: 0;
-    padding-top: 8px;
+    padding-top: 16px;
     font-size: 20px;
+    color: #8a4d41;
+    @media screen and (max-width: 600px) {
+      font-size: 18px;
+    }
+    @media screen and (max-width: 320px) {
+      padding-top: 8px;
+      font-size: 16px;
+    }
   }
   &__button {
     font-size: 18px;
@@ -66,22 +82,37 @@
 
 .food-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 8px 0 16px;
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
 }
 
 .food {
-  border: 1px solid rgba(black, 0.12);
-  overflow: hidden;
   border-radius: 4px;
+  background-color: #f0eddd;
+  padding: 16px 16px 8px;
+  box-shadow: 3px 3px 0 0 rgba(black, 0.3);
+  @media screen and (max-width: 600px) {
+    padding: 8px 8px 0;
+    box-shadow: 2px 2px 0 0 rgba(black, 0.3);
+  }
   &__img {
     background-size: cover;
     background-position: center;
     padding-bottom: 56.25%;
+    border-radius: 4px;
   }
   &__name {
     margin: 0;
-    padding-top: 8px;
-    font-size: 14px;
+    padding-top: 16px;
+    font-size: 16px;
+    color: #8a4d41;
+    @media screen and (max-width: 600px) {
+      padding-top: 8px;
+      font-size: 12px;
+    }
   }
 }
