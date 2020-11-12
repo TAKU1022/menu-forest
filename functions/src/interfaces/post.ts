@@ -16,6 +16,8 @@ export interface Post {
   myMenuId: string;
   postId: string;
   createdAt: firestore.Timestamp;
+  title: string;
+  thumbnailURLs: string[];
 }
 
 export interface PostWithFood {
@@ -23,6 +25,8 @@ export interface PostWithFood {
   creatorId: string;
   postId: string;
   createdAt: firestore.Timestamp;
+  title: string;
+  thumbnailURLs: string[];
 }
 
 export interface PostWithFoodWithUser extends PostWithFood {
