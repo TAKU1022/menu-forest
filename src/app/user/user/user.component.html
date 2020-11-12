@@ -21,16 +21,14 @@
                 *ngFor="let number of [1, 2]"
               />
               <p class="post__title">
-                好物盛り合わせメニュー
+                {{ post.title }}
               </p>
               <div class="post__foods-content">
-                <ng-container *ngFor="let dayMenu of post.days">
+                <ng-container *ngFor="let thumbnailURL of post.thumbnailURLs">
                   <div class="post__foods">
                     <div
                       class="post__food-images"
-                      [style.background-image]="
-                        'url(' + dayMenu.lunch.image + ')'
-                      "
+                      [style.background-image]="'url(' + thumbnailURL + ')'"
                     ></div>
                   </div>
                 </ng-container>
