@@ -5,11 +5,10 @@ import { DayMenuWithFood, MyMenu } from '@interfaces/my-menu';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Food } from '@interfaces/food';
-import { PostService } from 'src/app/services/post.service';
 import { tap } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ChangeMyMenuDialogComponent } from 'src/app/change-my-menu-dialog/change-my-menu-dialog/change-my-menu-dialog.component';
+import { PostDialogComponent } from '../post-dialog/post-dialog.component';
 
 @Component({
   selector: 'app-create-my-menu',
@@ -31,8 +30,6 @@ export class CreateMyMenuComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private myMenuService: MyMenuService,
     private dialog: MatDialog,
-    private postService: PostService,
-    private snackBar: MatSnackBar,
     private loadingService: LoadingService
   ) {
     this.loadingService.toggleLoading(true);
@@ -66,18 +63,15 @@ export class CreateMyMenuComponent implements OnInit, OnDestroy {
     });
   }
 
-  createPost(): void {
-    this.postService
-      .createPost({
-        day: this.myMenu.day,
-        creatorId: this.userId,
-        myMenuId: this.myMenu.myMenuId,
-      })
-      .then(() => {
-        this.snackBar.open('投稿に成功しました！', null);
-        if (!this.myMenu.isPosted) {
-          this.myMenuService.changeMyMenuIsPosted(this.myMenu.myMenuId, true);
-        }
-      });
+  openPostDialog(weekMenu: DayMenuWithFood[]): void {
+    this.dialog.open(PostDialogComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+      data: {
+        weekMenu,
+        myMenu: this.myMenu,
+        userId: this.userId,
+      },
+    });
   }
 }
