@@ -64,6 +64,7 @@
     <p class="content-section__title">ユーザー名編集</p>
     <mat-form-field
       appearance="fill"
+      hintLabel="入力文字数"
       [hideRequiredMarker]="true"
       class="name-form"
     >
@@ -75,7 +76,9 @@
         placeholder="{{ user.name }}"
         [formControl]="nameForm"
         required
+        #input
       />
+      <mat-hint align="end">{{ input.value?.length || 0 }}/25</mat-hint>
       <mat-error *ngIf="nameForm.hasError('required')">必須入力です</mat-error>
       <mat-error *ngIf="nameForm.hasError('maxlength')"
         >最大文字数は25文字です</mat-error
