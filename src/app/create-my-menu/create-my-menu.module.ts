@@ -8,9 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChangeMyMenuDialogModule } from '../change-my-menu-dialog/change-my-menu-dialog.module';
 import { PostDialogComponent } from './post-dialog/post-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [CreateMyMenuComponent, PostDialogComponent],
@@ -23,8 +25,10 @@ import { PostDialogComponent } from './post-dialog/post-dialog.component';
     MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
-    MatAutocompleteModule,
     ChangeMyMenuDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatRadioModule,
   ],
 })
 export class CreateMyMenuModule {}
