@@ -71,6 +71,8 @@ export class PostService {
           creatorId: post.creatorId,
           postId: post.postId,
           createdAt: post.createdAt,
+          title: post.title,
+          thumbnailURLs: post.thumbnailURLs,
         };
       })
     );

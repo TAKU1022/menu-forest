@@ -4,7 +4,7 @@
     alt="My献立編集画面のタイトル"
     class="content-title"
   />
-  <div class="wood-background" *ngIf="weekMenu$ | async">
+  <div class="wood-background" *ngIf="weekMenu$ | async as weekMenu">
     <img
       src="/assets/images/others/wood-pin.png"
       alt="木のピン"
@@ -12,7 +12,7 @@
       class="wood-pins"
     />
     <div class="week-grid">
-      <div *ngFor="let dayMenu of weekMenu$ | async; let i = index">
+      <div *ngFor="let dayMenu of weekMenu; let i = index">
         <img
           src="/assets/images/titles/day-of-week-title{{ i }}.png"
           alt="{{ dayMenu.dayOfWeek }}曜日のタイトル"
@@ -91,7 +91,11 @@
         </div>
       </div>
     </div>
-    <div class="decoration-btn" (click)="createPost()" *ngIf="!myMenu.isPosted">
+    <div
+      class="decoration-btn"
+      (click)="openPostDialog(weekMenu)"
+      *ngIf="!myMenu.isPosted"
+    >
       <div class="decoration-btn__border">
         <span class="decoration-btn__text">My献立を投稿する</span>
       </div>

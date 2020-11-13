@@ -8,7 +8,7 @@
         class="wood-pins"
       />
       <h1 class="post-title">
-        <span class="post-title__text">好物盛り合わせメニュー</span>
+        <span class="post-title__text">{{ post.title }}</span>
       </h1>
       <div class="content">
         <img
@@ -20,7 +20,7 @@
         <div class="week-grid">
           <div *ngFor="let menu of post.days; let i = index">
             <img
-              src="/assets/images/day-of-week{{ i }}.png"
+              src="/assets/images/titles/day-of-week-title{{ i }}.png"
               alt="{{ menu.dayOfWeek }}曜日のタイトル"
               class="day-of-week"
             />

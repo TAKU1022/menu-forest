@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl } from '@angular/forms';
 import { SearchIndex } from 'algoliasearch/lite';
 import { SearchService } from 'src/app/services/search.service';
-import { startWith, take } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 import { MyMenu } from '@interfaces/my-menu';
 
 @Component({
