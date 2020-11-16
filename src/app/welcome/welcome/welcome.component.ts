@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -9,18 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private snackBar: MatSnackBar,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
   loginWithGoogle(): void {
-    this.authService.loginWithGoogle().then(() => {
-      this.snackBar.open('ようこそ！', null);
-      this.router.navigateByUrl('/');
-    });
+    this.authService.loginWithGoogle();
   }
 }
