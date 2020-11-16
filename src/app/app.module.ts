@@ -31,6 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 registerLocaleData(localeJa);
 @NgModule({
@@ -65,6 +66,7 @@ registerLocaleData(localeJa);
     MatProgressSpinnerModule,
     HttpClientModule,
     LayoutModule,
+    MatSnackBarModule,
   ],
   providers: [
     { provide: REGION, useValue: 'asia-northeast1' },
