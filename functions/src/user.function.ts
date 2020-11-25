@@ -21,6 +21,8 @@ export const createUser = functions
       isEatenBreakfast: false,
       isEatenLunch: false,
       isEatenDinner: false,
+      isCompletedCreateMyMenuTutorial: false,
+      isCompletedHomeTutorial: false,
     });
   });
 
