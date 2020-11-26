@@ -29,12 +29,7 @@ export class AdminGuard implements CanActivate, CanLoad {
     | boolean
     | UrlTree {
     return this.authService.user$.pipe(
-      tap((user: User) => {
-        if (!user) {
-          this.router.navigateByUrl('/welcome');
-        }
-      }),
-      map((isUser: User) => isUser.admin),
+      map((user: User) => user.admin),
       tap((isAdmin: boolean) => {
         if (!isAdmin) {
           this.router.navigateByUrl('/');
@@ -42,17 +37,13 @@ export class AdminGuard implements CanActivate, CanLoad {
       })
     );
   }
+
   canLoad(
     route: Route,
     segments: UrlSegment[]
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.authService.user$.pipe(
-      tap((user: User) => {
-        if (!user) {
-          this.router.navigateByUrl('/welcome');
-        }
-      }),
-      map((isUser: User) => isUser.admin),
+      map((user: User) => user.admin),
       take(1),
       tap((isAdmin: boolean) => {
         if (!isAdmin) {
