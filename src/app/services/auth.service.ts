@@ -23,7 +23,6 @@ export class AuthService {
     })
   );
   userId: string;
-  isInitialLogin: boolean;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -43,9 +42,13 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(googleAuthProvider)
       .then((result: auth.UserCredential) => {
-        this.isInitialLogin = result.additionalUserInfo.isNewUser;
-        this.snackBar.open('ようこそ！', null);
-        this.router.navigateByUrl('/');
+        if (result.additionalUserInfo.isNewUser) {
+          this.router.navigateByUrl('/my-menu-loading');
+          this.snackBar.open('アカウントが作成されました！', null);
+        } else {
+          this.router.navigateByUrl('/');
+          this.snackBar.open('おかえりなさい！', null);
+        }
       });
   }
 
