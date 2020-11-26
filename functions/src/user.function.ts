@@ -23,6 +23,7 @@ export const createUser = functions
       isEatenDinner: false,
       isCompletedCreateMyMenuTutorial: false,
       isCompletedHomeTutorial: false,
+      isCreatedMyMenu: false,
     });
   });
 

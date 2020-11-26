@@ -11,4 +11,5 @@ export interface User {
   isEatenDinner: boolean;
   isCompletedCreateMyMenuTutorial: boolean;
   isCompletedHomeTutorial: boolean;
+  isCreatedMyMenu: boolean;
 }
