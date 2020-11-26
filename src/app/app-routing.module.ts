@@ -9,19 +9,6 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'welcome',
-    component: WelcomeShellComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () =>
-          import('./welcome/welcome.module').then((m) => m.WelcomeModule),
-        canLoad: [GuestGuard],
-        canActivate: [GuestGuard],
-      },
-    ],
-  },
-  {
     path: '',
     component: MainShellComponent,
     children: [
@@ -116,6 +103,28 @@ const routes: Routes = [
         canLoad: [AdminGuard],
       },
     ],
+  },
+  {
+    path: '',
+    component: WelcomeShellComponent,
+    children: [
+      {
+        path: 'welcome',
+        loadChildren: () =>
+          import('./welcome/welcome.module').then((m) => m.WelcomeModule),
+        canLoad: [GuestGuard],
+        canActivate: [GuestGuard],
+      },
+    ],
+  },
+  {
+    path: 'my-menu-loading',
+    loadChildren: () =>
+      import('./my-menu-loading/my-menu-loading.module').then(
+        (m) => m.MyMenuLoadingModule
+      ),
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
