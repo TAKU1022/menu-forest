@@ -29,6 +29,12 @@ export class UserService {
     }
   }
 
+  changeUserIsCreatedMyMenu(userId: string): Promise<void> {
+    return this.db.doc<User>(`users/${userId}`).update({
+      isCreatedMyMenu: true,
+    });
+  }
+
   changeUserName(userId: string, name: string): Promise<void> {
     return this.db.doc<User>(`users/${userId}`).update({
       name,
