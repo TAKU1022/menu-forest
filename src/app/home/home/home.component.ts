@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DayMenuWithFood, MyMenu } from '@interfaces/my-menu';
 import { MyMenuService } from 'src/app/services/my-menu.service';
@@ -12,25 +12,26 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Food } from '@interfaces/food';
 import { ChangeMyMenuDialogComponent } from 'src/app/change-my-menu-dialog/change-my-menu-dialog/change-my-menu-dialog.component';
+import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  isEatenBreakfast: boolean;
-  isEatenLunch: boolean;
-  isEatenDinner: boolean;
-
+export class HomeComponent implements OnInit, AfterViewInit {
   private userId: string = this.authService.userId;
   private eatCount: number;
   private today: number;
   private myMenu: MyMenu;
+  private user$: Observable<User> = this.authService.user$;
 
   todayMenu$: Observable<DayMenuWithFood> = this.myMenuService
     .getTodayMenu(this.userId)
     .pipe(tap(() => this.loadingService.toggleLoading(false)));
+  isEatenBreakfast: boolean;
+  isEatenLunch: boolean;
+  isEatenDinner: boolean;
 
   constructor(
     private myMenuService: MyMenuService,
@@ -39,7 +40,8 @@ export class HomeComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dayService: DayService,
     private loadingService: LoadingService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private tutorialService: TutorialService
   ) {
     this.loadingService.toggleLoading(true);
   }
@@ -48,6 +50,22 @@ export class HomeComponent implements OnInit {
     this.resetEatStatus();
     this.getEatStatus();
     this.getMyMenu();
+  }
+
+  ngAfterViewInit(): void {
+    this.startTutorial();
+  }
+
+  private startTutorial(): void {
+    this.user$
+      .pipe(take(1))
+      .toPromise()
+      .then((user: User) => {
+        if (!user.isCompletedHomeTutorial) {
+          this.tutorialService.startHomeTutorial();
+          this.userService.completeTutorial('home', this.userId);
+        }
+      });
   }
 
   private resetEatStatus(): void {
@@ -65,7 +83,7 @@ export class HomeComponent implements OnInit {
   }
 
   private getEatStatus(): void {
-    this.authService.user$
+    this.user$
       .pipe(take(1))
       .toPromise()
       .then((user: User) => {

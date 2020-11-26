@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { User } from '@interfaces/user';
 import { Observable } from 'rxjs';
@@ -14,6 +17,23 @@ export class UserService {
     private storage: AngularFireStorage,
     private afAuth: AngularFireAuth
   ) {}
+
+  completeTutorial(tutorial: string, userId: string): Promise<void> {
+    const userDocument: AngularFirestoreDocument<User> = this.db.doc<User>(
+      `users/${userId}`
+    );
+    if (tutorial === 'create-my-menu') {
+      return userDocument.update({ isCompletedCreateMyMenuTutorial: true });
+    } else if (tutorial === 'home') {
+      return userDocument.update({ isCompletedHomeTutorial: true });
+    }
+  }
+
+  changeUserIsCreatedMyMenu(userId: string): Promise<void> {
+    return this.db.doc<User>(`users/${userId}`).update({
+      isCreatedMyMenu: true,
+    });
+  }
 
   changeUserName(userId: string, name: string): Promise<void> {
     return this.db.doc<User>(`users/${userId}`).update({

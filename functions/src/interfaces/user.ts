@@ -9,4 +9,7 @@ export interface User {
   isEatenBreakfast: boolean;
   isEatenLunch: boolean;
   isEatenDinner: boolean;
+  isCompletedCreateMyMenuTutorial: boolean;
+  isCompletedHomeTutorial: boolean;
+  isCreatedMyMenu: boolean;
 }

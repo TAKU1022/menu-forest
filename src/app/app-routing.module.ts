@@ -6,21 +6,9 @@ import { WelcomeShellComponent } from './welcome-shell/welcome-shell.component';
 import { MainShellComponent } from './main-shell/main-shell.component';
 import { GuestGuard } from './guards/guest.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { MyMenuLoadingGuard } from './guards/my-menu-loading.guard';
 
 const routes: Routes = [
-  {
-    path: 'welcome',
-    component: WelcomeShellComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () =>
-          import('./welcome/welcome.module').then((m) => m.WelcomeModule),
-        canLoad: [GuestGuard],
-        canActivate: [GuestGuard],
-      },
-    ],
-  },
   {
     path: '',
     component: MainShellComponent,
@@ -85,6 +73,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'usage',
+        loadChildren: () =>
+          import('./usage/usage.module').then((m) => m.UsageModule),
+        canLoad: [AuthGuard],
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'setting',
         loadChildren: () =>
           import('./setting/setting.module').then((m) => m.SettingModule),
@@ -105,10 +100,32 @@ const routes: Routes = [
         path: 'admin',
         loadChildren: () =>
           import('./admin/admin.module').then((m) => m.AdminModule),
-        canActivate: [AdminGuard],
-        canLoad: [AdminGuard],
+        canActivate: [AuthGuard, AdminGuard],
+        canLoad: [AuthGuard, AdminGuard],
       },
     ],
+  },
+  {
+    path: '',
+    component: WelcomeShellComponent,
+    children: [
+      {
+        path: 'welcome',
+        loadChildren: () =>
+          import('./welcome/welcome.module').then((m) => m.WelcomeModule),
+        canLoad: [GuestGuard],
+        canActivate: [GuestGuard],
+      },
+    ],
+  },
+  {
+    path: 'my-menu-loading',
+    loadChildren: () =>
+      import('./my-menu-loading/my-menu-loading.module').then(
+        (m) => m.MyMenuLoadingModule
+      ),
+    canLoad: [AuthGuard, MyMenuLoadingGuard],
+    canActivate: [AuthGuard, MyMenuLoadingGuard],
   },
   {
     path: '**',

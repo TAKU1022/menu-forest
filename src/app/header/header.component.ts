@@ -3,7 +3,6 @@ import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { User } from '@interfaces/user';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +13,7 @@ export class HeaderComponent implements OnInit {
   @Input() sidenav: MatSidenav;
   user$: Observable<User> = this.authService.user$;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
