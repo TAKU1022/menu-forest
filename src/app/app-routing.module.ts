@@ -6,6 +6,7 @@ import { WelcomeShellComponent } from './welcome-shell/welcome-shell.component';
 import { MainShellComponent } from './main-shell/main-shell.component';
 import { GuestGuard } from './guards/guest.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { MyMenuLoadingGuard } from './guards/my-menu-loading.guard';
 
 const routes: Routes = [
   {
@@ -123,8 +124,8 @@ const routes: Routes = [
       import('./my-menu-loading/my-menu-loading.module').then(
         (m) => m.MyMenuLoadingModule
       ),
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard],
+    canLoad: [AuthGuard, MyMenuLoadingGuard],
+    canActivate: [AuthGuard, MyMenuLoadingGuard],
   },
   {
     path: '**',
