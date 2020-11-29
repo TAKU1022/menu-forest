@@ -11,7 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DayMenuWithFood, MyMenu } from '@interfaces/my-menu';
 import { User } from '@interfaces/user';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 import { MyMenuService } from 'src/app/services/my-menu.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
@@ -22,6 +23,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./post-dialog.component.scss'],
 })
 export class PostDialogComponent implements OnInit {
+  private userId: string = this.authService.userId;
+
   form: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.maxLength(25)]],
     dayOfWeeks: this.fb.array([]),
@@ -49,7 +52,7 @@ export class PostDialogComponent implements OnInit {
       };
     })
   );
-  user$: Observable<User> = this.userService.getUserbyId(this.data.userId);
+  user$: Observable<User> = this.authService.user$;
   today: Date = new Date();
 
   get titleControl(): FormControl {
@@ -65,14 +68,14 @@ export class PostDialogComponent implements OnInit {
     public data: {
       weekMenu: DayMenuWithFood[];
       myMenu: MyMenu;
-      userId: string;
     },
     private fb: FormBuilder,
     private postService: PostService,
     private snackBar: MatSnackBar,
     private myMenuService: MyMenuService,
     private userService: UserService,
-    private dialogRef: MatDialogRef<PostDialogComponent>
+    private dialogRef: MatDialogRef<PostDialogComponent>,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -96,6 +99,16 @@ export class PostDialogComponent implements OnInit {
     this.dayOfWeeksFormArray.setValue(initialValue);
   }
 
+  private increasedUserPostCount(): void {
+    this.user$
+      .pipe(take(1))
+      .toPromise()
+      .then((user: User) => {
+        const increasedPostCount: number = ++user.postCount;
+        this.userService.changeUserPostCount(this.userId, increasedPostCount);
+      });
+  }
+
   createPost(): void {
     const formData: { title: string; dayOfWeeks: string[] } = this.form.value;
     const thumbnailURLs: string[] = formData.dayOfWeeks.map(
@@ -113,7 +126,7 @@ export class PostDialogComponent implements OnInit {
     this.postService
       .createPost({
         day: this.data.myMenu.day,
-        creatorId: this.data.userId,
+        creatorId: this.userId,
         myMenuId: this.data.myMenu.myMenuId,
         title: formData.title,
         thumbnailURLs,
@@ -121,6 +134,7 @@ export class PostDialogComponent implements OnInit {
       .then(() => {
         this.snackBar.open('投稿に成功しました！', null);
         this.dialogRef.close();
+        this.increasedUserPostCount();
         if (!this.data.myMenu.isPosted) {
           this.myMenuService.changeMyMenuIsPosted(
             this.data.myMenu.myMenuId,
