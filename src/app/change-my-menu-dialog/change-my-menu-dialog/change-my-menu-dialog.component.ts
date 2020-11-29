@@ -2,14 +2,15 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Food } from '@interfaces/food';
 import { FoodService } from 'src/app/services/food.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MyMenuService } from 'src/app/services/my-menu.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl } from '@angular/forms';
 import { SearchIndex } from 'algoliasearch/lite';
 import { SearchService } from 'src/app/services/search.service';
-import { startWith } from 'rxjs/operators';
+import { startWith, take, tap } from 'rxjs/operators';
 import { MyMenu } from '@interfaces/my-menu';
+import { firestore } from 'firebase';
 
 @Component({
   selector: 'app-change-my-menu-dialog',
@@ -19,13 +20,18 @@ import { MyMenu } from '@interfaces/my-menu';
 export class ChangeMyMenuDialogComponent implements OnInit, OnDestroy {
   private index: SearchIndex = this.searchService.index.foods;
   private subscription: Subscription;
+  private lastFoodDocument: firestore.QueryDocumentSnapshot<
+    firestore.DocumentData
+  >;
+  private isInitial = true;
 
-  foods$: Observable<Food[]> = this.foodService.getFoods();
+  foods: Food[] = [];
   searchControl = new FormControl('');
   searchOptions: any[];
   searchResults: any[];
   nbHits: number;
   isSearched = false;
+  isLoading: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -43,6 +49,7 @@ export class ChangeMyMenuDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.setSerchOptions();
+    this.getFoods();
   }
 
   ngOnDestroy(): void {
@@ -57,6 +64,25 @@ export class ChangeMyMenuDialogComponent implements OnInit, OnDestroy {
           .search(value)
           .then((result) => (this.searchOptions = result.hits));
       });
+  }
+
+  getFoods(): void {
+    this.foodService
+      .getFoods(this.lastFoodDocument)
+      .pipe(
+        take(1),
+        tap(() =>
+          this.isInitial ? (this.isLoading = false) : (this.isLoading = true)
+        )
+      )
+      .toPromise()
+      .then(({ foods, lastFoodDocument }) => {
+        this.foods.push(...foods);
+        this.lastFoodDocument = lastFoodDocument;
+        this.isInitial = false;
+        this.isLoading = false;
+      })
+      .catch(() => (this.isLoading = false));
   }
 
   changeMyMenu(foodId: string): void {

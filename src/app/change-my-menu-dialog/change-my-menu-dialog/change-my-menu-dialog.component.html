@@ -56,7 +56,7 @@
 
     <ng-template #default>
       <div class="food-grid">
-        <div *ngFor="let food of foods$ | async">
+        <div *ngFor="let food of foods">
           <div class="food">
             <div
               class="food__img"
@@ -74,6 +74,21 @@
           </div>
         </div>
       </div>
+      <div
+        infiniteScroll
+        [infiniteScrollDistance]="4"
+        [infiniteScrollThrottle]="500"
+        [scrollWindow]="false"
+        infiniteScrollContainer="mat-dialog-content"
+        [fromRoot]="true"
+        (scrolled)="getFoods()"
+      ></div>
+      <mat-progress-spinner
+        mode="indeterminate"
+        *ngIf="isLoading"
+        class="loading-spinner"
+        [diameter]="30"
+      ></mat-progress-spinner>
     </ng-template>
   </mat-dialog-content>
 
