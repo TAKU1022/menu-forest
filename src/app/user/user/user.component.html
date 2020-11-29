@@ -1,53 +1,63 @@
 <div class="container">
-  <ng-container *ngIf="userPosts$ | async as userPosts">
-    <div class="wood-background">
-      <img
-        src="/assets/images/others/wood-pin.png"
-        alt="木のピン"
-        *ngFor="let number of [1, 2, 3, 4]"
-        class="wood-pins"
-      />
-      <h1 class="user-name-title" *ngIf="user$ | async as user">
-        <span class="user-name-title__text">{{ user.name }}</span>
-      </h1>
-      <div class="grid">
-        <ng-container *ngFor="let post of userPosts">
-          <div class="post">
-            <a routerLink="/post/{{ post.postId }}">
-              <img
-                src="/assets/images/others/pin-yellow.png"
-                alt="黄色のピン"
-                class="post__pins"
-                *ngFor="let number of [1, 2]"
-              />
-              <p class="post__title">
-                {{ post.title }}
-              </p>
-              <div class="post__foods-content">
-                <ng-container *ngFor="let thumbnailURL of post.thumbnailURLs">
-                  <div class="post__foods">
-                    <div
-                      class="post__food-images"
-                      [style.background-image]="'url(' + thumbnailURL + ')'"
-                    ></div>
-                  </div>
-                </ng-container>
-              </div>
-              <div class="post__user-content">
-                <img
-                  [src]="post.creator.avaterURL"
-                  alt="ユーザーのアバター"
-                  class="post__user-avater"
-                />
-                <div class="post__user-content-right">
-                  <p class="post__user-name">{{ post.creator.name }}</p>
-                  <p class="post__date">{{ post.createdAt.toDate() | date }}</p>
+  <div class="wood-background" *ngIf="isGotPosts">
+    <img
+      src="/assets/images/others/wood-pin.png"
+      alt="木のピン"
+      *ngFor="let number of [1, 2, 3, 4]"
+      class="wood-pins"
+    />
+    <h1 class="user-name-title" *ngIf="user$ | async as user">
+      <span class="user-name-title__text">{{ user.name }}</span>
+    </h1>
+    <div class="grid">
+      <ng-container *ngFor="let post of userPosts">
+        <div class="post">
+          <a routerLink="/post/{{ post.postId }}">
+            <img
+              src="/assets/images/others/pin-yellow.png"
+              alt="黄色のピン"
+              class="post__pins"
+              *ngFor="let number of [1, 2]"
+            />
+            <p class="post__title">
+              {{ post.title }}
+            </p>
+            <div class="post__foods-content">
+              <ng-container *ngFor="let thumbnailURL of post.thumbnailURLs">
+                <div class="post__foods">
+                  <div
+                    class="post__food-images"
+                    [style.background-image]="'url(' + thumbnailURL + ')'"
+                  ></div>
                 </div>
+              </ng-container>
+            </div>
+            <div class="post__user-content">
+              <img
+                [src]="post.creator.avaterURL"
+                alt="ユーザーのアバター"
+                class="post__user-avater"
+              />
+              <div class="post__user-content-right">
+                <p class="post__user-name">{{ post.creator.name }}</p>
+                <p class="post__date">{{ post.createdAt.toDate() | date }}</p>
               </div>
-            </a>
-          </div>
-        </ng-container>
-      </div>
+            </div>
+          </a>
+        </div>
+      </ng-container>
     </div>
-  </ng-container>
+    <div
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="80"
+      (scrolled)="getUserPosts()"
+    ></div>
+    <mat-progress-spinner
+      mode="indeterminate"
+      *ngIf="isLoading"
+      class="loading-spinner"
+      [diameter]="30"
+    ></mat-progress-spinner>
+  </div>
 </div>
