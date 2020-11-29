@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [PostComponent, PostDetailComponent],
@@ -16,6 +18,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
+    InfiniteScrollModule,
   ],
 })
 export class PostModule {}
