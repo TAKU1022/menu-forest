@@ -12,4 +12,5 @@ export interface User {
   isCompletedCreateMyMenuTutorial: boolean;
   isCompletedHomeTutorial: boolean;
   isCreatedMyMenu: boolean;
+  postCount: number;
 }

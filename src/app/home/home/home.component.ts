@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       .pipe(take(1))
       .toPromise()
       .then((user: User) => {
-        if (!user.isCompletedHomeTutorial) {
+        if (!user?.isCompletedHomeTutorial) {
           this.tutorialService.startHomeTutorial();
           this.userService.completeTutorial('home', this.userId);
         }
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       .pipe(take(1))
       .toPromise()
       .then((day: any) => {
-        if (this.today !== day.dayNumber) {
+        if (this.today !== day?.dayNumber) {
           this.userService.initializeUserIsEatenFood(this.userId);
           this.dayService.changeDayNumber(this.today);
         }

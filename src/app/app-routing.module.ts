@@ -73,13 +73,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'usage',
-        loadChildren: () =>
-          import('./usage/usage.module').then((m) => m.UsageModule),
-        canLoad: [AuthGuard],
-        canActivate: [AuthGuard],
-      },
-      {
         path: 'setting',
         loadChildren: () =>
           import('./setting/setting.module').then((m) => m.SettingModule),

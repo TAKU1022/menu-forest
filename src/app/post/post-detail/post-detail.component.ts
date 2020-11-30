@@ -10,6 +10,8 @@ import { MyMenuService } from 'src/app/services/my-menu.service';
 import { MyMenu } from '@interfaces/my-menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { User } from '@interfaces/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -22,6 +24,7 @@ export class PostDetailComponent implements OnInit {
 
   post$: Observable<PostWithFood>;
   userId: string = this.authService.userId;
+  user$: Observable<User> = this.authService.user$;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +34,8 @@ export class PostDetailComponent implements OnInit {
     private myMenuService: MyMenuService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private userService: UserService
   ) {
     this.loadingService.toggleLoading(true);
   }
@@ -74,6 +78,16 @@ export class PostDetailComponent implements OnInit {
       .then((myMenu: MyMenu) => (this.myMenu = myMenu));
   }
 
+  private reduceUserPostCount(): void {
+    this.user$
+      .pipe(take(1))
+      .toPromise()
+      .then((user: User) => {
+        const reducedPostCount = --user.postCount;
+        this.userService.changeUserPostCount(this.userId, reducedPostCount);
+      });
+  }
+
   changeMyMenuToUserMenu(): void {
     this.myMenuService
       .changeMyMenuToUserMenu(this.myMenu.myMenuId, this.post.day)
@@ -87,6 +101,7 @@ export class PostDetailComponent implements OnInit {
     this.location.back();
     this.postService.deletePost(this.post.postId).then(() => {
       this.snackBar.open('この投稿を削除しました！', null);
+      this.reduceUserPostCount();
     });
   }
 }

@@ -24,6 +24,7 @@ export const createUser = functions
       isCompletedCreateMyMenuTutorial: false,
       isCompletedHomeTutorial: false,
       isCreatedMyMenu: false,
+      postCount: 0,
     });
   });
 

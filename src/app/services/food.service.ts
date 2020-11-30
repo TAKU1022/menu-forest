@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Food } from '@interfaces/food';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,35 @@ export class FoodService {
     });
   }
 
-  getFoods(): Observable<Food[]> {
-    return this.db.collection<Food>('foods').valueChanges();
+  getFoods(
+    lastFood: firestore.QueryDocumentSnapshot<firestore.DocumentData>
+  ): Observable<{
+    foods: Food[];
+    lastFoodDocument: firestore.QueryDocumentSnapshot<firestore.DocumentData>;
+  }> {
+    return this.db
+      .collection<Food>('foods', (ref) => {
+        if (lastFood) {
+          return ref.startAfter(lastFood).limit(24);
+        } else {
+          return ref.limit(12);
+        }
+      })
+      .get({ source: 'server' })
+      .pipe(
+        map((snap: firestore.QuerySnapshot<firestore.DocumentData>) => {
+          const foods: Food[] = snap.docs.map(
+            (doc: firestore.QueryDocumentSnapshot<firestore.DocumentData>) =>
+              doc.data() as Food
+          );
+          const lastFoodDocument: firestore.QueryDocumentSnapshot<firestore.DocumentData> =
+            snap.docs[snap?.docs.length - 1];
+          return {
+            foods,
+            lastFoodDocument,
+          };
+        })
+      );
   }
 
   getFoodById(id: string): Observable<Food> {

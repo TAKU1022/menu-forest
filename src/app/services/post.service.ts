@@ -93,80 +93,141 @@ export class PostService {
       );
   }
 
-  getPostsWithFoodWithUser(): Observable<PostWithFoodWithUser[]> {
+  getPostsWithFoodWithUser(
+    lastPost: firestore.QueryDocumentSnapshot<firestore.DocumentData>
+  ): Observable<{
+    postsWithFoodWithUser: PostWithFoodWithUser[];
+    lastPostDocument: firestore.QueryDocumentSnapshot<firestore.DocumentData>;
+  }> {
+    let lastPostDocument: firestore.QueryDocumentSnapshot<firestore.DocumentData>;
     return this.db
-      .collection<Post>(`posts`)
-      .valueChanges()
+      .collection<Post>(`posts`, (ref) => {
+        if (lastPost) {
+          return ref.startAfter(lastPost).limit(6);
+        } else {
+          return ref.limit(6);
+        }
+      })
+      .get({ source: 'server' })
       .pipe(
-        switchMap((posts: Post[]) => {
-          const postWithFoods$$: Observable<
-            PostWithFood
-          >[] = posts.map((post: Post) => this.mergePostWithFood(post));
-          return combineLatest(postWithFoods$$);
+        switchMap((snap: firestore.QuerySnapshot<firestore.DocumentData>) => {
+          if (snap) {
+            lastPostDocument = snap.docs[snap.docs?.length - 1];
+            const postWithFoods$$: Observable<PostWithFood>[] = snap.docs.map(
+              (
+                doc: firestore.QueryDocumentSnapshot<firestore.DocumentData>
+              ) => {
+                const post: Post = doc.data() as Post;
+                return this.mergePostWithFood(post);
+              }
+            );
+            return combineLatest(postWithFoods$$);
+          } else {
+            return of(null);
+          }
         }),
-        switchMap((postWithFoods: PostWithFood[]) => {
-          const distinctUserIds: string[] = Array.from(
-            new Set(
-              postWithFoods.map(
-                (postWithFood: PostWithFood) => postWithFood.creatorId
+        switchMap((postWithFoods: PostWithFood[] | null) => {
+          if (postWithFoods) {
+            const distinctUserIds: string[] = Array.from(
+              new Set(
+                postWithFoods.map(
+                  (postWithFood: PostWithFood) => postWithFood.creatorId
+                )
               )
-            )
-          );
-          const users$: Observable<User[]> = combineLatest(
-            distinctUserIds.map((userId: string) => {
-              return this.userService.getUserbyId(userId);
-            })
-          );
-          return combineLatest([of(postWithFoods), users$]);
+            );
+            const users$: Observable<User[]> = combineLatest(
+              distinctUserIds.map((userId: string) => {
+                return this.userService.getUserbyId(userId);
+              })
+            );
+            return combineLatest([of(postWithFoods), users$]);
+          } else {
+            return null;
+          }
         }),
         map(([postWithFoods, users]) => {
-          return postWithFoods.map((postWithFood: PostWithFood) => {
-            return {
-              ...postWithFood,
-              creator: users.find(
-                (user: User) => user.uid === postWithFood.creatorId
-              ),
-            };
-          });
+          const postsWithFoodWithUser: PostWithFoodWithUser[] = postWithFoods?.map(
+            (postWithFood: PostWithFood) => {
+              return {
+                ...postWithFood,
+                creator: users.find(
+                  (user: User) => user.uid === postWithFood.creatorId
+                ),
+              };
+            }
+          );
+          return {
+            postsWithFoodWithUser,
+            lastPostDocument,
+          };
         })
       );
   }
 
-  getPostsByUserId(userId: string): Observable<Post[]> {
+  getUserPosts(
+    userId: string,
+    lastPost: firestore.QueryDocumentSnapshot<firestore.DocumentData>
+  ): Observable<{
+    postsWithFoodWithUser: PostWithFoodWithUser[];
+    lastPostDocument: firestore.QueryDocumentSnapshot<firestore.DocumentData>;
+  } | null> {
+    let lastPostDocument: firestore.QueryDocumentSnapshot<firestore.DocumentData>;
     return this.db
       .collection<Post>('posts', (ref) => {
-        return ref.where('creatorId', '==', userId);
+        const posts = ref.where('creatorId', '==', userId);
+        if (lastPost) {
+          return posts.startAfter(lastPost).limit(6);
+        } else {
+          return posts.limit(6);
+        }
       })
-      .valueChanges();
-  }
-
-  getUserPosts(userId: string): Observable<PostWithFoodWithUser[]> {
-    return this.getPostsByUserId(userId).pipe(
-      switchMap((posts: Post[]) => {
-        const postWithFood$$: Observable<
-          PostWithFood
-        >[] = posts.map((post: Post) => this.mergePostWithFood(post));
-        return combineLatest(postWithFood$$);
-      }),
-      switchMap((postWithFoods: PostWithFood[]) => {
-        const users$: Observable<User[]> = combineLatest(
-          postWithFoods.map((postWithFood: PostWithFood) => {
-            return this.userService.getUserbyId(postWithFood.creatorId);
-          })
-        );
-        return combineLatest([of(postWithFoods), users$]);
-      }),
-      map(([postWithFoods, users]) => {
-        return postWithFoods.map((postWithFood: PostWithFood) => {
+      .get({ source: 'server' })
+      .pipe(
+        switchMap((snap: firestore.QuerySnapshot<firestore.DocumentData>) => {
+          if (snap) {
+            lastPostDocument = snap.docs[snap.docs?.length - 1];
+            const postWithFoods$$: Observable<PostWithFood>[] = snap.docs.map(
+              (
+                doc: firestore.QueryDocumentSnapshot<firestore.DocumentData>
+              ) => {
+                const post: Post = doc.data() as Post;
+                return this.mergePostWithFood(post);
+              }
+            );
+            return combineLatest(postWithFoods$$);
+          } else {
+            return of(null);
+          }
+        }),
+        switchMap((postWithFoods: PostWithFood[] | null) => {
+          if (postWithFoods) {
+            const users$: Observable<User[]> = combineLatest(
+              postWithFoods.map((postWithFood: PostWithFood) => {
+                return this.userService.getUserbyId(postWithFood.creatorId);
+              })
+            );
+            return combineLatest([of(postWithFoods), users$]);
+          } else {
+            return of(null);
+          }
+        }),
+        map(([postWithFoods, users]) => {
+          const postsWithFoodWithUser: PostWithFoodWithUser[] = postWithFoods.map(
+            (postWithFood: PostWithFood) => {
+              return {
+                ...postWithFood,
+                creator: users.find(
+                  (user: User) => user.uid === postWithFood.creatorId
+                ),
+              };
+            }
+          );
           return {
-            ...postWithFood,
-            creator: users.find(
-              (user: User) => user.uid === postWithFood.creatorId
-            ),
+            postsWithFoodWithUser,
+            lastPostDocument,
           };
-        });
-      })
-    );
+        })
+      );
   }
 
   deletePost(postId: string): Promise<void> {
