@@ -12,6 +12,7 @@ import { PostDialogComponent } from '../post-dialog/post-dialog.component';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { User } from '@interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
   selector: 'app-create-my-menu',
@@ -36,9 +37,11 @@ export class CreateMyMenuComponent implements OnInit, OnDestroy, AfterViewInit {
     private dialog: MatDialog,
     private loadingService: LoadingService,
     private tutorialService: TutorialService,
-    private userService: UserService
+    private userService: UserService,
+    private titleService: TitleService
   ) {
     this.loadingService.toggleLoading(true);
+    this.titleService.setTitle('My献立の編集');
   }
 
   ngOnInit(): void {

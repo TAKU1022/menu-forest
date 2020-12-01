@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { User } from '@interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -35,7 +36,8 @@ export class PostDetailComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private location: Location,
-    private userService: UserService
+    private userService: UserService,
+    private titleService: TitleService
   ) {
     this.loadingService.toggleLoading(true);
   }
@@ -53,7 +55,10 @@ export class PostDetailComponent implements OnInit {
         const postId: string = param.get('detail');
         return this.postService.getPostWithFoodById(postId);
       }),
-      tap(() => this.loadingService.toggleLoading(false))
+      tap((post: PostWithFood) => {
+        this.loadingService.toggleLoading(false);
+        this.titleService.setTitle(post.title);
+      })
     );
   }
 

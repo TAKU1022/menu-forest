@@ -5,6 +5,7 @@ import { SearchIndex } from 'algoliasearch/lite';
 import { startWith } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
   selector: 'app-search',
@@ -23,8 +24,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(
     private searchService: SearchService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private titleService: TitleService
+  ) {
+    this.titleService.setTitle('検索');
+  }
 
   ngOnInit(): void {
     this.setSearchOptions();

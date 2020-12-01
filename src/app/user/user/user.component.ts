@@ -8,6 +8,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { User } from '@interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { firestore } from 'firebase';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
   selector: 'app-user',
@@ -29,7 +30,8 @@ export class UserComponent implements OnInit {
     private postService: PostService,
     private route: ActivatedRoute,
     private loadingService: LoadingService,
-    private userService: UserService
+    private userService: UserService,
+    private titleService: TitleService
   ) {
     this.loadingService.toggleLoading(true);
   }
@@ -45,7 +47,8 @@ export class UserComponent implements OnInit {
         const userId = param.get('id');
         return this.userService.getUserbyId(userId);
       }),
-      take(1)
+      take(1),
+      tap((user: User) => this.titleService.setTitle(`${user.name}の投稿一覧`))
     );
   }
 

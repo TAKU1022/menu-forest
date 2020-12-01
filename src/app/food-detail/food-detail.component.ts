@@ -6,6 +6,7 @@ import { switchMap, tap, take } from 'rxjs/operators';
 import { Food } from '@interfaces/food';
 import { LoadingService } from '../services/loading.service';
 import { RakutenRecipeApiService } from '../services/rakuten-recipe-api.service';
+import { TitleService } from '../services/title.service';
 
 @Component({
   selector: 'app-food-detail',
@@ -22,7 +23,8 @@ export class FoodDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private foodService: FoodService,
     private loadingService: LoadingService,
-    private rakutenRecipeApiService: RakutenRecipeApiService
+    private rakutenRecipeApiService: RakutenRecipeApiService,
+    private titleService: TitleService
   ) {
     this.loadingService.toggleLoading(true);
   }
@@ -43,7 +45,10 @@ export class FoodDetailComponent implements OnInit, OnDestroy {
         const id = prams.get('detail');
         return this.foodService.getFoodById(id);
       }),
-      tap(() => this.loadingService.toggleLoading(false))
+      tap((food: Food) => {
+        this.loadingService.toggleLoading(false);
+        this.titleService.setTitle(`${food.name}のレシピ`);
+      })
     );
   }
 

@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Food } from '@interfaces/food';
 import { ChangeMyMenuDialogComponent } from 'src/app/change-my-menu-dialog/change-my-menu-dialog/change-my-menu-dialog.component';
 import { TutorialService } from 'src/app/services/tutorial.service';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
   selector: 'app-home',
@@ -41,9 +42,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private dayService: DayService,
     private loadingService: LoadingService,
     private dialog: MatDialog,
-    private tutorialService: TutorialService
+    private tutorialService: TutorialService,
+    private titleService: TitleService
   ) {
     this.loadingService.toggleLoading(true);
+    this.titleService.setTitle('本日の献立');
   }
 
   ngOnInit(): void {
