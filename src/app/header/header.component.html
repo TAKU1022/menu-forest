@@ -20,13 +20,21 @@
       </a>
     </div>
     <div class="header-content__right" *ngIf="user$ | async as user">
-      <a routerLink="/" class="header-content__home header-content--mobile">
+      <a
+        routerLink="/"
+        class="header-content__home header-content--mobile"
+        matTooltip="本日の献立"
+      >
         <img
           src="/assets/images/icons/home-icon.png"
           alt="ホーム画面のアイコン"
         />
       </a>
-      <a routerLink="/menu" class="header-content__menu header-content--mobile">
+      <a
+        routerLink="/menu"
+        class="header-content__menu header-content--mobile"
+        matTooltip="一週間の献立"
+      >
         <img
           src="/assets/images/icons/menu-icon.png"
           alt="一週間の献立画面のアイコン"
@@ -35,19 +43,24 @@
       <a
         routerLink="/food-list"
         class="header-content__food-list header-content--mobile"
+        matTooltip="メニュー一覧"
       >
         <img
           src="/assets/images/icons/food-list-icon.png"
           alt="メニュー一覧画面のアイコン"
         />
       </a>
-      <a routerLink="/post" class="header-content__post header-content--mobile">
+      <a
+        routerLink="/post"
+        class="header-content__post header-content--mobile"
+        matTooltip="みんなの献立"
+      >
         <img
           src="/assets/images/icons/post-icon.png"
           alt="みんなの献立画面のアイコン"
         />
       </a>
-      <a routerLink="/search" class="header-content__search">
+      <a routerLink="/search" class="header-content__search" matTooltip="検索">
         <img
           src="/assets/images/icons/search-icon.png"
           alt="検索画面のアイコン"

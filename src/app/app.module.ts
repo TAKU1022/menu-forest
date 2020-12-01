@@ -32,6 +32,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 registerLocaleData(localeJa);
 @NgModule({
@@ -67,6 +68,7 @@ registerLocaleData(localeJa);
     HttpClientModule,
     LayoutModule,
     MatSnackBarModule,
+    MatTooltipModule,
   ],
   providers: [
     { provide: REGION, useValue: 'asia-northeast1' },
