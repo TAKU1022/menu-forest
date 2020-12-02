@@ -31,7 +31,6 @@ export class AuthGuard implements CanActivate, CanLoad {
       map((user: firebase.User) => !!user),
       tap((isLogin: boolean) => {
         if (!isLogin) {
-          console.log('ログインしてないよ');
           this.router.navigateByUrl('/welcome');
         }
       })
@@ -46,7 +45,6 @@ export class AuthGuard implements CanActivate, CanLoad {
       take(1),
       tap((isLogin: boolean) => {
         if (!isLogin) {
-          console.log('ログインしてないよ');
           this.router.navigateByUrl('/welcome');
         }
       })

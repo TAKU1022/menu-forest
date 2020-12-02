@@ -47,20 +47,17 @@ export class AccountComponent implements OnInit {
   changeFileEvent(event: any): void {
     this.imageChangedEvent = event;
   }
+
   cropImage(event: ImageCroppedEvent): void {
     this.croppedImage = event.base64;
   }
-  loadImage(): void {
-    console.log('画像が読み込まれました');
-  }
-  isReadyForCropper(sourceImageDimensions: Dimensions): void {
-    console.log('操作できるようになりました', sourceImageDimensions);
-  }
+
   failLoadImage(selectedImage): void {
     alert('画像の読み込みに失敗しました');
     selectedImage.value = '';
     this.imageChangedEvent = null;
   }
+
   resetImage(selectedImage): void {
     selectedImage.value = '';
     this.imageChangedEvent = null;

@@ -92,8 +92,8 @@ export class UserService {
     return this.db.doc<User>(`users/${userId}`).valueChanges();
   }
 
-  deleteUser(): Promise<void> {
-    return this.afAuth.currentUser.then((user: firebase.User) => user.delete());
+  async deleteUser(): Promise<void> {
+    return (await this.afAuth.currentUser).delete();
   }
 
   changeUserPostCount(userId: string, postCount: number): Promise<void> {
