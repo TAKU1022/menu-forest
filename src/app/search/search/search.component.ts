@@ -7,6 +7,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TitleService } from 'src/app/services/title.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-search',
@@ -28,8 +29,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     private router: Router,
     private route: ActivatedRoute,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private loadingService: LoadingService
   ) {
+    this.loadingService.toggleLoading(false);
     this.titleService.setTitle('検索');
   }
 
