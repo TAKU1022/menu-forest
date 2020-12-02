@@ -107,6 +107,7 @@ export class ChangeMyMenuDialogComponent implements OnInit, OnDestroy {
   searchFood(searchQuery: string): void {
     if (searchQuery === '') {
       this.searchResults = null;
+      this.isSearched = false;
     } else {
       this.index.search(searchQuery).then((result) => {
         this.searchResults = result.hits;

@@ -24,36 +24,40 @@
       <mat-icon>search</mat-icon>
     </button>
   </form>
+  <ng-container *ngIf="isSearched">
+    <ng-template #searchHit>
+      <p class="search-hit">{{ nbHits }} 件ヒットしました</p>
+    </ng-template>
+    <ng-container *ngIf="nbHits === 0; else searchHit">
+      <p class="search-hit">
+        {{ searchControl.value }} に一致する情報は見つかりませんでした
+      </p>
+    </ng-container>
+  </ng-container>
 
   <mat-dialog-content>
     <ng-container *ngIf="isSearched; else default">
-      <ng-template #hits>
-        <div class="result-grid">
-          <ng-container *ngFor="let result of searchResults">
-            <div class="result">
-              <div
-                class="result__img"
-                [style.background-image]="'url(' + result.image + ')'"
-              ></div>
-              <p class="result__name">{{ result.name }}</p>
-              <button
-                class="result__button"
-                mat-button
-                color="primary"
-                (click)="changeMyMenu(result.foodId)"
-                matDialogClose
-              >
-                変更する
-              </button>
-            </div>
-          </ng-container>
-        </div>
-      </ng-template>
-      <ng-container *ngIf="nbHits === 0; else hits">
-        <p>一致する検索結果はありませんでした</p>
-      </ng-container>
+      <div class="result-grid">
+        <ng-container *ngFor="let result of searchResults">
+          <div class="result">
+            <div
+              class="result__img"
+              [style.background-image]="'url(' + result.image + ')'"
+            ></div>
+            <p class="result__name">{{ result.name }}</p>
+            <button
+              class="result__button"
+              mat-button
+              color="primary"
+              (click)="changeMyMenu(result.foodId)"
+              matDialogClose
+            >
+              変更する
+            </button>
+          </div>
+        </ng-container>
+      </div>
     </ng-container>
-
     <ng-template #default>
       <div class="food-grid">
         <div *ngFor="let food of foods">
@@ -76,7 +80,7 @@
       </div>
       <div
         infiniteScroll
-        [infiniteScrollDistance]="4"
+        [infiniteScrollDistance]="2"
         [infiniteScrollThrottle]="500"
         [scrollWindow]="false"
         infiniteScrollContainer="mat-dialog-content"
