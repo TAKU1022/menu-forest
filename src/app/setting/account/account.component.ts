@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '@interfaces/user';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { ImageCroppedEvent, Dimensions } from 'ngx-image-cropper';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -31,9 +31,9 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  changeUserName(): Promise<void> {
+  changeUserName(): void {
     const newUserName = this.nameForm.value;
-    return this.userService
+    this.userService
       .changeUserName(this.userId, newUserName)
       .then(() => {
         this.snackBar.open('変更されました', null);
@@ -52,20 +52,20 @@ export class AccountComponent implements OnInit {
     this.croppedImage = event.base64;
   }
 
-  failLoadImage(selectedImage): void {
+  failLoadImage(selectedImage: any): void {
     alert('画像の読み込みに失敗しました');
     selectedImage.value = '';
     this.imageChangedEvent = null;
   }
 
-  resetImage(selectedImage): void {
+  resetImage(selectedImage: any): void {
     selectedImage.value = '';
     this.imageChangedEvent = null;
     this.croppedImage = '';
   }
 
-  changeUserAvater(selectedImage): Promise<void> {
-    return this.userService
+  changeUserAvater(selectedImage: any): void {
+    this.userService
       .changeUserAvater(this.userId, this.croppedImage)
       .then(() => {
         this.snackBar.open('変更されました', null);
