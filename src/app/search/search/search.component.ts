@@ -21,6 +21,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   searchControl = new FormControl('');
   searchOptions: any[];
   searchResults: any[];
+  nbHits: number;
+  isSearched: boolean;
 
   constructor(
     private searchService: SearchService,
@@ -69,12 +71,14 @@ export class SearchComponent implements OnInit, OnDestroy {
             food.rotateTypeId = rotateTypeId;
           });
           this.searchResults = result.hits;
+          this.nbHits = result.nbHits;
         });
       }
     );
   }
 
   routeSearch(searchQuery: string): void {
+    this.isSearched = true;
     this.router.navigate([], {
       queryParamsHandling: 'merge',
       queryParams: { query: searchQuery || null },
@@ -82,6 +86,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   navigateByFoodId(event: MatAutocompleteSelectedEvent): void {
+    this.searchControl.setValue(null);
     const foodId: string = event.option?.value;
     this.router.navigateByUrl(`/food-list/${foodId}`);
   }
