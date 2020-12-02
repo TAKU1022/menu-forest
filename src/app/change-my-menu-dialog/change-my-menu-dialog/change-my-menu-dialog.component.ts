@@ -95,12 +95,6 @@ export class ChangeMyMenuDialogComponent implements OnInit, OnDestroy {
       )
       .then(() => {
         this.snackBar.open('My献立を変更しました！', null);
-        if (this.data.myMenu.isPosted) {
-          this.myMenuService.changeMyMenuIsPosted(
-            this.data.myMenu.myMenuId,
-            false
-          );
-        }
       });
   }
 

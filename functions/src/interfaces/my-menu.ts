@@ -18,7 +18,6 @@ export interface MyMenu {
   };
   creatorId: string;
   myMenuId: string;
-  isPosted: boolean;
 }
 
 export interface DayMenuWithFood {

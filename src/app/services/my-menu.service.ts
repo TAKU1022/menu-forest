@@ -210,12 +210,6 @@ export class MyMenuService {
     }
   }
 
-  changeMyMenuIsPosted(myMenuId: string, isPosted: boolean): Promise<void> {
-    return this.db.doc<MyMenu>(`myMenus/${myMenuId}`).update({
-      isPosted,
-    });
-  }
-
   changeMyMenuToUserMenu(
     myMenuId: string,
     userMenu: {

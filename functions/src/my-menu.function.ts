@@ -50,7 +50,6 @@ export const createMyMenu = functions
       },
       creatorId: user.uid,
       myMenuId: myMenuId,
-      isPosted: false,
     };
     return db.doc(`myMenus/${myMenuId}`).set(myMenu);
   });
