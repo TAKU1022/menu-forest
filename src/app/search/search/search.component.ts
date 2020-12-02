@@ -6,6 +6,7 @@ import { startWith } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TitleService } from 'src/app/services/title.service';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-search',
@@ -73,26 +74,15 @@ export class SearchComponent implements OnInit, OnDestroy {
     );
   }
 
-  displayFn(food): string {
-    return food && food.name ? food.name : '';
-  }
-
-  routeSearch(searchQuery): void {
+  routeSearch(searchQuery: string): void {
     this.router.navigate([], {
       queryParamsHandling: 'merge',
-      queryParams: {
-        query: searchQuery || null,
-      },
+      queryParams: { query: searchQuery || null },
     });
   }
 
-  navigateByFoodId(foodId: string): void {
+  navigateByFoodId(event: MatAutocompleteSelectedEvent): void {
+    const foodId: string = event.option?.value;
     this.router.navigateByUrl(`/food-list/${foodId}`);
-  }
-
-  setSearchQuery(value): void {
-    this.searchControl.setValue(value, {
-      emitEvent: false,
-    });
   }
 }

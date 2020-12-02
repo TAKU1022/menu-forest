@@ -1,26 +1,21 @@
 <div class="container">
-  <form class="search">
+  <form class="search" (ngSubmit)="routeSearch(searchControl.value)">
     <input
       class="search__input"
       type="text"
       [formControl]="searchControl"
       [matAutocomplete]="auto"
+      autocomplete="off"
     />
     <mat-autocomplete
       #auto="matAutocomplete"
-      [displayWith]="displayFn"
-      (optionSelected)="navigateByFoodId($event.option?.value.foodId)"
-      (optionActivated)="setSearchQuery($event.option?.value)"
+      (optionSelected)="navigateByFoodId($event)"
     >
-      <mat-option *ngFor="let option of searchOptions" [value]="option">
+      <mat-option *ngFor="let option of searchOptions" [value]="option.foodId">
         {{ option.name }}
       </mat-option>
     </mat-autocomplete>
-    <button
-      mat-icon-button
-      class="search__button"
-      (click)="routeSearch(searchControl.value)"
-    >
+    <button mat-icon-button class="search__button">
       <mat-icon>search</mat-icon>
     </button>
   </form>
