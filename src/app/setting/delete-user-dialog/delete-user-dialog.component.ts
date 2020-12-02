@@ -39,7 +39,7 @@ export class DeleteUserDialogComponent implements OnInit {
           '退会処理に失敗しました。ログインをし直し再度お試しください。',
           null,
           {
-            duration: 50000,
+            duration: 5000,
           }
         );
       });
