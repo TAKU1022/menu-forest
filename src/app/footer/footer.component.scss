@@ -23,31 +23,19 @@
     margin: 0 auto 16px;
   }
   &__item {
-    display: flex;
-    font-size: 18px;
-    @media screen and (max-width: 450px) {
-      font-size: 16px;
-    }
-  }
-  &__terms {
-    color: #fff;
+    font-size: 12px;
     margin-right: 16px;
-    font-size: 12px;
     @media screen and (max-width: 450px) {
       font-size: 10px;
     }
   }
-  &__privacy {
+  &__item:nth-last-child(1) {
+    margin: 0;
+  }
+  &__link {
     color: #fff;
-    font-size: 12px;
-    @media screen and (max-width: 450px) {
-      font-size: 10px;
-    }
   }
-  &__terms:hover {
-    text-decoration: underline;
-  }
-  &__privacy:hover {
+  &__link:hover {
     text-decoration: underline;
   }
 }
