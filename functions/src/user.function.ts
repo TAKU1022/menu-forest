@@ -2,7 +2,6 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 admin.initializeApp();
 import { deleteCollectionByReference } from './firebase-util.function';
-import { sendEmail } from './send-email.function';
 
 const db = admin.firestore();
 
@@ -28,20 +27,6 @@ export const createUser = functions
     });
   });
 
-export const sendEmailCreateUser = functions
-  .region('asia-northeast1')
-  .firestore.document('users/{userId}')
-  .onCreate((snap) => {
-    const user = snap.data();
-    return sendEmail({
-      to: user.email,
-      templateId: 'd-715a0d2cfae7406791a2e2e259a99204',
-      dynamicTemplateData: {
-        name: user.name,
-      },
-    });
-  });
-
 export const deleteUserAccount = functions
   .region('asia-northeast1')
   .auth.user()
@@ -53,18 +38,4 @@ export const deleteUserAccount = functions
     const posts = db.collection('posts').where('creatorId', '==', userId);
     const deleteAllPosts = deleteCollectionByReference(posts);
     return Promise.all([deleteUser, deleteMyMenu, deleteAllPosts]);
-  });
-
-export const sendEmailDeleteUser = functions
-  .region('asia-northeast1')
-  .firestore.document('users/{userId}')
-  .onDelete((snap) => {
-    const user = snap.data();
-    return sendEmail({
-      to: user.email,
-      templateId: 'd-706070cfbebb4b969f11599a82b12be2',
-      dynamicTemplateData: {
-        name: user.name,
-      },
-    });
   });
