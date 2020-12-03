@@ -1,27 +1,23 @@
-.container {
-  @media screen and (max-width: 450px) {
-    margin: 0 0 64px;
-  }
-}
-
-.content-title {
+.title {
   width: 350px;
-  margin: 32px 0;
+  margin: 0 0 40px;
   @media screen and (max-width: 600px) {
-    width: 280px;
+    width: 260px;
   }
   @media screen and (max-width: 320px) {
-    width: 240px;
-    margin: 16px 0 32px;
+    width: 220px;
+    margin: 0 0 32px;
   }
 }
 
 .wood-background {
-  padding: 56px 32px 48px;
-  max-width: 1200px;
-  margin: 0 auto;
-  @media screen and (max-width: 450px) {
-    padding: 48px 16px;
+  &--setting {
+    padding: 56px 32px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    @media screen and (max-width: 450px) {
+      padding: 48px 16px;
+    }
   }
 }
 
