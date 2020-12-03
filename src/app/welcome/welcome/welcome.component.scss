@@ -12,8 +12,12 @@
       center;
     background-size: 110% auto;
     width: 100%;
-    padding-bottom: 56.25%;
+    height: 100vh;
     position: relative;
+    @media screen and (max-width: 800px) {
+      height: 0;
+      padding-bottom: 56.25%;
+    }
   }
   &__logo {
     position: absolute;
@@ -21,8 +25,8 @@
     top: 45%;
     left: 50%;
     transform: translate(-50%, -45%);
-    @media screen and (max-width: 600px) {
-      width: 70%;
+    @media screen and (max-width: 800px) {
+      width: 80%;
     }
   }
 }
@@ -50,9 +54,16 @@
   &__line-img {
     margin: 0 0 24px;
   }
-  &__sentence-content {
-    position: relative;
+  &__content {
     margin-bottom: 48px;
+    display: flex;
+    @media screen and (max-width: 1000px) {
+      flex-flow: column;
+    }
+  }
+  &__sentence-content {
+    flex: 1;
+    margin: 24px 0;
   }
   &__sentence {
     font-size: 20px;
@@ -71,35 +82,17 @@
       font-size: 13px;
     }
   }
-  &__left-img {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
+  &__sentence:nth-last-child(1) {
+    margin: 0;
+  }
+  &__image {
     width: 30%;
+    align-self: center;
     @media screen and (max-width: 1000px) {
-      display: none;
+      width: auto;
     }
-  }
-  &__right-img {
-    position: absolute;
-    bottom: 50%;
-    right: 0;
-    transform: translateY(50%);
-    width: 30%;
-    @media screen and (max-width: 1000px) {
-      display: none;
-    }
-  }
-  &__top-img {
-    margin-bottom: 24px;
-    @media screen and (min-width: 1001px) {
-      display: none;
-    }
-  }
-  &__bottom-img {
-    @media screen and (min-width: 1001px) {
-      display: none;
+    @media screen and (max-width: 400px) {
+      width: 80%;
     }
   }
   &__button {
