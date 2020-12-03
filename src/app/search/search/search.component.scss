@@ -1,3 +1,11 @@
+.container {
+  &--search {
+    @media screen and (max-width: 450px) {
+      margin: 104px 8px 64px;
+    }
+  }
+}
+
 .search-content {
   margin: 40px 0 32px;
 }
