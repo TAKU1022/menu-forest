@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container container--menu">
   <img
     src="/assets/images/titles/menu-title.png"
     alt="一週間の献立画面のタイトル"
-    class="content-title"
+    class="title"
   />
   <div class="grid" *ngIf="weekMenu$ | async as weekMenu">
     <ng-container *ngFor="let dayMenu of weekMenu; let i = index">
