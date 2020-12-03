@@ -2,16 +2,19 @@
   <img
     src="/assets/images/titles/my-page-title.png"
     alt="マイページ画面のタイトル"
-    class="content-title"
+    class="title"
   />
-  <div class="wood-background" *ngIf="user$ | async as user">
+  <div
+    class="wood-background wood-background--my-page"
+    *ngIf="user$ | async as user"
+  >
     <img
       src="/assets/images/others/wood-pin.png"
       alt="木のピン"
       *ngFor="let number of [1, 2, 3, 4]"
       class="wood-pins"
     />
-    <div class="content">
+    <div class="my-page">
       <img
         src="/assets/images/others/pin-yellow.png"
         alt="黄色のピン"
