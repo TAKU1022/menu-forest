@@ -1,14 +1,9 @@
-.container {
-  @media screen and (max-width: 450px) {
-    margin: 0 0 64px;
-  }
-}
-
 .wood-background {
-  padding: 56px 32px 48px;
-  margin-top: 48px;
-  @media screen and (max-width: 450px) {
-    padding: 40px 24px 48px;
+  &--user {
+    padding: 56px 32px;
+    @media screen and (max-width: 450px) {
+      padding: 40px 24px 48px;
+    }
   }
 }
 
