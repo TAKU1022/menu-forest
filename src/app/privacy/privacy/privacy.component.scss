@@ -1,15 +1,12 @@
-.dot-background {
+.privacy-content {
+  max-width: 1000px;
+  margin: 0 auto;
   text-align: left;
   padding: 104px 16px 80px;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   @media screen and (max-width: 600px) {
     padding: 88px 16px 64px;
   }
-}
-
-.privacy-content {
-  max-width: 1000px;
-  margin: 0 auto;
   &__sentence {
     padding-left: 16px;
   }
