@@ -10,7 +10,7 @@
       <h1 class="post-title">
         <span class="post-title__text">{{ post.title }}</span>
       </h1>
-      <div class="content">
+      <div class="post-content">
         <img
           src="/assets/images/others/pin-yellow.png"
           alt="黄色のピン"
@@ -99,7 +99,10 @@
       </div>
 
       <div class="decoration-btn-content">
-        <div class="decoration-btn" (click)="changeMyMenuToUserMenu()">
+        <div
+          class="decoration-btn decoration-btn--update-my-menu"
+          (click)="changeMyMenuToUserMenu()"
+        >
           <div class="decoration-btn__border">
             <span class="decoration-btn__text">My献立に上書き</span>
           </div>
