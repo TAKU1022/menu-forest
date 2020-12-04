@@ -1,18 +1,18 @@
-.container {
-  @media screen and (max-width: 450px) {
-    margin: 0 0 64px;
-  }
-}
-
 .wood-background {
-  padding: 56px 32px 48px;
-  @media screen and (max-width: 450px) {
-    padding: 40px 24px 48px;
+  &--post {
+    padding: 56px 32px;
+    @media screen and (max-width: 450px) {
+      padding: 40px 24px;
+    }
   }
 }
 
-.content-title {
-  margin: 16px 0 32px;
+.title {
+  margin: 0 0 40px;
+  @media screen and (max-width: 450px) {
+    margin: 0 0 32px;
+    width: 90%;
+  }
 }
 
 .grid {
@@ -55,7 +55,7 @@
     color: #fff;
     font-weight: bold;
     margin: 0;
-    padding: 16px;
+    padding: 16px 24px;
     letter-spacing: 2px;
   }
   &__foods-content {
@@ -147,7 +147,7 @@
     color: #fff;
     font-size: 14px;
     font-weight: bold;
-    margin: 0 0 8px;
+    margin: 0 0 4px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
