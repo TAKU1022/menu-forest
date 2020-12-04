@@ -1,10 +1,18 @@
-.content-title {
-  margin: 40px 0 24px;
+.container {
+  &--menu {
+    @media screen and (max-width: 450px) {
+      padding: 104px 8px 64px;
+    }
+  }
+}
+
+.title {
+  margin: 0 0 24px;
   @media screen and (max-width: 750px) {
     width: 450px;
   }
   @media screen and (max-width: 450px) {
-    width: 320px;
+    width: 300px;
   }
 }
 
