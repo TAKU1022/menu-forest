@@ -2,9 +2,12 @@
   <img
     src="/assets/images/titles/create-my-menu-title.png"
     alt="My献立編集画面のタイトル"
-    class="content-title"
+    class="title"
   />
-  <div class="wood-background" *ngIf="weekMenu$ | async as weekMenu">
+  <div
+    class="wood-background wood-background--create-my-menu"
+    *ngIf="weekMenu$ | async as weekMenu"
+  >
     <img
       src="/assets/images/others/wood-pin.png"
       alt="木のピン"
@@ -91,7 +94,10 @@
         </div>
       </div>
     </div>
-    <div class="decoration-btn" (click)="openPostDialog(weekMenu)">
+    <div
+      class="decoration-btn decoration-btn--post"
+      (click)="openPostDialog(weekMenu)"
+    >
       <div class="decoration-btn__border">
         <span class="decoration-btn__text">My献立を投稿する</span>
       </div>

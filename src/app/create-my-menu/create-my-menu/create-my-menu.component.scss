@@ -1,26 +1,19 @@
-.container {
-  @media screen and (max-width: 600px) {
-    margin: 0 0 64px;
-  }
-}
-
-.content-title {
-  margin: 40px 0;
+.title {
+  margin: 0 0 40px;
   @media screen and (max-width: 600px) {
     width: 90%;
-    margin: 32px 0;
-  }
-  @media screen and (max-width: 320px) {
-    margin: 16px 0 32px;
+    margin: 0 0 32px;
   }
 }
 
 .wood-background {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 64px;
-  @media screen and (max-width: 600px) {
-    padding: 32px 16px 40px;
+  &--create-my-menu {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+    @media screen and (max-width: 600px) {
+      padding: 32px 16px 40px;
+    }
   }
 }
 
@@ -157,5 +150,7 @@
 }
 
 .decoration-btn {
-  margin: 40px 0 0;
+  &--post {
+    margin: 40px 0 0;
+  }
 }
