@@ -1,5 +1,15 @@
 .container {
-  position: relative;
+  &--home {
+    position: relative;
+    @media screen and (max-width: 450px) {
+      padding: 104px 8px 64px;
+    }
+  }
+}
+
+.food-wrap {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .woods {
@@ -9,40 +19,35 @@
   @media screen and (max-width: 1000px) {
     display: none;
   }
-  &:nth-child(2) {
+  &:nth-child(1) {
     top: 10%;
     right: -16%;
   }
-  &:nth-child(3) {
+  &:nth-child(2) {
     top: 45%;
     right: -10%;
   }
-  &:nth-child(4) {
+  &:nth-child(3) {
     top: 80%;
     right: -8%;
   }
-  &:nth-child(5) {
+  &:nth-child(4) {
     top: 20%;
     left: -14%;
   }
-  &:nth-child(6) {
+  &:nth-child(5) {
     top: 60%;
     left: -8%;
   }
 }
 
-.food-wrap {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.content-title {
-  margin: 40px 0;
+.title {
+  margin: 0 0 40px;
   @media screen and (max-width: 750px) {
     width: 350px;
   }
   @media screen and (max-width: 450px) {
-    margin: 24px 0 32px;
+    margin: 0 0 32px;
     width: 300px;
   }
 }

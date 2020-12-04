@@ -1,22 +1,22 @@
-<div class="container">
+<div class="container container--home">
   <img
     src="/assets/images/titles/home-title.png"
     alt="ホーム画面のタイトル"
-    class="content-title"
-  />
-  <img
-    *ngFor="let number of [1, 2, 3]"
-    src="/assets/images/others/wood0.png"
-    alt="シンプルな木"
-    class="woods"
-  />
-  <img
-    *ngFor="let number of [1, 2]"
-    src="/assets/images/others/wood1.png"
-    alt="りんごの実がなる木"
-    class="woods"
+    class="title"
   />
   <div class="food-wrap" *ngIf="todayMenu$ | async as todayMenu">
+    <img
+      *ngFor="let number of [1, 2, 3]"
+      src="/assets/images/others/wood0.png"
+      alt="シンプルな木"
+      class="woods"
+    />
+    <img
+      *ngFor="let number of [1, 2]"
+      src="/assets/images/others/wood1.png"
+      alt="りんごの実がなる木"
+      class="woods"
+    />
     <div class="grid">
       <div class="grid-item grid-item--breakfast">
         <img
