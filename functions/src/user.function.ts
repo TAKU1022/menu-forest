@@ -4,6 +4,7 @@ admin.initializeApp();
 import { deleteCollectionByReference } from './firebase-util.function';
 
 const db = admin.firestore();
+const storage = admin.storage().bucket();
 
 export const createUser = functions
   .region('asia-northeast1')
@@ -37,5 +38,11 @@ export const deleteUserAccount = functions
     const deleteMyMenu = deleteCollectionByReference(myMenu);
     const posts = db.collection('posts').where('creatorId', '==', userId);
     const deleteAllPosts = deleteCollectionByReference(posts);
-    return Promise.all([deleteUser, deleteMyMenu, deleteAllPosts]);
+    const deleteStorageData = storage.file(`users/${userId}`).delete();
+    return Promise.all([
+      deleteUser,
+      deleteMyMenu,
+      deleteAllPosts,
+      deleteStorageData,
+    ]);
   });
