@@ -1,13 +1,7 @@
 <app-header [sidenav]="sidenav"></app-header>
 
 <mat-sidenav-container>
-  <mat-sidenav
-    #sidenav
-    fixedInViewport
-    mode="over"
-    [opened]="isMobile"
-    class="sidenav"
-  >
+  <mat-sidenav #sidenav mode="over" [opened]="false" class="sidenav">
     <mat-nav-list>
       <a routerLink="/" class="list-item list-item--home">
         <div class="list-item__border">

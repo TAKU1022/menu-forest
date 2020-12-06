@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingService } from '../services/loading.service';
 import { Observable } from 'rxjs';
-import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-main-shell',
@@ -10,15 +9,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class MainShellComponent implements OnInit {
   loading$: Observable<boolean> = this.loadingService.loading$;
-  isMobile = false;
-  mediaQuery: MediaQueryList;
 
-  constructor(
-    private loadingService: LoadingService,
-    private mediaMatcher: MediaMatcher
-  ) {}
+  constructor(private loadingService: LoadingService) {}
 
-  ngOnInit(): void {
-    this.mediaQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
-  }
+  ngOnInit(): void {}
 }
