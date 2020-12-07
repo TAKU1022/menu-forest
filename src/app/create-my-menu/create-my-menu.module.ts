@@ -11,6 +11,7 @@ import { PostDialogComponent } from './post-dialog/post-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [CreateMyMenuComponent, PostDialogComponent],
@@ -25,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatFormFieldModule,
     MatRadioModule,
+    MatButtonModule,
   ],
 })
 export class CreateMyMenuModule {}
