@@ -1,6 +1,6 @@
 <div class="container">
   <ng-container *ngIf="food$ | async as food">
-    <div class="wood-background">
+    <div class="wood-background wood-background--food-detail">
       <img
         src="/assets/images/others/wood-pin.png"
         alt="木のピン"
@@ -8,7 +8,7 @@
         class="wood-pins"
       />
       <div class="food-name">
-        <h1 class="food-name-text">{{ food.name }}のレシピ</h1>
+        <h1 class="food-name__text">{{ food.name }}のレシピ</h1>
       </div>
       <div class="grid">
         <ng-container *ngFor="let recipe of recipes">
@@ -31,7 +31,13 @@
               >
               <span class="recipe__cost">費用：{{ recipe.recipeCost }}</span>
               <p class="recipe__url">
-                作り方：<a [href]="recipe.recipeUrl">{{ recipe.recipeUrl }}</a>
+                作り方：<a
+                  [href]="recipe.recipeUrl"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  class="recipe__link"
+                  >{{ recipe.recipeUrl }}</a
+                >
               </p>
             </div>
           </div>

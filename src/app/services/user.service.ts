@@ -7,6 +7,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { User } from '@interfaces/user';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -92,8 +93,17 @@ export class UserService {
     return this.db.doc<User>(`users/${userId}`).valueChanges();
   }
 
-  deleteUser(): Promise<void> {
-    return this.afAuth.currentUser.then((user: firebase.User) => user.delete());
+  async deleteUser(): Promise<void> {
+    const user: firebase.User = await this.afAuth.currentUser;
+    const googleAuthProvider: auth.GoogleAuthProvider = new auth.GoogleAuthProvider();
+    return user
+      .reauthenticateWithPopup(googleAuthProvider)
+      .then(() => {
+        return user.delete();
+      })
+      .catch((error) => {
+        alert(error);
+      });
   }
 
   changeUserPostCount(userId: string, postCount: number): Promise<void> {

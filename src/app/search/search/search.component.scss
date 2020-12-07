@@ -1,7 +1,19 @@
+.container {
+  &--search {
+    @media screen and (max-width: 450px) {
+      padding: 104px 8px 64px;
+    }
+  }
+}
+
+.search-content {
+  margin: 0 0 40px;
+}
+
 .search {
   width: 80%;
   max-width: 400px;
-  margin: 40px auto 32px;
+  margin: 0 auto;
   position: relative;
   &__input {
     width: 100%;
@@ -29,6 +41,12 @@
       color: #fff;
     }
   }
+}
+
+.search-hit {
+  margin: 8px 0;
+  font-weight: bold;
+  color: #fff;
 }
 
 .result-grid {

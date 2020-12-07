@@ -1,11 +1,5 @@
-.container {
-  @media screen and (max-width: 450px) {
-    margin: 0 0 64px;
-  }
-}
-
-.content-title {
-  margin: 32px 0;
+.title {
+  margin: 0 0 40px;
   @media screen and (max-width: 600px) {
     width: 300px;
   }
@@ -15,11 +9,13 @@
 }
 
 .wood-background {
-  padding: 56px 40px 48px;
-  max-width: 1200px;
-  margin: 0 auto;
-  @media screen and (max-width: 450px) {
-    padding: 40px 16px 48px;
+  &--my-page {
+    padding: 56px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    @media screen and (max-width: 450px) {
+      padding: 48px 16px;
+    }
   }
 }
 
@@ -27,7 +23,7 @@
   z-index: -1;
 }
 
-.content {
+.my-page {
   background-color: #43a047;
   border-radius: 4px;
   position: relative;
@@ -334,7 +330,6 @@
       transform: rotate(-7deg);
     }
   }
-
   &__food-images {
     background-size: cover;
     background-position: center;

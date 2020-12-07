@@ -41,8 +41,8 @@ service cloud.firestore {
     match /posts/{postId} {
       //誰でも見ることができる
       allow read: if true;
-      //ログインした人かつ、前回の投稿と異なる内容(My献立)にした人が作成できる
-      allow create: if isLogin() && get(/databases/$(database)/documents/myMenus/$(request.resource.data.myMenuId)).data.isPosted == false;
+      //ログインした人だけ作成できる
+      allow create: if isLogin()
       //作成者かつ、そのユーザーを変えようとしていない人がアップデートできる
       allow update: if request.auth.uid == resource.data.creatorId && request.resource.data.creatorId == resource.data.creatorId;
       //作成者だけ削除できる

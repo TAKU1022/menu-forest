@@ -5,6 +5,9 @@ import { SearchIndex } from 'algoliasearch/lite';
 import { startWith } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TitleService } from 'src/app/services/title.service';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-search',
@@ -19,12 +22,19 @@ export class SearchComponent implements OnInit, OnDestroy {
   searchControl = new FormControl('');
   searchOptions: any[];
   searchResults: any[];
+  nbHits: number;
+  isSearched: boolean;
 
   constructor(
     private searchService: SearchService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private titleService: TitleService,
+    private loadingService: LoadingService
+  ) {
+    this.loadingService.toggleLoading(false);
+    this.titleService.setTitle('検索');
+  }
 
   ngOnInit(): void {
     this.setSearchOptions();
@@ -64,31 +74,23 @@ export class SearchComponent implements OnInit, OnDestroy {
             food.rotateTypeId = rotateTypeId;
           });
           this.searchResults = result.hits;
+          this.nbHits = result.nbHits;
         });
       }
     );
   }
 
-  displayFn(food): string {
-    return food && food.name ? food.name : '';
-  }
-
-  routeSearch(searchQuery): void {
+  routeSearch(searchQuery: string): void {
+    this.isSearched = true;
     this.router.navigate([], {
       queryParamsHandling: 'merge',
-      queryParams: {
-        query: searchQuery || null,
-      },
+      queryParams: { query: searchQuery || null },
     });
   }
 
-  navigateByFoodId(foodId: string): void {
+  navigateByFoodId(event: MatAutocompleteSelectedEvent): void {
+    this.searchControl.setValue(null);
+    const foodId: string = event.option?.value;
     this.router.navigateByUrl(`/food-list/${foodId}`);
-  }
-
-  setSearchQuery(value): void {
-    this.searchControl.setValue(value, {
-      emitEvent: false,
-    });
   }
 }

@@ -95,18 +95,13 @@ export class ChangeMyMenuDialogComponent implements OnInit, OnDestroy {
       )
       .then(() => {
         this.snackBar.open('My献立を変更しました！', null);
-        if (this.data.myMenu.isPosted) {
-          this.myMenuService.changeMyMenuIsPosted(
-            this.data.myMenu.myMenuId,
-            false
-          );
-        }
       });
   }
 
   searchFood(searchQuery: string): void {
     if (searchQuery === '') {
       this.searchResults = null;
+      this.isSearched = false;
     } else {
       this.index.search(searchQuery).then((result) => {
         this.searchResults = result.hits;

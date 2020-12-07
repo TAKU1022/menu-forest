@@ -135,12 +135,6 @@ export class PostDialogComponent implements OnInit {
         this.snackBar.open('投稿に成功しました！', null);
         this.dialogRef.close();
         this.increasedUserPostCount();
-        if (!this.data.myMenu.isPosted) {
-          this.myMenuService.changeMyMenuIsPosted(
-            this.data.myMenu.myMenuId,
-            true
-          );
-        }
       });
   }
 }

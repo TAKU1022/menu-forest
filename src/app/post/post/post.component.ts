@@ -4,6 +4,7 @@ import { PostWithFoodWithUser } from '@interfaces/post';
 import { take, tap } from 'rxjs/operators';
 import { LoadingService } from 'src/app/services/loading.service';
 import { firestore } from 'firebase';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
   selector: 'app-post',
@@ -22,9 +23,11 @@ export class PostComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private titleService: TitleService
   ) {
     this.loadingService.toggleLoading(true);
+    this.titleService.setTitle('みんなの献立');
   }
 
   ngOnInit(): void {

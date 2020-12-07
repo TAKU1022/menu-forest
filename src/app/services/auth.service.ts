@@ -32,7 +32,6 @@ export class AuthService {
   ) {
     this.afUser$.subscribe((user: firebase.User) => {
       this.userId = user && user.uid;
-      console.log(user);
     });
   }
 

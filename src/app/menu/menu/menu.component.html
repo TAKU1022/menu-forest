@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container container--menu">
   <img
     src="/assets/images/titles/menu-title.png"
     alt="一週間の献立画面のタイトル"
-    class="content-title"
+    class="title"
   />
   <div class="grid" *ngIf="weekMenu$ | async as weekMenu">
     <ng-container *ngFor="let dayMenu of weekMenu; let i = index">
@@ -15,7 +15,7 @@
         <div class="menu-grid">
           <div class="food-content food-content--breakfast">
             <div class="food food--breakfast">
-              <a routerLink="/menu/{{ dayMenu.breakfast.foodId }}">
+              <a routerLink="/food-list/{{ dayMenu.breakfast.foodId }}">
                 <img
                   src="/assets/images/others/pin-red.png"
                   alt="赤色ピン"
@@ -39,7 +39,7 @@
           </div>
           <div class="food-content food-content--lunch">
             <div class="food food--lunch">
-              <a routerLink="/menu/{{ dayMenu.lunch.foodId }}">
+              <a routerLink="/food-list/{{ dayMenu.lunch.foodId }}">
                 <img
                   src="/assets/images/others/pin-red.png"
                   alt="赤色ピン"
@@ -61,7 +61,7 @@
           </div>
           <div class="food-content food-content--dinner">
             <div class="food food--dinner">
-              <a routerLink="/menu/{{ dayMenu.dinner.foodId }}">
+              <a routerLink="/food-list/{{ dayMenu.dinner.foodId }}">
                 <img
                   src="/assets/images/others/pin-red.png"
                   alt="赤色ピン"

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from 'src/app/services/search.service';
 import { SearchIndex } from 'algoliasearch/lite';
+import { TitleService } from 'src/app/services/title.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-food-list',
@@ -16,7 +18,14 @@ export class FoodListComponent implements OnInit {
   initialFoods: any[] = [];
   isLoading: boolean;
 
-  constructor(private searchService: SearchService) {}
+  constructor(
+    private searchService: SearchService,
+    private titleService: TitleService,
+    private loadingService: LoadingService
+  ) {
+    this.loadingService.toggleLoading(false);
+    this.titleService.setTitle('メニュー一覧');
+  }
 
   ngOnInit(): void {
     this.search();

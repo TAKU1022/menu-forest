@@ -13,7 +13,7 @@ export class TutorialService {
     this.shepherdService.defaultStepOptions = {
       canClickTarget: false,
       cancelIcon: {
-        enabled: true,
+        enabled: false,
       },
       scrollTo: { behavior: 'smooth', block: 'center' },
       modalOverlayOpeningPadding: 8,

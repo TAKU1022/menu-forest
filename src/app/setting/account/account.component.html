@@ -28,8 +28,6 @@
       format="png"
       [roundCropper]="true"
       (imageCropped)="cropImage($event)"
-      (imageLoaded)="loadImage()"
-      (cropperReady)="isReadyForCropper($event)"
       (loadImageFailed)="failLoadImage(selectedImage)"
       [class.active]="imageChangedEvent"
       width="300px"

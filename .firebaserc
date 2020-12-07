@@ -1,14 +1,5 @@
 {
   "projects": {
     "default": "menu-2d67e"
-  },
-  "targets": {
-    "menu-2d67e": {
-      "hosting": {
-        "menu": [
-          "menu-2d67e"
-        ]
-      }
-    }
   }
 }

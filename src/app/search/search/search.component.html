@@ -1,29 +1,39 @@
-<div class="container">
-  <form class="search">
-    <input
-      class="search__input"
-      type="text"
-      [formControl]="searchControl"
-      [matAutocomplete]="auto"
-    />
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      [displayWith]="displayFn"
-      (optionSelected)="navigateByFoodId($event.option?.value.foodId)"
-      (optionActivated)="setSearchQuery($event.option?.value)"
-    >
-      <mat-option *ngFor="let option of searchOptions" [value]="option">
-        {{ option.name }}
-      </mat-option>
-    </mat-autocomplete>
-    <button
-      mat-icon-button
-      class="search__button"
-      (click)="routeSearch(searchControl.value)"
-    >
-      <mat-icon>search</mat-icon>
-    </button>
-  </form>
+<div class="container container--search">
+  <div class="search-content">
+    <form class="search" (ngSubmit)="routeSearch(searchControl.value)">
+      <input
+        class="search__input"
+        type="text"
+        [formControl]="searchControl"
+        [matAutocomplete]="auto"
+        autocomplete="off"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="navigateByFoodId($event)"
+      >
+        <mat-option
+          *ngFor="let option of searchOptions"
+          [value]="option.foodId"
+        >
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+      <button mat-icon-button class="search__button">
+        <mat-icon>search</mat-icon>
+      </button>
+    </form>
+    <ng-container *ngIf="isSearched">
+      <ng-template #searchHit>
+        <p class="search-hit">{{ nbHits }} 件ヒットしました</p>
+      </ng-template>
+      <ng-container *ngIf="nbHits === 0; else searchHit">
+        <p class="search-hit">
+          {{ searchControl.value }} に一致する情報は見つかりませんでした
+        </p>
+      </ng-container>
+    </ng-container>
+  </div>
 
   <div class="result-grid">
     <ng-container *ngFor="let result of searchResults">

@@ -31,7 +31,6 @@ export class GuestGuard implements CanActivate, CanLoad {
       map((user: firebase.User) => !user),
       tap((isGuest: boolean) => {
         if (!isGuest) {
-          console.log('ログインしてるよ');
           this.router.navigateByUrl('/');
         }
       })
@@ -46,7 +45,6 @@ export class GuestGuard implements CanActivate, CanLoad {
       take(1),
       tap((isGuest: boolean) => {
         if (!isGuest) {
-          console.log('ログインしてるよ');
           this.router.navigateByUrl('/');
         }
       })

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FoodService } from 'src/app/services/food.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RakutenRecipeApiService } from 'src/app/services/rakuten-recipe-api.service';
+import { TitleService } from 'src/app/services/title.service';
 
 @Component({
   selector: 'app-admin',
@@ -22,8 +23,11 @@ export class AdminComponent implements OnInit {
     private fb: FormBuilder,
     private foodService: FoodService,
     private snackBar: MatSnackBar,
-    private rakutenRecipeApiService: RakutenRecipeApiService
-  ) {}
+    private rakutenRecipeApiService: RakutenRecipeApiService,
+    private titleService: TitleService
+  ) {
+    this.titleService.setTitle('管理者画面');
+  }
 
   ngOnInit(): void {
     this.getCategoryList();

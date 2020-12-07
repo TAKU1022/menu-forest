@@ -11,7 +11,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './header/header.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,9 +18,6 @@ import { FooterComponent } from './footer/footer.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { WelcomeShellComponent } from './welcome-shell/welcome-shell.component';
 import { MainShellComponent } from './main-shell/main-shell.component';
@@ -30,8 +26,8 @@ import { registerLocaleData } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
-import { LayoutModule } from '@angular/cdk/layout';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 registerLocaleData(localeJa);
 @NgModule({
@@ -53,20 +49,15 @@ registerLocaleData(localeJa);
     AngularFireFunctionsModule,
     AngularFireAnalyticsModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatListModule,
     MatSidenavModule,
     MatMenuModule,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    FormsModule,
     MatProgressSpinnerModule,
     HttpClientModule,
-    LayoutModule,
     MatSnackBarModule,
+    MatTooltipModule,
   ],
   providers: [
     { provide: REGION, useValue: 'asia-northeast1' },
