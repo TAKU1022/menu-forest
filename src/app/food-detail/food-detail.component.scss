@@ -59,22 +59,22 @@
     @media screen and (max-width: 600px) {
       font-size: 16px;
     }
-  }
-  &::before,
-  &::after {
-    border: none;
-    border-bottom: solid 10px transparent;
-    content: '';
-    position: absolute;
-    top: 100%;
-  }
-  &::before {
-    left: 0;
-    border-right: solid 10px #ef6c00;
-  }
-  &::after {
-    right: 0;
-    border-left: solid 10px #ef6c00;
+    &::before,
+    &::after {
+      border: none;
+      border-bottom: solid 10px transparent;
+      content: '';
+      position: absolute;
+      top: 100%;
+    }
+    &::before {
+      left: 0;
+      border-right: solid 10px #ef6c00;
+    }
+    &::after {
+      right: 0;
+      border-left: solid 10px #ef6c00;
+    }
   }
 }
 
