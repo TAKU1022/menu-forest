@@ -1,33 +1,59 @@
 <app-header [sidenav]="sidenav"></app-header>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav mode="over" [opened]="false" class="sidenav">
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    [opened]="false"
+    class="sidenav"
+    fixedInViewport
+  >
     <mat-nav-list>
-      <a routerLink="/" class="list-item list-item--home">
+      <a
+        routerLink="/"
+        class="list-item list-item--home"
+        (click)="sidenav.close()"
+      >
         <div class="list-item__border">
           <mat-icon class="list-item__icon">home</mat-icon
           ><span class="list-item__text">本日の献立</span>
         </div>
       </a>
-      <a routerLink="/menu" class="list-item list-item--menu">
+      <a
+        routerLink="/menu"
+        class="list-item list-item--menu"
+        (click)="sidenav.close()"
+      >
         <div class="list-item__border">
           <mat-icon class="list-item__icon">date_range</mat-icon
           ><span class="list-item__text">一週間の献立</span>
         </div></a
       >
-      <a routerLink="/food-list" class="list-item list-item--food-list">
+      <a
+        routerLink="/food-list"
+        class="list-item list-item--food-list"
+        (click)="sidenav.close()"
+      >
         <div class="list-item__border">
           <mat-icon class="list-item__icon">restaurant</mat-icon
           ><span class="list-item__text">メニュー一覧</span>
         </div>
       </a>
-      <a routerLink="/post" class="list-item list-item--post">
+      <a
+        routerLink="/post"
+        class="list-item list-item--post"
+        (click)="sidenav.close()"
+      >
         <div class="list-item__border">
           <mat-icon class="list-item__icon">group</mat-icon
           ><span class="list-item__text">みんなの献立</span>
         </div>
       </a>
-      <a routerLink="/search" class="list-item list-item--search">
+      <a
+        routerLink="/search"
+        class="list-item list-item--search"
+        (click)="sidenav.close()"
+      >
         <div class="list-item__border">
           <mat-icon class="list-item__icon">search</mat-icon
           ><span class="list-item__text">メニュー検索</span>

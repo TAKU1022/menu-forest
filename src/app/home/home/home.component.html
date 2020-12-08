@@ -45,7 +45,7 @@
         <div class="decoration-btn-content decoration-btn-content--breakfast">
           <div
             class="decoration-btn decoration-btn--change-food"
-            (click)="openChangeMyMenuDialog(todayMenu.breakfast, '朝')"
+            (click)="openChangeMyMenuDialog(todayMenu.breakfast, 'morning')"
           >
             <div class="decoration-btn__border">
               <mat-icon inline class="decoration-btn__icon"
@@ -55,7 +55,7 @@
           </div>
           <div
             class="decoration-btn decoration-btn--eat-check"
-            (click)="increaseEatCount('朝')"
+            (click)="increaseEatCount('morning')"
             *ngIf="!isEatenBreakfast"
           >
             <div class="decoration-btn__border">
@@ -66,7 +66,7 @@
           </div>
           <div
             class="decoration-btn decoration-btn--eat-check"
-            (click)="reduceEatCount('朝')"
+            (click)="reduceEatCount('morning')"
             *ngIf="isEatenBreakfast"
           >
             <div class="decoration-btn__border">
@@ -101,7 +101,7 @@
         <div class="decoration-btn-content decoration-btn-content--lunch">
           <div
             class="decoration-btn decoration-btn--change-food"
-            (click)="openChangeMyMenuDialog(todayMenu.lunch, '昼')"
+            (click)="openChangeMyMenuDialog(todayMenu.lunch, 'noon')"
           >
             <div class="decoration-btn__border">
               <mat-icon inline class="decoration-btn__icon"
@@ -111,7 +111,7 @@
           </div>
           <div
             class="decoration-btn decoration-btn--eat-check"
-            (click)="increaseEatCount('昼')"
+            (click)="increaseEatCount('noon')"
             *ngIf="!isEatenLunch"
           >
             <div class="decoration-btn__border">
@@ -122,7 +122,7 @@
           </div>
           <div
             class="decoration-btn decoration-btn--eat-check"
-            (click)="reduceEatCount('昼')"
+            (click)="reduceEatCount('noon')"
             *ngIf="isEatenLunch"
           >
             <div class="decoration-btn__border">
@@ -157,7 +157,7 @@
         <div class="decoration-btn-content decoration-btn-content--dinner">
           <div
             class="decoration-btn decoration-btn--change-food"
-            (click)="openChangeMyMenuDialog(todayMenu.dinner, '夜')"
+            (click)="openChangeMyMenuDialog(todayMenu.dinner, 'night')"
           >
             <div class="decoration-btn__border">
               <mat-icon inline class="decoration-btn__icon"
@@ -167,7 +167,7 @@
           </div>
           <div
             class="decoration-btn decoration-btn--eat-check"
-            (click)="increaseEatCount('夜')"
+            (click)="increaseEatCount('night')"
             *ngIf="!isEatenDinner"
           >
             <div class="decoration-btn__border">
@@ -178,7 +178,7 @@
           </div>
           <div
             class="decoration-btn decoration-btn--eat-check"
-            (click)="reduceEatCount('夜')"
+            (click)="reduceEatCount('night')"
             *ngIf="isEatenDinner"
           >
             <div class="decoration-btn__border">

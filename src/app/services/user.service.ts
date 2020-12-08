@@ -66,15 +66,15 @@ export class UserService {
     isEaten: boolean
   ): Promise<void> | void {
     switch (time) {
-      case '朝':
+      case 'morning':
         return this.db.doc<User>(`users/${userId}`).update({
           isEatenBreakfast: isEaten,
         });
-      case '昼':
+      case 'noon':
         return this.db.doc<User>(`users/${userId}`).update({
           isEatenLunch: isEaten,
         });
-      case '夜':
+      case 'night':
         return this.db.doc<User>(`users/${userId}`).update({
           isEatenDinner: isEaten,
         });
