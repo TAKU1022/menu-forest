@@ -9,8 +9,6 @@ import { FoodService } from './food.service';
   providedIn: 'root',
 })
 export class MyMenuService {
-  dayOfWeeks: string[] = ['日', '月', '火', '水', '木', '金', '土'];
-
   constructor(private db: AngularFirestore, private foodService: FoodService) {}
 
   getMyMenuById(myMenuId: string): Observable<MyMenu> {
@@ -30,7 +28,7 @@ export class MyMenuService {
     return this.getMyMenuByUserId(userId).pipe(
       map((myMenu: MyMenu) => {
         const day = myMenu?.day;
-        if (myMenu) {
+        if (day) {
           return [
             day?.sunday,
             day?.monday,
@@ -67,9 +65,12 @@ export class MyMenuService {
             });
             return combineLatest(dayMenuWithFoods$).pipe(
               map((dayMenuWithFoods: DayMenuWithFood[]) => {
-                for (let i = 0; i < 7; i++) {
-                  dayMenuWithFoods[i].dayOfWeek = this.dayOfWeeks[i];
-                }
+                const dayOfWeeks = ['日', '月', '火', '水', '木', '金', '土'];
+                dayMenuWithFoods.forEach(
+                  (dayMenuWithFood: DayMenuWithFood, i: number) => {
+                    dayMenuWithFood.dayOfWeek = dayOfWeeks[i];
+                  }
+                );
                 return dayMenuWithFoods;
               })
             );
@@ -103,105 +104,105 @@ export class MyMenuService {
   ): Promise<void> {
     switch (dayOfWeek) {
       case 0:
-        if (time === '朝') {
+        if (time === 'morning') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.sunday.breakfastId': foodId,
           });
-        } else if (time === '昼') {
+        } else if (time === 'noon') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.sunday.lunchId': foodId,
           });
-        } else if (time === '夜') {
+        } else if (time === 'night') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.sunday.dinnerId': foodId,
           });
         }
         break;
       case 1:
-        if (time === '朝') {
+        if (time === 'morning') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.monday.breakfastId': foodId,
           });
-        } else if (time === '昼') {
+        } else if (time === 'noon') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.monday.lunchId': foodId,
           });
-        } else if (time === '夜') {
+        } else if (time === 'night') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.monday.dinnerId': foodId,
           });
         }
         break;
       case 2:
-        if (time === '朝') {
+        if (time === 'morning') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.tuesday.breakfastId': foodId,
           });
-        } else if (time === '昼') {
+        } else if (time === 'noon') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.tuesday.lunchId': foodId,
           });
-        } else if (time === '夜') {
+        } else if (time === 'night') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.tuesday.dinnerId': foodId,
           });
         }
         break;
       case 3:
-        if (time === '朝') {
+        if (time === 'morning') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.wednesday.breakfastId': foodId,
           });
-        } else if (time === '昼') {
+        } else if (time === 'noon') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.wednesday.lunchId': foodId,
           });
-        } else if (time === '夜') {
+        } else if (time === 'night') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.wednesday.dinnerId': foodId,
           });
         }
         break;
       case 4:
-        if (time === '朝') {
+        if (time === 'morning') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.thursday.breakfastId': foodId,
           });
-        } else if (time === '昼') {
+        } else if (time === 'noon') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.thursday.lunchId': foodId,
           });
-        } else if (time === '夜') {
+        } else if (time === 'night') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.thursday.dinnerId': foodId,
           });
         }
         break;
       case 5:
-        if (time === '朝') {
+        if (time === 'morning') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.friday.breakfastId': foodId,
           });
-        } else if (time === '昼') {
+        } else if (time === 'noon') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.friday.lunchId': foodId,
           });
-        } else if (time === '夜') {
+        } else if (time === 'night') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.friday.dinnerId': foodId,
           });
         }
         break;
       case 6:
-        if (time === '朝') {
+        if (time === 'morning') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.saturday.breakfastId': foodId,
           });
-        } else if (time === '昼') {
+        } else if (time === 'noon') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.saturday.lunchId': foodId,
           });
-        } else if (time === '夜') {
+        } else if (time === 'night') {
           return this.db.doc(`myMenus/${myMenuId}`).update({
             'day.saturday.dinnerId': foodId,
           });
