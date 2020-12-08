@@ -63,9 +63,11 @@ export class PostService {
     return combineLatest(dayMenuWithFoods$$).pipe(
       map((dayMenuWithFoods: DayMenuWithFood[]) => {
         const dayOfWeeks = ['日', '月', '火', '水', '木', '金', '土'];
-        for (let i = 0; i < 7; i++) {
-          dayMenuWithFoods[i].dayOfWeek = dayOfWeeks[i];
-        }
+        dayMenuWithFoods.forEach(
+          (dayMenuWithFood: DayMenuWithFood, i: number) => {
+            dayMenuWithFood.dayOfWeek = dayOfWeeks[i];
+          }
+        );
         return {
           days: dayMenuWithFoods,
           creatorId: post.creatorId,
@@ -93,7 +95,7 @@ export class PostService {
       );
   }
 
-  getPostsWithFoodWithUser(
+  getPostFoodsWithUser(
     lastPost: firestore.QueryDocumentSnapshot<firestore.DocumentData>
   ): Observable<{
     postsWithFoodWithUser: PostWithFoodWithUser[];
