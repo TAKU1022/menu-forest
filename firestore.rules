@@ -48,7 +48,7 @@ service cloud.firestore {
       //作成者だけ削除できる
       allow delete: if request.auth.uid == resource.data.creatorId;
     }
-    match /day/day {
+    match /coreData/day {
       //誰でも見ることができる
       allow read: if true;
       //誰も作成できない
