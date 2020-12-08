@@ -36,7 +36,7 @@ export class PostComponent implements OnInit {
 
   getPosts(): void {
     this.postService
-      .getPostsWithFoodWithUser(this.lastPostDocument)
+      .getPostFoodsWithUser(this.lastPostDocument)
       .pipe(
         take(1),
         tap(() =>
