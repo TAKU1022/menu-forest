@@ -48,6 +48,9 @@ export class AuthService {
           this.router.navigateByUrl('/');
           this.snackBar.open('おかえりなさい！', null);
         }
+      })
+      .catch(() => {
+        this.snackBar.open('ログインに失敗しました', null);
       });
   }
 
