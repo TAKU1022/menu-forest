@@ -3,7 +3,7 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: 22px;
   margin: 0 0 16px;
   font-weight: bold;
   color: #8a4d41;
@@ -11,7 +11,17 @@
 
 .form-field {
   width: 100%;
+  margin: 0 0 16px;
+}
+
+.title-thumbnail {
   margin: 0 0 8px;
+  color: #8a4d41;
+  font-weight: bold;
+  font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 18px;
+  }
 }
 
 .formArray {
@@ -24,15 +34,14 @@
   display: inline-block;
   margin: 0 auto -12px;
   padding: 0 8px;
-  font-weight: bold;
   font-size: 18px;
-  color: #8a4d41;
+  color: rgba(0, 0, 0, 0.87);
   background-color: #fff;
   z-index: 1;
 }
 
 .radio-group {
-  margin: 0 0 24px;
+  margin: 0 0 16px;
   border: 1px solid rgba(black, 0.14);
   border-radius: 5px;
   padding: 16px 8px 16px;
@@ -53,7 +62,6 @@
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
   position: relative;
-  // width: 80%;
   margin: 0 auto 16px;
   &__title {
     font-size: 16px;
@@ -62,6 +70,7 @@
     margin: 0;
     padding: 16px;
     letter-spacing: 2px;
+    word-wrap: break-word;
   }
   &__foods-content {
     padding-bottom: 80%;
