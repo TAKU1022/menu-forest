@@ -25,7 +25,7 @@ export class MyMenuLoadingComponent implements OnInit {
     this.setProgressBarWidth();
     setTimeout(() => {
       this.isLoadingFinished = true;
-      this.router.navigateByUrl('/create-my-menu').then(() => {
+      this.router.navigateByUrl('/').then(() => {
         this.userService.changeUserIsCreatedMyMenu(this.userId);
       });
     }, 6000);
