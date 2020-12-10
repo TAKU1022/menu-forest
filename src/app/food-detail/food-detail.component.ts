@@ -7,6 +7,7 @@ import { Food } from '@interfaces/food';
 import { LoadingService } from '../services/loading.service';
 import { RakutenRecipeApiService } from '../services/rakuten-recipe-api.service';
 import { TitleService } from '../services/title.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-food-detail',
@@ -24,7 +25,8 @@ export class FoodDetailComponent implements OnInit, OnDestroy {
     private foodService: FoodService,
     private loadingService: LoadingService,
     private rakutenRecipeApiService: RakutenRecipeApiService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private location: Location
   ) {
     this.loadingService.toggleLoading(true);
   }
@@ -58,5 +60,9 @@ export class FoodDetailComponent implements OnInit, OnDestroy {
         .getCategoryRanking(food.categoryId)
         .then((data: any) => (this.recipes = data.result));
     });
+  }
+
+  backToBeforePage(): void {
+    this.location.back();
   }
 }
