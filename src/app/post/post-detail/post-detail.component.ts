@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PostWithFood, Post } from '@interfaces/post';
+import { PostWithFood, Post, PostWithFoodWithUser } from '@interfaces/post';
 import { switchMap, tap, take } from 'rxjs/operators';
 import { PostService } from 'src/app/services/post.service';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -23,7 +23,7 @@ export class PostDetailComponent implements OnInit {
   private post: Post;
   private myMenu: MyMenu;
 
-  post$: Observable<PostWithFood>;
+  userPost$: Observable<PostWithFoodWithUser>;
   userId: string = this.authService.userId;
   user$: Observable<User> = this.authService.user$;
 
@@ -49,13 +49,13 @@ export class PostDetailComponent implements OnInit {
   }
 
   private getPostWithFood(): void {
-    this.post$ = this.route.paramMap.pipe(
+    this.userPost$ = this.route.paramMap.pipe(
       take(1),
       switchMap((param: ParamMap) => {
         const postId: string = param.get('detail');
-        return this.postService.getPostWithFoodById(postId);
+        return this.postService.getPostFoodWithUserByPostId(postId);
       }),
-      tap((post: PostWithFood) => {
+      tap((post: PostWithFoodWithUser) => {
         this.loadingService.toggleLoading(false);
         this.titleService.setTitle(post.title);
       })

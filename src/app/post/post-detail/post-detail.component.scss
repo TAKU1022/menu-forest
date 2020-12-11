@@ -38,7 +38,7 @@
   border-radius: 4px;
   box-shadow: 4px 4px 0 0 rgba(black, 0.3);
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 40px;
   position: relative;
   @media screen and (max-width: 600px) {
     padding: 24px 16px 40px;
@@ -211,6 +211,52 @@
   &__color-sheet:hover {
     background-color: #fff;
     opacity: 0.3;
+  }
+}
+
+.creator {
+  background-color: #43a047;
+  padding: 6px;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 0 rgba(black, 0.3);
+  display: inline-block;
+  &:hover {
+    background-color: #66bb6a;
+  }
+  &__flex-content {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    border: dashed 2px #2e7d32;
+  }
+  &__avater {
+    margin-right: 16px;
+    align-self: center;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: block;
+    @media screen and (max-width: 600px) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  &__about {
+    color: #fff;
+    text-align: left;
+  }
+  &__name {
+    margin: 0 0 8px;
+    font-size: 20px;
+    @media screen and (max-width: 600px) {
+      font-size: 14px;
+    }
+  }
+  &__date {
+    margin: 0;
+    @media screen and (max-width: 600px) {
+      font-size: 12px;
+    }
   }
 }
 

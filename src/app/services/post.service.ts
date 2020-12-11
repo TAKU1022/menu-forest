@@ -232,6 +232,25 @@ export class PostService {
       );
   }
 
+  getPostFoodWithUserByPostId(
+    postId: string
+  ): Observable<PostWithFoodWithUser> {
+    return this.getPostWithFoodById(postId).pipe(
+      switchMap((postWithFood: PostWithFood) => {
+        const user$: Observable<User> = this.userService.getUserbyId(
+          postWithFood.creatorId
+        );
+        return combineLatest([of(postWithFood), user$]);
+      }),
+      map(([postWithFood, user]) => {
+        return {
+          ...postWithFood,
+          creator: user,
+        };
+      })
+    );
+  }
+
   deletePost(postId: string): Promise<void> {
     return this.db.doc<Post>(`posts/${postId}`).delete();
   }
