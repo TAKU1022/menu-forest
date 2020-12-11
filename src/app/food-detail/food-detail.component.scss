@@ -9,6 +9,23 @@
   }
 }
 
+.decoration-btn {
+  &--food-detail {
+    position: absolute;
+    top: 80px;
+    left: 32px;
+    transform: rotate(-14deg);
+    z-index: 2;
+    @media screen and (max-width: 750px) {
+      position: fixed;
+      top: auto;
+      left: auto;
+      bottom: 32px;
+      right: 24px;
+    }
+  }
+}
+
 .food-name {
   box-sizing: border-box;
   margin: 0 auto 48px;

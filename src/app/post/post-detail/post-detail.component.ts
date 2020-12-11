@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PostWithFood, Post, PostWithFoodWithUser } from '@interfaces/post';
 import { switchMap, tap, take } from 'rxjs/operators';
@@ -13,6 +13,8 @@ import { Location } from '@angular/common';
 import { User } from '@interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { TitleService } from 'src/app/services/title.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateMyMenuDialogComponent } from '../update-my-menu-dialog/update-my-menu-dialog.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -34,10 +36,10 @@ export class PostDetailComponent implements OnInit {
     private authService: AuthService,
     private myMenuService: MyMenuService,
     private snackBar: MatSnackBar,
-    private router: Router,
     private location: Location,
     private userService: UserService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private dialog: MatDialog
   ) {
     this.loadingService.toggleLoading(true);
   }
@@ -93,13 +95,15 @@ export class PostDetailComponent implements OnInit {
       });
   }
 
-  changeMyMenuToUserMenu(): void {
-    this.myMenuService
-      .changeMyMenuToUserMenu(this.myMenu.myMenuId, this.post.day)
-      .then(() => {
-        this.snackBar.open('この献立をMy献立に登録しました！', null);
-        this.router.navigateByUrl('/create-my-menu');
-      });
+  openUpdateMyMenuDialog(): void {
+    this.dialog.open(UpdateMyMenuDialogComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+      data: {
+        myMenuId: this.myMenu.myMenuId,
+        postFoods: this.post.day,
+      },
+    });
   }
 
   deletePost(): void {

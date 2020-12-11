@@ -7,6 +7,14 @@
         *ngFor="let number of [1, 2, 3, 4]"
         class="wood-pins"
       />
+      <div
+        class="decoration-btn decoration-btn--food-detail"
+        (click)="backToBeforePage()"
+      >
+        <div class="decoration-btn__border">
+          <span class="decoration-btn__text">戻る</span>
+        </div>
+      </div>
       <div class="food-name">
         <h1 class="food-name__text">{{ food.name }}のレシピ</h1>
       </div>
