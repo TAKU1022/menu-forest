@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngIf="post$ | async as post">
+  <ng-container *ngIf="userPost$ | async as post">
     <div class="wood-background">
       <img
         src="/assets/images/others/wood-pin.png"
@@ -10,6 +10,7 @@
       <h1 class="post-title">
         <span class="post-title__text">{{ post.title }}</span>
       </h1>
+
       <div class="post-content">
         <img
           src="/assets/images/others/pin-yellow.png"
@@ -17,6 +18,7 @@
           class="content-pins"
           *ngFor="let number of [1, 2, 3, 4]"
         />
+
         <div class="week-grid">
           <div *ngFor="let menu of post.days; let i = index">
             <img
@@ -97,6 +99,28 @@
           </div>
         </div>
       </div>
+
+      <a
+        class="creator"
+        routerLink="/user"
+        [queryParams]="{ id: post.creatorId }"
+      >
+        <div class="creator__flex-content">
+          <img
+            [src]="post.creator.avaterURL"
+            alt="ユーザーのアバター"
+            class="creator__avater"
+          />
+          <div class="creator__about-content">
+            <div class="creator__about">
+              <p class="creator__name">{{ post.creator.name }}</p>
+              <p class="creator__date">
+                {{ post.createdAt.toDate() | date }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </a>
 
       <div class="decoration-btn-content">
         <div

@@ -209,4 +209,30 @@
   &__link:hover {
     text-decoration: underline;
   }
+  &__logo-content {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__logo-content-text {
+    color: rgba(#8a4d41, 0.8);
+    font-weight: bold;
+    @media screen and (max-width: 600px) {
+      font-size: 14px;
+    }
+    @media screen and (max-width: 320px) {
+      font-size: 12px;
+    }
+  }
+  &__logo-link {
+    width: 140px;
+    @media screen and (max-width: 600px) {
+      width: 120px;
+    }
+    @media screen and (max-width: 320px) {
+      width: 100px;
+    }
+  }
+  &__logo {
+    vertical-align: middle;
+  }
 }

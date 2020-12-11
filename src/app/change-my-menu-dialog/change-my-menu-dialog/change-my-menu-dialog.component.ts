@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl } from '@angular/forms';
 import { SearchIndex } from 'algoliasearch/lite';
 import { SearchService } from 'src/app/services/search.service';
-import { startWith, take, tap } from 'rxjs/operators';
+import { debounceTime, startWith, take, tap } from 'rxjs/operators';
 import { MyMenu } from '@interfaces/my-menu';
 import { firestore } from 'firebase';
 
@@ -58,7 +58,7 @@ export class ChangeMyMenuDialogComponent implements OnInit, OnDestroy {
 
   private setSerchOptions(): void {
     this.subscription = this.searchControl.valueChanges
-      .pipe(startWith(''))
+      .pipe(startWith(''), debounceTime(500))
       .subscribe((value) => {
         this.index
           .search(value)
