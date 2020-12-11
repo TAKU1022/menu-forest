@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SearchService } from 'src/app/services/search.service';
 import { FormControl } from '@angular/forms';
 import { SearchIndex } from 'algoliasearch/lite';
-import { startWith } from 'rxjs/operators';
+import { debounceTime, startWith } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TitleService } from 'src/app/services/title.service';
@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private setSearchOptions(): void {
     this.searchOptionsSubscription = this.searchControl.valueChanges
-      .pipe(startWith(''))
+      .pipe(startWith(''), debounceTime(500))
       .subscribe((value) => {
         this.index
           .search(value)
