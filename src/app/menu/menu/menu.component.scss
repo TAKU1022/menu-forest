@@ -38,8 +38,11 @@
       width: 160px;
     }
     @media screen and (max-width: 600px) {
-      width: 140px;
+      width: 120px;
       margin: 0 0 8px;
+    }
+    @media screen and (max-width: 320px) {
+      width: 100px;
     }
   }
 }
