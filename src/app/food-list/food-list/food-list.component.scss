@@ -83,6 +83,12 @@
       transform: rotate(3deg) translateY(-5px);
     }
   }
+  &--rotate-type-f {
+    transform: rotate(4deg);
+    &:hover {
+      transform: rotate(4deg) translateY(-5px);
+    }
+  }
 }
 
 .food {

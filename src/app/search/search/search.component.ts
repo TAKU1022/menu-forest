@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private getRandomRotateId(): string {
-    const rotateTypeIds: string[] = ['a', 'b', 'c', 'd', 'e'];
+    const rotateTypeIds: string[] = ['a', 'b', 'c', 'd', 'e', 'f'];
     const randomNumber: number = Math.floor(
       Math.random() * rotateTypeIds.length
     );

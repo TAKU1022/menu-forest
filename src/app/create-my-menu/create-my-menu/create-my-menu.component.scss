@@ -28,8 +28,10 @@
 
 .day-of-week {
   width: 200px;
+  margin: 0 0 8px;
   @media screen and (max-width: 600px) {
-    width: 150px;
+    width: 120px;
+    margin: 0 0 4px;
   }
   @media screen and (max-width: 320px) {
     width: 100px;
