@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+const rakutenRecipeApi = require('../../../rakuten-recipe.json');
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class RakutenRecipeApiService {
         'https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426',
         {
           params: {
-            applicationId: '1050220932929590319',
+            applicationId: rakutenRecipeApi.applicationId,
           },
         }
       )
@@ -26,7 +27,7 @@ export class RakutenRecipeApiService {
         'https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426',
         {
           params: {
-            applicationId: '1050220932929590319',
+            applicationId: rakutenRecipeApi.applicationId,
             categoryId,
           },
         }
