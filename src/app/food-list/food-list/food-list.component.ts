@@ -32,7 +32,7 @@ export class FoodListComponent implements OnInit {
   }
 
   private getRandomRotateId(): string {
-    const rotateTypeIds: string[] = ['a', 'b', 'c', 'd', 'e'];
+    const rotateTypeIds: string[] = ['a', 'b', 'c', 'd', 'e', 'f'];
     const randomNumber: number = Math.floor(
       Math.random() * rotateTypeIds.length
     );
