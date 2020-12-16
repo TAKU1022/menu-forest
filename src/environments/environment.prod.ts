@@ -1,17 +1,18 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: 'AIzaSyB06O8wT7XR0aRTnKIzk7HnbYsSr1sWwWw',
-    authDomain: 'menu-2d67e.firebaseapp.com',
-    databaseURL: 'https://menu-2d67e.firebaseio.com',
-    projectId: 'menu-2d67e',
-    storageBucket: 'menu-2d67e.appspot.com',
-    messagingSenderId: '106080504750',
-    appId: '1:106080504750:web:4fe7bb85e3c426c657163f',
-    measurementId: 'G-DRKTDKVVBC',
+    apiKey: 'AIzaSyBWHRbXWAjmpuvmB9rhpDtqcbTpMqxaqbI',
+    authDomain: 'menu-prod.firebaseapp.com',
+    databaseURL: 'https://menu-prod.firebaseio.com',
+    projectId: 'menu-prod',
+    storageBucket: 'menu-prod.appspot.com',
+    messagingSenderId: '364673862792',
+    appId: '1:364673862792:web:0e5defe569e3063319e33d',
+    measurementId: 'G-5DTQSTTHLP',
   },
   algoia: {
     appId: '22KHOCYFR4',
     searchKey: '4499a84d9540168a8ee73a8c6b9237d1',
+    indexName: 'foods_prod',
   },
 };

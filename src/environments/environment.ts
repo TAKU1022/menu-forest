@@ -17,6 +17,7 @@ export const environment = {
   algoia: {
     appId: '22KHOCYFR4',
     searchKey: '4499a84d9540168a8ee73a8c6b9237d1',
+    indexName: 'foods',
   },
 };
 
