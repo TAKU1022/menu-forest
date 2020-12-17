@@ -3,12 +3,11 @@ export const environment = {
   firebase: {
     apiKey: 'AIzaSyBWHRbXWAjmpuvmB9rhpDtqcbTpMqxaqbI',
     authDomain: 'menu-prod.firebaseapp.com',
-    databaseURL: 'https://menu-prod.firebaseio.com',
     projectId: 'menu-prod',
     storageBucket: 'menu-prod.appspot.com',
     messagingSenderId: '364673862792',
-    appId: '1:364673862792:web:0e5defe569e3063319e33d',
-    measurementId: 'G-5DTQSTTHLP',
+    appId: '1:364673862792:web:e885a30f4166f18419e33d',
+    measurementId: 'G-S5J0Z8F8JQ',
   },
   algoia: {
     appId: '22KHOCYFR4',
