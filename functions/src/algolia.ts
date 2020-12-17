@@ -4,7 +4,8 @@ import algoliasearch, { SearchIndex } from 'algoliasearch';
 const ALGOLIA_ID = functions.config().algolia.app_id;
 const ALGOLIA_ADMIN_KEY = functions.config().algolia.api_key;
 const client = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
-const foodIndex: SearchIndex = client.initIndex('foods');
+const indexName = functions.config().algolia.index_name;
+const foodIndex: SearchIndex = client.initIndex(indexName);
 
 const addFoodRecords = (food: any) => {
   const records = food.image

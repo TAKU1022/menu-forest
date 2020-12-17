@@ -12,7 +12,7 @@ const searchClient = algoliasearch(
 })
 export class SearchService {
   index = {
-    foods: searchClient.initIndex('foods'),
+    foods: searchClient.initIndex(environment.algoia.indexName),
   };
 
   constructor() {}

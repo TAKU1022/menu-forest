@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-const rakutenRecipeApi = require('../../../rakuten-recipe.json');
+const rakutenRecipeApi = require('rakuten-recipe.json');
 
 @Injectable({
   providedIn: 'root',

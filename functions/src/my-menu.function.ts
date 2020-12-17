@@ -10,42 +10,43 @@ export const createMyMenu = functions
   .onCreate((snap) => {
     const myMenuId = db.collection('_').doc().id;
     const user = snap.data();
+    const myMenuConfig = functions.config().mymenu;
     const myMenu: MyMenu = {
       day: {
         sunday: {
-          breakfastId: '06hTLHibydomuKggmCzB',
-          lunchId: '0Mf78jXWWqrEUMdexNp8',
-          dinnerId: '11LZesjqIzHYTQAO1ngZ',
+          breakfastId: myMenuConfig.sunday.breakfast,
+          lunchId: myMenuConfig.sunday.lunch,
+          dinnerId: myMenuConfig.sunday.dinner,
         },
         monday: {
-          breakfastId: '1Vn4hGcnbpWmtprtQrFa',
-          lunchId: '2A7mhRONmZlXgeqcJusG',
-          dinnerId: '2cYUhyiRVlObgEO6UUQv',
+          breakfastId: myMenuConfig.monday.breakfast,
+          lunchId: myMenuConfig.monday.lunch,
+          dinnerId: myMenuConfig.monday.dinner,
         },
         tuesday: {
-          breakfastId: '30Cf56r7USQMdgXu5i96',
-          lunchId: '59iSx68XE2cVibSJNqzo',
-          dinnerId: '5DkoBGU2VYpWpudccdyT',
+          breakfastId: myMenuConfig.tuesday.breakfast,
+          lunchId: myMenuConfig.tuesday.lunch,
+          dinnerId: myMenuConfig.tuesday.dinner,
         },
         wednesday: {
-          breakfastId: '5f7vQd6b9TriRcubUO5R',
-          lunchId: '6DFPn1qpP2V7NoZOw5qR',
-          dinnerId: '6E09xOrRuig14rM9bdnW',
+          breakfastId: myMenuConfig.wednesday.breakfast,
+          lunchId: myMenuConfig.wednesday.lunch,
+          dinnerId: myMenuConfig.wednesday.dinner,
         },
         thursday: {
-          breakfastId: '6sGOXtkAsg5ZmTlllDGV',
-          lunchId: '76ZB0MGg83gKxlBHTFTs',
-          dinnerId: '84NtUMX2G0bdFcbyUfrS',
+          breakfastId: myMenuConfig.thursday.breakfast,
+          lunchId: myMenuConfig.thursday.lunch,
+          dinnerId: myMenuConfig.thursday.dinner,
         },
         friday: {
-          breakfastId: '8DU6xqisCPRVELAVdmeZ',
-          lunchId: '7zNVuEU005trxmTlp0Ok',
-          dinnerId: '8RpxMnRhehbR6mKDVVvv',
+          breakfastId: myMenuConfig.friday.breakfast,
+          lunchId: myMenuConfig.friday.lunch,
+          dinnerId: myMenuConfig.friday.dinner,
         },
         saturday: {
-          breakfastId: '9vHoo8RGFF77TO7A6JJb',
-          lunchId: 'BYm5wRiljkPm0upfXAvy',
-          dinnerId: 'xm0fcyyZge7MjZe0ccHi',
+          breakfastId: myMenuConfig.saturday.breakfast,
+          lunchId: myMenuConfig.saturday.lunch,
+          dinnerId: myMenuConfig.saturday.dinner,
         },
       },
       creatorId: user.uid,

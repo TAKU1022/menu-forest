@@ -8,9 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CreateFoodDialogComponent } from './create-food-dialog/create-food-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [AdminComponent, CreateFoodDialogComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -20,6 +22,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
 })
 export class AdminModule {}

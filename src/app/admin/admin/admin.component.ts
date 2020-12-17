@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FoodService } from 'src/app/services/food.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { RakutenRecipeApiService } from 'src/app/services/rakuten-recipe-api.service';
 import { TitleService } from 'src/app/services/title.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateFoodDialogComponent } from '../create-food-dialog/create-food-dialog.component';
 
 @Component({
   selector: 'app-admin',
@@ -11,20 +10,12 @@ import { TitleService } from 'src/app/services/title.service';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  form: FormGroup = this.fb.group({
-    name: ['', Validators.required],
-    image: ['', Validators.required],
-    categoryId: ['', Validators.required],
-  });
   categories: any[];
-  recipes: any[];
 
   constructor(
-    private fb: FormBuilder,
-    private foodService: FoodService,
-    private snackBar: MatSnackBar,
     private rakutenRecipeApiService: RakutenRecipeApiService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private dialog: MatDialog
   ) {
     this.titleService.setTitle('管理者画面');
   }
@@ -33,29 +24,25 @@ export class AdminComponent implements OnInit {
     this.getCategoryList();
   }
 
-  submit(): void {
-    const formData = this.form.value;
-    this.foodService
-      .createFood({
-        name: formData.name,
-        image: formData.image,
-        categoryId: formData.categoryId,
-      })
-      .then(() => {
-        this.snackBar.open('firestoreに追加しました！', null);
-        this.form.reset();
-      });
-  }
-
   private getCategoryList() {
     this.rakutenRecipeApiService
       .getCategoryList()
       .then((data: any) => (this.categories = data.result.medium));
   }
 
-  getCategoryRanking(categoryId: string) {
-    this.rakutenRecipeApiService
-      .getCategoryRanking(categoryId)
-      .then((data: any) => (this.recipes = data.result));
+  openCreateFoodDialog(
+    parentCategoryId: string,
+    categoryId: string,
+    categoryName: string
+  ): void {
+    this.dialog.open(CreateFoodDialogComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+      data: {
+        parentCategoryId,
+        categoryId,
+        categoryName,
+      },
+    });
   }
 }

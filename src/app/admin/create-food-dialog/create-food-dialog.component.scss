@@ -1,0 +1,16 @@
+.wrap {
+  text-align: center;
+}
+
+.category-ranking {
+  max-width: 480px;
+  word-break: break-all;
+  margin: 0 auto 24px;
+  &__button {
+    width: 240px;
+  }
+}
+
+.form-field {
+  margin-right: 8px;
+}

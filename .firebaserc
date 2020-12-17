@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "menu-2d67e"
+    "dev": "menu-2d67e",
+    "prod": "menu-prod"
   }
 }

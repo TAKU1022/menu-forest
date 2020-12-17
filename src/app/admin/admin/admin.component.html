@@ -1,59 +1,22 @@
 <div class="container">
   <div class="content">
-    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
-      <mat-form-field class="form-field">
-        <mat-label>メニュー名</mat-label>
-        <input
-          type="text"
-          matInput
-          formControlName="name"
-          autocomplete="off"
-          required
-        />
-      </mat-form-field>
-      <mat-form-field class="form-field">
-        <mat-label>画像URL</mat-label>
-        <input
-          type="text"
-          matInput
-          formControlName="image"
-          autocomplete="off"
-          required
-        />
-      </mat-form-field>
-      <mat-form-field class="form-field">
-        <mat-label>カテゴリーID</mat-label>
-        <input
-          type="text"
-          matInput
-          formControlName="categoryId"
-          autocomplete="off"
-          required
-        />
-      </mat-form-field>
-      <button mat-raised-button color="primary" [disabled]="form.invalid">
-        firestoreに送信
-      </button>
-    </form>
-
-    <input type="text" #input />
-    <button (click)="getCategoryRanking(input.value)">検索</button>
-    <div class="category-ranking" *ngFor="let recipe of recipes">
-      <p class="category-ranking__title">
-        {{ recipe.recipeTitle }} : {{ recipe.recipeId }}
-      </p>
-      <p>{{ recipe.recipeUrl }}</p>
-      <p>{{ recipe.recipeMaterial }}</p>
-      <p>{{ recipe.recipeIndication }}</p>
-      <p>{{ recipe.recipeCost }}</p>
-      <p>{{ recipe.rank }}</p>
-      <p class="category-ranking__url">{{ recipe.foodImageUrl }}</p>
-      <img [src]="recipe.foodImageUrl" [alt]="recipe.recipeTitle" />
-    </div>
     <ul class="category-list">
-      <li *ngFor="let category of categories">
-        {{ category.parentCategoryId }}-{{ category.categoryId }}:
-        {{ category.categoryName }}
+      <li *ngFor="let category of categories" class="category-item">
+        <span class="category-item__food">
+          {{ category.parentCategoryId }}-{{ category.categoryId }}:
+          {{ category.categoryName }}
+        </span>
+        <button
+          (click)="
+            openCreateFoodDialog(
+              category.parentCategoryId,
+              category.categoryId,
+              category.categoryName
+            )
+          "
+        >
+          データGET
+        </button>
       </li>
     </ul>
   </div>

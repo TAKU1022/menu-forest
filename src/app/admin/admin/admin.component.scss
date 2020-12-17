@@ -3,26 +3,16 @@
   margin: 0 auto;
 }
 
-.form {
-  margin: 16px auto 56px;
-  max-width: 300px;
-}
-
-.form-field {
-  width: 100%;
-}
-
-.category-ranking {
-  margin: 0 0 56px;
-  &__title {
-    word-wrap: break-word;
-  }
-  &__url {
-    word-wrap: break-word;
-  }
-}
-
 .category-list {
   list-style: none;
   text-align: left;
+  background-color: #fff;
+  padding: 24px 0 24px 40px;
+}
+
+.category-item {
+  margin-bottom: 16px;
+  &__food {
+    margin-right: 24px;
+  }
 }
