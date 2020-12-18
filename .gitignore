@@ -45,4 +45,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-rakuten-recipe.json
+rakuten-recipe-api-data.ts
