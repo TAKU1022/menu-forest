@@ -81,12 +81,9 @@ a {
 
 .dot-background {
   text-align: center;
-  background-color: #f8f8f0;
-  background-image: radial-gradient(#f3efe4 15%, transparent 30%),
-    radial-gradient(#f3efe4 15%, transparent 30%);
-  background-size: 24px 24px;
-  background-position: center;
   overflow: hidden;
+  background: url('/assets/images/backgrounds/dot-background.jpg');
+  background-position: center;
   @media screen and (max-width: 600px) {
     background-size: 20px 20px;
   }
