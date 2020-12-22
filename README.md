@@ -1,27 +1,15 @@
-# Menu
+# こんだての森
+あなたの毎日の献立を提案します
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+<img width="1440" alt="スクリーンショット 2020-11-30 15 16 47" src="https://user-images.githubusercontent.com/63761544/102864612-ca413480-4477-11eb-906c-01a103c74b70.png">
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## 機能一覧
+- Googleログイン
+- My献立の編集・削除・投稿
+- 曜日ごとの献立表示切り替え
+- algoliaによるメニュー検索
+- ユーザー情報編集
+- ツアー形式のチュートリアル
+- 無限スクロールによる追加検索
+- 楽天APIによるレシピ表示
+- 退会処理
