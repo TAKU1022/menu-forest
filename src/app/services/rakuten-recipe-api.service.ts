@@ -1,37 +1,19 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import rakutenRecipeApi from '../data/rakuten-recipe-api-data';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RakutenRecipeApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private functions: AngularFireFunctions) {}
 
   getCategoryList(): Promise<any> {
-    return this.http
-      .get(
-        'https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426',
-        {
-          params: {
-            applicationId: rakutenRecipeApi.applicationId,
-          },
-        }
-      )
-      .toPromise();
+    const categoryList = this.functions.httpsCallable('getCategoryList');
+    return categoryList(null).toPromise();
   }
 
   getCategoryRanking(categoryId: string): Promise<any> {
-    return this.http
-      .get(
-        'https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426',
-        {
-          params: {
-            applicationId: rakutenRecipeApi.applicationId,
-            categoryId,
-          },
-        }
-      )
-      .toPromise();
+    const categoryRanking = this.functions.httpsCallable('getCategoryRanking');
+    return categoryRanking(categoryId).toPromise();
   }
 }
