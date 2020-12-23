@@ -24,7 +24,7 @@ export class AdminComponent implements OnInit {
     this.getCategoryList();
   }
 
-  private getCategoryList() {
+  private getCategoryList(): void {
     this.rakutenRecipeApiService
       .getCategoryList()
       .then((data: any) => (this.categories = data.result.medium));
