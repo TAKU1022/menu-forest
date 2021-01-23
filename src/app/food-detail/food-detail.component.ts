@@ -19,6 +19,7 @@ export class FoodDetailComponent implements OnInit, OnDestroy {
 
   food$: Observable<Food>;
   recipes: any[];
+  isLoading: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,7 +49,6 @@ export class FoodDetailComponent implements OnInit, OnDestroy {
         return this.foodService.getFoodById(id);
       }),
       tap((food: Food) => {
-        this.loadingService.toggleLoading(false);
         this.titleService.setTitle(`${food.name}のレシピ`);
       })
     );
@@ -58,7 +58,11 @@ export class FoodDetailComponent implements OnInit, OnDestroy {
     this.subscription = this.food$.subscribe((food: Food) => {
       this.rakutenRecipeApiService
         .getCategoryRanking(food.categoryId)
-        .then((data: any) => (this.recipes = data.result));
+        .then((data: any) => {
+          this.recipes = data.result;
+          this.loadingService.toggleLoading(false);
+          this.isLoading = true;
+        });
     });
   }
 
