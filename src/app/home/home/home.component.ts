@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       .pipe(take(1))
       .toPromise()
       .then((user: User) => {
-        if (!user?.isCompletedHomeTutorial) {
+        if (user && !user?.isCompletedHomeTutorial) {
           this.tutorialService.startHomeTutorial();
           this.userService.completeTutorial('home', this.userId);
         }
