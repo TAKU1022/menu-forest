@@ -61,7 +61,7 @@ export class CreateMyMenuComponent implements OnInit, OnDestroy, AfterViewInit {
       .pipe(take(1))
       .toPromise()
       .then((user: User) => {
-        if (!user?.isCompletedCreateMyMenuTutorial) {
+        if (user && !user?.isCompletedCreateMyMenuTutorial) {
           this.tutorialService.startCreateMyMenuTutorial();
           this.userService.completeTutorial('create-my-menu', this.userId);
         }
