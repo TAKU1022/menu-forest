@@ -8,7 +8,7 @@ AngularとFirebaseを用いた献立提案アプリを作成しました。
 デザインはAdobe XDで作成しました。某ゲーム開発会社のど○ぶつの森の世界観を意識してデザインと開発をしています。
 
 ## 公開URL
-[menuforest.page](https://menuforest.page/welcome)
+[menuforest.page](https://menuforest.page)
 
 ## 使用技術
 - Angular(TypeScript)
